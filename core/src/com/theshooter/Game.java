@@ -19,7 +19,7 @@ public class Game extends ApplicationAdapter {
 	Texture img, player, dot;
 	Rectangle playerRectangle;
 	Array<Rectangle> dots;
-	int score, speed = 200;
+	int score, speed = 2000;
 
 	@Override
 	public void create () {
