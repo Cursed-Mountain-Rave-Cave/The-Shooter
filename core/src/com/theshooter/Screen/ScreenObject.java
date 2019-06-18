@@ -17,7 +17,14 @@ public class ScreenObject implements IScreenObject {
     public ScreenObject() {}
 
     public void draw(SpriteBatch batch){
-        batch.draw(texture, entity.getX() - entity.getY(), (entity.getX() + entity.getY())/2);
+        //if(entity.getDepth() != Depth.EFFECTS && entity.getDepth() != Depth.PLAYER && entity.getDepth() != Depth.THINGS){
+            batch.draw(texture, entity.getX() - entity.getY(), (entity.getX() + entity.getY())/2);
+        /*}else{
+            batch.draw(texture,
+                    (entity.getX() - entity.getWidth()/2) - (entity.getY() - entity.getHeight()/2),
+                    ((entity.getX() - entity.getWidth()/2) + (entity.getY() - entity.getHeight()/2))/2);
+        }*/
+
     }
 
     @Override
@@ -28,15 +35,20 @@ public class ScreenObject implements IScreenObject {
             if (s.getDepth() == Depth.FLOOR)
                 return 1;
         }
+        /*
+        if (s.getY() < getY())
+            return -1;
+        if (s.getY() > getY())
+            return 1;
+        */
         if (s.getX() < getX())
             return -1;
         if (s.getX() > getX())
             return 1;
 
-        if (s.getY() < getY())
-            return -1;
-        if (s.getY() > getY())
-            return 1;
+
+
+
 
         return getDepth().compareTo(s.getDepth());
     }
@@ -60,6 +72,9 @@ public class ScreenObject implements IScreenObject {
     }
     public void setY(int y) {
         entity.setY(y);
+    }
+    public void setTexture(Texture texture) {
+        this.texture = texture;
     }
     public void setDepth(Depth depth){
         entity.setDepth(depth);

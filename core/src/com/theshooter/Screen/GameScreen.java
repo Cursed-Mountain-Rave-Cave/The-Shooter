@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
+import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Entity;
 import com.theshooter.Logic.Entity.Player;
+import com.theshooter.Logic.Entity.Vase;
 
 public class GameScreen implements Screen {
 
@@ -23,7 +25,11 @@ public class GameScreen implements Screen {
     private Texture body[];
     private Texture legs[];
 
-    private Player player;
+    private Texture bullet;
+
+    private Texture vase1;
+    private Texture vase2;
+
     private PlayerScreenObject playerScreen;
 
     private OrthographicCamera camera;
@@ -44,8 +50,12 @@ public class GameScreen implements Screen {
         for (int i = 0; i < 8; i++)
             legs[i] = new Texture("player/legs/legs" + Integer.valueOf(i + 1).toString() + ".png");
 
-        player = new Player(0, 0, 25, 25);
-        playerScreen = new PlayerScreenObject(player, body, legs);
+        bullet = new Texture("bullet.png");
+        vase1 = new Texture("exportVase1.png");
+        vase2 = new Texture("exportVase2.png");
+
+
+        playerScreen = new PlayerScreenObject(game.player, body, legs);
 
         screenObjects = new ScreenObjectArray();
 
@@ -59,14 +69,23 @@ public class GameScreen implements Screen {
             for (int j = 10; j > -10; j--)
                 screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS), box));
 
-        for (int i = 15; i > 10; i -= 2)
-            for (int j = 10; j > -10; j --){
+        for (int i = 15; i > 10; i -= 1)
+            for (int j = 10; j > -10; j -= 1){
                 Entity entity = new Entity(i*50, j*50, 50, 50, Depth.WALLS, false);
                 game.map.addEntity(entity);
                 screenObjects.add(new ScreenObject(entity, flyingFloor));
             }
 
+        for (int i = -100; i < 0; i ++)
+            for (int j = 50; j > -50; j -= 1){
+                Vase entity = new Vase(i*50, j*50);
+                game.map.addBreakableEntitu(entity);
+                screenObjects.add(new VaseScreenObject(entity, vase1, vase2));
+            }
+    }
 
+    public void addBullet(Bullet bullet){
+        screenObjects.add(new ScreenObject(bullet, this.bullet));
     }
 
     @Override
@@ -110,7 +129,7 @@ public class GameScreen implements Screen {
             dy /= Math.sqrt(2);
         }
 
-        Rectangle place = player.getRectangle();
+        Rectangle place = game.player.getRectangle();
         place.x += dx/2 + dy;
         place.y += -dx/2 + dy;
 
@@ -127,6 +146,10 @@ public class GameScreen implements Screen {
         playerScreen.setCurrentBody(curX, curY);
         playerScreen.setCurrentLegs(dx, dy);
 
+        if(Gdx.input.isTouched())
+            game.shoot();
+
+        game.map.update();
     }
 
     @Override
@@ -159,6 +182,9 @@ public class GameScreen implements Screen {
             cur.dispose();
         for (Texture cur : legs)
             cur.dispose();
+        vase1.dispose();
+        vase2.dispose();
+        bullet.dispose();
 
         screenObjects.clear();
     }
