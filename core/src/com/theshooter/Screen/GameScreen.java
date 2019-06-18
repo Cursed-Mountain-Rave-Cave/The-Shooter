@@ -76,30 +76,28 @@ public class GameScreen implements Screen {
 
         int dx = 0, dy = 0;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            dx += 1000;
-            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
-            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            dx -= 1000;
-            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
-            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            dy -= 1000;
-            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
-            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D))  {
+        if (Gdx.input.isKeyPressed(Input.Keys.W))
             dy += 1000;
-            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
-            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
-        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.S))
+            dy -= 1000;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.A))
+            dx -= 1000;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D))
+            dx += 1000;
+
         dx *= Gdx.graphics.getDeltaTime();
         dy *= Gdx.graphics.getDeltaTime();
-        player.move(dx, dy);
-        camera.translate(dx - dy, (dx + dy)/2);
+
+        if(dx != 0 && dy != 0){
+            dx /= Math.sqrt(2);
+            dy /= Math.sqrt(2);
+        }
+
+        player.move(dx/2 + dy, -dx/2 + dy);
+        camera.translate(dx, dy);
     }
 
     @Override
