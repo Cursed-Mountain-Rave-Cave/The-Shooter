@@ -8,7 +8,7 @@ public class Player {
     private ScreenObject top, legs;
 
     public Player(Texture t, Texture l, int x, int y, int h, int w) {
-        top = new ScreenObject(t, x + 2 * w, y + 2 * h, w, h, Depth.PLAYER);
+        top = new ScreenObject(t, x, y, w, h, Depth.PLAYER);
         legs = new ScreenObject(l, x, y, w, h, Depth.PLAYER);
     }
 

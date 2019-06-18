@@ -25,7 +25,6 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game){
         this.game = game;
-
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1920, 1080);
         camera.translate(-960, -540);
