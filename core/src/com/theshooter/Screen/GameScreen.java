@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Bullet;
@@ -78,7 +79,7 @@ public class GameScreen implements Screen {
 
         for (int i = -100; i < 0; i ++)
             for (int j = 50; j > -50; j -= 1){
-                Vase entity = new Vase(i*50, j*50);
+                Vase entity = new Vase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
                 game.map.addBreakableEntitu(entity);
                 screenObjects.add(new VaseScreenObject(entity, vase1, vase2));
             }
