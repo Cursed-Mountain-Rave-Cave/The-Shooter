@@ -19,8 +19,8 @@ public class GameScreen implements Screen {
     private Texture flyingFloor;
     private Texture box;
 
-    private Texture body;
-    private Texture legs;
+    private Texture body[];
+    private Texture legs[];
 
     private Texture bullet;
 
@@ -40,8 +40,13 @@ public class GameScreen implements Screen {
         floor = new Texture("floor/floor2.png");
         flyingFloor = new Texture("floor/flyingfloor.png");
         box = new Texture("box.png");
-        body = new Texture("body.png");
-        legs = new Texture("legs.png");
+        body = new Texture[8];
+        for (int i = 0; i < 8; i++)
+            body[i] = new Texture("player/bodies/body" + Integer.valueOf(i + 1).toString() + ".png");
+        legs = new Texture[8];
+        for (int i = 0; i < 8; i++)
+            legs[i] = new Texture("player/legs/legs" + Integer.valueOf(i + 1).toString() + ".png");
+
         bullet = new Texture("bullet.png");
         vase1 = new Texture("exportVase1.png");
         vase2 = new Texture("exportVase2.png");
@@ -131,6 +136,12 @@ public class GameScreen implements Screen {
             place.y -= -dx/2 + dy;
         }
 
+        float curX = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
+        float curY = Gdx.input.getY() - Gdx.graphics.getHeight() / 2;
+
+        playerScreen.setCurrentBody(curX, curY);
+        playerScreen.setCurrentLegs(dx, dy);
+
         if(Gdx.input.isTouched())
             game.shoot();
 
@@ -163,8 +174,10 @@ public class GameScreen implements Screen {
 
         flyingFloor.dispose();
         floor.dispose();
-        body.dispose();
-        legs.dispose();
+        for (Texture cur : body)
+            cur.dispose();
+        for (Texture cur : legs)
+            cur.dispose();
         vase1.dispose();
         vase2.dispose();
         bullet.dispose();
