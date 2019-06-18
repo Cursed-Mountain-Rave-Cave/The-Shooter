@@ -7,10 +7,16 @@ import com.theshooter.Game;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.height = 480;
-		config.width = 800;
+
+		config.width = 1600;
+		config.height = 900;
+
+		config.foregroundFPS = 120;
+		config.backgroundFPS = 120;
+
 		config.title = "The Shooter";
 		config.forceExit = false;
+
 		new LwjglApplication(new Game(), config);
 	}
 }

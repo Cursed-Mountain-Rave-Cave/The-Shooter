@@ -123,3 +123,4 @@ Thumbs.db
 !/ios-moe/xcode/*.xcodeproj/xcshareddata
 !/ios-moe/xcode/*.xcodeproj/project.pbxproj
 /ios-moe/xcode/native/
+*.class~b0fe279d642b7b5f50622fda1c0f027106c2f507

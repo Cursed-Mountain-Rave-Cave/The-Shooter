@@ -1,81 +1,63 @@
 package com.theshooter;
 
-import com.badlogic.gdx.ApplicationAdapter;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
+import com.theshooter.Logic.Entity.Bullet;
+import com.theshooter.Logic.Entity.Player;
+import com.theshooter.Logic.Map;
+import com.theshooter.Screen.GameScreen;
+import com.theshooter.Screen.MainScreen;
+import com.theshooter.Screen.ScreenObject;
+import com.theshooter.Screen.ScreenObjectArray;
 
-import java.util.Iterator;
+public class Game extends com.badlogic.gdx.Game {
+    public Player player;
 
-public class Game extends ApplicationAdapter {
-	SpriteBatch batch;
-	BitmapFont font;
-	Texture img, player, dot;
-	Rectangle playerRectangle;
-	Array<Rectangle> dots;
-	int score, speed = 2000;
+	public SpriteBatch batch;
+	public Map map;
+
+	private MainScreen mainScreen;
+	private GameScreen gameScreen;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		player = new Texture("player.png");
-		dot = new Texture("dot.png");
-		font = new BitmapFont();
-		dots = new Array<Rectangle>();
-		playerRectangle = new Rectangle(0, 0, 64, 64);
+		map = new Map();
+        player = new Player(20, 20, 25, 25);
+
+		mainScreen = new MainScreen(this);
+		gameScreen = new GameScreen(this);
+
+		setScreen(gameScreen);
 	}
+
+	public void shoot(){
+	    float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
+	    float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
+
+	    float dx = sdx/2 + sdy;
+	    float dy = -sdx/2 + sdy;
+
+	    float norm = (float) Math.sqrt(dx*dx + dy*dy);
+
+	    dx /= norm;
+	    dy /= norm;
+
+        Bullet bullet = new Bullet(player.getX(), player.getY(), dx, dy);
+
+        map.addBullet(bullet);
+        gameScreen.addBullet(bullet);
+    }
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0.3f, 0.3f, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		batch.begin();
-
-		batch.draw(player, playerRectangle.x, playerRectangle.y);
-		for (Rectangle rect: dots){
-			batch.draw(dot, rect.x, rect.y);
-		}
-		font.draw(batch, ""+score, 0, 480);
-
-		batch.end();
-
-		if (dots.size < 5){
-			dots.add(new Rectangle(MathUtils.random(0, 800-32), MathUtils.random(0, 480-32), 32, 32));
-		}
-
-		Iterator<Rectangle> iter = dots.iterator();
-		while (iter.hasNext()){
-			if(iter.next().overlaps(playerRectangle)) {
-				iter.remove();
-				score++;
-			}
-		}
-
-		if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) playerRectangle.y += speed*Gdx.graphics.getDeltaTime();
-		if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) playerRectangle.y -= speed*Gdx.graphics.getDeltaTime();
-		if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) playerRectangle.x += speed*Gdx.graphics.getDeltaTime();
-		if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) playerRectangle.x -= speed*Gdx.graphics.getDeltaTime();
-
-		if (playerRectangle.x < 0) playerRectangle.x = 0;
-		if (playerRectangle.y < 0) playerRectangle.y = 0;
-		if (playerRectangle.x > 800 - 64) playerRectangle.x = 800 - 64;
-		if (playerRectangle.y > 480 - 64) playerRectangle.y = 480 - 64;
+		super.render();
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
-		player.dispose();
-		dot.dispose();
-		font.dispose();
 	}
 }
