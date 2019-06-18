@@ -1,43 +1,43 @@
 package com.theshooter.Screen;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.theshooter.Player;
+import com.theshooter.Logic.Entity.Player;
 
 public class PlayerScreenObject extends ScreenObject {
     private Player player;
 
-    public PlayerScreenObject(Player player) {
+    private Texture body;
+    private Texture legs;
+
+    public PlayerScreenObject(Player player, Texture body, Texture legs) {
         this.player = player;
+        this.body = body;
+        this.legs = legs;
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(player.getTop().getTexture(), player.getTop().getX() - player.getTop().getY(),
-                (player.getTop().getX() + player.getTop().getY())/2);
-        batch.draw(player.getLegs().getTexture(), player.getLegs().getX() - player.getLegs().getY(),
-                (player.getLegs().getX() + player.getLegs().getY())/2);
-    }
-
-    public int compareTo(IScreenObject s) {
-        return player.getLegs().compareTo(s);
+        batch.draw(legs, player.getX() - player.getY(), (player.getX() + player.getY())/2);
+        batch.draw(body, player.getX() - player.getY(), (player.getX() + player.getY())/2);
     }
 
     public int getX() {
-        return player.getLegs().getX();
+        return player.getX();
     }
 
     public int getY() {
-        return player.getLegs().getY();
+        return player.getY();
     }
 
     public float getScreenX() {
-        return player.getLegs().getX() - player.getLegs().getY();
+        return player.getX() - player.getY();
     }
 
     public float getScreenY() {
-        return (player.getLegs().getX() + player.getLegs().getY())/2;
+        return (player.getX() + player.getY())/2;
     }
 
     public Depth getDepth() {
-        return player.getLegs().getDepth();
+        return player.getDepth();
     }
 }

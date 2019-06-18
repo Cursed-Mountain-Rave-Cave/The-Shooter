@@ -2,8 +2,8 @@ package com.theshooter.Screen;
 
 public enum Depth {
     FLOOR,
-    PLAYER,
     THINGS,
+    PLAYER,
     EFFECTS,
     ENEMY,
     WALLS
