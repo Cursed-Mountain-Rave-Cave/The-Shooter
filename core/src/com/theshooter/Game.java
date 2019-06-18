@@ -12,6 +12,7 @@ import java.util.*;
 public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Texture floor, flyingFloor, box;
+	private Player player;
 
 	private ScreenObjectArray down;
 
@@ -23,9 +24,14 @@ public class Game extends ApplicationAdapter {
 		flyingFloor = new Texture("flyingfloor.png");
 		box = new Texture("box.png");
 
+		player = new Player(new Texture("body.png"), new Texture("legs.png"), 22, 22, 50, 50);
+
 		down = new ScreenObjectArray();
 
-        for (int i = -100; i < 100; i++)
+		down.add(new PlayerScreenObject(player));
+
+
+       for (int i = -100; i < 100; i++)
             for (int j = -100; j < 100; j++)
                 down.add(new ScreenObject(floor, i*50, j*50, 50, 50, Depth.FLOOR));
 
@@ -46,6 +52,7 @@ public class Game extends ApplicationAdapter {
 
 		batch.begin();
 
+		player.move(1,0);
 		down.draw(batch);
 
 		batch.end();
