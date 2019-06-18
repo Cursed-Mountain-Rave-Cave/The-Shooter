@@ -6,8 +6,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
-import com.theshooter.Player;
+import com.theshooter.Logic.Entity.Entity;
+import com.theshooter.Logic.Entity.Player;
 
 public class GameScreen implements Screen {
 
@@ -17,6 +19,9 @@ public class GameScreen implements Screen {
     private Texture floor;
     private Texture flyingFloor;
     private Texture box;
+
+    private Texture body;
+    private Texture legs;
 
     private Player player;
     private PlayerScreenObject playerScreen;
@@ -32,9 +37,11 @@ public class GameScreen implements Screen {
         floor = new Texture("floor/floor2.png");
         flyingFloor = new Texture("floor/flyingfloor.png");
         box = new Texture("box.png");
+        body = new Texture("body.png");
+        legs = new Texture("legs.png");
 
-        player = new Player(new Texture("body.png"), new Texture("legs.png"), 20, 20, 50, 50);
-        playerScreen = new PlayerScreenObject(player);
+        player = new Player(20, 20, 25, 25);
+        playerScreen = new PlayerScreenObject(player, body, legs);
 
         screenObjects = new ScreenObjectArray();
 
@@ -42,15 +49,19 @@ public class GameScreen implements Screen {
 
         for (int i = -100; i < 100; i++)
             for (int j = -100; j < 100; j++)
-                screenObjects.add(new ScreenObject(floor, i*50, j*50, 50, 50, Depth.FLOOR));
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.FLOOR), floor));
 
         for (int i = 20; i > 10; i--)
             for (int j = 10; j > -10; j--)
-                screenObjects.add(new ScreenObject(box, i*50, j*50, 50, 50, Depth.THINGS));
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS), box));
 
         for (int i = 15; i > 10; i -= 2)
-            for (int j = 10; j > -10; j -= 3)
-                screenObjects.add(new ScreenObject(flyingFloor, i*50, j*50, 50, 50, Depth.WALLS));
+            for (int j = 10; j > -10; j -= 3){
+                Entity entity = new Entity(i*50, j*50, 50, 50, Depth.WALLS, false);
+                game.map.addEntity(entity);
+                screenObjects.add(new ScreenObject(entity, flyingFloor));
+            }
+
 
     }
 
@@ -95,8 +106,16 @@ public class GameScreen implements Screen {
             dy /= Math.sqrt(2);
         }
 
-        player.move(dx/2 + dy, -dx/2 + dy);
-        camera.translate(dx, dy);
+        Rectangle place = player.getRectangle();
+        place.x += dx/2 + dy;
+        place.y += -dx/2 + dy;
+
+        if(game.map.isAllowed(place)){
+            camera.translate(dx, dy);
+        }else{
+            place.x -= dx/2 + dy;
+            place.y -= -dx/2 + dy;
+        }
     }
 
     @Override
@@ -125,6 +144,8 @@ public class GameScreen implements Screen {
 
         flyingFloor.dispose();
         floor.dispose();
+        body.dispose();
+        legs.dispose();
 
         screenObjects.clear();
     }

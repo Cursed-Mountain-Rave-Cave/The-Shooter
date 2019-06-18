@@ -2,31 +2,33 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+import com.theshooter.Logic.Entity.Entity;
 
 public class ScreenObject implements IScreenObject {
-    private Rectangle rect;
-    private Texture texture;
-    private Depth depth;
 
-    public ScreenObject(Texture texture, int x, int y, int w, int h, Depth d){
+    Entity entity;
+    private Texture texture;
+
+    public ScreenObject(Entity entity, Texture texture){
+        this.entity = entity;
         this.texture = texture;
-        this.depth = d;
-        this.rect = new Rectangle(x, y, w, h);
     }
 
     public ScreenObject() {}
 
     public void draw(SpriteBatch batch){
-        batch.draw(texture, rect.x - rect.y, (rect.x + rect.y)/2);
+        batch.draw(texture, entity.getX() - entity.getY(), (entity.getX() + entity.getY())/2);
     }
 
     @Override
     public int compareTo(IScreenObject s) {
-        if (getDepth() == Depth.FLOOR)
-            return -1;
-        if (s.getDepth() == Depth.FLOOR)
-            return 1;
+        if(getDepth() != Depth.FLOOR && s.getDepth() != Depth.FLOOR){
+            if (getDepth() == Depth.FLOOR)
+                return -1;
+            if (s.getDepth() == Depth.FLOOR)
+                return 1;
+        }
+
         if (s.getY() < getY())
             return -1;
         if (s.getY() > getY())
@@ -35,35 +37,32 @@ public class ScreenObject implements IScreenObject {
             return -1;
         if (s.getX() > getX())
             return 1;
-        return depth.compareTo(s.getDepth());
+
+        return getDepth().compareTo(s.getDepth());
     }
+
 
     public int getX() {
-        return (int)rect.x;
+        return entity.getX();
     }
-
     public int getY() {
-        return (int)rect.y;
+        return entity.getY();
     }
-
-    public void setX(int x) {
-        rect.x = x;
-    }
-
-    public void setY(int y) {
-        rect.y = y;
-    }
-
     public Texture getTexture() {
         return texture;
     }
-
-    public Rectangle getRect() {
-        return  rect;
+    public Depth getDepth() {
+        return entity.getDepth();
     }
 
-    public Depth getDepth() {
-        return depth;
+    public void setX(int x) {
+        entity.setX(x);
+    }
+    public void setY(int y) {
+        entity.setY(y);
+    }
+    public void setDepth(Depth depth){
+        entity.setDepth(depth);
     }
 }
 

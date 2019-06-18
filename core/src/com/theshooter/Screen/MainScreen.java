@@ -6,7 +6,6 @@ import com.theshooter.Game;
 public class MainScreen implements Screen {
 
     final private Game game;
-    private ScreenObjectArray screenObjects;
 
     public MainScreen(Game game){
         this.game = game;
