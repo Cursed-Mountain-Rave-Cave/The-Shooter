@@ -1,6 +1,7 @@
 package com.theshooter.Screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -49,8 +50,8 @@ public class GameScreen implements Screen {
             legs[i] = new Texture("player/legs/legs" + Integer.valueOf(i + 1).toString() + ".png");
 
         bullet = new Texture("bullet.png");
-        vase1 = new Texture("exportVase1.png");
-        vase2 = new Texture("exportVase2.png");
+        vase1 = new Texture("environment/exportVase1.png");
+        vase2 = new Texture("environment/exportVase2.png");
 
         playerScreen = new PlayerScreenObject(game.player, body, legs);
 
@@ -103,6 +104,18 @@ public class GameScreen implements Screen {
         screenObjects.draw(game.batch);
 
         game.batch.end();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+            Gdx.app.exit();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.F11)){
+            if(Gdx.graphics.isFullscreen())
+                Gdx.graphics.setWindowedMode(1600, 900);
+            else
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+        }
+
+
 
         int dx = 0, dy = 0;
 
