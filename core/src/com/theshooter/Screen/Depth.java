@@ -1,4 +1,4 @@
-package com.theshooter;
+package com.theshooter.Screen;
 
 public enum Depth {
     FLOOR,

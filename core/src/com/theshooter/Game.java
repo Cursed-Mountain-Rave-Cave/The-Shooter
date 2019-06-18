@@ -1,60 +1,36 @@
 package com.theshooter;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
+import com.theshooter.Screen.GameScreen;
+import com.theshooter.Screen.MainScreen;
+import com.theshooter.Screen.ScreenObjectArray;
 
-import java.util.*;
+public class Game extends com.badlogic.gdx.Game {
 
-public class Game extends ApplicationAdapter {
-	private SpriteBatch batch;
-	private Texture floor, flyingFloor, box;
+	public SpriteBatch batch;
 
-	private ScreenObjectArray down;
+	private MainScreen mainScreen;
+	private GameScreen gameScreen;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
-		floor = new Texture("floor.png");
-		flyingFloor = new Texture("flyingfloor.png");
-		box = new Texture("box.png");
+		mainScreen = new MainScreen(this);
+		gameScreen = new GameScreen(this);
 
-		down = new ScreenObjectArray();
-
-        for (int i = -100; i < 100; i++)
-            for (int j = -100; j < 100; j++)
-                down.add(new ScreenObject(floor, i*50, j*50, 50, 50, Depth.FLOOR));
-
-		for (int i = 20; i > 10; i--)
-			for (int j = 10; j > -10; j--)
-				down.add(new ScreenObject(box, i*50, j*50, 50, 50, Depth.THINGS));
-
-		for (int i = 15; i > 10; i -= 2)
-			for (int j = 10; j > -10; j -= 3)
-				down.add(new ScreenObject(flyingFloor, i*50, j*50, 50, 50, Depth.WALLS));
-
+		setScreen(gameScreen);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0.3f, 0.3f, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		batch.begin();
-
-		down.draw(batch);
-
-		batch.end();
+		super.render();
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		down.clear();
-		floor.dispose();
 	}
 }
