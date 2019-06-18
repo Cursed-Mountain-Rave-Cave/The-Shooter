@@ -7,26 +7,36 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
-	private Texture floor, player;
+	private Texture floor, flyingFloor, box;
 
-	private Array<ScreenObject> down;
+	private ScreenObjectArray down;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
 		floor = new Texture("floor.png");
-		player = new Texture("player.png");
+		flyingFloor = new Texture("flyingfloor.png");
+		box = new Texture("box.png");
 
-		down = new Array<ScreenObject>();
+		down = new ScreenObjectArray();
 
-		for (int i = -100; i < 100; i++)
-			for (int j = -100; j < 100; j++)
-				down.add(new ScreenObject(floor, i*50, j*50, 50, 50));
+        for (int i = -100; i < 100; i++)
+            for (int j = -100; j < 100; j++)
+                down.add(new ScreenObject(floor, i*50, j*50, 50, 50, Depth.FLOOR));
+
+		for (int i = 20; i > 10; i--)
+			for (int j = 10; j > -10; j--)
+				down.add(new ScreenObject(box, i*50, j*50, 50, 50, Depth.THINGS));
+
+		for (int i = 15; i > 10; i -= 2)
+			for (int j = 10; j > -10; j -= 3)
+				down.add(new ScreenObject(flyingFloor, i*50, j*50, 50, 50, Depth.WALLS));
+
 	}
 
 	@Override
@@ -35,11 +45,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-		batch.draw(player, 0, 0);
-		for(ScreenObject object: down)
-			object.draw(batch);
-		batch.begin();
-
+		down.draw(batch);
 
 		batch.end();
 	}
