@@ -18,6 +18,10 @@ public class Entity {
         this(x, y, w, h, depth, true);
     }
 
+    public void update(){
+
+    }
+
     public Depth getDepth() {
         return depth;
     }
