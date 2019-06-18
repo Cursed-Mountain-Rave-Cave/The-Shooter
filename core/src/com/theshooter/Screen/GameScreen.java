@@ -8,10 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
-import com.theshooter.Logic.Entity.Bullet;
-import com.theshooter.Logic.Entity.Entity;
-import com.theshooter.Logic.Entity.Player;
-import com.theshooter.Logic.Entity.Vase;
+import com.theshooter.Logic.Entity.*;
 
 public class GameScreen implements Screen {
 
@@ -48,7 +45,6 @@ public class GameScreen implements Screen {
         bullet = new Texture("bullet.png");
         vase1 = new Texture("exportVase1.png");
         vase2 = new Texture("exportVase2.png");
-
 
         playerScreen = new PlayerScreenObject(game.player, body, legs);
 
