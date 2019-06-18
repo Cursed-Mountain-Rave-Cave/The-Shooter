@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.theshooter.Game;
+import com.theshooter.Player;
 
 public class GameScreen implements Screen {
 
@@ -16,7 +17,9 @@ public class GameScreen implements Screen {
     private Texture floor;
     private Texture flyingFloor;
     private Texture box;
-    private Texture player;
+
+    private Player player;
+    private PlayerScreenObject playerScreen;
 
     private OrthographicCamera camera;
 
@@ -25,13 +28,18 @@ public class GameScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1920, 1080);
+        camera.translate(-960, -540);
 
         floor = new Texture("floor/floor2.png");
         flyingFloor = new Texture("floor/flyingfloor.png");
         box = new Texture("box.png");
-        player = new Texture("player/south-west.png");
+
+        player = new Player(new Texture("body.png"), new Texture("legs.png"), 20, 20, 50, 50);
+        playerScreen = new PlayerScreenObject(player);
 
         screenObjects = new ScreenObjectArray();
+
+        screenObjects.add(playerScreen);
 
         for (int i = -100; i < 100; i++)
             for (int j = -100; j < 100; j++)
@@ -44,9 +52,6 @@ public class GameScreen implements Screen {
         for (int i = 15; i > 10; i -= 2)
             for (int j = 10; j > -10; j -= 3)
                 screenObjects.add(new ScreenObject(flyingFloor, i*50, j*50, 50, 50, Depth.WALLS));
-
-        screenObjects.add(new ScreenObject(player, 500, 0, 25, 25, Depth.PLAYER));
-
 
     }
 
@@ -69,10 +74,32 @@ public class GameScreen implements Screen {
 
         game.batch.end();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) camera.translate(0,1000 * Gdx.graphics.getDeltaTime());
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) camera.translate(0,-1000 * Gdx.graphics.getDeltaTime());
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) camera.translate(-1000 * Gdx.graphics.getDeltaTime(), 0);
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) camera.translate(1000 * Gdx.graphics.getDeltaTime(),0);
+        int dx = 0, dy = 0;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            dx += 1000;
+            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
+            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            dx -= 1000;
+            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
+            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            dy -= 1000;
+            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
+            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.D))  {
+            dy += 1000;
+            //player.move(0, (int)(1000 * Gdx.graphics.getDeltaTime()));
+            //camera.translate(playerScreen.getScreenX(), playerScreen.getScreenY());
+        }
+        dx *= Gdx.graphics.getDeltaTime();
+        dy *= Gdx.graphics.getDeltaTime();
+        player.move(dx, dy);
+        camera.translate(dx - dy, (dx + dy)/2);
     }
 
     @Override
@@ -100,7 +127,6 @@ public class GameScreen implements Screen {
         box.dispose();
 
         flyingFloor.dispose();
-        player.dispose();
         floor.dispose();
 
         screenObjects.clear();

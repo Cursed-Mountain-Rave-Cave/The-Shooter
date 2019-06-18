@@ -1,6 +1,8 @@
 package com.theshooter;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.theshooter.Screen.Depth;
+import com.theshooter.Screen.ScreenObject;
 
 public class Player {
     private ScreenObject top, legs;

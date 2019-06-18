@@ -1,16 +1,13 @@
-package com.theshooter;
+package com.theshooter.Screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+import com.theshooter.Player;
 
 public class PlayerScreenObject extends ScreenObject {
     private Player player;
-    private Rectangle rect;
-    private Depth depth = Depth.PLAYER;
 
     public PlayerScreenObject(Player player) {
         this.player = player;
-        this.rect = player.getLegs().getRect();
     }
 
     public void draw(SpriteBatch batch) {
@@ -28,9 +25,16 @@ public class PlayerScreenObject extends ScreenObject {
         return player.getLegs().getX();
     }
 
-
     public int getY() {
         return player.getLegs().getY();
+    }
+
+    public float getScreenX() {
+        return player.getLegs().getX() - player.getLegs().getY();
+    }
+
+    public float getScreenY() {
+        return (player.getLegs().getX() + player.getLegs().getY())/2;
     }
 
     public Depth getDepth() {
