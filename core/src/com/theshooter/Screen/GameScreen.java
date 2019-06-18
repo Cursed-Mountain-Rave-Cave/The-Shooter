@@ -20,8 +20,8 @@ public class GameScreen implements Screen {
     private Texture flyingFloor;
     private Texture box;
 
-    private Texture body;
-    private Texture legs;
+    private Texture body[];
+    private Texture legs[];
 
     private Player player;
     private PlayerScreenObject playerScreen;
@@ -37,10 +37,14 @@ public class GameScreen implements Screen {
         floor = new Texture("floor/floor2.png");
         flyingFloor = new Texture("floor/flyingfloor.png");
         box = new Texture("box.png");
-        body = new Texture("body.png");
-        legs = new Texture("legs.png");
+        body = new Texture[8];
+        for (int i = 0; i < 8; i++)
+            body[i] = new Texture("player/bodies/body" + Integer.valueOf(i + 1).toString() + ".png");
+        legs = new Texture[8];
+        for (int i = 0; i < 8; i++)
+            legs[i] = new Texture("player/legs/legs" + Integer.valueOf(i + 1).toString() + ".png");
 
-        player = new Player(20, 20, 25, 25);
+        player = new Player(0, 0, 25, 25);
         playerScreen = new PlayerScreenObject(player, body, legs);
 
         screenObjects = new ScreenObjectArray();
@@ -56,7 +60,7 @@ public class GameScreen implements Screen {
                 screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS), box));
 
         for (int i = 15; i > 10; i -= 2)
-            for (int j = 10; j > -10; j -= 3){
+            for (int j = 10; j > -10; j --){
                 Entity entity = new Entity(i*50, j*50, 50, 50, Depth.WALLS, false);
                 game.map.addEntity(entity);
                 screenObjects.add(new ScreenObject(entity, flyingFloor));
@@ -116,6 +120,13 @@ public class GameScreen implements Screen {
             place.x -= dx/2 + dy;
             place.y -= -dx/2 + dy;
         }
+
+        float curX = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
+        float curY = Gdx.input.getY() - Gdx.graphics.getHeight() / 2;
+
+        playerScreen.setCurrentBody(curX, curY);
+        playerScreen.setCurrentLegs(dx, dy);
+
     }
 
     @Override
@@ -144,8 +155,10 @@ public class GameScreen implements Screen {
 
         flyingFloor.dispose();
         floor.dispose();
-        body.dispose();
-        legs.dispose();
+        for (Texture cur : body)
+            cur.dispose();
+        for (Texture cur : legs)
+            cur.dispose();
 
         screenObjects.clear();
     }

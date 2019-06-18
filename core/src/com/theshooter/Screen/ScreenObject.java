@@ -22,20 +22,20 @@ public class ScreenObject implements IScreenObject {
 
     @Override
     public int compareTo(IScreenObject s) {
-        if(getDepth() != Depth.FLOOR && s.getDepth() != Depth.FLOOR){
+        if(getDepth() != Depth.FLOOR || s.getDepth() != Depth.FLOOR){
             if (getDepth() == Depth.FLOOR)
                 return -1;
             if (s.getDepth() == Depth.FLOOR)
                 return 1;
         }
+        if (s.getX() < getX())
+            return -1;
+        if (s.getX() > getX())
+            return 1;
 
         if (s.getY() < getY())
             return -1;
         if (s.getY() > getY())
-            return 1;
-        if (s.getX() < getX())
-            return -1;
-        if (s.getX() > getX())
             return 1;
 
         return getDepth().compareTo(s.getDepth());
