@@ -2,35 +2,41 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Player;
+import com.theshooter.Logic.InputController;
 import com.theshooter.Logic.Map;
+import com.theshooter.Logic.TextureController;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
-import com.theshooter.Screen.ScreenObject;
-import com.theshooter.Screen.ScreenObjectArray;
 
 public class Game extends com.badlogic.gdx.Game {
     public Player player;
 
-	public SpriteBatch batch;
 	public Map map;
 
-	private MainScreen mainScreen;
-	private GameScreen gameScreen;
+	public MainScreen mainScreen;
+	public GameScreen gameScreen;
+	public TextureController t;
+
+	private InputController inputController;
 
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
 		map = new Map();
-        player = new Player(20, 20, 25, 25);
+        player = new Player(0, 0, 25, 25, map);
 
+		t = new TextureController();
 		mainScreen = new MainScreen(this);
 		gameScreen = new GameScreen(this);
 
 		setScreen(gameScreen);
+
+		map.addEntity(player);
+
+		inputController = new InputController(this);
+
+		Gdx.input.setInputProcessor(inputController);
 	}
 
 	public void shoot(){
@@ -45,8 +51,7 @@ public class Game extends com.badlogic.gdx.Game {
 	    dx /= norm;
 	    dy /= norm;
 
-        Bullet bullet = new Bullet(player.getX(), player.getY(), dx, dy);
-
+        Bullet bullet = new Bullet(player.getX() + 25, player.getY() + 25, dx, dy);
         map.addBullet(bullet);
         gameScreen.addBullet(bullet);
     }
@@ -54,10 +59,16 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void render () {
 		super.render();
+		inputController.update();
+		map.update();
 	}
 
 	@Override
 	public void dispose () {
-		batch.dispose();
+		t.dispose();
+	}
+
+	public Map getMap() {
+		return map;
 	}
 }

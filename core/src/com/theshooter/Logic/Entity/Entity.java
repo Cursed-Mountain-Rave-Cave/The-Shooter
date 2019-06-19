@@ -3,7 +3,7 @@ package com.theshooter.Logic.Entity;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Screen.Depth;
 
-public class Entity {
+public class Entity implements IEntity{
     private Rectangle rect;
     private Depth depth;
     boolean passable;
@@ -16,6 +16,12 @@ public class Entity {
 
     public Entity(int x, int y, int w, int h, Depth depth){
         this(x, y, w, h, depth, true);
+    }
+
+    public Entity(Rectangle r, Depth depth, boolean passable) {
+        rect = new Rectangle(r);
+        this.depth = depth;
+        this.passable = passable;
     }
 
     public void update(){

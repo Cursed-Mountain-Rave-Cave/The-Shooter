@@ -7,24 +7,17 @@ import com.theshooter.Logic.Entity.Entity;
 public class ScreenObject implements IScreenObject {
 
     Entity entity;
+    int shift;
     private Texture texture;
 
-    public ScreenObject(Entity entity, Texture texture){
+    public ScreenObject(Entity entity, Texture texture, int shift){
         this.entity = entity;
         this.texture = texture;
+        this.shift = shift;
     }
 
-    public ScreenObject() {}
-
     public void draw(SpriteBatch batch){
-        //if(entity.getDepth() != Depth.EFFECTS && entity.getDepth() != Depth.PLAYER && entity.getDepth() != Depth.THINGS){
-            batch.draw(texture, entity.getX() - entity.getY(), (entity.getX() + entity.getY())/2);
-        /*}else{
-            batch.draw(texture,
-                    (entity.getX() - entity.getWidth()/2) - (entity.getY() - entity.getHeight()/2),
-                    ((entity.getX() - entity.getWidth()/2) + (entity.getY() - entity.getHeight()/2))/2);
-        }*/
-
+        batch.draw(texture, getScreenX()- shift, getScreenY() );
     }
 
     @Override
@@ -35,20 +28,13 @@ public class ScreenObject implements IScreenObject {
             if (s.getDepth() == Depth.FLOOR)
                 return 1;
         }
-        /*
-        if (s.getY() < getY())
+
+        if (s.getX() + s.getWidth() / 2 + s.getY() + s.getHeight() / 2 <
+                getX() + getWidth() / 2 + getY() + getHeight() / 2)
             return -1;
-        if (s.getY() > getY())
+        if (s.getX() + s.getWidth() / 2 + s.getY() + s.getHeight() / 2 >
+                getX() + getWidth() / 2 + getY() + getHeight() / 2)
             return 1;
-        */
-        if (s.getX() < getX())
-            return -1;
-        if (s.getX() > getX())
-            return 1;
-
-
-
-
 
         return getDepth().compareTo(s.getDepth());
     }
@@ -60,12 +46,26 @@ public class ScreenObject implements IScreenObject {
     public int getY() {
         return entity.getY();
     }
+    public int getWidth() {
+        return entity.getWidth();
+    }
+    public int getHeight() {
+        return entity.getHeight();
+    }
+
+    public int getScreenX() {
+        return entity.getX() - entity.getY();
+    }
+    public int getScreenY() {
+        return (entity.getX() + entity.getY())/2;
+    }
     public Texture getTexture() {
         return texture;
     }
     public Depth getDepth() {
         return entity.getDepth();
     }
+    public Entity getEntity() { return entity; }
 
     public void setX(int x) {
         entity.setX(x);
