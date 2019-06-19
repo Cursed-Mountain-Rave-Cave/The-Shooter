@@ -105,13 +105,31 @@ public class GameScreen implements Screen {
             for(int j = 0; j < 4; j++)
                 placeFloor(i, j, 2);
 
-        for(int i = 49; i < 100; i++)
-            for(int j = 4; j < 6; j++)
-                placeFloor(i, j, 4);
+        for(int i = 51; i < 100; i++)
+            for(int j = 3; j < 10; j++)
+                placeFloor(i, j, 2);
+
+
 
         for(int i = 49; i < 100; i++)
             for(int j = 4; j < 6; j++)
                 placeFloor(i, j, 4);
+
+        for(int i = 49; i < 51; i++)
+            for(int j = 6; j < 10; j++)
+                placeFloor(i, j, 4);
+
+        for(int i = 0; i < 89; i++)
+            for(int j = 10; j < 100; j++)
+                placeFloor(i, j, 4);
+
+
+
+        for(int i = 89; i < 100; i++)
+            for(int j = 10; j < 100; j++)
+                placeFloor(i, j, 7);
+
+
 
 
 
@@ -177,7 +195,7 @@ public class GameScreen implements Screen {
         cameraController.update();
         batch.setProjectionMatrix(cameraController.getCamera().combined);
 
-        Gdx.gl.glClearColor(0.3f, 0.3f, 1, 1);
+        Gdx.gl.glClearColor(0xDC / 265f, 0xC2 / 265f, 0x76 / 265f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
