@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
                 Vase entity = new Vase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
                 game.map.addBreakableEntity(entity);
                 screenObjects.add(new BreakableScreenObject(entity,
-                                  game.t.getTextures("things", "breakableThing1")));
+                                  game.t.getTextures("things", "breakableThing1"), 150));
             }
 
         for (int i = -300; i < -250; i += 2)
@@ -68,7 +68,7 @@ public class GameScreen implements Screen {
                 game.map.addBreakableEntity(entity);
                 int rand = MathUtils.random(2, 3);
                 screenObjects.add(new BreakableScreenObject(entity,
-                        game.t.getTextures("things", "breakableThing" + rand)));
+                        game.t.getTextures("things", "breakableThing" + rand), 150));
             }
 
         for (int i = 30; i > 20; i--)

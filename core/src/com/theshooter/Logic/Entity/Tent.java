@@ -5,6 +5,6 @@ import com.theshooter.Screen.Depth;
 public class Tent extends BreakableEntity {
 
     public Tent(int x, int y){
-        super(x, y, 200, 200, Depth.THINGS);
+        super(x, y, 150, 150, Depth.THINGS, false);
     }
 }
