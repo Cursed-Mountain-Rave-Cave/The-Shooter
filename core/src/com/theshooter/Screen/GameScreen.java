@@ -20,7 +20,31 @@ public class GameScreen implements Screen {
 
     public HumanScreenObject playerScreen;
 
-    public WallScreenObject wallScreen;
+    public void placeFloor(int x, int y, int type){
+        screenObjects.add(new ScreenObject(new Entity(x*50, y*50, 50, 50, Depth.FLOOR),
+                game.t.getTexture("floor", "floor" + type), 50));
+    }
+
+    public void placeWall(int x, int y){
+        Wall entity = new Wall(x*50, y*50, 50, 50);
+        game.map.addEntity(entity);
+        screenObjects.add(new WallScreenObject(entity, game.t.getTextures("walls", "wall2")));
+    }
+
+    public void placeVase(int x, int y){
+        Vase entity = new Vase(x, y);
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("things", "breakableThing1"), 50));
+    }
+
+    public void placeTend(int x, int y){
+        Tent entity = new Tent(x, y);
+        game.map.addBreakableEntity(entity);
+        int rand = MathUtils.random(2, 3);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("things", "breakableThing" + rand), 150));
+    }
 
     private void spawnArabinWarrior(int x, int y) {
         HumanEnemy entity = new HumanEnemy(x, y, 15, game.player.getRectangle(), game.getMap());
@@ -73,48 +97,18 @@ public class GameScreen implements Screen {
 
         for (int i = -100; i < 100; i++)
             for (int j = -100; j < 100; j++)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.FLOOR),
-                                  game.t.getTexture("floor", "floor" + MathUtils.random(1, 8)), 50));
-
-        for (int i = 20; i > 10; i--)
-            for (int j = 10; j > -10; j--)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS),
-                            game.t.getTexture("things", "unbreakableThing1"), 50));
+                placeFloor(i, j, 3);
 
         for (int i = 15; i > 10; i -= 1)
-            for (int j = 10; j > -10; j -= 1){
-                Wall entity = new Wall(i*50, j*50, 50, 50);
-                game.map.addEntity(entity);
-                screenObjects.add(new WallScreenObject(entity, game.t.getTextures("walls", "wall2")));
-            }
+            for (int j = 10; j > -10; j -= 1)
+                placeWall(i, j);
 
-        for (int i = 0; i < 10000; i ++){
-            Vase entity = new Vase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("things", "breakableThing1"), 50));
-        }
+        for (int i = 0; i < 10000; i ++)
+            placeVase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
 
 
-        for (int i = -300; i < -250; i += 2)
-            for (int j = 50; j > 0; j -= 5) {
-                Tent entity = new Tent(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-                game.map.addBreakableEntity(entity);
-                int rand = MathUtils.random(2, 3);
-                screenObjects.add(new BreakableScreenObject(entity,
-                        game.t.getTextures("things", "breakableThing" + rand), 150));
-            }
-
-        for (int i = 30; i > 20; i--)
-            for (int j = 10; j > -10; j--)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS),
-                        game.t.getTexture("things", "unbreakableThing2"), 50));
-
-        for (int i = 40; i > 30; i -= 2)
-            for (int j = 10; j > -10; j -= 2)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS),
-                        game.t.getTexture("things", "unbreakableThing3"), 50));
-
+        for (int i = 0; i < 100; i ++)
+            placeTend(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
 
 
 
