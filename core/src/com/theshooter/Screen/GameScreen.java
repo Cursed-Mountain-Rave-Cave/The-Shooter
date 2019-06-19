@@ -95,10 +95,35 @@ public class GameScreen implements Screen {
 
         screenObjects.add(playerScreen);
 
-        for (int i = -100; i < 100; i++)
-            for (int j = -100; j < 100; j++)
-                placeFloor(i, j, 3);
 
+        for(int i = 0; i < 49; i++)
+            for(int j = 0; j < 10; j++)
+                placeFloor(i, j, 2);
+
+
+        for(int i = 49; i < 100; i++)
+            for(int j = 0; j < 4; j++)
+                placeFloor(i, j, 2);
+
+        for(int i = 49; i < 100; i++)
+            for(int j = 4; j < 6; j++)
+                placeFloor(i, j, 4);
+
+        for(int i = 49; i < 100; i++)
+            for(int j = 4; j < 6; j++)
+                placeFloor(i, j, 4);
+
+
+
+
+        for(int i = 0; i < 49; i++)
+            for(int j = 10; j < 11; j++)
+                placeWall(i, j);
+
+
+
+
+            /*
         for (int i = 15; i > 10; i -= 1)
             for (int j = 10; j > -10; j -= 1)
                 placeWall(i, j);
@@ -109,28 +134,31 @@ public class GameScreen implements Screen {
 
         for (int i = 0; i < 100; i ++)
             placeTend(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
+*/
 
 
-
-        for (int i = 0; i < 50; i ++){
+            /*
+        for (int i = 0; i < 50; i ++)
             spawnKeanu(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-        }
 
-       for (int i = 0; i < 50; i ++){
+
+       for (int i = 0; i < 50; i ++)
            spawnPlane(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-        }
 
-        for (int i = 0; i < 50; i ++){
+
+        for (int i = 0; i < 50; i ++)
             spawnTrain(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-        }
 
-        for (int i = 0; i < 50; i ++){
+
+        for (int i = 0; i < 50; i ++)
             spawnBoss(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-        }
 
-        for (int i = 0; i < 50; i ++){
+
+        for (int i = 0; i < 50; i ++)
             spawnArabinWarrior(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-        }
+
+             */
+
     }
 
     public void addBullet(Bullet bullet){
