@@ -2,9 +2,9 @@ package com.theshooter.Logic.Entity;
 
 import com.theshooter.Screen.Depth;
 
-public class BreakableEntity extends Entity {
+public class BreakableEntity extends Entity implements IBreakableEntity{
 
-    boolean broken;
+    protected boolean broken;
 
     public BreakableEntity(int x, int y, int w, int h, Depth depth, boolean passable) {
         super(x, y, w, h, depth, passable);

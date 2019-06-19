@@ -46,22 +46,7 @@ public class InputController implements InputProcessor {
             dy--;
         }
 
-        float norm = (float) Math.hypot(dx, dy);
-
-        dx = (int)(dx * 1000 * Gdx.graphics.getDeltaTime() / norm);
-        dy = (int)(dy * 1000 * Gdx.graphics.getDeltaTime() / norm);
-
-        Rectangle place = game.player.getRectangle();
-
-        place.x += dx;
-        place.y += dy;
-
-        if(!game.map.isAllowed(place)){
-            place.x -= dx;
-            place.y -= dy;
-        }
-
-        game.gameScreen.playerScreen.setCurrentLegs(dx, dy);
+        game.player.moveAt(dx, dy);
 
         if (leftMouseBottomPressed)
             game.shoot();
@@ -151,19 +136,19 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        float curX = screenX - Gdx.graphics.getWidth() / 2;
-        float curY = screenY - Gdx.graphics.getHeight() / 2;
+        int curX = screenX - Gdx.graphics.getWidth() / 2;
+        int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        game.gameScreen.playerScreen.setCurrentBody(curX, curY);
+        game.player.lookAt(curX, curY);
         return false;
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        float curX = screenX - Gdx.graphics.getWidth() / 2;
-        float curY = screenY - Gdx.graphics.getHeight() / 2;
+        int curX = screenX - Gdx.graphics.getWidth() / 2;
+        int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        game.gameScreen.playerScreen.setCurrentBody(curX, curY);
+        game.player.lookAt(curX, curY);
 
         return false;
     }

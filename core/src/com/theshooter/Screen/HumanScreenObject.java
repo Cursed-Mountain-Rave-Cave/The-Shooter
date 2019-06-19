@@ -2,10 +2,10 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.theshooter.Logic.Entity.Player;
+import com.theshooter.Logic.Entity.Human;
 
-public class PlayerScreenObject extends ScreenObject {
-    private Player player;
+public class HumanScreenObject extends ScreenObject {
+    private Human human;
 
     private Texture[] body;
     private Texture[] legs;
@@ -13,20 +13,26 @@ public class PlayerScreenObject extends ScreenObject {
     private int currentBody;
     private int currentLegs;
 
-    public PlayerScreenObject(Player player, Texture[] body, Texture[] legs) {
-        super(player, body[0], 50);
+    public HumanScreenObject(Human human, Texture[] body, Texture[] legs) {
+        super(human, body[0], 50);
 
-        this.player = player;
+        this.human = human;
         this.body = body;
         this.legs = legs;
     }
 
     public void draw(SpriteBatch batch) {
+        setCurrentLegs();
+        setCurrentBody();
+
         batch.draw(legs[currentLegs], getScreenX() - shift, getScreenY());
         batch.draw(body[currentBody], getScreenX() - shift, getScreenY());
     }
 
-    public void setCurrentLegs(int dx, int dy) {
+    public void setCurrentLegs() {
+        float dx = human.getMovedx();
+        float dy = human.getMovedy();
+
         if (dx == 0 && dy > 0)
             this.currentLegs = 5;
         if (dx == 0 && dy < 0)
@@ -45,8 +51,12 @@ public class PlayerScreenObject extends ScreenObject {
             this.currentLegs = 0;
     }
 
-    public void setCurrentBody(float dx, float dy) {
+    public void setCurrentBody() {
+        float dx = human.getLookdx();
+        float dy = human.getLookdy();
+
         double angle = Math.atan2(dy, dx) * 180 / 3.14;
+
         if (angle > 112.5 && angle < 157.5)
             this.currentBody = 7;
         else if (angle > 67.5 && angle < 112.5)

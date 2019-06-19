@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
     private Texture boss1;
     private Texture boss2;
 
-    public PlayerScreenObject playerScreen;
+    public HumanScreenObject playerScreen;
 
 
     public GameScreen(Game game){
@@ -78,7 +78,7 @@ public class GameScreen implements Screen {
         boss1 = new Texture("enemies/boss/alive.png");
         boss2 = new Texture("enemies/boss/dead.png");
 
-        playerScreen = new PlayerScreenObject(game.player, body, legs);
+        playerScreen = new HumanScreenObject(game.player, body, legs);
 
         screenObjects = new ScreenObjectArray();
 
