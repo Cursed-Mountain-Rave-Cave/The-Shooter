@@ -10,7 +10,7 @@ public class Map {
     private Array<IEntity> entities;
     private Array<IEntity> notPassableEntities;
     private Array<IEntity> bullets;
-    private Array<IBreakableEntity> breakableEntities;//fddhdsdghs
+    private Array<IBreakableEntity> breakableEntities;//fddhdsdghsdsfsa
 
     public Map(){
         entities = new Array<>();
