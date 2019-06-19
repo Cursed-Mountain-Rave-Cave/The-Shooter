@@ -10,18 +10,31 @@ public class Map {
     private Array<IEntity> entities;
     private Array<IEntity> notPassableEntities;
     private Array<IEntity> bullets;
-    private Array<IBreakableEntity> breakableEntities;//hello world 
+    private Array<IBreakableEntity> breakableEntities;
+    private Array<IEntity> entitiesDelete;
 
     public Map(){
         entities = new Array<>();
         notPassableEntities = new Array<>();
         bullets = new Array<>();
         breakableEntities = new Array<>();
+        entitiesDelete = new Array<>();
+
     }
 
     public void update(){
-        for(IEntity entity: entities)
+        for(IEntity entity: entities) {
             entity.update();
+            if (Math.hypot(entity.getX(), entity.getY()) > 1000000) {
+                entitiesDelete.add(entity);
+                entity.delete();
+            }
+        }
+
+        entities.removeAll(entitiesDelete,true);
+        notPassableEntities.removeAll(entitiesDelete,true);
+        bullets.removeAll(entitiesDelete,true);
+        entitiesDelete.clear();
 
         for(IEntity bullet: bullets){
             for(IBreakableEntity breakable: breakableEntities){
