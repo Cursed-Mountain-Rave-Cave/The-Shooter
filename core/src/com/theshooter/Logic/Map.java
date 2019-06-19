@@ -57,6 +57,11 @@ public class Map {
         return true;
     }
 
+    public Array<IEntity>          getEntities()            { return entities; }
+    public Array<IEntity>          getNotPassableEntities() { return notPassableEntities; }
+    public Array<IEntity>          getBullets()             { return bullets; }
+    public Array<IBreakableEntity> getBreakableEntities()   { return breakableEntities; }
+    
     public void removeFromNotPassable(IEntity target) {
         for(IEntity entity: notPassableEntities)
             if(entity == target)
