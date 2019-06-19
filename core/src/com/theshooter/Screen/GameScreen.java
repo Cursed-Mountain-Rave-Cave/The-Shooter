@@ -2,7 +2,6 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.theshooter.Game;
@@ -24,8 +23,9 @@ public class GameScreen implements Screen {
     public WallScreenObject wallScreen;
 
     public GameScreen(Game game){
-        batch = new SpriteBatch();
         this.game = game;
+        batch = new SpriteBatch();
+
 
         cameraController = new CameraController();
 
