@@ -19,7 +19,7 @@ public class GameScreen implements Screen {
 
     private CameraController cameraController;
 
-    public PlayerScreenObject playerScreen;
+    public HumanScreenObject playerScreen;
 
 
     public GameScreen(Game game){
@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
 
         cameraController = new CameraController();
 
-        playerScreen = new PlayerScreenObject(game.player, game.t.getTextures("player", "body1"),
+        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
                                                            game.t.getTextures("player", "legs1"));
 
         screenObjects = new ScreenObjectArray();
@@ -89,6 +89,7 @@ public class GameScreen implements Screen {
                 screenObjects.add(new BreakableScreenObject(entity,
                                   game.t.getTextures("enemy", "enemy1")));
             }
+ 
     }
 
     public void addBullet(Bullet bullet){
