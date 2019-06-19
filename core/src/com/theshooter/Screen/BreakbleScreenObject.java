@@ -11,7 +11,7 @@ public class BreakbleScreenObject extends ScreenObject{
     private Texture t1, t2;
 
     public BreakbleScreenObject(BreakableEntity entity, Texture t1, Texture t2){
-        super(entity, t1);
+        super(entity, t1, 50);
 
         this.entity = entity;
         this.t1 = t1;

@@ -2,11 +2,9 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
 import com.theshooter.Logic.CameraController;
 import com.theshooter.Logic.Entity.*;
@@ -88,17 +86,17 @@ public class GameScreen implements Screen {
 
         for (int i = -100; i < 100; i++)
             for (int j = -100; j < 100; j++)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.FLOOR), floor));
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.FLOOR), floor, 50));
 
         for (int i = 20; i > 10; i--)
             for (int j = 10; j > -10; j--)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS), box));
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS), box, 50));
 
         for (int i = 15; i > 10; i -= 1)
             for (int j = 10; j > -10; j -= 1){
                 Entity entity = new Entity(i*50, j*50, 50, 50, Depth.WALLS, false);
                 game.map.addEntity(entity);
-                screenObjects.add(new ScreenObject(entity, flyingFloor));
+                screenObjects.add(new ScreenObject(entity, flyingFloor, 50));
             }
 
         for (int i = -100; i < 0; i ++)
@@ -112,34 +110,30 @@ public class GameScreen implements Screen {
             for (int j = 5; j > 0; j -= 1){
                 Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
                 game.map.addBreakableEntity(entity);
-                game.map.addEntity(entity);
                 screenObjects.add(new BreakbleScreenObject(entity, dog1, dog2));
             }
         for (int i = -10; i < 0; i ++)
             for (int j = 5; j > 0; j -= 1){
                 Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
                 game.map.addBreakableEntity(entity);
-                game.map.addEntity(entity);
                 screenObjects.add(new BreakbleScreenObject(entity, plane1, plane2));
             }
         for (int i = -10; i < 0; i ++)
             for (int j = 5; j > 0; j -= 1){
                 Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
-                game.map.addBreakableEntity(entity);
-                game.map.addEntity(entity);
+                game.map.addBreakableEntity(entity);;
                 screenObjects.add(new BreakbleScreenObject(entity, thomas1, thomas2));
             }
         for (int i = -10; i < 0; i ++)
             for (int j = 5; j > 0; j -= 1){
                 Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 1000, game.player.getRectangle(), game.getMap());
                 game.map.addBreakableEntity(entity);
-                game.map.addEntity(entity);
                 screenObjects.add(new BreakbleScreenObject(entity, boss1, boss2));
             }
     }
 
     public void addBullet(Bullet bullet){
-        screenObjects.add(new ScreenObject(bullet, this.bullet));
+        screenObjects.add(new ScreenObject(bullet, this.bullet, 0));
     }
 
     @Override

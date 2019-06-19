@@ -26,7 +26,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void create () {
 		map = new Map();
-        player = new Player(20, 20, 25, 25);
+        player = new Player(0, 0, 25, 25);
 
 		mainScreen = new MainScreen(this);
 		gameScreen = new GameScreen(this);
@@ -51,7 +51,6 @@ public class Game extends com.badlogic.gdx.Game {
 	    dy /= norm;
 
         Bullet bullet = new Bullet(player.getX(), player.getY(), dx, dy);
-
         map.addBullet(bullet);
         gameScreen.addBullet(bullet);
     }

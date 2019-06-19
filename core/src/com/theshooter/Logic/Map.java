@@ -45,6 +45,7 @@ public class Map {
     }
 
     public void addBreakableEntity(BreakableEntity entity){
+        entities.add(entity);
         breakableEntities.add(entity);
     }
 
