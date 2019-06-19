@@ -10,7 +10,7 @@ public class Map {
     private Array<IEntity> entities;
     private Array<IEntity> notPassableEntities;
     private Array<IEntity> bullets;
-    private Array<IBreakableEntity> breakableEntities;//fddhdsdghsdsfsa
+    private Array<IBreakableEntity> breakableEntities;
 
     public Map(){
         entities = new Array<>();
@@ -63,8 +63,6 @@ public class Map {
     public Array<IBreakableEntity> getBreakableEntities()   { return breakableEntities; }
     
     public void removeFromNotPassable(IEntity target) {
-        for(IEntity entity: notPassableEntities)
-            if(entity == target)
-                notPassableEntities.removeValue(entity, true);
+        notPassableEntities.removeValue(target, true);
     }
 }

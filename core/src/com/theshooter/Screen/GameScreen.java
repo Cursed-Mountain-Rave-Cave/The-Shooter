@@ -21,6 +21,7 @@ public class GameScreen implements Screen {
 
     public HumanScreenObject playerScreen;
 
+    public WallScreenObject wallScreen;
 
     public GameScreen(Game game){
         batch = new SpriteBatch();
@@ -46,11 +47,11 @@ public class GameScreen implements Screen {
                             game.t.getTexture("things", "unbreakableThing1"), 50));
 
             // change to right texture in the future
-        for (int i = 15; i > 10; i -= 1)
+        for (int i = 15; i > 0; i -= 1)
             for (int j = 10; j > -10; j -= 1){
-                Entity entity = new Entity(i*50, j*50, 50, 50, Depth.WALLS, false);
+                Wall entity = new Wall(i*50, j*50, 50, 50);
                 game.map.addEntity(entity);
-                screenObjects.add(new ScreenObject(entity, game.t.getTexture("floor", "floor7"), 50));
+                screenObjects.add(new WallScreenObject(entity, game.t.getTextures("walls", "wall2")));
             }
 
         for (int i = -100; i < 0; i ++)
@@ -61,6 +62,25 @@ public class GameScreen implements Screen {
                                   game.t.getTextures("things", "breakableThing1")));
             }
 
+        for (int i = -300; i < -250; i += 2)
+            for (int j = 50; j > 0; j -= 5) {
+                Tent entity = new Tent(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
+                game.map.addBreakableEntity(entity);
+                int rand = MathUtils.random(2, 3);
+                screenObjects.add(new BreakableScreenObject(entity,
+                        game.t.getTextures("things", "breakableThing" + rand)));
+            }
+
+        for (int i = 30; i > 20; i--)
+            for (int j = 10; j > -10; j--)
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS),
+                        game.t.getTexture("things", "unbreakableThing2"), 50));
+
+        for (int i = 40; i > 30; i -= 2)
+            for (int j = 10; j > -10; j -= 2)
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS),
+                        game.t.getTexture("things", "unbreakableThing3"), 50));
+/*
         for (int i = -10; i < 0; i ++)
             for (int j = 5; j > 0; j -= 1){
                 Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
@@ -96,7 +116,7 @@ public class GameScreen implements Screen {
                 screenObjects.add(new HumanScreenObject(entity,
                         game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
             }
- 
+ */
     }
 
     public void addBullet(Bullet bullet){
