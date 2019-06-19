@@ -10,11 +10,24 @@ public class Enemy extends BreakableEntity {
     private Map map;
     private int velocity;
 
-    public Enemy(int x, int y, int velocity, Rectangle player, Map map){
-        super(x, y, 50, 50, Depth.ENEMY, false);
+
+    public Enemy(int x, int y, int w, int h, int hp, int velocity, Rectangle player, Map map){
+        super(x, y, w, h, hp, Depth.ENEMY, false);
         target = player;
         this.velocity = velocity;
         this.map = map;
+    }
+
+    public Enemy(int x, int y, int w, int h, int velocity, Rectangle player, Map map){
+        this(x, y, w, h, 1, velocity, player, map );
+    }
+
+    public Enemy(int x, int y, int hp, int velocity, Rectangle player, Map map){
+        this(x, y, 50, 50, hp, velocity, player, map );
+    }
+
+    public Enemy(int x, int y, int velocity, Rectangle player, Map map){
+        this(x, y, 50, 50, 1, velocity, player, map );
     }
 
     @Override

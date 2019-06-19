@@ -13,12 +13,15 @@ public class HumanEntity extends Entity implements ILookable, IMovable, IBreakab
     private float movedx, movedy;
     private boolean broken;
 
+    private int hp;
 
-    public HumanEntity(int x, int y, Depth depth, Map map){
+    public HumanEntity(int x, int y, int hp, Depth depth, Map map){
         super(x, y, 50, 50, depth, false);
         this.velocity = 1000;
         this.map = map;
         broken = false;
+
+        this.hp = hp;
     }
 
     public void update(){
@@ -38,8 +41,16 @@ public class HumanEntity extends Entity implements ILookable, IMovable, IBreakab
     }
 
     @Override
+    public int getHP() {
+        return hp;
+    }
+
+    @Override
     public void breakDown() {
-        broken = true;
+        if(hp > 0)
+            hp--;
+        if(hp == 0)
+            broken = true;
     }
 
     @Override
