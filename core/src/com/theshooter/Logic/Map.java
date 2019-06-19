@@ -1,5 +1,6 @@
 package com.theshooter.Logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Logic.Entity.IBreakableEntity;
@@ -23,9 +24,15 @@ public class Map {
     }
 
     public void update(){
+        /*
+        System.out.println("=========================");
+        System.out.println(Gdx.graphics.getFramesPerSecond() + "   " + entities.size);
+        System.out.println(bullets.size + "   " + breakableEntities.size);
+        */
+
         for(IEntity entity: entities) {
             entity.update();
-            if (Math.hypot(entity.getX(), entity.getY()) > 1000000) {
+            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 10000) {
                 entitiesDelete.add(entity);
                 entity.delete();
             }
@@ -40,7 +47,10 @@ public class Map {
             for(IBreakableEntity breakable: breakableEntities){
                 if(breakable.getRectangle().overlaps(bullet.getRectangle())){
                     breakable.breakDown();
-                    removeFromNotPassable(breakable);
+                    if(breakable.isBroken()){
+                        notPassableEntities.removeValue(breakable, true);
+                        breakableEntities.removeValue(breakable, true);
+                    }
                 }
             }
         }
@@ -74,10 +84,4 @@ public class Map {
     public Array<IEntity>          getNotPassableEntities() { return notPassableEntities; }
     public Array<IEntity>          getBullets()             { return bullets; }
     public Array<IBreakableEntity> getBreakableEntities()   { return breakableEntities; }
-    
-    public void removeFromNotPassable(IEntity target) {
-        for(IEntity entity: notPassableEntities)
-            if(entity == target)
-                notPassableEntities.removeValue(entity, true);
-    }
 }

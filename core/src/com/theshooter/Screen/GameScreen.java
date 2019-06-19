@@ -24,7 +24,7 @@ public class GameScreen implements Screen {
     public GameScreen(Game game){
         this.game = game;
         batch = new SpriteBatch();
-        
+
 
         cameraController = new CameraController();
 
