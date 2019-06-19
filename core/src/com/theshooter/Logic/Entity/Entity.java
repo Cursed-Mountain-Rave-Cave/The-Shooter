@@ -3,7 +3,7 @@ package com.theshooter.Logic.Entity;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Screen.Depth;
 
-public class Entity {
+public class Entity implements IEntity{
     private Rectangle rect;
     private Depth depth;
     boolean passable;

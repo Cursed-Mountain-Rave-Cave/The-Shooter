@@ -2,15 +2,15 @@ package com.theshooter.Logic;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.theshooter.Logic.Entity.BreakableEntity;
-import com.theshooter.Logic.Entity.Entity;
+import com.theshooter.Logic.Entity.IBreakableEntity;
+import com.theshooter.Logic.Entity.IEntity;
 
 public class Map {
 
-    private Array<Entity> entities;
-    private Array<Entity> notPassableEntities;
-    private Array<Entity> bullets;
-    private Array<BreakableEntity> breakableEntities;
+    private Array<IEntity> entities;
+    private Array<IEntity> notPassableEntities;
+    private Array<IEntity> bullets;
+    private Array<IBreakableEntity> breakableEntities;
 
     public Map(){
         entities = new Array<>();
@@ -20,37 +20,38 @@ public class Map {
     }
 
     public void update(){
-        for(Entity entity: entities)
+        for(IEntity entity: entities)
             entity.update();
 
-        for(Entity bullet: bullets){
-            for(BreakableEntity breakable: breakableEntities){
+        for(IEntity bullet: bullets){
+            for(IBreakableEntity breakable: breakableEntities){
                 if(breakable.getRectangle().overlaps(bullet.getRectangle())){
                     breakable.breakDown();
+                    removeFromNotPassable(breakable);
                 }
             }
         }
     }
 
-    public void addEntity(Entity entity){
+    public void addEntity(IEntity entity){
         if(!entity.isPassable())
             notPassableEntities.add(entity);
         entities.add(entity);
     }
 
-    public void addBullet(Entity entity){
+    public void addBullet(IEntity entity){
         entities.add(entity);
         bullets.add(entity);
     }
 
-    public void addBreakableEntitu(BreakableEntity entity){
-        entities.add(entity);
+    public void addBreakableEntity(IBreakableEntity entity){
+        addEntity(entity);
         breakableEntities.add(entity);
     }
 
     public boolean isAllowed(Rectangle place){
-        for(Entity entity: notPassableEntities)
-            if(place.overlaps(entity.getRectangle()))
+        for(IEntity entity: notPassableEntities)
+            if(place.overlaps(entity.getRectangle()) && entity.getRectangle() != place)
                 return false;
 
         return true;
@@ -60,4 +61,10 @@ public class Map {
     public Array<Entity>          getNotPassableEntities() { return notPassableEntities; }
     public Array<Entity>          getBullets()             { return bullets; }
     public Array<BreakableEntity> getBreakableEntities()   { return breakableEntities; }
+    
+    public void removeFromNotPassable(IEntity target) {
+        for(IEntity entity: notPassableEntities)
+            if(entity == target)
+                notPassableEntities.removeValue(entity, true);
+    }
 }

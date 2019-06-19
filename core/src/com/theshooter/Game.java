@@ -2,19 +2,15 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.theshooter.Logic.Entity.Bullet;
-import com.theshooter.Logic.Entity.Player;
+import com.theshooter.Logic.Entity.Human;
 import com.theshooter.Logic.InputController;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
-import com.theshooter.Screen.ScreenObject;
-import com.theshooter.Screen.ScreenObjectArray;
 
 public class Game extends com.badlogic.gdx.Game {
-    public Player player;
+    public Human player;
 
 	public Map map;
 
@@ -26,12 +22,14 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void create () {
 		map = new Map();
-        player = new Player(20, 20, 25, 25);
+        player = new Human(0, 0, 25, 25, map);
 
 		mainScreen = new MainScreen(this);
 		gameScreen = new GameScreen(this);
 
 		setScreen(gameScreen);
+
+		map.addEntity(player);
 
 		inputController = new InputController(this);
 
@@ -50,8 +48,7 @@ public class Game extends com.badlogic.gdx.Game {
 	    dx /= norm;
 	    dy /= norm;
 
-        Bullet bullet = new Bullet(player.getX(), player.getY(), dx, dy);
-
+        Bullet bullet = new Bullet(player.getX() + 25, player.getY() + 25, dx, dy);
         map.addBullet(bullet);
         gameScreen.addBullet(bullet);
     }
@@ -66,5 +63,9 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void dispose () {
 
+	}
+
+	public Map getMap() {
+		return map;
 	}
 }

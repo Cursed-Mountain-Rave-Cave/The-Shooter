@@ -9,7 +9,7 @@ public class WallScreenObject extends ScreenObject {
     private Wall wall;
 
     public WallScreenObject(Wall wall, Texture texture) {
-        super(wall, texture);
+        super(wall, texture, 50);
 
         this.wall = wall;
     }
