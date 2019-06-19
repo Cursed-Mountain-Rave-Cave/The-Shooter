@@ -57,10 +57,10 @@ public class Map {
         return true;
     }
 
-    public Array<Entity>          getEntities()            { return entities; }
-    public Array<Entity>          getNotPassableEntities() { return notPassableEntities; }
-    public Array<Entity>          getBullets()             { return bullets; }
-    public Array<BreakableEntity> getBreakableEntities()   { return breakableEntities; }
+    public Array<IEntity>          getEntities()            { return entities; }
+    public Array<IEntity>          getNotPassableEntities() { return notPassableEntities; }
+    public Array<IEntity>          getBullets()             { return bullets; }
+    public Array<IBreakableEntity> getBreakableEntities()   { return breakableEntities; }
     
     public void removeFromNotPassable(IEntity target) {
         for(IEntity entity: notPassableEntities)

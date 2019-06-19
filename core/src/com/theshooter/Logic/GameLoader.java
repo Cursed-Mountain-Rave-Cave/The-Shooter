@@ -2,9 +2,7 @@ package com.theshooter.Logic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.theshooter.Logic.Entity.BreakableEntity;
-import com.theshooter.Logic.Entity.Bullet;
-import com.theshooter.Logic.Entity.Entity;
+import com.theshooter.Logic.Entity.*;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Screen.Depth;
@@ -59,7 +57,7 @@ public class GameLoader {
         return new Entity(r, depth, passable == 1);
     }
 
-    private String writeEntity(Entity entity) {
+    private String writeEntity(IEntity entity) {
         Integer depthInt = entity.getDepth().ordinal();
         String entityInfo = entity.getRectangle().toString() + " " + depthInt.toString();
         if(entity.isPassable())
@@ -86,29 +84,29 @@ public class GameLoader {
         this.saveFile = new File(saveFile.getPath(), saveFile.getName());
         screenObjectArray = array;
 
-        Array<Entity>          entities            = m.getEntities();
-        Array<Entity>          notPassableEntities = m.getNotPassableEntities();
-        Array<Entity>          bullets             = m.getBullets();
-        Array<BreakableEntity> breakableEntities   = m.getBreakableEntities();
+        Array<IEntity>          entities            = m.getEntities();
+        Array<IEntity>          notPassableEntities = m.getNotPassableEntities();
+        Array<IEntity>          bullets             = m.getBullets();
+        Array<IBreakableEntity> breakableEntities   = m.getBreakableEntities();
 
         try                   { saveFile.createNewFile(); }
         catch (IOException e) { System.out.println(e.getMessage()); }
 
         try (FileOutputStream fout = new FileOutputStream(saveFile)){
             String entityInfo;
-            for(Entity e : entities) {
+            for(IEntity e : entities) {
                 entityInfo = "e " + writeEntity(e) + "\n";
                 fout.write(entityInfo.getBytes());
             }
-            for(Entity e : notPassableEntities) {
+            for(IEntity e : notPassableEntities) {
                 entityInfo = "p " + writeEntity(e) + "\n";
                 fout.write(entityInfo.getBytes());
             }
-            for(Entity e : bullets) {
+            for(IEntity e : bullets) {
                 entityInfo = "b " + writeEntity(e) + "\n";
                 fout.write(entityInfo.getBytes());
             }
-            for(BreakableEntity be : breakableEntities) {
+            for(IBreakableEntity be : breakableEntities) {
                 entityInfo = "d " + writeEntity(be);
                 if(be.isBroken())
                     entityInfo.concat(" 1 ");
@@ -152,13 +150,13 @@ public class GameLoader {
                         int breakable = scanner.nextInt();
                         if(breakable == 1)
                             breakableEntity.breakDown();
-                        gameMap.addBreakableEntitu(breakableEntity);
+                        gameMap.addBreakableEntity(breakableEntity);
                         break;
                     case 's':
                         entity = readEntity(scanner);
                         String textureName = scanf(scanner);
                         Texture texture = new Texture(textureName);
-                        ScreenObject screenObject = new ScreenObject(entity, texture);
+                        ScreenObject screenObject = new ScreenObject(entity, texture, texture.getWidth() / 2);
                         screenObjectArray.add(screenObject);
                         break;
                 }
