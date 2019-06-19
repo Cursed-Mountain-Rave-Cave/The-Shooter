@@ -151,8 +151,6 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-
-
         return false;
     }
 

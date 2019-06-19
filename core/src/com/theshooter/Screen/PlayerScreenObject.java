@@ -27,22 +27,25 @@ public class PlayerScreenObject extends ScreenObject {
     }
 
     public void setCurrentLegs(int dx, int dy) {
-        if (dx == 0 && dy < 0)
-            this.currentLegs = 0;
-        if (dx > 0 && dy == 0)
-            this.currentLegs = 1;
+
         if (dx == 0 && dy > 0)
-            this.currentLegs = 2;
-        if (dx < 0 && dy == 0)
-            this.currentLegs = 3;
-        if (dx > 0 && dy > 0)
-            this.currentLegs = 4;
-        if (dx < 0 && dy > 0)
             this.currentLegs = 5;
-        if (dx > 0 && dy < 0)
+        if (dx == 0 && dy < 0)
             this.currentLegs = 6;
-        if (dx < 0 && dy < 0)
+
+        if (dx > 0 && dy == 0)
+            this.currentLegs = 4;
+        if (dx < 0 && dy == 0)
             this.currentLegs = 7;
+
+        if (dx > 0 && dy > 0)
+            this.currentLegs = 2;
+        if (dx < 0 && dy > 0)
+            this.currentLegs = 3;
+        if (dx > 0 && dy < 0)
+            this.currentLegs = 1;
+        if (dx < 0 && dy < 0)
+            this.currentLegs = 0;
     }
 
     public void setCurrentBody(float dx, float dy) {
