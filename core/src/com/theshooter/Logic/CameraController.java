@@ -27,6 +27,6 @@ public class CameraController {
     }
 
     public void zoom(int ammount){
-        camera.zoom = Math.max(0.1f, Math.min(camera.zoom + ammount* 0.2f, 100f));
+        camera.zoom = Math.max(0.2f, Math.min(camera.zoom + ammount* 0.2f, 2f));
     }
 }
