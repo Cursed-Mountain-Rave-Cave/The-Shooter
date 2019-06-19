@@ -62,23 +62,23 @@ public class GameScreen implements Screen {
 
         for (int i = -100; i < 100; i++)
             for (int j = -100; j < 100; j++)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.FLOOR), floor));
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.FLOOR), floor, 50));
 
         for (int i = 20; i > 10; i--)
             for (int j = 10; j > -10; j--)
-                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS), box));
+                screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.THINGS), box, 50));
 
         for (int i = 15; i > 10; i -= 1)
             for (int j = 10; j > -10; j -= 1){
                 Entity entity = new Entity(i*50, j*50, 50, 50, Depth.WALLS, false);
                 game.map.addEntity(entity);
-                screenObjects.add(new ScreenObject(entity, flyingFloor));
+                screenObjects.add(new ScreenObject(entity, flyingFloor, 50));
             }
 
         for (int i = -100; i < 0; i ++)
             for (int j = 50; j > -50; j -= 1){
                 Vase entity = new Vase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-                game.map.addBreakableEntitu(entity);
+                game.map.addBreakableEntity(entity);
                 screenObjects.add(new VaseScreenObject(entity, vase1, vase2));
             }
 
@@ -86,7 +86,7 @@ public class GameScreen implements Screen {
     }
 
     public void addBullet(Bullet bullet){
-        screenObjects.add(new ScreenObject(bullet, this.bullet));
+        screenObjects.add(new ScreenObject(bullet, this.bullet, 0));
     }
 
     @Override

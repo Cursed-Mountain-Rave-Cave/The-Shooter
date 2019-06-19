@@ -14,7 +14,7 @@ public class PlayerScreenObject extends ScreenObject {
     private int currentLegs;
 
     public PlayerScreenObject(Player player, Texture[] body, Texture[] legs) {
-        super(player, body[0]);
+        super(player, body[0], 50);
 
         this.player = player;
         this.body = body;
@@ -22,22 +22,19 @@ public class PlayerScreenObject extends ScreenObject {
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(legs[currentLegs], getScreenX(), getScreenY());
-        batch.draw(body[currentBody], getScreenX(), getScreenY());
+        batch.draw(legs[currentLegs], getScreenX() - shift, getScreenY());
+        batch.draw(body[currentBody], getScreenX() - shift, getScreenY());
     }
 
     public void setCurrentLegs(int dx, int dy) {
-
         if (dx == 0 && dy > 0)
             this.currentLegs = 5;
         if (dx == 0 && dy < 0)
             this.currentLegs = 6;
-
         if (dx > 0 && dy == 0)
             this.currentLegs = 4;
         if (dx < 0 && dy == 0)
             this.currentLegs = 7;
-
         if (dx > 0 && dy > 0)
             this.currentLegs = 2;
         if (dx < 0 && dy > 0)
@@ -66,17 +63,5 @@ public class PlayerScreenObject extends ScreenObject {
             this.currentBody = 5;
         else
             this.currentBody = 3;
-    }
-
-    public int getX() {
-        return player.getX();
-    }
-
-    public int getY() {
-        return player.getY();
-    }
-
-    public Depth getDepth() {
-        return player.getDepth();
     }
 }

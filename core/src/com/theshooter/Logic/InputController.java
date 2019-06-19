@@ -151,6 +151,11 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        float curX = screenX - Gdx.graphics.getWidth() / 2;
+        float curY = screenY - Gdx.graphics.getHeight() / 2;
+
+        game.gameScreen.playerScreen.setCurrentBody(curX, curY);
+
         return false;
     }
 

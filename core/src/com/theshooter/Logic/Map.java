@@ -43,7 +43,7 @@ public class Map {
         bullets.add(entity);
     }
 
-    public void addBreakableEntitu(BreakableEntity entity){
+    public void addBreakableEntity(BreakableEntity entity){
         entities.add(entity);
         breakableEntities.add(entity);
     }

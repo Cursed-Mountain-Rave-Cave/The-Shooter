@@ -10,7 +10,7 @@ public class VaseScreenObject extends ScreenObject{
     private Texture t1, t2;
 
     public VaseScreenObject(Vase vase, Texture t1, Texture t2){
-        super(vase, t1);
+        super(vase, t1, 50);
 
         this.vase = vase;
         this.t1 = t1;
