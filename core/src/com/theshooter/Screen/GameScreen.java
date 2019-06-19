@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
         cameraController = new CameraController();
 
         playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
-                                                           game.t.getTextures("player", "legs1"));
+                                                          game.t.getTextures("player", "legs1"));
 
         screenObjects = new ScreenObjectArray();
 
@@ -84,10 +84,17 @@ public class GameScreen implements Screen {
             }
         for (int i = -10; i < 0; i ++)
             for (int j = 5; j > 0; j -= 1){
-                Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 1000, game.player.getRectangle(), game.getMap());
+                Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 200, game.player.getRectangle(), game.getMap());
                 game.map.addBreakableEntity(entity);
                 screenObjects.add(new BreakableScreenObject(entity,
                                   game.t.getTextures("enemy", "enemy1")));
+            }
+        for (int i = -10; i < 0; i ++)
+            for (int j = 5; j > 0; j -= 1){
+                HumanEnemy entity = new HumanEnemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), game.player.getRectangle(), game.getMap());
+                game.map.addBreakableEntity(entity);
+                screenObjects.add(new HumanScreenObject(entity,
+                        game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
             }
  
     }

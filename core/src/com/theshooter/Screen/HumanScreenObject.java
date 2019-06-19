@@ -16,8 +16,8 @@ public class HumanScreenObject extends ScreenObject {
     private int currentBody;
     private int currentLegs;
 
-    public HumanScreenObject(HumanEntity player, Array<Texture> body, Array<Texture> legs) {
-        super(player, body.get(0), 50);
+    public HumanScreenObject(HumanEntity human, Array<Texture> body, Array<Texture> legs) {
+        super(human, body.get(0), 50);
 
         this.human = human;
         this.body = body;
