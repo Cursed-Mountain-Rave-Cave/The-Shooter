@@ -27,6 +27,7 @@ public class Map {
             for(BreakableEntity breakable: breakableEntities){
                 if(breakable.getRectangle().overlaps(bullet.getRectangle())){
                     breakable.breakDown();
+                    removeFromNotPassable(breakable);
                 }
             }
         }
@@ -43,17 +44,21 @@ public class Map {
         bullets.add(entity);
     }
 
-    public void addBreakableEntitu(BreakableEntity entity){
-        entities.add(entity);
+    public void addBreakableEntity(BreakableEntity entity){
         breakableEntities.add(entity);
     }
 
     public boolean isAllowed(Rectangle place){
         for(Entity entity: notPassableEntities)
-            if(place.overlaps(entity.getRectangle()))
+            if(place.overlaps(entity.getRectangle()) && entity.getRectangle() != place)
                 return false;
 
         return true;
     }
 
+    public void removeFromNotPassable(Entity target) {
+        for(Entity entity: notPassableEntities)
+            if(entity == target)
+                notPassableEntities.removeValue(entity, true);
+    }
 }

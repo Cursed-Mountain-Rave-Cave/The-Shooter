@@ -6,9 +6,13 @@ public class BreakableEntity extends Entity {
 
     boolean broken;
 
-    public BreakableEntity(int x, int y, int w, int h, Depth depth) {
-        super(x, y, w, h, depth);
+    public BreakableEntity(int x, int y, int w, int h, Depth depth, boolean passable) {
+        super(x, y, w, h, depth, passable);
         this.broken = false;
+    }
+
+    public BreakableEntity(int x, int y, int w, int h, Depth depth) {
+        this(x, y, w, h, depth, true);
     }
 
     public boolean isBroken(){
@@ -17,5 +21,6 @@ public class BreakableEntity extends Entity {
 
     public void breakDown() {
         broken = true;
+      //  this.setPassable(true);
     }
 }

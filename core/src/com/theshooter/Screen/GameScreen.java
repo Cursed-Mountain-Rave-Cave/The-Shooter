@@ -33,6 +33,18 @@ public class GameScreen implements Screen {
     private Texture vase1;
     private Texture vase2;
 
+    private Texture dog1;
+    private Texture dog2;
+
+    private Texture plane1;
+    private Texture plane2;
+
+    private Texture thomas1;
+    private Texture thomas2;
+
+    private Texture boss1;
+    private Texture boss2;
+
     public PlayerScreenObject playerScreen;
 
 
@@ -55,6 +67,18 @@ public class GameScreen implements Screen {
         bullet = new Texture("bullet.png");
         vase1 = new Texture("environment/exportVase1.png");
         vase2 = new Texture("environment/exportVase2.png");
+
+        dog1 = new Texture("enemies/dog/alive.png");
+        dog2 = new Texture("enemies/dog/dead.png");
+
+        plane1 = new Texture("enemies/plane/alive.png");
+        plane2 = new Texture("enemies/plane/dead.png");
+
+        thomas1 = new Texture("enemies/thomas/alive.png");
+        thomas2 = new Texture("enemies/thomas/dead.png");
+
+        boss1 = new Texture("enemies/boss/alive.png");
+        boss2 = new Texture("enemies/boss/dead.png");
 
         playerScreen = new PlayerScreenObject(game.player, body, legs);
 
@@ -80,11 +104,38 @@ public class GameScreen implements Screen {
         for (int i = -100; i < 0; i ++)
             for (int j = 50; j > -50; j -= 1){
                 Vase entity = new Vase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-                game.map.addBreakableEntitu(entity);
-                screenObjects.add(new VaseScreenObject(entity, vase1, vase2));
+                game.map.addBreakableEntity(entity);
+                screenObjects.add(new BreakbleScreenObject(entity, vase1, vase2));
             }
 
-
+        for (int i = -10; i < 0; i ++)
+            for (int j = 5; j > 0; j -= 1){
+                Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
+                game.map.addBreakableEntity(entity);
+                game.map.addEntity(entity);
+                screenObjects.add(new BreakbleScreenObject(entity, dog1, dog2));
+            }
+        for (int i = -10; i < 0; i ++)
+            for (int j = 5; j > 0; j -= 1){
+                Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
+                game.map.addBreakableEntity(entity);
+                game.map.addEntity(entity);
+                screenObjects.add(new BreakbleScreenObject(entity, plane1, plane2));
+            }
+        for (int i = -10; i < 0; i ++)
+            for (int j = 5; j > 0; j -= 1){
+                Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
+                game.map.addBreakableEntity(entity);
+                game.map.addEntity(entity);
+                screenObjects.add(new BreakbleScreenObject(entity, thomas1, thomas2));
+            }
+        for (int i = -10; i < 0; i ++)
+            for (int j = 5; j > 0; j -= 1){
+                Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 1000, game.player.getRectangle(), game.getMap());
+                game.map.addBreakableEntity(entity);
+                game.map.addEntity(entity);
+                screenObjects.add(new BreakbleScreenObject(entity, boss1, boss2));
+            }
     }
 
     public void addBullet(Bullet bullet){
