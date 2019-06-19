@@ -1,9 +1,6 @@
 package com.theshooter.Screen;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, InputProcessor {
 
     final private Game game;
     private ScreenObjectArray screenObjects;
@@ -35,6 +32,9 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game){
         this.game = game;
+
+        Gdx.input.setInputProcessor(this);
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1920, 1080);
         camera.translate(-960, -540);
@@ -80,10 +80,16 @@ public class GameScreen implements Screen {
                 game.map.addBreakableEntitu(entity);
                 screenObjects.add(new VaseScreenObject(entity, vase1, vase2));
             }
+
+
     }
 
     public void addBullet(Bullet bullet){
         screenObjects.add(new ScreenObject(bullet, this.bullet));
+    }
+
+    public void addZoom(float dz){
+        camera.zoom = Math.max(0.1f, Math.min(camera.zoom + dz, 100f));
     }
 
     @Override
@@ -156,6 +162,7 @@ public class GameScreen implements Screen {
         playerScreen.setCurrentBody(curX, curY);
         playerScreen.setCurrentLegs(dx, dy);
 
+
         if(Gdx.input.isTouched())
             game.shoot();
 
@@ -197,5 +204,46 @@ public class GameScreen implements Screen {
         bullet.dispose();
 
         screenObjects.clear();
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        addZoom(amount * 0.2f);
+        return false;
     }
 }
