@@ -22,6 +22,41 @@ public class GameScreen implements Screen {
 
     public WallScreenObject wallScreen;
 
+    private void spawnArabinWarrior(int x, int y) {
+        HumanEnemy entity = new HumanEnemy(x, y, 15, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new HumanScreenObject(entity,
+                game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
+    }
+
+    private void spawnBoss(int x, int y) {
+        Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy1"), 84));
+    }
+
+    private void spawnTrain(int x, int y) {
+        Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy4"), 75));
+    }
+
+    private void spawnPlane(int x, int y) {
+        Enemy entity = new Enemy(x, y, 75,75, 10,100, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy3"), 150));
+    }
+
+    private void spawnKeanu(int x, int y) {
+        Enemy entity = new Enemy(x, y,75,75, 50,100, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy2"), 112));
+    }
+
     public GameScreen(Game game){
         this.game = game;
         batch = new SpriteBatch();
@@ -39,7 +74,7 @@ public class GameScreen implements Screen {
         for (int i = -100; i < 100; i++)
             for (int j = -100; j < 100; j++)
                 screenObjects.add(new ScreenObject(new Entity(i*50, j*50, 50, 50, Depth.FLOOR),
-                                  game.t.getTexture("floor", "floor3"), 50));
+                                  game.t.getTexture("floor", "floor" + MathUtils.random(1, 8)), 50));
 
         for (int i = 20; i > 10; i--)
             for (int j = 10; j > -10; j--)
@@ -83,40 +118,24 @@ public class GameScreen implements Screen {
 
 
 
-                        
         for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000),75,75, 50,100, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy2"), 112));
+            spawnKeanu(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
         }
 
        for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 75,75, 10,100, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy3"), 150));
+           spawnPlane(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
         }
 
         for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000),75,75,10,200, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);;
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy4"), 75));
+            spawnTrain(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
         }
 
         for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000),75, 75, 100, 100,game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy1"), 84));
+            spawnBoss(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
         }
 
         for (int i = 0; i < 50; i ++){
-            HumanEnemy entity = new HumanEnemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 15, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new HumanScreenObject(entity,
-                    game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
+            spawnArabinWarrior(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
         }
     }
 
