@@ -18,6 +18,12 @@ public class Entity {
         this(x, y, w, h, depth, true);
     }
 
+    public Entity(Rectangle r, Depth depth, boolean passable) {
+        rect = new Rectangle(r);
+        this.depth = depth;
+        this.passable = passable;
+    }
+
     public void update(){
 
     }

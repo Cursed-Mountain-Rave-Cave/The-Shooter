@@ -56,4 +56,8 @@ public class Map {
         return true;
     }
 
+    public Array<Entity>          getEntities()            { return entities; }
+    public Array<Entity>          getNotPassableEntities() { return notPassableEntities; }
+    public Array<Entity>          getBullets()             { return bullets; }
+    public Array<BreakableEntity> getBreakableEntities()   { return breakableEntities; }
 }

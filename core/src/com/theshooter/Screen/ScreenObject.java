@@ -65,6 +65,7 @@ public class ScreenObject implements IScreenObject {
     public Depth getDepth() {
         return entity.getDepth();
     }
+    public Entity getEntity() { return entity; }
 
     public void setX(int x) {
         entity.setX(x);

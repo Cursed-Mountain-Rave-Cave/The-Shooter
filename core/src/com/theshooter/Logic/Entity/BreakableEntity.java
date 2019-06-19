@@ -2,6 +2,8 @@ package com.theshooter.Logic.Entity;
 
 import com.theshooter.Screen.Depth;
 
+import java.awt.*;
+
 public class BreakableEntity extends Entity {
 
     boolean broken;
