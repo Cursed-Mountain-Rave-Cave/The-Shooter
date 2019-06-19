@@ -14,14 +14,16 @@ public class PlayerScreenObject extends ScreenObject {
     private int currentLegs;
 
     public PlayerScreenObject(Player player, Texture[] body, Texture[] legs) {
+        super(player, body[0]);
+
         this.player = player;
         this.body = body;
         this.legs = legs;
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(legs[currentLegs], player.getX() - player.getY(), (player.getX() + player.getY())/2);
-        batch.draw(body[currentBody], player.getX() - player.getY(), (player.getX() + player.getY())/2);
+        batch.draw(legs[currentLegs], getScreenX(), getScreenY());
+        batch.draw(body[currentBody], getScreenX(), getScreenY());
     }
 
     public void setCurrentLegs(int dx, int dy) {

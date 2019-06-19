@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Player;
+import com.theshooter.Logic.InputController;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
@@ -15,15 +16,15 @@ import com.theshooter.Screen.ScreenObjectArray;
 public class Game extends com.badlogic.gdx.Game {
     public Player player;
 
-	public SpriteBatch batch;
 	public Map map;
 
-	private MainScreen mainScreen;
-	private GameScreen gameScreen;
+	public MainScreen mainScreen;
+	public GameScreen gameScreen;
+
+	private InputController inputController;
 
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
 		map = new Map();
         player = new Player(20, 20, 25, 25);
 
@@ -31,6 +32,10 @@ public class Game extends com.badlogic.gdx.Game {
 		gameScreen = new GameScreen(this);
 
 		setScreen(gameScreen);
+
+		inputController = new InputController(this);
+
+		Gdx.input.setInputProcessor(inputController);
 	}
 
 	public void shoot(){
@@ -54,10 +59,12 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void render () {
 		super.render();
+		inputController.update();
+		map.update();
 	}
 
 	@Override
 	public void dispose () {
-		batch.dispose();
+
 	}
 }

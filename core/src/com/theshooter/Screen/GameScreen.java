@@ -4,15 +4,22 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
+import com.theshooter.Logic.CameraController;
 import com.theshooter.Logic.Entity.*;
 
-public class GameScreen implements Screen, InputProcessor {
+public class GameScreen implements Screen {
 
     final private Game game;
+
+    public SpriteBatch batch;
+
     private ScreenObjectArray screenObjects;
+
+    private CameraController cameraController;
 
     private Texture floor;
     private Texture flyingFloor;
@@ -26,18 +33,14 @@ public class GameScreen implements Screen, InputProcessor {
     private Texture vase1;
     private Texture vase2;
 
-    private PlayerScreenObject playerScreen;
+    public PlayerScreenObject playerScreen;
 
-    private OrthographicCamera camera;
 
     public GameScreen(Game game){
+        batch = new SpriteBatch();
         this.game = game;
 
-        Gdx.input.setInputProcessor(this);
-
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1920, 1080);
-        camera.translate(-960, -540);
+        cameraController = new CameraController();
 
         floor = new Texture("floor/floor2.png");
         flyingFloor = new Texture("floor/flyingfloor.png");
@@ -88,10 +91,6 @@ public class GameScreen implements Screen, InputProcessor {
         screenObjects.add(new ScreenObject(bullet, this.bullet));
     }
 
-    public void addZoom(float dz){
-        camera.zoom = Math.max(0.1f, Math.min(camera.zoom + dz, 100f));
-    }
-
     @Override
     public void show() {
 
@@ -99,74 +98,19 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+        cameraController.lookAt(playerScreen.getScreenX(), playerScreen.getScreenY());
+
+        cameraController.update();
+        batch.setProjectionMatrix(cameraController.getCamera().combined);
 
         Gdx.gl.glClearColor(0.3f, 0.3f, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        game.batch.begin();
+        batch.begin();
 
-        screenObjects.draw(game.batch);
+        screenObjects.draw(batch);
 
-        game.batch.end();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
-            Gdx.app.exit();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.F11)){
-            if(Gdx.graphics.isFullscreen())
-                Gdx.graphics.setWindowedMode(1600, 900);
-            else
-                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-        }
-
-
-
-        int dx = 0, dy = 0;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W))
-            dy += 1000;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.S))
-            dy -= 1000;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.A))
-            dx -= 1000;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.D))
-            dx += 1000;
-
-        dx *= Gdx.graphics.getDeltaTime();
-        dy *= Gdx.graphics.getDeltaTime();
-
-        if(dx != 0 && dy != 0){
-            dx /= Math.sqrt(2);
-            dy /= Math.sqrt(2);
-        }
-
-        Rectangle place = game.player.getRectangle();
-        place.x += dx/2 + dy;
-        place.y += -dx/2 + dy;
-
-        if(game.map.isAllowed(place)){
-            camera.translate(dx, dy);
-        }else{
-            place.x -= dx/2 + dy;
-            place.y -= -dx/2 + dy;
-        }
-
-        float curX = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
-        float curY = Gdx.input.getY() - Gdx.graphics.getHeight() / 2;
-
-        playerScreen.setCurrentBody(curX, curY);
-        playerScreen.setCurrentLegs(dx, dy);
-
-
-        if(Gdx.input.isTouched())
-            game.shoot();
-
-        game.map.update();
+        batch.end();
     }
 
     @Override
@@ -204,46 +148,10 @@ public class GameScreen implements Screen, InputProcessor {
         bullet.dispose();
 
         screenObjects.clear();
+        batch.dispose();
     }
 
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        addZoom(amount * 0.2f);
-        return false;
+    public CameraController getCameraController() {
+        return cameraController;
     }
 }

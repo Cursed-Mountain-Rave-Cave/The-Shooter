@@ -17,14 +17,7 @@ public class ScreenObject implements IScreenObject {
     public ScreenObject() {}
 
     public void draw(SpriteBatch batch){
-        //if(entity.getDepth() != Depth.EFFECTS && entity.getDepth() != Depth.PLAYER && entity.getDepth() != Depth.THINGS){
-            batch.draw(texture, entity.getX() - entity.getY(), (entity.getX() + entity.getY())/2);
-        /*}else{
-            batch.draw(texture,
-                    (entity.getX() - entity.getWidth()/2) - (entity.getY() - entity.getHeight()/2),
-                    ((entity.getX() - entity.getWidth()/2) + (entity.getY() - entity.getHeight()/2))/2);
-        }*/
-
+        batch.draw(texture, getScreenX(), getScreenY());
     }
 
     @Override
@@ -59,6 +52,12 @@ public class ScreenObject implements IScreenObject {
     }
     public int getY() {
         return entity.getY();
+    }
+    public int getScreenX() {
+        return entity.getX() - entity.getY();
+    }
+    public int getScreenY() {
+        return (entity.getX() + entity.getY())/2;
     }
     public Texture getTexture() {
         return texture;
