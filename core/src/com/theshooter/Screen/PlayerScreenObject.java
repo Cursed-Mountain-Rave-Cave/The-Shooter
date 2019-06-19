@@ -2,19 +2,20 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.theshooter.Logic.Entity.Player;
 
 public class PlayerScreenObject extends ScreenObject {
     private Player player;
 
-    private Texture[] body;
-    private Texture[] legs;
+    private Array<Texture> body;
+    private Array<Texture> legs;
 
     private int currentBody;
     private int currentLegs;
 
-    public PlayerScreenObject(Player player, Texture[] body, Texture[] legs) {
-        super(player, body[0], 50);
+    public PlayerScreenObject(Player player, Array<Texture> body, Array<Texture> legs) {
+        super(player, body.get(0), 50);
 
         this.player = player;
         this.body = body;
@@ -22,8 +23,8 @@ public class PlayerScreenObject extends ScreenObject {
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(legs[currentLegs], getScreenX() - shift, getScreenY());
-        batch.draw(body[currentBody], getScreenX() - shift, getScreenY());
+        batch.draw(legs.get(currentLegs), getScreenX() - shift, getScreenY());
+        batch.draw(body.get(currentBody), getScreenX() - shift, getScreenY());
     }
 
     public void setCurrentLegs(int dx, int dy) {

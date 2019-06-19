@@ -8,6 +8,7 @@ import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Player;
 import com.theshooter.Logic.InputController;
 import com.theshooter.Logic.Map;
+import com.theshooter.Logic.TextureController;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Screen.ScreenObject;
@@ -20,6 +21,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
+	public TextureController t;
 
 	private InputController inputController;
 
@@ -28,6 +30,7 @@ public class Game extends com.badlogic.gdx.Game {
 		map = new Map();
         player = new Player(0, 0, 25, 25);
 
+		t = new TextureController();
 		mainScreen = new MainScreen(this);
 		gameScreen = new GameScreen(this);
 
@@ -64,7 +67,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void dispose () {
-
+		t.dispose();
 	}
 
 	public Map getMap() {
