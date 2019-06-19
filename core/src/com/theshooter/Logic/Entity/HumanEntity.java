@@ -6,16 +6,19 @@ import com.theshooter.Screen.Depth;
 
 public class HumanEntity extends Entity implements ILookable, IMovable, IBreakableEntity {
 
-    private Map map;
+
+    protected Map map;
     private int velocity;
     private float lookdx, lookdy;
     private float movedx, movedy;
+    private boolean broken;
 
 
     public HumanEntity(int x, int y, Depth depth, Map map){
         super(x, y, 50, 50, depth, false);
         this.velocity = 1000;
         this.map = map;
+        broken = false;
     }
 
     public void update(){
@@ -31,16 +34,20 @@ public class HumanEntity extends Entity implements ILookable, IMovable, IBreakab
 
     @Override
     public boolean isBroken() {
-        return false;
+        return broken;
     }
 
     @Override
     public void breakDown() {
-
+        broken = true;
     }
 
     @Override
     public void lookAt(int dx, int dy) {
+        if(dx == 0 && dy == 0){
+            lookdx = 0;
+            lookdy = 0;
+        }
         float norm = (float) Math.hypot(dx, dy);
         lookdx = dx / norm;
         lookdy = dy / norm;

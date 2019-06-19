@@ -26,6 +26,9 @@ public class GameScreen implements Screen {
     private Texture body[];
     private Texture legs[];
 
+    private Texture enemyBody[];
+    private Texture enemyLegs[];
+
     private Texture bullet;
 
     private Texture vase1;
@@ -61,6 +64,13 @@ public class GameScreen implements Screen {
         legs = new Texture[8];
         for (int i = 0; i < 8; i++)
             legs[i] = new Texture("player/legs/legs" + Integer.valueOf(i + 1).toString() + ".png");
+
+        enemyBody = new Texture[8];
+        for (int i = 0; i < 8; i++)
+            enemyBody[i] = new Texture("enemies/enemy1/bodies/body" + Integer.valueOf(i + 1).toString() + ".png");
+        enemyLegs = new Texture[8];
+        for (int i = 0; i < 8; i++)
+            enemyLegs[i] = new Texture("enemies/enemy1/legs/legs" + Integer.valueOf(i + 1).toString() + ".png");
 
         bullet = new Texture("bullet.png");
         vase1 = new Texture("environment/exportVase1.png");
@@ -108,6 +118,13 @@ public class GameScreen implements Screen {
 
         for (int i = -10; i < 0; i ++)
             for (int j = 5; j > 0; j -= 1){
+                HumanEnemy entity = new HumanEnemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000),  game.player.getRectangle(), game.getMap());
+                game.map.addBreakableEntity(entity);
+                screenObjects.add(new HumanScreenObject(entity, enemyBody, enemyLegs));
+            }
+/*
+        for (int i = -10; i < 0; i ++)
+            for (int j = 5; j > 0; j -= 1){
                 Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 100, game.player.getRectangle(), game.getMap());
                 game.map.addBreakableEntity(entity);
                 screenObjects.add(new BreakbleScreenObject(entity, dog1, dog2));
@@ -130,6 +147,7 @@ public class GameScreen implements Screen {
                 game.map.addBreakableEntity(entity);
                 screenObjects.add(new BreakbleScreenObject(entity, boss1, boss2));
             }
+ */
     }
 
     public void addBullet(Bullet bullet){

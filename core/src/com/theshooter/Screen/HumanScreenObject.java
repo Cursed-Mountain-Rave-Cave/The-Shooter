@@ -2,10 +2,12 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.theshooter.Logic.Entity.Human;
+import com.theshooter.Logic.Entity.HumanEnemy;
+import com.theshooter.Logic.Entity.HumanEntity;
+import com.theshooter.Logic.Entity.Player;
 
 public class HumanScreenObject extends ScreenObject {
-    private Human human;
+    private HumanEntity human;
 
     private Texture[] body;
     private Texture[] legs;
@@ -13,7 +15,7 @@ public class HumanScreenObject extends ScreenObject {
     private int currentBody;
     private int currentLegs;
 
-    public HumanScreenObject(Human human, Texture[] body, Texture[] legs) {
+    public HumanScreenObject(HumanEntity human, Texture[] body, Texture[] legs) {
         super(human, body[0], 50);
 
         this.human = human;
