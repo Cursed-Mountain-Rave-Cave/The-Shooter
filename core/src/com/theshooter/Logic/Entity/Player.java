@@ -1,5 +1,6 @@
 package com.theshooter.Logic.Entity;
 
+import com.badlogic.gdx.Gdx;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
@@ -12,6 +13,9 @@ public class Player extends HumanEntity{
     @Override
     public void breakDown() {
         super.breakDown();
-        if(isBroken()) delete();
+        if(isBroken()){
+            delete();
+            Gdx.app.exit();
+        }
     }
 }
