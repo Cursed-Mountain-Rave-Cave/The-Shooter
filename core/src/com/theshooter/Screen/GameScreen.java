@@ -238,7 +238,9 @@ public class GameScreen implements Screen {
         /*
             Tramp
         */
-        spawnTramp(3 * 50, 22 * 50);
+//        spawnTramp(87 * 50, 5 * 50);
+//        spawnTramp(87 * 50, 1 * 50);
+//        spawnTramp(87 * 50, -5 * 50);
         /*
             Arabin warrior
         */

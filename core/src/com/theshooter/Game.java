@@ -3,6 +3,7 @@ package com.theshooter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Player;
@@ -63,7 +64,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private float sinAlpha, cosAlpha;
 	public void shoot1(){
 	    float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-	    float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
+	    float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
 	    float dx = sdx/2 + sdy;
 	    float dy = -sdx/2 + sdy;
@@ -73,9 +74,9 @@ public class Game extends com.badlogic.gdx.Game {
 	    dx /= norm;
 	    dy /= norm;
 
-	    scatter = (int) (Math.random() * 15 + 1);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
-		cosAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
+	    scatter = MathUtils.random(-5, 5);
+		sinAlpha = (float) Math.sin(Math.toRadians((double) scatter));
+		cosAlpha = (float) Math.cos(Math.toRadians((double) scatter));
 
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
@@ -86,8 +87,8 @@ public class Game extends com.badlogic.gdx.Game {
     }
 
 	public void shoot1(Rectangle shooter, Rectangle target){
-		//float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-		//float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
+		// float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
+		// float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
 
 		float dx = target.getX() - shooter.getX();
 		float dy = target.getY() - shooter.getY();
@@ -97,9 +98,9 @@ public class Game extends com.badlogic.gdx.Game {
 		dx /= norm;
 		dy /= norm;
 
-		scatter = (int) (Math.random() * 15 - 5);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
-		cosAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
+		scatter = MathUtils.random(-5, 5);
+		sinAlpha = (float) Math.sin(Math.toRadians((double) scatter));
+		cosAlpha = (float) Math.cos(Math.toRadians((double) scatter));
 
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
@@ -111,7 +112,7 @@ public class Game extends com.badlogic.gdx.Game {
 
     public void shoot2() {
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
+		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
 		float dx1 = sdx/2 + sdy;
 		float dy1 = -sdx/2 + sdy;
@@ -121,17 +122,17 @@ public class Game extends com.badlogic.gdx.Game {
 		dx1 /= norm;
 		dy1 /= norm;
 
-		scatter = (int) (Math.random() * 15 - 5);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
-		cosAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
+		scatter = MathUtils.random(-10, 10);
+		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
+		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
 
 		float dx2 = dx1*cosAlpha - dy1*sinAlpha;
 		float dy2 = dx1*sinAlpha + dy1*cosAlpha;
 
 
-		scatter = (int) (Math.random() % 15 - 5);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
-		cosAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
+		scatter = MathUtils.random(-10, 10);
+		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
+		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
 
 		float dx3 = dx1*cosAlpha + dy1*sinAlpha;
 		float dy3 = -dx1*sinAlpha + dy1*cosAlpha;
@@ -146,7 +147,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public void shoot3() {
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
+		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
 		float dx = sdx/2 + sdy;
 		float dy = -sdx/2 + sdy;
@@ -158,9 +159,9 @@ public class Game extends com.badlogic.gdx.Game {
 
 		float newDx, newDy;
 		for(int i = 0; i < 8; ++i) {
-			scatter = (int) (Math.random() * 15 - 5);
+			scatter = MathUtils.random(-2, 2);
 			sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
-			cosAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
+			cosAlpha = (float) Math.cos(Math.toRadians((double) (45 + scatter)));
 
 			newDx = dx*cosAlpha - dy*sinAlpha;
 			newDy = dx*sinAlpha + dy*cosAlpha;
