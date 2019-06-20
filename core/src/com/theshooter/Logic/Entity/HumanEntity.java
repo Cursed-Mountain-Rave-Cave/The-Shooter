@@ -17,7 +17,7 @@ public class HumanEntity extends Entity implements ILookable, IMovable, IBreakab
 
     public HumanEntity(int x, int y, int hp, Depth depth, Map map){
         super(x, y, 50, 50, depth, false);
-        this.velocity = 1000;
+        this.velocity = 500;
         this.map = map;
         broken = false;
 
