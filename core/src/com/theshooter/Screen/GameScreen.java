@@ -37,13 +37,29 @@ public class GameScreen implements Screen {
         screenObjects.add(new WallScreenObject(entity, game.t.getTextures("walls", "wall2")));
     }
 
+    public void placeFloors(int x0, int y0, int x1, int y1, int type){
+        for(int i = x0; i < x1; i++)
+            for(int j = y0; j < y1; j++)
+                placeFloor(i, j, type);
+    }
+
+    public void placeWalls(int x0, int y0, int x1, int y1){
+        Wall entity = new Wall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
+        game.map.addEntity(entity);
+
+        for(int x = x0; x < x1; x++)
+            for (int y = y0; y < y1; y++){
+                screenObjects.add(new WallScreenObject(entity, 50 * x, 50 * y, game.t.getTextures("walls", "wall2")));
+            }
+
+    }
+
     public void placeVase(int x, int y){
         Vase entity = new Vase(x, y);
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("things", "breakableThing1"), 50));
     }
-
     public void placeTend(int x, int y){
         Tent entity = new Tent(x, y);
         game.map.addBreakableEntity(entity);
@@ -58,33 +74,63 @@ public class GameScreen implements Screen {
         screenObjects.add(new HumanScreenObject(entity,
                 game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
     }
-
     private void spawnBoss(int x, int y) {
         Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy1"), 84));
     }
-
     private void spawnTrain(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy4"), 75));
     }
-
     private void spawnPlane(int x, int y) {
         Enemy entity = new Enemy(x, y, 75,75, 10,100, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy3"), 150));
     }
-
     private void spawnKeanu(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75, 50,100, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy2"), 112));
+    }
+
+    private void generFloor(){
+        placeFloors(0, 0, 49, 10, 2);
+        placeFloors(49, 0, 100, 4, 2);
+        placeFloors(51, 3, 100, 10, 2);
+        placeFloors(49,4,100,6,4);
+        placeFloors(49, 6, 51, 10, 4);
+        placeFloors(0, 10, 89, 100, 2);
+        placeFloors(89, 10, 100, 100, 7);
+    }
+
+    private void generWalls(){
+        placeWalls(0, 10, 48, 11);
+        placeWalls(0, 11, 1, 100);
+        placeWalls(52, 10, 90, 11);
+        placeWalls(89, 11, 90, 100);
+        placeWalls(1, 99, 90, 100);
+        placeWalls(30, 11, 31, 28);
+        placeWalls(70, 11, 71, 28);
+        placeWalls(30, 27, 55, 28);
+        placeWalls(58, 27, 71, 28);
+        placeWalls(54, 27, 55, 37);
+        placeWalls(14, 36, 55, 37);
+        placeWalls(58, 27, 59, 45);
+        placeWalls(58, 44, 82, 45);
+        placeWalls(81, 44, 82, 76);
+        placeWalls(13, 36, 14, 46);
+        placeWalls(13, 52, 14, 93);
+        placeWalls(70, 58, 71, 82);
+        placeWalls(13, 58, 49, 59);
+        placeWalls(58, 58, 71, 59);
+        placeWalls(0, 63, 14, 64);
+        placeWalls(14, 82, 82, 83);
     }
 
     public GameScreen(Game game){
@@ -106,44 +152,9 @@ public class GameScreen implements Screen {
         font.setColor(Color.BLACK);
         font.getData().setScale(2);
 
-        for(int i = 0; i < 49; i++)
-            for(int j = 0; j < 10; j++)
-                placeFloor(i, j, 2);
+        generFloor();
+        generWalls();
 
-        for(int i = 49; i < 100; i++)
-            for(int j = 0; j < 4; j++)
-                placeFloor(i, j, 2);
-
-        for(int i = 51; i < 100; i++)
-            for(int j = 3; j < 10; j++)
-                placeFloor(i, j, 2);
-
-
-        for(int i = 49; i < 100; i++)
-            for(int j = 4; j < 6; j++)
-                placeFloor(i, j, 4);
-
-        for(int i = 49; i < 51; i++)
-            for(int j = 6; j < 10; j++)
-                placeFloor(i, j, 4);
-
-        for(int i = 0; i < 89; i++)
-            for(int j = 10; j < 100; j++)
-                placeFloor(i, j, 2);//city
-
-
-        for(int i = 89; i < 100; i++)
-            for(int j = 10; j < 100; j++)
-                placeFloor(i, j, 7);
-
-
-
-
-
-
-        for(int i = 0; i < 48; i++)
-            for(int j = 10; j < 11; j++)
-                placeWall(i, j);
 
         spawnArabinWarrior(87 * 50, 8 * 50);
         spawnArabinWarrior(86 * 50, 3 * 50);
@@ -171,6 +182,7 @@ public class GameScreen implements Screen {
         spawnArabinWarrior(43 * 50, 25 * 50);
         spawnArabinWarrior(36 * 50, 19 * 50);
         spawnArabinWarrior(31 * 50, 25 * 50);
+
 
         for(int i = 83; i < 86; i++)
             for(int j = 28; j < 32; j++)
@@ -219,87 +231,6 @@ public class GameScreen implements Screen {
             spawnTrain(55 * 50, 34 * 50);
 
 
-
-        for(int i = 0; i < 1; i++)
-            for(int j = 11; j < 100; j++)
-                placeWall(i, j);
-
-        for(int i = 52; i < 90; i++)
-            for(int j = 10; j < 11; j++)
-                placeWall(i, j);
-
-        for(int i = 89; i < 90; i++)
-            for(int j = 11; j < 100; j++)
-                placeWall(i, j);
-
-        for(int i = 1; i < 90; i++)
-            for(int j = 99; j < 100; j++)
-                placeWall(i, j);
-
-        for(int i = 30; i < 31; i++)
-            for(int j = 11; j < 28; j++)
-                placeWall(i, j);
-
-        for(int i = 70; i < 71; i++)
-            for(int j = 11; j < 28; j++)
-                placeWall(i, j);
-
-        for(int i = 30; i < 55; i++)
-            for(int j = 27; j < 28; j++)
-                placeWall(i, j);
-
-        for(int i = 58; i < 71; i++)
-            for(int j = 27; j < 28; j++)
-                placeWall(i, j);
-
-        for(int i = 54; i < 55; i++)
-            for(int j = 27; j < 37; j++)
-                placeWall(i, j);
-
-        for(int i = 14; i < 55; i++)
-            for(int j = 36; j < 37; j++)
-                placeWall(i, j);
-
-        for(int i = 58; i < 59; i++)
-            for(int j = 27; j < 45; j++)
-                placeWall(i, j);
-
-        for(int i = 58; i < 82; i++)
-            for(int j = 44; j < 45; j++)
-                placeWall(i, j);
-
-        for(int i = 81; i < 82; i++)
-            for(int j = 44; j < 76; j++)
-                placeWall(i, j);
-
-
-        for(int i = 13; i < 14; i++)
-            for(int j = 36; j < 46; j++)
-                placeWall(i, j);
-
-        for(int i = 13; i < 14; i++)
-            for(int j = 52; j < 93; j++)
-                placeWall(i, j);
-
-        for(int i = 70; i < 71; i++)
-            for(int j = 58; j < 82; j++)
-                placeWall(i, j);
-
-        for(int i = 13; i < 49; i++)
-            for(int j = 58; j < 59; j++)
-                placeWall(i, j);
-
-        for(int i = 58; i < 71; i++)
-            for(int j = 58; j < 59; j++)
-                placeWall(i, j);
-
-        for(int i = 0; i < 14; i++)
-            for(int j = 63; j < 64; j++)
-                placeWall(i, j);
-
-        for(int i = 14; i < 82; i++)
-            for(int j = 82; j < 83; j++)
-                placeWall(i, j);
 
         placeTend(50 * 7, 50 * 22);
         placeTend(50 * 5, 50 * 55);

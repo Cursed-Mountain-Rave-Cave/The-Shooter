@@ -52,7 +52,6 @@ public class ScreenObject implements IScreenObject {
     public int getHeight() {
         return entity.getHeight();
     }
-
     public int getScreenX() {
         return entity.getX() - entity.getY();
     }
