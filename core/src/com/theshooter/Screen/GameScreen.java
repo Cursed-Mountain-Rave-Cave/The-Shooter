@@ -3,6 +3,7 @@ package com.theshooter.Screen;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,6 +21,7 @@ public class GameScreen implements Screen {
     private ScreenObjectArray screenObjects;
 
     private CameraController cameraController;
+    private CameraController guiCameraController;
 
     public HumanScreenObject playerScreen;
 
@@ -99,6 +101,8 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         cameraController = new CameraController();
+        guiCameraController = new CameraController();
+        guiCameraController.translateCamera(960, 540);
 
         playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
                                                           game.t.getTextures("player", "legs1"));
@@ -336,22 +340,29 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        System.out.println(Gdx.input.getX() + " " + Gdx.input.getY());
         cameraController.lookAt(playerScreen.getScreenX(), playerScreen.getScreenY());
 
         cameraController.update();
-        batch.setProjectionMatrix(cameraController.getCamera().combined);
+        guiCameraController.update();
 
         Gdx.gl.glClearColor(0xDC / 265f, 0xC2 / 265f, 0x76 / 265f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
 
+        //World
+
+        batch.setProjectionMatrix(cameraController.getCamera().combined);
+
         screenObjects.draw(batch);
 
+        //GUI
+
+        batch.setProjectionMatrix(guiCameraController.getCamera().combined);
+
         if(showAdditionalInfo == true)
-            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),
-                    cameraController.getCamera().position.x - Gdx.graphics.getWidth() / 2 - 150,
-                    Gdx.graphics.getHeight() / 2 + cameraController.getCamera().position.y + 60);
+            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 1080);
 
         batch.end();
     }
