@@ -220,9 +220,106 @@ public class GameScreen implements Screen {
 
         spawnBoss(5 * 50, 65 * 50);
 
+        for(int i = 35; i < 37; i++)
+            for(int j = 26; j < 27; j++)
+                placeVase(i * 50, j * 50);
 
-            spawnTrain(55 * 50, 30 * 50);
-            spawnTrain(55 * 50, 34 * 50);
+        for(int i = 54; i < 56; i++)
+            for(int j = 19; j < 21; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 52; i < 55; i++)
+            for(int j = 26; j < 27; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 58; i < 61; i++)
+            for(int j = 26; j < 27; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 72; i < 74; i++)
+            for(int j = 36; j < 38; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 75; i < 77; i++)
+            for(int j = 32; j < 34; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 40; i < 44; i++)
+            for(int j = 87; j < 95; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 58; i < 60; i++)
+            for(int j = 65; j < 67; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 48; i < 51; i++)
+            for(int j = 69; j < 72; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 8; i < 10; i++)
+            for(int j = 53; j < 55; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 5; i < 7; i++)
+            for(int j = 18; j < 20; j++)
+                placeVase(i * 50, j * 50);
+
+        for(int i = 26; i < 27; i++)
+            for(int j = 24; j < 27; j++)
+                placeVase(i * 50, j * 50);
+
+        placeVase(62 * 50, 57 * 50);
+        placeVase(66 * 50, 57 * 50);
+
+        spawnTrain(55 * 50, 30 * 50);
+        spawnTrain(55 * 50, 34 * 50);
+        spawnTrain(60 * 50,49 * 50);
+        spawnTrain(54 * 50,45 * 50);
+        spawnTrain(49 * 50,41 * 50);
+        spawnTrain(27 * 50,64 * 50);
+        spawnTrain(23 * 50,66 * 50);
+        spawnTrain(19 * 50,70 * 50);
+        spawnTrain(83 * 50,57 * 50);
+
+        for(int i = 61; i < 65; i+=2)
+            for(int j = 87; j < 91; j+=2)
+                spawnTrain(i * 50, j * 50);
+
+            spawnKeanu(60 * 50, 59 * 50);
+            spawnKeanu(42 * 50, 59 * 50);
+            spawnKeanu(11 * 50, 52 * 50);
+            spawnKeanu(11 * 50, 44 * 50);
+            spawnKeanu(80 * 50, 83 * 50);
+            spawnKeanu(82 * 50, 74 * 50);
+            spawnKeanu(79 * 50, 42 * 50);
+
+        for(int i = 46; i < 50; i+=2)
+            for(int j = 88; j < 92; j+= 2)
+                spawnKeanu(i * 50, j * 50);
+
+            spawnPlane(84 * 50, 66 * 50);
+            spawnPlane(84 * 50, 66 * 50);
+
+        for(int i = 53; i < 57; i+=2)
+            for(int j = 92; j < 96; j+= 2)
+                spawnPlane(i * 50, j * 50);
+
+            spawnPlane(54 * 50, 61 * 50);
+            spawnPlane(49 * 50, 61 * 50);
+            spawnPlane(4 * 50, 28 * 50);
+            spawnPlane(10 * 50, 18 * 50);
+            spawnPlane(13 * 50, 24 * 50);
+            spawnPlane(18 * 50, 19 * 50);
+            spawnPlane(22 * 50, 24 * 50);
+
+
+
+
+
+
+
+
+
 
 
 
