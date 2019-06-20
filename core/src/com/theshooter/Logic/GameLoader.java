@@ -2,10 +2,12 @@ package com.theshooter.Logic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Screen.Depth;
+import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.ScreenObject;
 import com.theshooter.Screen.ScreenObjectArray;
 import java.awt.*;
@@ -15,6 +17,8 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class GameLoader {
+    private Game game;
+    private GameScreen gameScreen;
     private Map gameMap;
     private File saveFile;
     private ScreenObjectArray screenObjectArray;
@@ -79,15 +83,18 @@ public class GameLoader {
         return  s.toString();
     }
 
-    public GameLoader(Map m, ScreenObjectArray array, File saveFile) {
-        gameMap = m;
+    public GameLoader(Game game, GameScreen gameScreen, File saveFile) {
+        this.game = game;
+        this.gameScreen = gameScreen;
+        gameMap = game.getMap();
         this.saveFile = new File(saveFile.getPath(), saveFile.getName());
-        screenObjectArray = array;
+    }
 
-        Array<IEntity>          entities            = m.getEntities();
-        Array<IEntity>          notPassableEntities = m.getNotPassableEntities();
-        Array<IEntity>          bullets             = m.getBullets();
-        Array<IBreakableEntity> breakableEntities   = m.getBreakableEntities();
+    public void save() {
+        Array<IEntity>          entities            = gameMap.getEntities();
+        Array<IEntity>          notPassableEntities = gameMap.getNotPassableEntities();
+        Array<IEntity>          bullets             = gameMap.getBullets();
+        Array<IBreakableEntity> breakableEntities   = gameMap.getBreakableEntities();
 
         try                   { saveFile.createNewFile(); }
         catch (IOException e) { System.out.println(e.getMessage()); }
@@ -115,8 +122,8 @@ public class GameLoader {
                 entityInfo.concat("\n");
                 fout.write(entityInfo.getBytes());
             }
-            for(ScreenObject s : array) {
-                entityInfo = "s " + writeEntity(s.getEntity()) + s.getTexture().toString() + "\n";
+            for(ScreenObject s : screenObjectArray) {
+                entityInfo = "s " + writeEntity(s.getEntity()) + "\n";
                 fout.write(entityInfo.getBytes());
             }
         }
@@ -161,6 +168,9 @@ public class GameLoader {
                         break;
                 }
             }
+            gameScreen.dispose();
+            gameScreen = new GameScreen(game);
+            game.gameScreen = gameScreen;
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
