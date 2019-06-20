@@ -45,7 +45,7 @@ public class GameScreen implements Screen {
                 placeFloor(i, j, MathUtils.random(10, 11));
     }
 
-    public void placeWalls(int x0, int y0, int x1, int y1){
+    public void placeWall(int x0, int y0, int x1, int y1){
         Wall entity = new Wall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
         game.map.addEntity(entity);
 
@@ -83,6 +83,12 @@ public class GameScreen implements Screen {
         game.map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
                 game.t.getTexture("things", "unbreakableThing2"), 0));
+    }
+    public void placePalm(int x, int y) {
+        Palm entity = new Palm(x, y);
+        game.map.addEntity(entity);
+        screenObjects.add(new ScreenObject(entity,
+                game.t.getTexture("things", "unbreakableThing3"), 0));
     }
 
     private void spawnArabinWarrior(int x, int y) {
@@ -132,27 +138,27 @@ public class GameScreen implements Screen {
         placeFloors(89, 10, 100, 100, 7);
     }
     private void generWalls(){
-        placeWalls(0, 10, 48, 11);
-        placeWalls(0, 11, 1, 100);
-        placeWalls(52, 10, 90, 11);
-        placeWalls(89, 11, 90, 100);
-        placeWalls(1, 99, 90, 100);
-        placeWalls(30, 11, 31, 28);
-        placeWalls(70, 11, 71, 28);
-        placeWalls(30, 27, 55, 28);
-        placeWalls(58, 27, 71, 28);
-        placeWalls(54, 27, 55, 37);
-        placeWalls(14, 36, 55, 37);
-        placeWalls(58, 27, 59, 45);
-        placeWalls(58, 44, 82, 45);
-        placeWalls(81, 44, 82, 76);
-        placeWalls(13, 36, 14, 46);
-        placeWalls(13, 52, 14, 93);
-        placeWalls(70, 58, 71, 82);
-        placeWalls(13, 58, 49, 59);
-        placeWalls(58, 58, 71, 59);
-        placeWalls(0, 63, 14, 64);
-        placeWalls(14, 82, 82, 83);
+        placeWall(0, 10, 48, 11);
+        placeWall(0, 11, 1, 100);
+        placeWall(52, 10, 90, 11);
+        placeWall(89, 11, 90, 100);
+        placeWall(1, 99, 90, 100);
+        placeWall(30, 11, 31, 28);
+        placeWall(70, 11, 71, 28);
+        placeWall(30, 27, 55, 28);
+        placeWall(58, 27, 71, 28);
+        placeWall(54, 27, 55, 37);
+        placeWall(14, 36, 55, 37);
+        placeWall(58, 27, 59, 45);
+        placeWall(58, 44, 82, 45);
+        placeWall(81, 44, 82, 76);
+        placeWall(13, 36, 14, 46);
+        placeWall(13, 52, 14, 93);
+        placeWall(70, 58, 71, 82);
+        placeWall(13, 58, 49, 59);
+        placeWall(58, 58, 71, 59);
+        placeWall(0, 63, 14, 64);
+        placeWall(14, 82, 82, 83);
 
         placeInvisibleWall(-1, -1, 0, 101);
         placeInvisibleWall(-1, -1, 101, 0);
@@ -244,6 +250,7 @@ public class GameScreen implements Screen {
         /*
             Arabin warrior
         */
+        placePalm(playerScreen.getX(), playerScreen.getY() + 1);
         spawnArabinWarrior(87 * 50, 8 * 50);
         spawnArabinWarrior(86 * 50, 3 * 50);
         spawnArabinWarrior(85 * 50, 6 * 50);
@@ -409,7 +416,7 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(guiCameraController.getCamera().combined);
 
-        if(Game.config.showAdditionalInfo == true)
+        if(Game.config.showAdditionalInfo)
             font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 1080);
 
         batch.end();
