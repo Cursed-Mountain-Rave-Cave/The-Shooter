@@ -33,7 +33,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 		setScreen(gameScreen);
 
-		map.addEntity(player);
+		map.addBreakableEntity(player);
 
 		inputController = new InputController(this);
 

@@ -9,13 +9,14 @@ public class Enemy extends BreakableEntity {
     private Rectangle target;
     private Map map;
     private int velocity;
-
+    private boolean damaged;
 
     public Enemy(int x, int y, int w, int h, int hp, int velocity, Rectangle player, Map map){
         super(x, y, w, h, hp, Depth.ENEMY, false);
         target = player;
         this.velocity = velocity;
         this.map = map;
+        damaged = false;
     }
 
     public Enemy(int x, int y, int w, int h, int velocity, Rectangle player, Map map){
@@ -42,12 +43,21 @@ public class Enemy extends BreakableEntity {
 
             int changeX = (int) (dx * Gdx.graphics.getDeltaTime() * velocity);
             int changeY = (int) (dy * Gdx.graphics.getDeltaTime() * velocity);
-            setX(getX() + changeX);
-            setY(getY() + changeY);
+
+            if (len < 5 * 50 || damaged) {
+                setX(getX() + changeX);
+                setY(getY() + changeY);
+            }
             if (!map.isAllowed(super.getRectangle())) {
                 setX(getX() - changeX);
                 setY(getY() - changeY);
             }
         }
+    }
+
+    @Override
+    public void breakDown() {
+        super.breakDown();
+        damaged = true;
     }
 }

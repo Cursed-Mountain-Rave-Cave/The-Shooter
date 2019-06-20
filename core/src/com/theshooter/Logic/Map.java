@@ -3,8 +3,7 @@ package com.theshooter.Logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.theshooter.Logic.Entity.IBreakableEntity;
-import com.theshooter.Logic.Entity.IEntity;
+import com.theshooter.Logic.Entity.*;
 
 public class Map {
 
@@ -13,6 +12,8 @@ public class Map {
     private Array<IEntity> bullets;
     private Array<IBreakableEntity> breakableEntities;
     private Array<IEntity> entitiesDelete;
+    private Array<IBreakableEntity> enemies;
+    private Array<IBreakableEntity> players;
 
     public Map(){
         entities = new Array<>();
@@ -20,6 +21,8 @@ public class Map {
         bullets = new Array<>();
         breakableEntities = new Array<>();
         entitiesDelete = new Array<>();
+        enemies = new Array<>();
+        players = new Array<>();
 
     }
 
@@ -60,6 +63,15 @@ public class Map {
                 }
         }
 
+        for(IBreakableEntity enemy : enemies) {
+            for(IBreakableEntity player : players) {
+                int dx = player.getX() - enemy.getX();
+                int dy = player.getY() - enemy.getY();
+                if (Math.hypot(dx, dy) < 4 * 50)
+                    player.breakDown();
+            }
+        }
+
         entities.removeAll(entitiesDelete,true);
         bullets.removeAll(entitiesDelete,true);
         entitiesDelete.clear();
@@ -78,6 +90,10 @@ public class Map {
 
     public void addBreakableEntity(IBreakableEntity entity){
         addEntity(entity);
+        if(entity.getClass() == HumanEnemy.class || entity.getClass() == Enemy.class)
+            enemies.add(entity);
+        if(entity.getClass() == Player.class)
+            players.add(entity);
         breakableEntities.add(entity);
     }
 

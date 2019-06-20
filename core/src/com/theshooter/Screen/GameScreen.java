@@ -12,7 +12,6 @@ import com.theshooter.Logic.CameraController;
 import com.theshooter.Logic.Entity.*;
 
 public class GameScreen implements Screen {
-
     final private Game game;
 
     public SpriteBatch batch;
@@ -151,6 +150,7 @@ public class GameScreen implements Screen {
             for(int j = 10; j < 11; j++)
                 placeWall(i, j);
 
+        spawnTrain(87 * 50, 5 * 50);
         spawnArabinWarrior(87 * 50, 8 * 50);
         spawnArabinWarrior(86 * 50, 3 * 50);
         spawnArabinWarrior(85 * 50, 6 * 50);
