@@ -138,7 +138,21 @@ public class GameScreen implements Screen {
             for(int j = 10; j < 11; j++)
                 placeWall(i, j);
 
-
+        spawnArabinWarrior(87 * 50, 8 * 50);
+        spawnArabinWarrior(86 * 50, 3 * 50);
+        spawnArabinWarrior(85 * 50, 6 * 50);
+        spawnArabinWarrior(82 * 50, 2 * 50);
+        spawnArabinWarrior(79 * 50, 6 * 50);
+        spawnArabinWarrior(76 * 50, 2 * 50);
+        spawnArabinWarrior(70 * 50, 8 * 50);
+        spawnArabinWarrior(64 * 50, 2 * 50);
+        spawnArabinWarrior(59 * 50, 7 * 50);
+        spawnArabinWarrior(55 * 50, 50);
+        spawnArabinWarrior(52 * 50, 8 * 50);
+        spawnArabinWarrior(43 * 50, 6 * 50);
+        spawnArabinWarrior(42 * 50, 3 * 50);
+        spawnArabinWarrior(37 * 50, 6 * 50);
+        spawnArabinWarrior(33 * 50, 3 * 50);
 
 
             /*
