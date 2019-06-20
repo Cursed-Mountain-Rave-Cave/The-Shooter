@@ -66,7 +66,7 @@ public class Game extends com.badlogic.gdx.Game {
 					}
 				}
 				int rand = MathUtils.random(1, 14);
-				reloadingSound[rand].play(0.2f);
+				reloadingSound[rand].play(0.8f);
 				ammoSupply = 0;
 				try {
 					Thread.sleep(2000);
@@ -86,7 +86,7 @@ public class Game extends com.badlogic.gdx.Game {
 
         SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/SimpleMan.mp3"));
 
-        SimpleMan.setVolume(0.8f);
+        SimpleMan.setVolume(0.2f);
         SimpleMan.setLooping(true);
         SimpleMan.play();
 		t = new TextureController();
