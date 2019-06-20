@@ -66,16 +66,17 @@ public class TextureController {
          * player adding
          */
 
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 7; i++) {
             Array<Texture> texturesBody = new Array<>();
             Array<Texture> texturesLegs = new Array<>();
-            for (int j = 1; j <= 8; j++) {
+            for (int j = 1; j <= 9; j++) {
                 texturesBody.add(new Texture("player/bodies/body" + i + "/" + j + ".png"));
                 texturesLegs.add(new Texture("player/legs/legs" + i + "/" + j + ".png"));
             }
             addTextureArray("player", "legs" + i, texturesLegs);
             addTextureArray("player", "body" + i, texturesBody);
         }
+
 
         /**
          * enemies adding
