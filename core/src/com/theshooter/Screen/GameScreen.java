@@ -39,6 +39,12 @@ public class GameScreen implements Screen {
             for(int j = y0; j < y1; j++)
                 placeFloor(i, j, type);
     }
+    public void placeFloors(int x0, int y0, int x1, int y1){
+        for(int i = x0; i < x1; i++)
+            for(int j = y0; j < y1; j++)
+                placeFloor(i, j, MathUtils.random(10, 11));
+    }
+
     public void placeWalls(int x0, int y0, int x1, int y1){
         Wall entity = new Wall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
         game.map.addEntity(entity);
@@ -63,9 +69,14 @@ public class GameScreen implements Screen {
     public void placeTend(int x, int y){
         Tent entity = new Tent(x, y);
         game.map.addBreakableEntity(entity);
-        int rand = MathUtils.random(2, 3);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("things", "breakableThing" + rand), 150));
+                game.t.getTextures("things", "breakableThing" + MathUtils.random(2, 3)), 0));
+    }
+    public void placeGate(int x, int y){
+        Gate entity = new Gate(x, y);
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
     public void placeHookah(int x, int y) {
         Hookah entity = new Hookah(x, y);
@@ -112,12 +123,12 @@ public class GameScreen implements Screen {
     }
 
     private void generFloor(){
-        placeFloors(0, 0, 49, 10, 10);
-        placeFloors(49, 0, 100, 4, 10);
-        placeFloors(51, 3, 100, 10, 10);
+        placeFloors(0, 0, 49, 10);
+        placeFloors(49, 0, 100, 4);
+        placeFloors(51, 3, 100, 10);
         placeFloors(49,4,100,6,4);
         placeFloors(49, 6, 51, 10, 4);
-        placeFloors(0, 10, 89, 100, 10);
+        placeFloors(0, 10, 89, 100);
         placeFloors(89, 10, 100, 100, 7);
     }
     private void generWalls(){
@@ -202,6 +213,8 @@ public class GameScreen implements Screen {
 
         placeVase(62 * 50, 57 * 50);
         placeVase(66 * 50, 57 * 50);
+
+        placeGate(50 * 48, 50 * 10);
 
         placeTend(50 * 7, 50 * 22);
         placeTend(50 * 5, 50 * 55);

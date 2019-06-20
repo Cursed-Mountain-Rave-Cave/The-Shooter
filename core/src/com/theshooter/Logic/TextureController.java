@@ -24,7 +24,7 @@ public class TextureController {
          * floor adding
          */
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 12; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("floor/" + i + ".png"));
             addTextureArray("floor", "floor" + i, textures);
@@ -55,7 +55,7 @@ public class TextureController {
          * breakable things adding
          */
 
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
             for (int j = 1; j <= 2; j++)
                 textures.add(new Texture("environment/breakable/breakable" + i + "/" + j + ".png"));
