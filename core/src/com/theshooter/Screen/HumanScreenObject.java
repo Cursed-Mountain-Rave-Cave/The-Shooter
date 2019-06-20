@@ -1,14 +1,20 @@
 package com.theshooter.Screen;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.theshooter.Game;
 import com.theshooter.Logic.Entity.HumanEnemy;
 import com.theshooter.Logic.Entity.HumanEntity;
 import com.theshooter.Logic.Entity.Player;
 
 public class HumanScreenObject extends ScreenObject {
+
     private HumanEntity human;
+
+    private BitmapFont font;
 
     private Array<Texture> body;
     private Array<Texture> legs;
@@ -17,11 +23,15 @@ public class HumanScreenObject extends ScreenObject {
     private int currentLegs;
 
     public HumanScreenObject(HumanEntity human, Array<Texture> body, Array<Texture> legs) {
-        super(human, body.get(0), 50);
+        super(human, legs.get(0), 50);
 
         this.human = human;
         this.body = body;
         this.legs = legs;
+
+        this.font = new BitmapFont();
+        this.font.setColor(Color.BLACK);
+        this.font.getData().setScale(2);
     }
 
     public void draw(SpriteBatch batch) {
@@ -30,6 +40,9 @@ public class HumanScreenObject extends ScreenObject {
 
         batch.draw(legs.get(currentLegs), getScreenX() - shift, getScreenY());
         batch.draw(body.get(currentBody), getScreenX() - shift, getScreenY());
+
+        if(Game.config.showAdditionalInfo)
+            font.draw(batch, "" + human.getHP(), entity.getX() - entity.getY() - shift, (entity.getX() + entity.getY()) / 2 + getTexture().getWidth());
     }
 
     public void setCurrentLegs() {
