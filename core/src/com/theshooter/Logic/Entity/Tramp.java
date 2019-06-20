@@ -8,7 +8,7 @@ public class Tramp extends Enemy {
     private long lastAttck;
 
     public Tramp(int x, int y, Rectangle target, Map map) {
-        super(x, y, 200,200,30,900, target, map);
+        super(x, y, 200,200,1000,390, target, map);
     }
 
     @Override

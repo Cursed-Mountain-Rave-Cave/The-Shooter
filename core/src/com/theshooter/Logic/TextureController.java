@@ -92,7 +92,7 @@ public class TextureController {
          * bullets adding
          */
 
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("bullets/" + i + ".png"));
             addTextureArray("bullets", "bullet" + i, textures);
