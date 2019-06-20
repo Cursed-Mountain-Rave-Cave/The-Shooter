@@ -24,7 +24,7 @@ public class TextureController {
          * floor adding
          */
 
-        for (int i = 1; i <= 13; i++) {
+        for (int i = 1; i <= 14; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("floor/" + i + ".png"));
             addTextureArray("floor", "floor" + i, textures);
@@ -66,7 +66,7 @@ public class TextureController {
          * player adding
          */
 
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= 4; i++) {
             Array<Texture> texturesBody = new Array<>();
             Array<Texture> texturesLegs = new Array<>();
             for (int j = 1; j <= 8; j++) {

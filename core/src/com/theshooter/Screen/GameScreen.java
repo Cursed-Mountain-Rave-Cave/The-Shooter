@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
     public void placeFloors(int x0, int y0, int x1, int y1){
         for(int i = x0; i < x1; i++)
             for(int j = y0; j < y1; j++)
-                placeFloor(i, j, MathUtils.random(10, 11));
+                placeFloor(i, j, MathUtils.random(12, 12));
     }
 
     public void placeWalls(int x0, int y0, int x1, int y1){
@@ -89,7 +89,8 @@ public class GameScreen implements Screen {
         HumanEnemy entity = new HumanEnemy(x, y, 15, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new HumanScreenObject(entity,
-                game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
+                game.t.getTextures("player", "body" + MathUtils.random(2, 4)),
+                game.t.getTextures("player", "legs" + MathUtils.random(1, 4))));
     }
     private void spawnBoss(int x, int y) {
         Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
@@ -184,9 +185,6 @@ public class GameScreen implements Screen {
             for(int j = 32; j < 34; j++)
                 placeVase(i * 50, j * 50);
 
-        for(int i = 89; i < 100; i++)
-            for(int j = 10; j < 100; j++)
-                placeFloor(i, j, 9);
         for(int i = 40; i < 44; i++)
             for(int j = 87; j < 95; j++)
                 placeVase(i * 50, j * 50);
