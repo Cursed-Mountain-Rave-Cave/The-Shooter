@@ -1,7 +1,10 @@
 package com.theshooter.Screen;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.theshooter.Game;
@@ -19,6 +22,16 @@ public class GameScreen implements Screen {
     private CameraController cameraController;
 
     public HumanScreenObject playerScreen;
+
+    private boolean showAdditionalInfo;
+    private BitmapFont font;
+
+    public void switchAdditionalInfo() {
+        if(showAdditionalInfo == true)
+            showAdditionalInfo = false;
+        else
+            showAdditionalInfo = true;
+    }
 
     public void placeFloor(int x, int y, int type){
         screenObjects.add(new ScreenObject(new Entity(x*50, y*50, 50, 50, Depth.FLOOR),
@@ -85,7 +98,6 @@ public class GameScreen implements Screen {
         this.game = game;
         batch = new SpriteBatch();
 
-
         cameraController = new CameraController();
 
         playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
@@ -95,6 +107,10 @@ public class GameScreen implements Screen {
 
         screenObjects.add(playerScreen);
 
+        showAdditionalInfo = false;
+        font = new BitmapFont();
+        font.setColor(Color.BLACK);
+        font.getData().setScale(2);
 
         for(int i = 0; i < 49; i++)
             for(int j = 0; j < 10; j++)
@@ -272,6 +288,11 @@ public class GameScreen implements Screen {
         batch.begin();
 
         screenObjects.draw(batch);
+
+        if(showAdditionalInfo == true)
+            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),
+                    cameraController.getCamera().position.x - Gdx.graphics.getWidth() / 2 - 150,
+                    Gdx.graphics.getHeight() / 2 + cameraController.getCamera().position.y + 60);
 
         batch.end();
     }
