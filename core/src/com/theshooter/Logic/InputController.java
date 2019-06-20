@@ -109,7 +109,7 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.F3: {
-                game.gameScreen.switchAdditionalInfo();
+                Game.config.showAdditionalInfo = !Game.config.showAdditionalInfo;
                 break;
             }
         }
