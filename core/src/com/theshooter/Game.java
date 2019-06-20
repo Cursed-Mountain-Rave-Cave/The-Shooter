@@ -10,8 +10,16 @@ import com.theshooter.Logic.Map;
 import com.theshooter.Logic.TextureController;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
+import com.theshooter.Utils.Config;
 
 public class Game extends com.badlogic.gdx.Game {
+
+	public static Config config;
+
+	static {
+		config = new Config();
+	}
+
     public Player player;
 
 	public Map map;

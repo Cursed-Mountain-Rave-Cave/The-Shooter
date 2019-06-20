@@ -3,8 +3,6 @@ package com.theshooter.Screen;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -25,15 +23,8 @@ public class GameScreen implements Screen {
 
     public HumanScreenObject playerScreen;
 
-    private boolean showAdditionalInfo;
     private BitmapFont font;
 
-    public void switchAdditionalInfo() {
-        if(showAdditionalInfo == true)
-            showAdditionalInfo = false;
-        else
-            showAdditionalInfo = true;
-    }
 
     public void placeFloor(int x, int y, int type){
         screenObjects.add(new ScreenObject(new Entity(x*50, y*50, 50, 50, Depth.FLOOR),
@@ -111,7 +102,6 @@ public class GameScreen implements Screen {
 
         screenObjects.add(playerScreen);
 
-        showAdditionalInfo = false;
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(2);
@@ -340,7 +330,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println(Gdx.input.getX() + " " + Gdx.input.getY());
         cameraController.lookAt(playerScreen.getScreenX(), playerScreen.getScreenY());
 
         cameraController.update();
@@ -361,7 +350,7 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(guiCameraController.getCamera().combined);
 
-        if(showAdditionalInfo == true)
+        if(Game.config.showAdditionalInfo == true)
             font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 1080);
 
         batch.end();
