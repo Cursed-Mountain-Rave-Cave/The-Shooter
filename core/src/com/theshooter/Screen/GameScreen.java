@@ -415,8 +415,9 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(guiCameraController.getCamera().combined);
 
+        font.draw(batch, "Patrons: " + game.checkAmmoSuply(), 50, 70);
         if(Game.config.showAdditionalInfo)
-            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
+            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 1080);
 
         batch.end();
     }
