@@ -3,6 +3,7 @@ package com.theshooter.Logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 
 public class Map {
@@ -14,8 +15,9 @@ public class Map {
     private Array<IEntity> entitiesDelete;
     private Array<IBreakableEntity> enemies;
     private Array<IBreakableEntity> players;
+    public Game game;
 
-    public Map(){
+    public Map(Game game){
         entities = new Array<>();
         notPassableEntities = new Array<>();
         bullets = new Array<>();
@@ -23,6 +25,7 @@ public class Map {
         entitiesDelete = new Array<>();
         enemies = new Array<>();
         players = new Array<>();
+        this.game = game;
 
     }
 

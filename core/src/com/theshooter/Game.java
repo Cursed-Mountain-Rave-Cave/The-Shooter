@@ -3,6 +3,7 @@ package com.theshooter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Player;
 import com.theshooter.Logic.InputController;
@@ -34,7 +35,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void create () {
-		map = new Map();
+		map = new Map(this);
         player = new Player(99*50, 3*50, 25, 25, map);
 
         SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/SimpleMan.mp3"));
@@ -70,6 +71,23 @@ public class Game extends com.badlogic.gdx.Game {
         map.addBullet(bullet);
         gameScreen.addBullet(bullet);
     }
+
+	public void shoot1(Rectangle shooter, Rectangle target){
+		//float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
+		//float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
+
+		float dx = target.getX() - shooter.getX();
+		float dy = target.getY() - shooter.getY();
+
+		float norm = (float) Math.sqrt(dx*dx + dy*dy);
+
+		dx /= norm;
+		dy /= norm;
+
+		Bullet bullet = new Bullet((int)(shooter.getX() + 25 + dx * 150), (int)(shooter.getY() + 25 + dy * 150), dx, dy);
+		map.addBullet(bullet);
+		gameScreen.addBullet(bullet);
+	}
 
 	private final static float SIN_ALPHA = (float) Math.sin(Math.toRadians((double) 45));
 	private final static float COS_ALPHA = (float) Math.cos(Math.toRadians((double) 45));

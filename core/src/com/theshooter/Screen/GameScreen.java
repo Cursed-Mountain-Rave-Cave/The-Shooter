@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
     }
 
     private void spawnTramp(int x, int y) {
-        Enemy entity = new Enemy(x, y,200,200,30,900, game.player.getRectangle(), game.getMap());
+        Enemy entity = new Tramp(x, y, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy5"), 200));
@@ -140,7 +140,7 @@ public class GameScreen implements Screen {
 
         for(int i = 89; i < 100; i++)
             for(int j = 10; j < 100; j++)
-                placeFloor(i, j, 7);
+                placeFloor(i, j, 9);
 
 
 
