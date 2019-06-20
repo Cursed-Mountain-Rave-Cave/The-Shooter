@@ -38,7 +38,7 @@ public class Map {
 
         for(IEntity entity: entities) {
             entity.update();
-            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 15000) {
+            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000) {
                 entitiesDelete.add(entity);
                 entity.delete();
             }
