@@ -104,7 +104,7 @@ public class GameScreen implements Screen {
         game.map.addBreakableEntity(entity);
         screenObjects.add(new HumanScreenObject(entity,
                 game.t.getTextures("player", "body" + MathUtils.random(2, 4)),
-                game.t.getTextures("player", "legs" + MathUtils.random(1, 4))));
+                game.t.getTextures("player", "legs" + MathUtils.random(1, 5))));
     }
     private void spawnBoss(int x, int y) {
         Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
@@ -400,8 +400,8 @@ public class GameScreen implements Screen {
         guiCameraController = new CameraController();
         guiCameraController.translateCamera(960, 540);
 
-        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
-                                                          game.t.getTextures("player", "legs1"));
+        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body5"),
+                                                          game.t.getTextures("player", "legs5"));
 
         screenObjects = new ScreenObjectArray();
 

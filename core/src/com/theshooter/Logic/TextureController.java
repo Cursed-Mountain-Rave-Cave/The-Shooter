@@ -66,7 +66,7 @@ public class TextureController {
          * player adding
          */
 
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> texturesBody = new Array<>();
             Array<Texture> texturesLegs = new Array<>();
             for (int j = 1; j <= 8; j++) {
