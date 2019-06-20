@@ -65,6 +65,9 @@ public class Map {
 
         for(IBreakableEntity enemy : enemies) {
             for(IBreakableEntity player : players) {
+                if (enemy.isBroken()) {
+                    enemies.removeValue(enemy, true);
+                }
                 int dx = player.getX() - enemy.getX();
                 int dy = player.getY() - enemy.getY();
                 if (Math.hypot(dx, dy) < 4 * 50)

@@ -65,6 +65,13 @@ public class GameScreen implements Screen {
                 game.t.getTextures("enemy", "enemy1"), 84));
     }
 
+    private void spawnTramp(int x, int y) {
+        Enemy entity = new Enemy(x, y,200,200,30,900, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy5"), 200));
+    }
+
     private void spawnTrain(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
@@ -144,7 +151,9 @@ public class GameScreen implements Screen {
             for(int j = 10; j < 11; j++)
                 placeWall(i, j);
 
-        spawnTrain(87 * 50, 5 * 50);
+        spawnTramp(87 * 50, 5 * 50);
+        spawnTramp(87 * 50, 1 * 50);
+        spawnTramp(87 * 50, -5 * 50);
         spawnArabinWarrior(87 * 50, 8 * 50);
         spawnArabinWarrior(86 * 50, 3 * 50);
         spawnArabinWarrior(85 * 50, 6 * 50);
