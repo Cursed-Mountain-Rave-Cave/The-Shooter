@@ -49,6 +49,10 @@ public class GameScreen implements Screen {
             }
 
     }
+    public void placeInvisibleWall(int x0, int y0, int x1, int y1) {
+        InvisibleWall entity = new InvisibleWall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
+        game.map.addEntity(entity);
+    }
 
     public void placeVase(int x, int y){
         Vase entity = new Vase(x, y);
@@ -132,6 +136,11 @@ public class GameScreen implements Screen {
         placeWalls(58, 58, 71, 59);
         placeWalls(0, 63, 14, 64);
         placeWalls(14, 82, 82, 83);
+
+        placeInvisibleWall(-1, -1, 0, 101);
+        placeInvisibleWall(-1, -1, 101, 0);
+        placeInvisibleWall(89, 10, 101, 11);
+        placeInvisibleWall(100, -1, 101, 101);
     }
     private void generEnvironment(){
         for(int i = 35; i < 37; i++)
@@ -345,11 +354,11 @@ public class GameScreen implements Screen {
         generFloor();
         generWalls();
         generEnvironment();
-        generEnemies();
+    //    generEnemies();
     }
 
     public void addBullet(Bullet bullet){
-        screenObjects.add(new BulletScreenObject(bullet, game.t.getTexture("bullets", "bullet1"), 5));
+        screenObjects.add(new BulletScreenObject(bullet, game.t.getTexture("bullets", "bullet" + MathUtils.random(1, 5)), 5));
     }
 
     @Override
