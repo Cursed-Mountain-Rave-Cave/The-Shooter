@@ -119,7 +119,7 @@ public class GameScreen implements Screen {
 
         for(int i = 0; i < 89; i++)
             for(int j = 10; j < 100; j++)
-                placeFloor(i, j, 4);
+                placeFloor(i, j, 2);//city
 
 
         for(int i = 89; i < 100; i++)
@@ -127,7 +127,7 @@ public class GameScreen implements Screen {
                 placeFloor(i, j, 7);
 
 
-        for(int i = 0; i < 49; i++)
+        for(int i = 0; i < 48; i++)
             for(int j = 10; j < 11; j++)
                 placeWall(i, j);
 
@@ -150,11 +150,6 @@ public class GameScreen implements Screen {
             placeTend(50 * 60, 50 * 15);
             placeTend(50 * 63, 50 * 20);
 
-
-
-
-
-            
 
     }
 
