@@ -67,6 +67,12 @@ public class GameScreen implements Screen {
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("things", "breakableThing" + rand), 150));
     }
+    public void placeHookah(int x, int y) {
+        Hookah entity = new Hookah(x, y);
+        game.map.addEntity(entity);
+        screenObjects.add(new ScreenObject(entity,
+                game.t.getTexture("things", "unbreakableThing2"), 0));
+    }
 
     private void spawnArabinWarrior(int x, int y) {
         HumanEnemy entity = new HumanEnemy(x, y, 15, game.player.getRectangle(), game.getMap());
