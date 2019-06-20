@@ -42,7 +42,7 @@ public class Tramp extends Enemy {
             else if (getHP() <= 2 * maxHp / 3 && getHP() > maxHp / 3) {
                 tryMove(-changeX, -changeY);
                 map.game.shoot1(getRectangle(), target);
-                setHp(getHP() + 1);
+              //  setHp(getHP() + 1);
             }
             if (getHP() <= maxHp / 3) {
                 for (int i = 0; i < 10; i++) {
