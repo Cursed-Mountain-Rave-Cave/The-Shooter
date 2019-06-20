@@ -24,7 +24,7 @@ public class TextureController {
          * floor adding
          */
 
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 10; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("floor/" + i + ".png"));
             addTextureArray("floor", "floor" + i, textures);
@@ -45,7 +45,7 @@ public class TextureController {
          * unbreakable things adding
          */
 
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 2; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("environment/unbreakable/" + i + ".png"));
             addTextureArray("things", "unbreakableThing" + i, textures);
@@ -92,7 +92,7 @@ public class TextureController {
          * bullets adding
          */
 
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("bullets/" + i + ".png"));
             addTextureArray("bullets", "bullet" + i, textures);
