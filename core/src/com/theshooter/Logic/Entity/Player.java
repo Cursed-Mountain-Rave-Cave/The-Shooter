@@ -12,6 +12,6 @@ public class Player extends HumanEntity{
     @Override
     public void breakDown() {
         super.breakDown();
-        System.out.println(getHP());
+        if(isBroken()) delete();
     }
 }
