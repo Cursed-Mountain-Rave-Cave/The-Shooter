@@ -70,11 +70,13 @@ public class Map {
             for(IBreakableEntity player : players) {
                 if (enemy.isBroken()) {
                     enemies.removeValue(enemy, true);
+                    System.out.println(enemies.size);
                 }
                 int dx = player.getX() - enemy.getX();
                 int dy = player.getY() - enemy.getY();
-                if (Math.hypot(dx, dy) < 3 * 50)
+                if (Math.hypot(dx, dy) < 2 * 50) {
                     player.breakDown();
+                }
             }
         }
 
@@ -86,6 +88,10 @@ public class Map {
             game.bossFight = true;
             game.gameScreen.bossFight();
             System.out.println(enemies.size);
+        }
+        if (enemies.isEmpty() && game.bossFight) {
+            game.gameScreen.screenMessage = "             Game over!\n        Thanks for playing!";
+            game.gameScreen.targetMessage = "Put the top five for the practice";
         }
     }
 

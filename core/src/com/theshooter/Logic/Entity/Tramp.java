@@ -9,7 +9,7 @@ public class Tramp extends Enemy {
     private int maxHp;
 
     public Tramp(int x, int y, Rectangle target, Map map) {
-        super(x, y, 200,200,1000,300, target, map);
+        super(x, y, 150,150,1000,300, target, map);
         maxHp = getHP();
     }
 
@@ -24,8 +24,6 @@ public class Tramp extends Enemy {
 
     @Override
     public void update() {
-
-        //super.update();
         if (!isBroken()) {
             float dx = target.getX() - getX();
             float dy = target.getY() - getY();
@@ -42,7 +40,7 @@ public class Tramp extends Enemy {
             else if (getHP() <= 2 * maxHp / 3 && getHP() > maxHp / 3) {
                 tryMove(-changeX, -changeY);
                 map.game.shoot1(getRectangle(), target);
-                setHp(getHP() + 1);
+              //  setHp(getHP() + 1);
             }
             if (getHP() <= maxHp / 3) {
                 for (int i = 0; i < 10; i++) {

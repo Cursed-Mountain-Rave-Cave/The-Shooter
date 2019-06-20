@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.audio.Music;
 import com.theshooter.Game;
 import com.theshooter.Logic.CameraController;
 import com.theshooter.Logic.Entity.*;
@@ -25,11 +24,23 @@ public class GameScreen implements Screen {
 
     private BitmapFont font;
 
+    private boolean bossHere;
+
+    public String screenMessage;
+    public String targetMessage;
+
+
     public void bossFight() {
         game.SimpleMan.stop();
         game.SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
+        game.SimpleMan.setVolume(0.3f);
         game.SimpleMan.play();
-        spawnTramp(5, 5);
+        spawnTramp(30 * 50, 4 * 50);
+        game.player.setX(99*50);
+        game.player.setY(3*50);
+        bossHere = true;
+
+        targetMessage = "Be SLAV !!!";
     }
 
     public void placeFloor(int x, int y, int type){
@@ -104,7 +115,7 @@ public class GameScreen implements Screen {
         game.map.addBreakableEntity(entity);
         screenObjects.add(new HumanScreenObject(entity,
                 game.t.getTextures("player", "body" + MathUtils.random(2, 4)),
-                game.t.getTextures("player", "legs" + MathUtils.random(1, 4))));
+                game.t.getTextures("player", "legs" + MathUtils.random(1, 5))));
     }
     private void spawnBoss(int x, int y) {
         Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
@@ -116,10 +127,11 @@ public class GameScreen implements Screen {
         Enemy entity = new Tramp(x, y, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy5"), 200));
+                game.t.getTextures("enemy", "enemy5"), 250));
     }
     private void spawnTrain(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
+        entity.setRadius(1000);
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy4"), 75));
@@ -269,6 +281,16 @@ public class GameScreen implements Screen {
         placePalm(50 * 66, 50 * 8);
         placePalm(50 * 34, 50 * 6);
         placePalm(50 * 8, 50 * 4);
+
+        placePalm(50 * 90, 50 * 8);
+        placePalm(50 * 72, 50 * 2);
+        placePalm(50 * 66, 50 * 9);
+        placePalm(50 * 34, 50 * 8);
+        placePalm(50 * 8, 50 * 2);
+
+
+
+
         placePalm(50 * 3, 50 * 5);
         placePalm(50 * 4, 50 * 7);
 
@@ -277,11 +299,6 @@ public class GameScreen implements Screen {
         placeHookah(50 * 2, 50 * 7);
     }
     private void generEnemies(){
-        /*
-            Tramp
-        */
-
-        spawnTramp(3 * 50, 22 * 50);
         /*
             Arabin warrior
         */
@@ -396,14 +413,17 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game){
         this.game = game;
+        this.screenMessage = "Ah shit, here we go again.";
+        this.targetMessage = "Kill all enemies";
+        bossHere = false;
         batch = new SpriteBatch();
 
         cameraController = new CameraController();
         guiCameraController = new CameraController();
         guiCameraController.translateCamera(960, 540);
 
-        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
-                                                          game.t.getTextures("player", "legs1"));
+        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body5"),
+                                                          game.t.getTextures("player", "legs5"));
 
         screenObjects = new ScreenObjectArray();
 
@@ -417,8 +437,7 @@ public class GameScreen implements Screen {
         generWalls();
         generEnvironment();
 
-        spawnArabinWarrior(87 * 50, 8 * 50);
-   //     generEnemies();
+        generEnemies();
     }
 
     public void addBullet(Bullet bullet){
@@ -452,8 +471,17 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(guiCameraController.getCamera().combined);
 
+        font.getData().setScale(2);
         if(Game.config.showAdditionalInfo)
-            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
+            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + game.player.getX() + " Y: " + game.player.getY(), 0, 1080);
+
+        font.draw(batch, "Target: " + targetMessage + "\nHP: " + game.player.getHP() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
+
+        if(bossHere){
+            font.getData().setScale(5);
+            font.draw(batch, screenMessage, 500, 780);
+        }
+
 
         batch.end();
     }
