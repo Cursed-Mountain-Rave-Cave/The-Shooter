@@ -52,7 +52,7 @@ public class Game extends com.badlogic.gdx.Game {
 	    dx /= norm;
 	    dy /= norm;
 
-        Bullet bullet = new Bullet(player.getX() + 25, player.getY() + 25, dx, dy);
+        Bullet bullet = new Bullet((int)(player.getX() + 25 + dx * 25), (int)(player.getY() + 25 + dy * 25), dx, dy);
         map.addBullet(bullet);
         gameScreen.addBullet(bullet);
     }
@@ -77,9 +77,9 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx3 = dx1*COS_ALPHA + dy1*SIN_ALPHA;
 		float dy3 = -dx1*SIN_ALPHA + dy1*COS_ALPHA;
 
-		Bullet bullet1 = new Bullet(player.getX() + 25, player.getY() + 25, dx1, dy1);
-		Bullet bullet2 = new Bullet(player.getX() + 25, player.getY() + 25, dx2, dy2);
-		Bullet bullet3 = new Bullet(player.getX() + 25, player.getY() + 25, dx3, dy3);
+		Bullet bullet1 = new Bullet((int)(player.getX() + 25 + dx1 * 25), (int)(player.getY() + 25 + dy1 * 25), dx1, dy1);
+		Bullet bullet2 = new Bullet((int)(player.getX() + 25 + dx2 * 25), (int)(player.getY() + 25 + dy2 * 25), dx2, dy2);
+		Bullet bullet3 = new Bullet((int)(player.getX() + 25 + dx3 * 25), (int)(player.getY() + 25 + dy3 * 25), dx3, dy3);
 
 		map.addBullet(bullet1); 	   map.addBullet(bullet2);        map.addBullet(bullet3);
 		gameScreen.addBullet(bullet1); gameScreen.addBullet(bullet2); gameScreen.addBullet(bullet3);
@@ -102,7 +102,7 @@ public class Game extends com.badlogic.gdx.Game {
 			newDx = dx*COS_ALPHA - dy*SIN_ALPHA;
 			newDy = dx*SIN_ALPHA + dy*COS_ALPHA;
 
-			Bullet bullet = new Bullet(player.getX() + 25, player.getY() + 25, newDx, newDy);
+			Bullet bullet = new Bullet((int)(player.getX() + 25 + newDx * 25), (int)(player.getY() + 25 + newDy * 25), newDx, newDy);
 			map.addBullet(bullet);
 			gameScreen.addBullet(bullet);
 

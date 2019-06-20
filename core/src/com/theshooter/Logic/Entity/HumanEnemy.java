@@ -23,8 +23,10 @@ public class HumanEnemy extends HumanEntity {
                 moveAt(dx, dy);
             if (dist < 15 * 50)
                 lookAt(dx - dy, -(dx + dy)/2);
-            else
+            else {
                 lookAt(0, 0);
+                moveAt(0, 0);
+            }
 
         }else{
             moveAt(0, 0);
