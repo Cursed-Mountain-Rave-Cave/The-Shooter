@@ -320,7 +320,7 @@ public class GameScreen implements Screen {
     }
 
     public void addBullet(Bullet bullet){
-        screenObjects.add(new ScreenObject(bullet, game.t.getTexture("bullets", "bullet1"), 0));
+        screenObjects.add(new BulletScreenObject(bullet, game.t.getTexture("bullets", "bullet1"), 0));
     }
 
     @Override
