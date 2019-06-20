@@ -24,7 +24,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void create () {
 		map = new Map();
-        player = new Player(0, 0, 25, 25, map);
+        player = new Player(99*50, 3*50, 25, 25, map);
 
 		t = new TextureController();
 		mainScreen = new MainScreen(this);
