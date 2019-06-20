@@ -465,7 +465,7 @@ public class GameScreen implements Screen {
 
         font.getData().setScale(2);
         if(Game.config.showAdditionalInfo)
-            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond(), 0, 1080);
+            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + game.player.getX() + " Y: " + game.player.getY(), 0, 1080);
 
         font.draw(batch, "Target: " + targetMessage + "\nHP: " + game.player.getHP() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
 
