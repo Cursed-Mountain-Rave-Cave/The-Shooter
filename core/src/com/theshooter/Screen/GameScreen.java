@@ -114,8 +114,8 @@ public class GameScreen implements Screen {
         HumanEnemy entity = new HumanEnemy(x, y, 15, 300, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new HumanScreenObject(entity,
-                game.t.getTextures("player", "body" + MathUtils.random(2, 4)),
-                game.t.getTextures("player", "legs" + MathUtils.random(1, 5))));
+                game.t.getTextures("player", "body" + MathUtils.random(2, 6)),
+                game.t.getTextures("player", "legs" + MathUtils.random(1, 6))));
     }
     private void spawnBoss(int x, int y) {
         Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
@@ -394,7 +394,6 @@ public class GameScreen implements Screen {
             Plane
         */
         spawnPlane(84 * 50, 66 * 50);
-        spawnPlane(84 * 50, 66 * 50);
         spawnPlane(54 * 50, 61 * 50);
         spawnPlane(49 * 50, 61 * 50);
         spawnPlane(4 * 50, 28 * 50);
@@ -402,6 +401,7 @@ public class GameScreen implements Screen {
         spawnPlane(13 * 50, 24 * 50);
         spawnPlane(18 * 50, 19 * 50);
         spawnPlane(22 * 50, 24 * 50);
+
         for(int i = 53; i < 57; i+=2)
             for(int j = 92; j < 96; j+= 2)
                 spawnPlane(i * 50, j * 50);
@@ -422,8 +422,8 @@ public class GameScreen implements Screen {
         guiCameraController = new CameraController();
         guiCameraController.translateCamera(960, 540);
 
-        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body5"),
-                                                          game.t.getTextures("player", "legs5"));
+        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body7"),
+                                                          game.t.getTextures("player", "legs7"));
 
         screenObjects = new ScreenObjectArray();
 

@@ -49,6 +49,19 @@ public class Map {
         bullets.removeAll(entitiesDelete,true);
         entitiesDelete.clear();
 
+        for(IBreakableEntity enemy : enemies) {
+            for(IBreakableEntity player : players) {
+                if (enemy.isBroken()) {
+                    enemies.removeValue(enemy, true);
+                }
+                int dx = player.getX() - enemy.getX();
+                int dy = player.getY() - enemy.getY();
+                if (Math.hypot(dx, dy) < 2 * 50) {
+                    player.breakDown();
+                }
+            }
+        }
+
         for(IEntity bullet: bullets){
             for(IBreakableEntity breakable: breakableEntities){
                 if(breakable.getRectangle().overlaps(bullet.getRectangle())){
@@ -66,20 +79,6 @@ public class Map {
                 }
         }
 
-        for(IBreakableEntity enemy : enemies) {
-            for(IBreakableEntity player : players) {
-                if (enemy.isBroken()) {
-                    enemies.removeValue(enemy, true);
-                    System.out.println(enemies.size);
-                }
-                int dx = player.getX() - enemy.getX();
-                int dy = player.getY() - enemy.getY();
-                if (Math.hypot(dx, dy) < 2 * 50) {
-                    player.breakDown();
-                }
-            }
-        }
-
         entities.removeAll(entitiesDelete,true);
         bullets.removeAll(entitiesDelete,true);
         entitiesDelete.clear();
@@ -87,7 +86,7 @@ public class Map {
         if (enemies.isEmpty() && !game.bossFight) {
             game.bossFight = true;
             game.gameScreen.bossFight();
-            System.out.println(enemies.size);
+  //          System.out.println(enemies.size);
         }
         if (enemies.isEmpty() && game.bossFight) {
             game.gameScreen.screenMessage = "             Game over!\n        Thanks for playing!";
