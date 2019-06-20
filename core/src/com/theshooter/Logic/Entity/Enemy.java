@@ -6,10 +6,10 @@ import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
 public class Enemy extends BreakableEntity {
-    private Rectangle target;
-    private Map map;
-    private int velocity;
-    private boolean damaged;
+    protected Rectangle target;
+    protected Map map;
+    protected int velocity;
+    protected boolean damaged;
 
     public Enemy(int x, int y, int w, int h, int hp, int velocity, Rectangle player, Map map){
         super(x, y, w, h, hp, Depth.ENEMY, false);
@@ -59,5 +59,17 @@ public class Enemy extends BreakableEntity {
     public void breakDown() {
         super.breakDown();
         damaged = true;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public boolean isDamaged() {
+        return damaged;
+    }
+
+    public Rectangle getTarget() {
+        return target;
     }
 }

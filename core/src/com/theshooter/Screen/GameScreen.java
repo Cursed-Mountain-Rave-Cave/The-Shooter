@@ -77,7 +77,7 @@ public class GameScreen implements Screen {
                 game.t.getTextures("enemy", "enemy1"), 84));
     }
     private void spawnTramp(int x, int y) {
-        Enemy entity = new Enemy(x, y,200,200,100000,499, game.player.getRectangle(), game.getMap());
+        Enemy entity = new Tramp(x, y, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy5"), 200));
@@ -158,6 +158,9 @@ public class GameScreen implements Screen {
             for(int j = 32; j < 34; j++)
                 placeVase(i * 50, j * 50);
 
+        for(int i = 89; i < 100; i++)
+            for(int j = 10; j < 100; j++)
+                placeFloor(i, j, 9);
         for(int i = 40; i < 44; i++)
             for(int j = 87; j < 95; j++)
                 placeVase(i * 50, j * 50);
@@ -346,7 +349,7 @@ public class GameScreen implements Screen {
     }
 
     public void addBullet(Bullet bullet){
-        screenObjects.add(new ScreenObject(bullet, game.t.getTexture("bullets", "bullet1"), 5));
+        screenObjects.add(new BulletScreenObject(bullet, game.t.getTexture("bullets", "bullet1"), 5));
     }
 
     @Override
