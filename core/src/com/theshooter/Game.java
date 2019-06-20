@@ -2,6 +2,7 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Entity.Bullet;
@@ -37,10 +38,49 @@ public class Game extends com.badlogic.gdx.Game {
 	private InputController inputController;
 
 	private final int FULL_CLIP = 1000;
+	private boolean isReloading;
 	private int ammoSupply;
+	private Thread thread;
+	public static Sound[] reloadingSound;
+
+	private void initSound() {
+		reloadingSound = new Sound[15];
+		for(int i = 1; i <= 6; ++i)
+			reloadingSound[i] = Gdx.audio.newSound(Gdx.files.internal("sound/Reloading/" + i + ".mp3"));
+		for(int i = 1; i <= 8; ++i)
+			reloadingSound[6 + i] = Gdx.audio.newSound(Gdx.files.internal("sound/Cover/" + i + ".mp3"));
+	}
 
 	@Override
 	public void create () {
+		initSound();
+		isReloading = false;
+		thread = new Thread( ()-> {
+			while(true) {
+				while(!isReloading) { // без этого не работает !!!
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException ie) {
+						System.out.println(ie.getMessage());
+						Gdx.app.exit();
+					}
+				}
+				int rand = MathUtils.random(1, 14);
+				reloadingSound[rand].play(0.8f);
+				ammoSupply = 0;
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException ie) {
+					System.out.println(ie.getMessage());
+					Gdx.app.exit();
+				}
+				ammoSupply = FULL_CLIP;
+				isReloading = false;
+			}
+		});
+		thread.setDaemon(true);
+		thread.start();
+
 		map = new Map(this);
         player = new Player(99*50, 3*50, 25, 25, map);
 
@@ -65,19 +105,7 @@ public class Game extends com.badlogic.gdx.Game {
 	}
 
 	public void reload() {
-		Thread thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				ammoSupply = 0;
-				try { Thread.sleep(2000); }
-				catch (InterruptedException ie) {
-					System.out.println(ie.getMessage());
-					Gdx.app.exit();
-				}
-				ammoSupply = FULL_CLIP;
-			}
-		});
-		thread.start();
+		isReloading = true;
 	}
 	public int checkAmmoSuply() {
 		return ammoSupply;
