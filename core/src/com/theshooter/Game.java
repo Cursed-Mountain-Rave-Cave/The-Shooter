@@ -11,6 +11,7 @@ import com.theshooter.Logic.TextureController;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Utils.Config;
+import com.badlogic.gdx.audio.Music;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -27,6 +28,7 @@ public class Game extends com.badlogic.gdx.Game {
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
 	public TextureController t;
+	public Music SimpleMan;
 
 	private InputController inputController;
 
@@ -35,13 +37,17 @@ public class Game extends com.badlogic.gdx.Game {
 		map = new Map();
         player = new Player(99*50, 3*50, 25, 25, map);
 
+        SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/SimpleMan.mp3"));
+
+        SimpleMan.play();
+
 		t = new TextureController();
 		mainScreen = new MainScreen(this);
 		gameScreen = new GameScreen(this);
 
 		setScreen(gameScreen);
 
-		map.addEntity(player);
+		map.addBreakableEntity(player);
 
 		inputController = new InputController(this);
 
@@ -65,8 +71,8 @@ public class Game extends com.badlogic.gdx.Game {
         gameScreen.addBullet(bullet);
     }
 
-	private final static float SIN_ALPHA = (float) Math.sin((double) 45);
-	private final static float COS_ALPHA = (float) Math.cos((double) 45);
+	private final static float SIN_ALPHA = (float) Math.sin(Math.toRadians((double) 45));
+	private final static float COS_ALPHA = (float) Math.cos(Math.toRadians((double) 45));
     public void shoot2() {
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
