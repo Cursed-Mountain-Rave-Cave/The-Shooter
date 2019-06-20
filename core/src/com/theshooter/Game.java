@@ -128,7 +128,7 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
 
-		Bullet bullet = new Bullet((int)(shooter.getX() + 25 + dx1 * 150), (int)(shooter.getY() + 25 + dy1 * 150), dx1, dy1);
+		Bullet bullet = new Bullet((int)(shooter.getX() + 25 + dx1 * 200), (int)(shooter.getY() + 25 + dy1 * 200), dx1, dy1);
 		map.addBullet(bullet);
 		gameScreen.addBullet(bullet);
 	}
@@ -232,7 +232,7 @@ public class Game extends com.badlogic.gdx.Game {
 			newDx = dx*cosAlpha - dy*sinAlpha;
 			newDy = dx*sinAlpha + dy*cosAlpha;
 
-			Bullet bullet = new Bullet((int)(shooter.getX() + 25 + newDx * 150), (int)(shooter.getY() + 25 + newDy * 150), newDx, newDy);
+			Bullet bullet = new Bullet((int)(shooter.getX() + 25 + newDx * 200), (int)(shooter.getY() + 25 + newDy * 200), newDx, newDy);
 			map.addBullet(bullet);
 			gameScreen.addBullet(bullet);
 
