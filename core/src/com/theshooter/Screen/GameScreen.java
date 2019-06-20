@@ -29,19 +29,16 @@ public class GameScreen implements Screen {
         screenObjects.add(new ScreenObject(new Entity(x*50, y*50, 50, 50, Depth.FLOOR),
                 game.t.getTexture("floor", "floor" + type), 50));
     }
-
     public void placeWall(int x, int y){
         Wall entity = new Wall(x*50, y*50, 50, 50);
         game.map.addEntity(entity);
         screenObjects.add(new WallScreenObject(entity, game.t.getTextures("walls", "wall2")));
     }
-
     public void placeFloors(int x0, int y0, int x1, int y1, int type){
         for(int i = x0; i < x1; i++)
             for(int j = y0; j < y1; j++)
                 placeFloor(i, j, type);
     }
-
     public void placeWalls(int x0, int y0, int x1, int y1){
         Wall entity = new Wall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
         game.map.addEntity(entity);
@@ -79,14 +76,12 @@ public class GameScreen implements Screen {
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy1"), 84));
     }
-
     private void spawnTramp(int x, int y) {
-        Enemy entity = new Enemy(x, y,200,200,30,900, game.player.getRectangle(), game.getMap());
+        Enemy entity = new Enemy(x, y,200,200,100000,499, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy5"), 200));
     }
-
     private void spawnTrain(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
@@ -115,7 +110,6 @@ public class GameScreen implements Screen {
         placeFloors(0, 10, 89, 100, 2);
         placeFloors(89, 10, 100, 100, 7);
     }
-
     private void generWalls(){
         placeWalls(0, 10, 48, 11);
         placeWalls(0, 11, 1, 100);
@@ -139,104 +133,7 @@ public class GameScreen implements Screen {
         placeWalls(0, 63, 14, 64);
         placeWalls(14, 82, 82, 83);
     }
-
-    public GameScreen(Game game){
-        this.game = game;
-        batch = new SpriteBatch();
-
-        cameraController = new CameraController();
-        guiCameraController = new CameraController();
-        guiCameraController.translateCamera(960, 540);
-
-        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
-                                                          game.t.getTextures("player", "legs1"));
-
-        screenObjects = new ScreenObjectArray();
-
-        screenObjects.add(playerScreen);
-
-        font = new BitmapFont();
-        font.setColor(Color.BLACK);
-        font.getData().setScale(2);
-
-        generFloor();
-        generWalls();
-
-
-
-        spawnTramp(87 * 50, 5 * 50);
-        spawnTramp(87 * 50, 1 * 50);
-        spawnTramp(87 * 50, -5 * 50);
-        spawnArabinWarrior(87 * 50, 8 * 50);
-        spawnArabinWarrior(86 * 50, 3 * 50);
-        spawnArabinWarrior(85 * 50, 6 * 50);
-        spawnArabinWarrior(82 * 50, 2 * 50);
-        spawnArabinWarrior(79 * 50, 6 * 50);
-        spawnArabinWarrior(76 * 50, 2 * 50);
-        spawnArabinWarrior(70 * 50, 8 * 50);
-        spawnArabinWarrior(64 * 50, 2 * 50);
-        spawnArabinWarrior(59 * 50, 7 * 50);
-        spawnArabinWarrior(55 * 50, 50);
-        spawnArabinWarrior(52 * 50, 8 * 50);
-        spawnArabinWarrior(43 * 50, 6 * 50);
-        spawnArabinWarrior(42 * 50, 3 * 50);
-        spawnArabinWarrior(37 * 50, 6 * 50);
-        spawnArabinWarrior(33 * 50, 3 * 50);
-
-        spawnArabinWarrior(64 * 50, 16 * 50);
-        spawnArabinWarrior(60 * 50, 22 * 50);
-        spawnArabinWarrior(57 * 50, 15 * 50);
-        spawnArabinWarrior(51 * 50, 23 * 50);
-        spawnArabinWarrior(51 * 50, 13 * 50);
-        spawnArabinWarrior(47 * 50, 11 * 50);
-        spawnArabinWarrior(46 * 50, 22 * 50);
-        spawnArabinWarrior(43 * 50, 25 * 50);
-        spawnArabinWarrior(36 * 50, 19 * 50);
-        spawnArabinWarrior(31 * 50, 25 * 50);
-
-
-        for(int i = 83; i < 86; i++)
-            for(int j = 28; j < 32; j++)
-                spawnArabinWarrior(i * 50, j * 50);
-
-        for(int i = 39; i < 45; i++)
-            for(int j = 30; j < 33; j++)
-                spawnArabinWarrior(i * 50, j * 50);
-
-        for(int i = 69; i < 77; i++)
-            for(int j = 86; j < 95; j++)
-                spawnArabinWarrior(i * 50, j * 50);
-
-        for(int i = 83; i < 85; i++)
-            for(int j = 45; j < 47; j++)
-                spawnArabinWarrior(i * 50, j * 50);
-
-        for(int i = 44; i < 46; i++)
-            for(int j = 62; j < 66; j++)
-                spawnArabinWarrior(i * 50, j * 50);
-
-        spawnArabinWarrior(7 * 50, 34 * 50);
-        spawnArabinWarrior(4 * 50, 44 * 50);
-        spawnArabinWarrior(6 * 50, 52 * 50);
-        spawnArabinWarrior(21 * 50, 54 * 50);
-        spawnArabinWarrior(23 * 50, 44 * 50);
-        spawnArabinWarrior(28 * 50, 47 * 50);
-        spawnArabinWarrior(30 * 50, 55 * 50);
-        spawnArabinWarrior(35 * 50, 50 * 50);
-        spawnArabinWarrior(38 * 50, 43 * 50);
-        spawnArabinWarrior(43 * 50, 52 * 50);
-        spawnArabinWarrior(46 * 50, 43 * 50);
-        spawnArabinWarrior(48 * 50, 48 * 50);
-        spawnArabinWarrior(60 * 50, 54 * 50);
-        spawnArabinWarrior(65 * 50, 46 * 50);
-        spawnArabinWarrior(67 * 50, 51 * 50);
-        spawnArabinWarrior(56 * 50, 65 * 50);
-        spawnArabinWarrior(51 * 50, 65 * 50);
-        spawnArabinWarrior(38 * 50, 72 * 50);
-        spawnArabinWarrior(37 * 50, 71 * 50);
-
-        spawnBoss(5 * 50, 65 * 50);
-
+    private void generEnvironment(){
         for(int i = 35; i < 37; i++)
             for(int j = 26; j < 27; j++)
                 placeVase(i * 50, j * 50);
@@ -288,52 +185,6 @@ public class GameScreen implements Screen {
         placeVase(62 * 50, 57 * 50);
         placeVase(66 * 50, 57 * 50);
 
-        spawnTrain(55 * 50, 30 * 50);
-        spawnTrain(55 * 50, 34 * 50);
-        spawnTrain(60 * 50,49 * 50);
-        spawnTrain(54 * 50,45 * 50);
-        spawnTrain(49 * 50,41 * 50);
-        spawnTrain(27 * 50,64 * 50);
-        spawnTrain(23 * 50,66 * 50);
-        spawnTrain(19 * 50,70 * 50);
-        spawnTrain(83 * 50,57 * 50);
-
-        for(int i = 61; i < 65; i+=2)
-            for(int j = 87; j < 91; j+=2)
-                spawnTrain(i * 50, j * 50);
-
-            spawnKeanu(60 * 50, 59 * 50);
-            spawnKeanu(42 * 50, 59 * 50);
-            spawnKeanu(11 * 50, 52 * 50);
-            spawnKeanu(11 * 50, 44 * 50);
-            spawnKeanu(80 * 50, 83 * 50);
-            spawnKeanu(82 * 50, 74 * 50);
-            spawnKeanu(79 * 50, 42 * 50);
-
-        for(int i = 46; i < 50; i+=2)
-            for(int j = 88; j < 92; j+= 2)
-                spawnKeanu(i * 50, j * 50);
-
-            spawnPlane(84 * 50, 66 * 50);
-            spawnPlane(84 * 50, 66 * 50);
-
-        for(int i = 53; i < 57; i+=2)
-            for(int j = 92; j < 96; j+= 2)
-                spawnPlane(i * 50, j * 50);
-
-            spawnPlane(54 * 50, 61 * 50);
-            spawnPlane(49 * 50, 61 * 50);
-            spawnPlane(4 * 50, 28 * 50);
-            spawnPlane(10 * 50, 18 * 50);
-            spawnPlane(13 * 50, 24 * 50);
-            spawnPlane(18 * 50, 19 * 50);
-            spawnPlane(22 * 50, 24 * 50);
-
-
-
-
-
-
         placeTend(50 * 7, 50 * 22);
         placeTend(50 * 5, 50 * 55);
         placeTend(50 * 2, 50 * 93);
@@ -351,9 +202,151 @@ public class GameScreen implements Screen {
         placeTend(50 * 60, 50 * 15);
         placeTend(50 * 63, 50 * 20);
     }
+    private void generEnemies(){
+        /*
+            Tramp
+        */
+        spawnTramp(87 * 50, 5 * 50);
+        spawnTramp(87 * 50, 1 * 50);
+        spawnTramp(87 * 50, -5 * 50);
+        /*
+            Arabin warrior
+        */
+        spawnArabinWarrior(87 * 50, 8 * 50);
+        spawnArabinWarrior(86 * 50, 3 * 50);
+        spawnArabinWarrior(85 * 50, 6 * 50);
+        spawnArabinWarrior(82 * 50, 2 * 50);
+        spawnArabinWarrior(79 * 50, 6 * 50);
+        spawnArabinWarrior(76 * 50, 2 * 50);
+        spawnArabinWarrior(70 * 50, 8 * 50);
+        spawnArabinWarrior(64 * 50, 2 * 50);
+        spawnArabinWarrior(59 * 50, 7 * 50);
+        spawnArabinWarrior(55 * 50, 50);
+        spawnArabinWarrior(52 * 50, 8 * 50);
+        spawnArabinWarrior(43 * 50, 6 * 50);
+        spawnArabinWarrior(42 * 50, 3 * 50);
+        spawnArabinWarrior(37 * 50, 6 * 50);
+        spawnArabinWarrior(33 * 50, 3 * 50);
+        spawnArabinWarrior(64 * 50, 16 * 50);
+        spawnArabinWarrior(60 * 50, 22 * 50);
+        spawnArabinWarrior(57 * 50, 15 * 50);
+        spawnArabinWarrior(51 * 50, 23 * 50);
+        spawnArabinWarrior(51 * 50, 13 * 50);
+        spawnArabinWarrior(47 * 50, 11 * 50);
+        spawnArabinWarrior(46 * 50, 22 * 50);
+        spawnArabinWarrior(43 * 50, 25 * 50);
+        spawnArabinWarrior(36 * 50, 19 * 50);
+        spawnArabinWarrior(31 * 50, 25 * 50);
+        spawnArabinWarrior(7 * 50, 34 * 50);
+        spawnArabinWarrior(4 * 50, 44 * 50);
+        spawnArabinWarrior(6 * 50, 52 * 50);
+        spawnArabinWarrior(21 * 50, 54 * 50);
+        spawnArabinWarrior(23 * 50, 44 * 50);
+        spawnArabinWarrior(28 * 50, 47 * 50);
+        spawnArabinWarrior(30 * 50, 55 * 50);
+        spawnArabinWarrior(35 * 50, 50 * 50);
+        spawnArabinWarrior(38 * 50, 43 * 50);
+        spawnArabinWarrior(43 * 50, 52 * 50);
+        spawnArabinWarrior(46 * 50, 43 * 50);
+        spawnArabinWarrior(48 * 50, 48 * 50);
+        spawnArabinWarrior(60 * 50, 54 * 50);
+        spawnArabinWarrior(65 * 50, 46 * 50);
+        spawnArabinWarrior(67 * 50, 51 * 50);
+        spawnArabinWarrior(56 * 50, 65 * 50);
+        spawnArabinWarrior(51 * 50, 65 * 50);
+        spawnArabinWarrior(38 * 50, 72 * 50);
+        spawnArabinWarrior(37 * 50, 71 * 50);
+        for(int i = 83; i < 86; i++)
+            for(int j = 28; j < 32; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+        for(int i = 39; i < 45; i++)
+            for(int j = 30; j < 33; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+        for(int i = 69; i < 77; i++)
+            for(int j = 86; j < 95; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+        for(int i = 83; i < 85; i++)
+            for(int j = 45; j < 47; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+        for(int i = 44; i < 46; i++)
+            for(int j = 62; j < 66; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+        /*
+            Train
+        */
+        spawnTrain(55 * 50, 30 * 50);
+        spawnTrain(55 * 50, 34 * 50);
+        spawnTrain(60 * 50,49 * 50);
+        spawnTrain(54 * 50,45 * 50);
+        spawnTrain(49 * 50,41 * 50);
+        spawnTrain(27 * 50,64 * 50);
+        spawnTrain(23 * 50,66 * 50);
+        spawnTrain(19 * 50,70 * 50);
+        spawnTrain(83 * 50,57 * 50);
+        for(int i = 61; i < 65; i+=2)
+            for(int j = 87; j < 91; j+=2)
+                spawnTrain(i * 50, j * 50);
+        /*
+            Keanu
+        */
+        spawnKeanu(60 * 50, 59 * 50);
+        spawnKeanu(42 * 50, 59 * 50);
+        spawnKeanu(11 * 50, 52 * 50);
+        spawnKeanu(11 * 50, 44 * 50);
+        spawnKeanu(80 * 50, 83 * 50);
+        spawnKeanu(82 * 50, 74 * 50);
+        spawnKeanu(79 * 50, 42 * 50);
+        for(int i = 46; i < 50; i+=2)
+            for(int j = 88; j < 92; j+= 2)
+                spawnKeanu(i * 50, j * 50);
+        /*
+            Plane
+        */
+        spawnPlane(84 * 50, 66 * 50);
+        spawnPlane(84 * 50, 66 * 50);
+        spawnPlane(54 * 50, 61 * 50);
+        spawnPlane(49 * 50, 61 * 50);
+        spawnPlane(4 * 50, 28 * 50);
+        spawnPlane(10 * 50, 18 * 50);
+        spawnPlane(13 * 50, 24 * 50);
+        spawnPlane(18 * 50, 19 * 50);
+        spawnPlane(22 * 50, 24 * 50);
+        for(int i = 53; i < 57; i+=2)
+            for(int j = 92; j < 96; j+= 2)
+                spawnPlane(i * 50, j * 50);
+        /*
+            Boss
+        */
+        spawnBoss(5 * 50, 65 * 50);
+    }
+
+    public GameScreen(Game game){
+        this.game = game;
+        batch = new SpriteBatch();
+
+        cameraController = new CameraController();
+        guiCameraController = new CameraController();
+        guiCameraController.translateCamera(960, 540);
+
+        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
+                                                          game.t.getTextures("player", "legs1"));
+
+        screenObjects = new ScreenObjectArray();
+
+        screenObjects.add(playerScreen);
+
+        font = new BitmapFont();
+        font.setColor(Color.BLACK);
+        font.getData().setScale(2);
+
+        generFloor();
+        generWalls();
+        generEnvironment();
+        generEnemies();
+    }
 
     public void addBullet(Bullet bullet){
-        screenObjects.add(new ScreenObject(bullet, game.t.getTexture("bullets", "bullet1"), 0));
+        screenObjects.add(new ScreenObject(bullet, game.t.getTexture("bullets", "bullet1"), 5));
     }
 
     @Override
