@@ -88,7 +88,7 @@ public class GameScreen implements Screen {
         Palm entity = new Palm(x, y);
         game.map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing3"), 0));
+                game.t.getTexture("things", "unbreakableThing3"), 150));
     }
 
     private void spawnArabinWarrior(int x, int y) {
@@ -239,6 +239,8 @@ public class GameScreen implements Screen {
         placeTend(50 * 53, 50 * 13);
         placeTend(50 * 60, 50 * 15);
         placeTend(50 * 63, 50 * 20);
+
+        placePalm(46 * 50, 2 * 50);
     }
     private void generEnemies(){
         /*
@@ -250,7 +252,6 @@ public class GameScreen implements Screen {
         /*
             Arabin warrior
         */
-        placePalm(playerScreen.getX(), playerScreen.getY() + 1);
         spawnArabinWarrior(87 * 50, 8 * 50);
         spawnArabinWarrior(86 * 50, 3 * 50);
         spawnArabinWarrior(85 * 50, 6 * 50);
