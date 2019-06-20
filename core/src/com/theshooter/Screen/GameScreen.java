@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.audio.Music;
 import com.theshooter.Game;
 import com.theshooter.Logic.CameraController;
 import com.theshooter.Logic.Entity.*;
@@ -27,6 +26,10 @@ public class GameScreen implements Screen {
 
     private boolean bossHere;
 
+    public String screenMessage;
+    public String targetMessage;
+
+
     public void bossFight() {
         game.SimpleMan.stop();
         game.SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
@@ -36,6 +39,8 @@ public class GameScreen implements Screen {
         game.player.setX(99*50);
         game.player.setY(3*50);
         bossHere = true;
+
+        targetMessage = "Be SLAV !!!";
     }
 
     public void placeFloor(int x, int y, int type){
@@ -399,6 +404,8 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game){
         this.game = game;
+        this.screenMessage = "Ah shit, here we go again.";
+        this.targetMessage = "Kill all enemies";
         bossHere = false;
         batch = new SpriteBatch();
 
@@ -458,11 +465,13 @@ public class GameScreen implements Screen {
 
         font.getData().setScale(2);
         if(Game.config.showAdditionalInfo)
-            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
+            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond(), 0, 1080);
+
+        font.draw(batch, "Target: " + targetMessage + "\nHP: " + game.player.getHP() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
 
         if(bossHere){
             font.getData().setScale(5);
-            font.draw(batch, "Ah shit, here we go again.", 500, 780);
+            font.draw(batch, screenMessage, 500, 780);
         }
 
 

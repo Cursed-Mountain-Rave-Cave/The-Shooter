@@ -87,6 +87,10 @@ public class Map {
             game.gameScreen.bossFight();
             System.out.println(enemies.size);
         }
+        if (enemies.isEmpty() && game.bossFight) {
+            game.gameScreen.screenMessage = "             Game over!\n        Thanks for playing!";
+            game.gameScreen.targetMessage = "Put the top five for the practice";
+        }
     }
 
     public void addEntity(IEntity entity){
