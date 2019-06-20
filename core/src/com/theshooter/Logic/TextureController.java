@@ -45,7 +45,7 @@ public class TextureController {
          * unbreakable things adding
          */
 
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= 3; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("environment/unbreakable/" + i + ".png"));
             addTextureArray("things", "unbreakableThing" + i, textures);
