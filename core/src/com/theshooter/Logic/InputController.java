@@ -108,6 +108,10 @@ public class InputController implements InputProcessor {
                 typeOfShooting = 3;
                 break;
             }
+            case Input.Keys.F3: {
+                game.gameScreen.switchAdditionalInfo();
+                break;
+            }
         }
 
         return false;

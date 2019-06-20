@@ -53,7 +53,16 @@ public class Map {
                     }
                 }
             }
+            for(IEntity entity: notPassableEntities)
+                if(entity.getRectangle().overlaps(bullet.getRectangle())){
+                    entitiesDelete.add(bullet);
+                    bullet.delete();
+                }
         }
+
+        entities.removeAll(entitiesDelete,true);
+        bullets.removeAll(entitiesDelete,true);
+        entitiesDelete.clear();
     }
 
     public void addEntity(IEntity entity){
