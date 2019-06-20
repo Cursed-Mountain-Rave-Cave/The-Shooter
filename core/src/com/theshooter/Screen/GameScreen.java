@@ -166,6 +166,50 @@ public class GameScreen implements Screen {
             for(int j = 28; j < 32; j++)
                 spawnArabinWarrior(i * 50, j * 50);
 
+        for(int i = 39; i < 45; i++)
+            for(int j = 30; j < 33; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+
+        for(int i = 69; i < 77; i++)
+            for(int j = 86; j < 95; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+
+        for(int i = 83; i < 85; i++)
+            for(int j = 45; j < 47; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+
+        for(int i = 44; i < 46; i++)
+            for(int j = 62; j < 66; j++)
+                spawnArabinWarrior(i * 50, j * 50);
+
+        spawnArabinWarrior(7 * 50, 34 * 50);
+        spawnArabinWarrior(4 * 50, 44 * 50);
+        spawnArabinWarrior(6 * 50, 52 * 50);
+        spawnArabinWarrior(21 * 50, 54 * 50);
+        spawnArabinWarrior(23 * 50, 44 * 50);
+        spawnArabinWarrior(28 * 50, 47 * 50);
+        spawnArabinWarrior(30 * 50, 55 * 50);
+        spawnArabinWarrior(35 * 50, 50 * 50);
+        spawnArabinWarrior(38 * 50, 43 * 50);
+        spawnArabinWarrior(43 * 50, 52 * 50);
+        spawnArabinWarrior(46 * 50, 43 * 50);
+        spawnArabinWarrior(48 * 50, 48 * 50);
+        spawnArabinWarrior(60 * 50, 54 * 50);
+        spawnArabinWarrior(65 * 50, 46 * 50);
+        spawnArabinWarrior(67 * 50, 51 * 50);
+        spawnArabinWarrior(56 * 50, 65 * 50);
+        spawnArabinWarrior(51 * 50, 65 * 50);
+        spawnArabinWarrior(38 * 50, 72 * 50);
+        spawnArabinWarrior(37 * 50, 71 * 50);
+
+        spawnBoss(5 * 50, 65 * 50);
+
+
+            spawnTrain(55 * 50, 30 * 50);
+            spawnTrain(55 * 50, 34 * 50);
+
+
+
         for(int i = 0; i < 1; i++)
             for(int j = 11; j < 100; j++)
                 placeWall(i, j);
