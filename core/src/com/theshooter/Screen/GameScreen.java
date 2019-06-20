@@ -103,6 +103,12 @@ public class GameScreen implements Screen {
         screenObjects.add(new ScreenObject(entity,
                 game.t.getTexture("things", "unbreakableThing3"), 120));
     }
+    public void placeWoman(int x, int y) {
+        Woman entity = new Woman(x, y);
+        game.map.addEntity(entity);
+        screenObjects.add(new ScreenObject(entity,
+                game.t.getTexture("things", "unbreakableThing4"), 175));
+    }
     public void placeNotPassablePalm(int x, int y) {
         Palm entity = new Palm(x + MathUtils.random(-25, 25), y + MathUtils.random(-25, 25), true);
         game.map.addEntity(entity);
