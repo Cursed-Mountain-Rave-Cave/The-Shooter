@@ -25,11 +25,17 @@ public class GameScreen implements Screen {
 
     private BitmapFont font;
 
+    private boolean bossHere;
+
     public void bossFight() {
         game.SimpleMan.stop();
         game.SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
+        game.SimpleMan.setVolume(0.3f);
         game.SimpleMan.play();
-        spawnTramp(5, 5);
+        spawnTramp(30 * 50, 4 * 50);
+        game.player.setX(99*50);
+        game.player.setY(3*50);
+        bossHere = true;
     }
 
     public void placeFloor(int x, int y, int type){
@@ -262,11 +268,15 @@ public class GameScreen implements Screen {
         placeTend(50 * 63, 50 * 20);
 
         placePalm(46 * 50, 2 * 50);
-        placePalm(50 * 90, 50 * 6);
-        placePalm(50 * 72, 50 * 4);
-        placePalm(50 * 66, 50 * 8);
-        placePalm(50 * 34, 50 * 6);
-        placePalm(50 * 8, 50 * 4);
+        placePalm(50 * 90, 50 * 8);
+        placePalm(50 * 72, 50 * 2);
+        placePalm(50 * 66, 50 * 9);
+        placePalm(50 * 34, 50 * 8);
+        placePalm(50 * 8, 50 * 2);
+
+
+
+
         placePalm(50 * 3, 50 * 5);
         placePalm(50 * 4, 50 * 7);
 
@@ -275,11 +285,6 @@ public class GameScreen implements Screen {
         placeHookah(50 * 2, 50 * 7);
     }
     private void generEnemies(){
-        /*
-            Tramp
-        */
-
-        spawnTramp(3 * 50, 22 * 50);
         /*
             Arabin warrior
         */
@@ -394,6 +399,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game){
         this.game = game;
+        bossHere = false;
         batch = new SpriteBatch();
 
         cameraController = new CameraController();
@@ -450,8 +456,15 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(guiCameraController.getCamera().combined);
 
+        font.getData().setScale(2);
         if(Game.config.showAdditionalInfo)
             font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
+
+        if(bossHere){
+            font.getData().setScale(5);
+            font.draw(batch, "Ah shit, here we go again.", 500, 780);
+        }
+
 
         batch.end();
     }
