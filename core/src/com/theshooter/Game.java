@@ -66,7 +66,7 @@ public class Game extends com.badlogic.gdx.Game {
 					}
 				}
 				int rand = MathUtils.random(1, 14);
-				reloadingSound[rand].play();
+				reloadingSound[rand].play(0.2f);
 				ammoSupply = 0;
 				try {
 					Thread.sleep(2000);
