@@ -65,8 +65,8 @@ public class Game extends com.badlogic.gdx.Game {
         gameScreen.addBullet(bullet);
     }
 
-	private final static float SIN_ALPHA = (float) Math.sin((double) 45);
-	private final static float COS_ALPHA = (float) Math.cos((double) 45);
+	private final static float SIN_ALPHA = (float) Math.sin(Math.toRadians((double) 45));
+	private final static float COS_ALPHA = (float) Math.cos(Math.toRadians((double) 45));
     public void shoot2() {
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
