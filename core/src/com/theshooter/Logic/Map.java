@@ -70,11 +70,13 @@ public class Map {
             for(IBreakableEntity player : players) {
                 if (enemy.isBroken()) {
                     enemies.removeValue(enemy, true);
+                    System.out.println(enemies.size);
                 }
                 int dx = player.getX() - enemy.getX();
                 int dy = player.getY() - enemy.getY();
-                if (Math.hypot(dx, dy) < 3 * 50)
+                if (Math.hypot(dx, dy) < 2 * 50) {
                     player.breakDown();
+                }
             }
         }
 

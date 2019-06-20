@@ -131,6 +131,7 @@ public class GameScreen implements Screen {
     }
     private void spawnTrain(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
+        entity.setRadius(1000);
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy4"), 75));
@@ -428,8 +429,7 @@ public class GameScreen implements Screen {
         generWalls();
         generEnvironment();
 
-        spawnArabinWarrior(87 * 50, 8 * 50);
-   //     generEnemies();
+        generEnemies();
     }
 
     public void addBullet(Bullet bullet){

@@ -10,6 +10,7 @@ public class Enemy extends BreakableEntity {
     protected Map map;
     protected int velocity;
     protected boolean damaged;
+    private int radius;
 
     public Enemy(int x, int y, int w, int h, int hp, int velocity, Rectangle player, Map map){
         super(x, y, w, h, hp, Depth.ENEMY, false);
@@ -17,6 +18,7 @@ public class Enemy extends BreakableEntity {
         this.velocity = velocity;
         this.map = map;
         damaged = false;
+        radius = 5;
     }
 
     public Enemy(int x, int y, int w, int h, int velocity, Rectangle player, Map map){
@@ -44,7 +46,7 @@ public class Enemy extends BreakableEntity {
             int changeX = (int) (dx * Gdx.graphics.getDeltaTime() * velocity);
             int changeY = (int) (dy * Gdx.graphics.getDeltaTime() * velocity);
 
-            if (len < 5 * 50 || damaged) {
+            if (len < radius * 50 || damaged) {
                 setX(getX() + changeX);
                 setY(getY() + changeY);
             }
@@ -71,5 +73,9 @@ public class Enemy extends BreakableEntity {
 
     public Rectangle getTarget() {
         return target;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
     }
 }
