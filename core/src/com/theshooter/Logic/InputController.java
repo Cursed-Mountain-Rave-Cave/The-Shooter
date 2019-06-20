@@ -112,6 +112,10 @@ public class InputController implements InputProcessor {
                 Game.config.showAdditionalInfo = !Game.config.showAdditionalInfo;
                 break;
             }
+            case Input.Keys.R: {
+                game.reload();
+                break;
+            }
         }
 
         return false;

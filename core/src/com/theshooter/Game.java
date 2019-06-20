@@ -2,7 +2,6 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Entity.Bullet;
@@ -15,7 +14,7 @@ import com.theshooter.Screen.MainScreen;
 import com.theshooter.Utils.Config;
 import com.badlogic.gdx.audio.Music;
 
-import java.util.Random;
+import java.io.IOException;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -35,6 +34,9 @@ public class Game extends com.badlogic.gdx.Game {
 	public Music SimpleMan;
 
 	private InputController inputController;
+
+	private final int FULL_CLIP = 1000;
+	private int ammoSupply;
 
 	@Override
 	public void create () {
@@ -57,12 +59,36 @@ public class Game extends com.badlogic.gdx.Game {
 
 		inputController = new InputController(this);
 
+		ammoSupply = FULL_CLIP;
+
 		Gdx.input.setInputProcessor(inputController);
+	}
+
+	public void reload() {
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				ammoSupply = 0;
+				try { Thread.sleep(2000); }
+				catch (InterruptedException ie) {
+					System.out.println(ie.getMessage());
+					Gdx.app.exit();
+				}
+				ammoSupply = FULL_CLIP;
+			}
+		});
+		thread.start();
+	}
+	public int checkAmmoSuply() {
+		return ammoSupply;
 	}
 
 	private int scatter;
 	private float sinAlpha, cosAlpha;
 	public void shoot1(){
+		if(ammoSupply <= 0) return;
+		ammoSupply--;
+		
 	    float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 	    float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
@@ -85,7 +111,7 @@ public class Game extends com.badlogic.gdx.Game {
         map.addBullet(bullet);
         gameScreen.addBullet(bullet);
     }
-
+    
 	public void shoot1(Rectangle shooter, Rectangle target){
 		// float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 		// float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
@@ -111,6 +137,9 @@ public class Game extends com.badlogic.gdx.Game {
 	}
 
     public void shoot2() {
+		if(ammoSupply < 3) return;
+		ammoSupply -= 3;
+
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
@@ -153,6 +182,9 @@ public class Game extends com.badlogic.gdx.Game {
 	}
 
 	public void shoot3() {
+		if(ammoSupply < 8) return;
+		ammoSupply -= 8;
+
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
