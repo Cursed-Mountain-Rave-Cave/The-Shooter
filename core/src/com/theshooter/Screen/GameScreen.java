@@ -46,6 +46,41 @@ public class GameScreen implements Screen {
                 game.t.getTextures("things", "breakableThing" + rand), 150));
     }
 
+    private void spawnArabinWarrior(int x, int y) {
+        HumanEnemy entity = new HumanEnemy(x, y, 15, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new HumanScreenObject(entity,
+                game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
+    }
+
+    private void spawnBoss(int x, int y) {
+        Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy1"), 84));
+    }
+
+    private void spawnTrain(int x, int y) {
+        Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy4"), 75));
+    }
+
+    private void spawnPlane(int x, int y) {
+        Enemy entity = new Enemy(x, y, 75,75, 10,100, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy3"), 150));
+    }
+
+    private void spawnKeanu(int x, int y) {
+        Enemy entity = new Enemy(x, y,75,75, 50,100, game.player.getRectangle(), game.getMap());
+        game.map.addBreakableEntity(entity);
+        screenObjects.add(new BreakableScreenObject(entity,
+                game.t.getTextures("enemy", "enemy2"), 112));
+    }
+
     public GameScreen(Game game){
         this.game = game;
         batch = new SpriteBatch();
@@ -60,57 +95,143 @@ public class GameScreen implements Screen {
 
         screenObjects.add(playerScreen);
 
-        for (int i = -100; i < 100; i++)
-            for (int j = -100; j < 100; j++)
-                placeFloor(i, j, 3);
 
-        for (int i = 15; i > 10; i -= 1)
-            for (int j = 10; j > -10; j -= 1)
+        for(int i = 0; i < 49; i++)
+            for(int j = 0; j < 10; j++)
+                placeFloor(i, j, 2);
+
+        for(int i = 49; i < 100; i++)
+            for(int j = 0; j < 4; j++)
+                placeFloor(i, j, 2);
+
+        for(int i = 51; i < 100; i++)
+            for(int j = 3; j < 10; j++)
+                placeFloor(i, j, 2);
+
+
+        for(int i = 49; i < 100; i++)
+            for(int j = 4; j < 6; j++)
+                placeFloor(i, j, 4);
+
+        for(int i = 49; i < 51; i++)
+            for(int j = 6; j < 10; j++)
+                placeFloor(i, j, 4);
+
+        for(int i = 0; i < 89; i++)
+            for(int j = 10; j < 100; j++)
+                placeFloor(i, j, 2);//city
+
+
+        for(int i = 89; i < 100; i++)
+            for(int j = 10; j < 100; j++)
+                placeFloor(i, j, 7);
+
+
+
+
+
+
+        for(int i = 0; i < 48; i++)
+            for(int j = 10; j < 11; j++)
                 placeWall(i, j);
 
-        for (int i = 0; i < 10000; i ++)
-            placeVase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
+        for(int i = 0; i < 1; i++)
+            for(int j = 11; j < 100; j++)
+                placeWall(i, j);
 
+        for(int i = 52; i < 90; i++)
+            for(int j = 10; j < 11; j++)
+                placeWall(i, j);
 
-        for (int i = 0; i < 100; i ++)
-            placeTend(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
+        for(int i = 89; i < 90; i++)
+            for(int j = 11; j < 100; j++)
+                placeWall(i, j);
 
+        for(int i = 1; i < 90; i++)
+            for(int j = 99; j < 100; j++)
+                placeWall(i, j);
 
+        for(int i = 30; i < 31; i++)
+            for(int j = 11; j < 28; j++)
+                placeWall(i, j);
 
-        for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000),75,75, 50,100, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy2"), 112));
-        }
+        for(int i = 70; i < 71; i++)
+            for(int j = 11; j < 28; j++)
+                placeWall(i, j);
 
-       for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 75,75, 10,100, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy3"), 150));
-        }
+        for(int i = 30; i < 55; i++)
+            for(int j = 27; j < 28; j++)
+                placeWall(i, j);
 
-        for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000),75,75,10,200, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);;
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy4"), 75));
-        }
+        for(int i = 58; i < 71; i++)
+            for(int j = 27; j < 28; j++)
+                placeWall(i, j);
 
-        for (int i = 0; i < 50; i ++){
-            Enemy entity = new Enemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000),75, 75, 100, 100,game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new BreakableScreenObject(entity,
-                              game.t.getTextures("enemy", "enemy1"), 84));
-        }
+        for(int i = 54; i < 55; i++)
+            for(int j = 27; j < 37; j++)
+                placeWall(i, j);
 
-        for (int i = 0; i < 50; i ++){
-            HumanEnemy entity = new HumanEnemy(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000), 15, game.player.getRectangle(), game.getMap());
-            game.map.addBreakableEntity(entity);
-            screenObjects.add(new HumanScreenObject(entity,
-                    game.t.getTextures("player", "body2"), game.t.getTextures("player", "legs2")));
-        }
+        for(int i = 14; i < 55; i++)
+            for(int j = 36; j < 37; j++)
+                placeWall(i, j);
+
+        for(int i = 58; i < 59; i++)
+            for(int j = 27; j < 45; j++)
+                placeWall(i, j);
+
+        for(int i = 58; i < 82; i++)
+            for(int j = 44; j < 45; j++)
+                placeWall(i, j);
+
+        for(int i = 81; i < 82; i++)
+            for(int j = 44; j < 76; j++)
+                placeWall(i, j);
+
+            
+        for(int i = 13; i < 14; i++)
+            for(int j = 36; j < 46; j++)
+                placeWall(i, j);
+
+        for(int i = 13; i < 14; i++)
+            for(int j = 52; j < 93; j++)
+                placeWall(i, j);
+
+        for(int i = 70; i < 71; i++)
+            for(int j = 58; j < 82; j++)
+                placeWall(i, j);
+
+        for(int i = 13; i < 49; i++)
+            for(int j = 58; j < 59; j++)
+                placeWall(i, j);
+
+        for(int i = 58; i < 71; i++)
+            for(int j = 58; j < 59; j++)
+                placeWall(i, j);
+
+        for(int i = 0; i < 14; i++)
+            for(int j = 63; j < 64; j++)
+                placeWall(i, j);
+
+        for(int i = 14; i < 82; i++)
+            for(int j = 82; j < 83; j++)
+                placeWall(i, j);
+        
+        placeTend(50 * 7, 50 * 22);
+        placeTend(50 * 5, 50 * 55);
+        placeTend(50 * 2, 50 * 93);
+        placeTend(50 * 76, 50 * 33);
+        placeTend(50 * 55, 50 * 73);
+        placeTend(50 * 60, 50 * 69);
+        placeTend(50 * 63, 50 * 55);
+        placeTend(50 * 32, 50 * 21);
+        placeTend(50 * 34, 50 * 15);
+        placeTend(50 * 41, 50 * 16);
+        placeTend(50 * 41, 50 * 21);
+        placeTend(50 * 47, 50 * 21);
+        placeTend(50 * 47, 50 * 21);
+        placeTend(50 * 53, 50 * 13);
+        placeTend(50 * 60, 50 * 15);
+        placeTend(50 * 63, 50 * 20);
     }
 
     public void addBullet(Bullet bullet){
@@ -129,7 +250,7 @@ public class GameScreen implements Screen {
         cameraController.update();
         batch.setProjectionMatrix(cameraController.getCamera().combined);
 
-        Gdx.gl.glClearColor(0.3f, 0.3f, 1, 1);
+        Gdx.gl.glClearColor(0xDC / 265f, 0xC2 / 265f, 0x76 / 265f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
