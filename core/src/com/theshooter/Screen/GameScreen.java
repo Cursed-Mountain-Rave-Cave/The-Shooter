@@ -188,7 +188,6 @@ public class GameScreen implements Screen {
         placeVase(62 * 50, 57 * 50);
         placeVase(66 * 50, 57 * 50);
 
-        placeTend(50 * 7, 50 * 22);
         placeTend(50 * 5, 50 * 55);
         placeTend(50 * 2, 50 * 93);
         placeTend(50 * 76, 50 * 33);
@@ -209,13 +208,11 @@ public class GameScreen implements Screen {
         /*
             Tramp
         */
-        spawnTramp(87 * 50, 5 * 50);
-        spawnTramp(87 * 50, 1 * 50);
-        spawnTramp(87 * 50, -5 * 50);
+        spawnTramp(3 * 50, 22 * 50);
         /*
             Arabin warrior
         */
-        spawnArabinWarrior(87 * 50, 8 * 50);
+        /*spawnArabinWarrior(87 * 50, 8 * 50);
         spawnArabinWarrior(86 * 50, 3 * 50);
         spawnArabinWarrior(85 * 50, 6 * 50);
         spawnArabinWarrior(82 * 50, 2 * 50);
@@ -273,10 +270,11 @@ public class GameScreen implements Screen {
                 spawnArabinWarrior(i * 50, j * 50);
         for(int i = 44; i < 46; i++)
             for(int j = 62; j < 66; j++)
-                spawnArabinWarrior(i * 50, j * 50);
+                spawnArabinWarrior(i * 50, j * 50);*/
         /*
             Train
         */
+        /*
         spawnTrain(55 * 50, 30 * 50);
         spawnTrain(55 * 50, 34 * 50);
         spawnTrain(60 * 50,49 * 50);
@@ -288,11 +286,11 @@ public class GameScreen implements Screen {
         spawnTrain(83 * 50,57 * 50);
         for(int i = 61; i < 65; i+=2)
             for(int j = 87; j < 91; j+=2)
-                spawnTrain(i * 50, j * 50);
+                spawnTrain(i * 50, j * 50);*/
         /*
             Keanu
         */
-        spawnKeanu(60 * 50, 59 * 50);
+        /*spawnKeanu(60 * 50, 59 * 50);
         spawnKeanu(42 * 50, 59 * 50);
         spawnKeanu(11 * 50, 52 * 50);
         spawnKeanu(11 * 50, 44 * 50);
@@ -301,11 +299,11 @@ public class GameScreen implements Screen {
         spawnKeanu(79 * 50, 42 * 50);
         for(int i = 46; i < 50; i+=2)
             for(int j = 88; j < 92; j+= 2)
-                spawnKeanu(i * 50, j * 50);
+                spawnKeanu(i * 50, j * 50);*/
         /*
             Plane
         */
-        spawnPlane(84 * 50, 66 * 50);
+        /*spawnPlane(84 * 50, 66 * 50);
         spawnPlane(84 * 50, 66 * 50);
         spawnPlane(54 * 50, 61 * 50);
         spawnPlane(49 * 50, 61 * 50);
@@ -316,7 +314,7 @@ public class GameScreen implements Screen {
         spawnPlane(22 * 50, 24 * 50);
         for(int i = 53; i < 57; i+=2)
             for(int j = 92; j < 96; j+= 2)
-                spawnPlane(i * 50, j * 50);
+                spawnPlane(i * 50, j * 50);*/
         /*
             Boss
         */
