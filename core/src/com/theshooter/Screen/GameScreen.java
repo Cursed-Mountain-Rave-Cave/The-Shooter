@@ -106,12 +106,12 @@ public class GameScreen implements Screen {
     }
 
     private void generFloor(){
-        placeFloors(0, 0, 49, 10, 2);
-        placeFloors(49, 0, 100, 4, 2);
-        placeFloors(51, 3, 100, 10, 2);
+        placeFloors(0, 0, 49, 10, 10);
+        placeFloors(49, 0, 100, 4, 10);
+        placeFloors(51, 3, 100, 10, 10);
         placeFloors(49,4,100,6,4);
         placeFloors(49, 6, 51, 10, 4);
-        placeFloors(0, 10, 89, 100, 2);
+        placeFloors(0, 10, 89, 100, 10);
         placeFloors(89, 10, 100, 100, 7);
     }
     private void generWalls(){
@@ -354,7 +354,7 @@ public class GameScreen implements Screen {
         generFloor();
         generWalls();
         generEnvironment();
-    //    generEnemies();
+        generEnemies();
     }
 
     public void addBullet(Bullet bullet){
