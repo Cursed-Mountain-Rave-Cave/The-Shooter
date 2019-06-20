@@ -9,7 +9,7 @@ public class Tramp extends Enemy {
     private int maxHp;
 
     public Tramp(int x, int y, Rectangle target, Map map) {
-        super(x, y, 200,200,1000,300, target, map);
+        super(x, y, 150,150,1000,300, target, map);
         maxHp = getHP();
     }
 
@@ -24,8 +24,6 @@ public class Tramp extends Enemy {
 
     @Override
     public void update() {
-
-        //super.update();
         if (!isBroken()) {
             float dx = target.getX() - getX();
             float dy = target.getY() - getY();

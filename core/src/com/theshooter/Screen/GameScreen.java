@@ -122,7 +122,7 @@ public class GameScreen implements Screen {
         Enemy entity = new Tramp(x, y, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy5"), 200));
+                game.t.getTextures("enemy", "enemy5"), 250));
     }
     private void spawnTrain(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
