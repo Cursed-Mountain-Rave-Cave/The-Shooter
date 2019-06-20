@@ -17,6 +17,8 @@ public class InputController implements InputProcessor {
 
     private boolean leftMouseBottomPressed;
 
+    int typeOfShooting;
+
     public InputController(Game game){
         this.game = game;
         keyWPressed = false;
@@ -24,6 +26,7 @@ public class InputController implements InputProcessor {
         keyAPressed = false;
         keyDPressed = false;
         leftMouseBottomPressed = false;
+        typeOfShooting = 1;
     }
 
     public void update(){
@@ -49,7 +52,17 @@ public class InputController implements InputProcessor {
         game.player.moveAt(dx, dy);
 
         if (leftMouseBottomPressed)
-            game.shoot();
+            switch (typeOfShooting) {
+                case 1:
+                    game.shoot1();
+                    break;
+                case 2:
+                    game.shoot2();
+                    break;
+                case 3:
+                    game.shoot3();
+                    break;
+            }
     }
 
     @Override
@@ -83,6 +96,18 @@ public class InputController implements InputProcessor {
                 keyDPressed = true;
                 break;
             }
+            case Input.Keys.NUM_1: {
+                typeOfShooting = 1;
+                break;
+            }
+            case Input.Keys.NUM_2: {
+                typeOfShooting = 2;
+                break;
+            }
+            case Input.Keys.NUM_3: {
+                typeOfShooting = 3;
+                break;
+            }
         }
 
         return false;
@@ -113,7 +138,6 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean keyTyped(char character) {
-
 
         return false;
     }
