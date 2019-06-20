@@ -17,7 +17,7 @@ public class ScreenObject implements IScreenObject {
     }
 
     public void draw(SpriteBatch batch){
-        batch.draw(texture, getScreenX()- shift, getScreenY() );
+        batch.draw(texture, getScreenX()- shift, getScreenY());
     }
 
     @Override

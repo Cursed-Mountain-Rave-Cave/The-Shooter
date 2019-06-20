@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
-import com.theshooter.Logic.Entity.HumanEnemy;
 import com.theshooter.Logic.Entity.HumanEntity;
-import com.theshooter.Logic.Entity.Player;
 
 public class HumanScreenObject extends ScreenObject {
 

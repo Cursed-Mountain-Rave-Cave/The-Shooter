@@ -22,4 +22,7 @@ public class Bullet extends Entity{
         setX((int) (getX() + dx * Gdx.graphics.getDeltaTime() * VELOCITY));
         setY((int) (getY() + dy * Gdx.graphics.getDeltaTime() * VELOCITY));
     }
+
+    public float getDx() { return dx; }
+    public float getDy() { return dy; }
 }
