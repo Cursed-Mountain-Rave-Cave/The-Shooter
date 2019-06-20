@@ -1,5 +1,7 @@
 package com.theshooter.Logic.Entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
@@ -8,6 +10,7 @@ public class HumanEnemy extends HumanEntity {
 
     private Rectangle target;
     private boolean damaged;
+    public Sound Spank = Gdx.audio.newSound(Gdx.files.internal("sound/Spank.mp3"));
 
     public HumanEnemy(int x, int y, int hp, Rectangle target,  Map map) {
         super(x, y, hp, Depth.ENEMY, map);
@@ -39,6 +42,7 @@ public class HumanEnemy extends HumanEntity {
     @Override
     public void breakDown() {
         super.breakDown();
+        Spank.play();
         damaged = true;
     }
 }

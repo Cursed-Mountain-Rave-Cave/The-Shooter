@@ -39,6 +39,8 @@ public class Game extends com.badlogic.gdx.Game {
 
         SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/SimpleMan.mp3"));
 
+        SimpleMan.setVolume(0.2f);
+        SimpleMan.setLooping(true);
         SimpleMan.play();
 
 		t = new TextureController();
