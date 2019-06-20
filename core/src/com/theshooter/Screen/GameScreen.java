@@ -116,13 +116,89 @@ public class GameScreen implements Screen {
 
 
 
-        for(int i = 0; i < 49; i++)
+        for(int i = 0; i < 48; i++)
             for(int j = 10; j < 11; j++)
                 placeWall(i, j);
 
+        for(int i = 0; i < 1; i++)
+            for(int j = 11; j < 100; j++)
+                placeWall(i, j);
 
+        for(int i = 52; i < 90; i++)
+            for(int j = 10; j < 11; j++)
+                placeWall(i, j);
 
+        for(int i = 89; i < 90; i++)
+            for(int j = 11; j < 100; j++)
+                placeWall(i, j);
 
+        for(int i = 1; i < 90; i++)
+            for(int j = 99; j < 100; j++)
+                placeWall(i, j);
+
+        for(int i = 30; i < 31; i++)
+            for(int j = 11; j < 28; j++)
+                placeWall(i, j);
+
+        for(int i = 70; i < 71; i++)
+            for(int j = 11; j < 28; j++)
+                placeWall(i, j);
+
+        for(int i = 30; i < 55; i++)
+            for(int j = 27; j < 28; j++)
+                placeWall(i, j);
+
+        for(int i = 58; i < 71; i++)
+            for(int j = 27; j < 28; j++)
+                placeWall(i, j);
+
+        for(int i = 54; i < 55; i++)
+            for(int j = 27; j < 37; j++)
+                placeWall(i, j);
+
+        for(int i = 14; i < 55; i++)
+            for(int j = 36; j < 37; j++)
+                placeWall(i, j);
+
+        for(int i = 58; i < 59; i++)
+            for(int j = 27; j < 45; j++)
+                placeWall(i, j);
+
+        for(int i = 58; i < 82; i++)
+            for(int j = 44; j < 45; j++)
+                placeWall(i, j);
+
+        for(int i = 81; i < 82; i++)
+            for(int j = 44; j < 76; j++)
+                placeWall(i, j);
+
+        for(int i = 13; i < 14; i++)
+            for(int j = 36; j < 46; j++)
+                placeWall(i, j);
+
+        for(int i = 13; i < 14; i++)
+            for(int j = 52; j < 93; j++)
+                placeWall(i, j);
+
+        for(int i = 70; i < 71; i++)
+            for(int j = 58; j < 82; j++)
+                placeWall(i, j);
+
+        for(int i = 13; i < 49; i++)
+            for(int j = 58; j < 59; j++)
+                placeWall(i, j);
+
+        for(int i = 58; i < 71; i++)
+            for(int j = 58; j < 59; j++)
+                placeWall(i, j);
+
+        for(int i = 0; i < 14; i++)
+            for(int j = 63; j < 64; j++)
+                placeWall(i, j);
+
+        for(int i = 14; i < 82; i++)
+            for(int j = 82; j < 83; j++)
+                placeWall(i, j);
             /*
         for (int i = 15; i > 10; i -= 1)
             for (int j = 10; j > -10; j -= 1)
