@@ -100,7 +100,6 @@ public class GameScreen implements Screen {
             for(int j = 0; j < 10; j++)
                 placeFloor(i, j, 2);
 
-
         for(int i = 49; i < 100; i++)
             for(int j = 0; j < 4; j++)
                 placeFloor(i, j, 2);
@@ -108,7 +107,6 @@ public class GameScreen implements Screen {
         for(int i = 51; i < 100; i++)
             for(int j = 3; j < 10; j++)
                 placeFloor(i, j, 2);
-
 
 
         for(int i = 49; i < 100; i++)
@@ -124,14 +122,9 @@ public class GameScreen implements Screen {
                 placeFloor(i, j, 4);
 
 
-
         for(int i = 89; i < 100; i++)
             for(int j = 10; j < 100; j++)
                 placeFloor(i, j, 7);
-
-
-
-
 
 
         for(int i = 0; i < 49; i++)
@@ -140,42 +133,28 @@ public class GameScreen implements Screen {
 
 
 
-
-            /*
-        for (int i = 15; i > 10; i -= 1)
-            for (int j = 10; j > -10; j -= 1)
-                placeWall(i, j);
-
-        for (int i = 0; i < 10000; i ++)
-            placeVase(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-
-
-        for (int i = 0; i < 100; i ++)
-            placeTend(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-*/
-
-
-            /*
-        for (int i = 0; i < 50; i ++)
-            spawnKeanu(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
+            placeTend(50 * 7, 50 * 22);
+            placeTend(50 * 5, 50 * 55);
+            placeTend(50 * 2, 50 * 93);
+            placeTend(50 * 76, 50 * 33);
+            placeTend(50 * 55, 50 * 73);
+            placeTend(50 * 60, 50 * 69);
+            placeTend(50 * 63, 50 * 55);
+            placeTend(50 * 32, 50 * 21);
+            placeTend(50 * 34, 50 * 15);
+            placeTend(50 * 41, 50 * 16);
+            placeTend(50 * 41, 50 * 21);
+            placeTend(50 * 47, 50 * 21);
+            placeTend(50 * 47, 50 * 21);
+            placeTend(50 * 53, 50 * 13);
+            placeTend(50 * 60, 50 * 15);
+            placeTend(50 * 63, 50 * 20);
 
 
-       for (int i = 0; i < 50; i ++)
-           spawnPlane(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
 
 
-        for (int i = 0; i < 50; i ++)
-            spawnTrain(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
 
-
-        for (int i = 0; i < 50; i ++)
-            spawnBoss(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-
-
-        for (int i = 0; i < 50; i ++)
-            spawnArabinWarrior(MathUtils.random(-5000, 5000), MathUtils.random(-5000, 5000));
-
-             */
+            
 
     }
 
