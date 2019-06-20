@@ -311,12 +311,6 @@ public class GameScreen implements Screen {
 
 
 
-
-
-
-
-
-
         for(int i = 0; i < 1; i++)
             for(int j = 11; j < 100; j++)
                 placeWall(i, j);
