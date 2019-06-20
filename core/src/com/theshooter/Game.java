@@ -114,28 +114,35 @@ public class Game extends com.badlogic.gdx.Game {
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
-		float dx1 = sdx/2 + sdy;
-		float dy1 = -sdx/2 + sdy;
+		float dx = sdx/2 + sdy;
+		float dy = -sdx/2 + sdy;
 
-		float norm = (float) Math.sqrt(dx1*dx1 + dy1*dy1);
+		float norm = (float) Math.sqrt(dx*dx + dy*dy);
 
-		dx1 /= norm;
-		dy1 /= norm;
-
-		scatter = MathUtils.random(-10, 10);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
-		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
-
-		float dx2 = dx1*cosAlpha - dy1*sinAlpha;
-		float dy2 = dx1*sinAlpha + dy1*cosAlpha;
-
+		dx /= norm;
+		dy /= norm;
 
 		scatter = MathUtils.random(-10, 10);
 		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
 		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
 
-		float dx3 = dx1*cosAlpha + dy1*sinAlpha;
-		float dy3 = -dx1*sinAlpha + dy1*cosAlpha;
+		float dx1 = dx*cosAlpha - dy*sinAlpha;
+		float dy1 = dx*sinAlpha + dy*cosAlpha;
+
+		scatter = MathUtils.random(-10, 10);
+		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
+		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
+
+		float dx2 = dx*cosAlpha - dy*sinAlpha;
+		float dy2 = dx*sinAlpha + dy*cosAlpha;
+
+
+		scatter = MathUtils.random(-10, 10);
+		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
+		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
+
+		float dx3 = dx*cosAlpha + dy*sinAlpha;
+		float dy3 = -dx*sinAlpha + dy*cosAlpha;
 
 		Bullet bullet1 = new Bullet((int)(player.getX() + 25 + dx1 * 25), (int)(player.getY() + 25 + dy1 * 25), dx1, dy1);
 		Bullet bullet2 = new Bullet((int)(player.getX() + 25 + dx2 * 25), (int)(player.getY() + 25 + dy2 * 25), dx2, dy2);
