@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.audio.Music;
 import com.theshooter.Game;
 import com.theshooter.Logic.CameraController;
 import com.theshooter.Logic.Entity.*;
@@ -24,6 +25,12 @@ public class GameScreen implements Screen {
 
     private BitmapFont font;
 
+    public void bossFight() {
+        game.SimpleMan.stop();
+        game.SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
+        game.SimpleMan.play();
+        spawnTramp(5, 5);
+    }
 
     public void placeFloor(int x, int y, int type){
         screenObjects.add(new ScreenObject(new Entity(x*50, y*50, 50, 50, Depth.FLOOR),
@@ -92,7 +99,7 @@ public class GameScreen implements Screen {
     }
 
     private void spawnArabinWarrior(int x, int y) {
-        HumanEnemy entity = new HumanEnemy(x, y, 15, game.player.getRectangle(), game.getMap());
+        HumanEnemy entity = new HumanEnemy(x, y, 15, 300, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new HumanScreenObject(entity,
                 game.t.getTextures("player", "body" + MathUtils.random(2, 4)),
@@ -244,9 +251,8 @@ public class GameScreen implements Screen {
         /*
             Tramp
         */
-//        spawnTramp(87 * 50, 5 * 50);
-//        spawnTramp(87 * 50, 1 * 50);
-//        spawnTramp(87 * 50, -5 * 50);
+
+        spawnTramp(3 * 50, 22 * 50);
         /*
             Arabin warrior
         */
@@ -381,7 +387,9 @@ public class GameScreen implements Screen {
         generFloor();
         generWalls();
         generEnvironment();
-        generEnemies();
+
+        spawnArabinWarrior(87 * 50, 8 * 50);
+   //     generEnemies();
     }
 
     public void addBullet(Bullet bullet){

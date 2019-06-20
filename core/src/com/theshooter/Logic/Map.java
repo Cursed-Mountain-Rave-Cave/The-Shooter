@@ -73,7 +73,7 @@ public class Map {
                 }
                 int dx = player.getX() - enemy.getX();
                 int dy = player.getY() - enemy.getY();
-                if (Math.hypot(dx, dy) < 4 * 50)
+                if (Math.hypot(dx, dy) < 3 * 50)
                     player.breakDown();
             }
         }
@@ -81,6 +81,12 @@ public class Map {
         entities.removeAll(entitiesDelete,true);
         bullets.removeAll(entitiesDelete,true);
         entitiesDelete.clear();
+
+        if (enemies.isEmpty() && !game.bossFight) {
+            game.bossFight = true;
+            game.gameScreen.bossFight();
+            System.out.println(enemies.size);
+        }
     }
 
     public void addEntity(IEntity entity){
@@ -96,11 +102,12 @@ public class Map {
 
     public void addBreakableEntity(IBreakableEntity entity){
         addEntity(entity);
-        if(entity.getClass() == HumanEnemy.class || entity.getClass() == Enemy.class)
+        if(entity.getClass() == HumanEnemy.class || entity instanceof Enemy)
             enemies.add(entity);
         if(entity.getClass() == Player.class)
             players.add(entity);
         breakableEntities.add(entity);
+        System.out.println(enemies.size);
     }
 
     public boolean isAllowed(Rectangle place){

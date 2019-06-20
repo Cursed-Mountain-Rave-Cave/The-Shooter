@@ -8,7 +8,7 @@ public class HumanEntity extends Entity implements ILookable, IMovable, IBreakab
 
 
     protected Map map;
-    private int velocity;
+    protected int velocity;
     private float lookdx, lookdy;
     private float movedx, movedy;
     private boolean broken;
