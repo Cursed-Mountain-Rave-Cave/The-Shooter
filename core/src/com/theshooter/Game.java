@@ -33,6 +33,7 @@ public class Game extends com.badlogic.gdx.Game {
 	public GameScreen gameScreen;
 	public TextureController t;
 	public Music SimpleMan;
+	public boolean bossFight = false;
 
 	private InputController inputController;
 
@@ -88,7 +89,6 @@ public class Game extends com.badlogic.gdx.Game {
         SimpleMan.setVolume(0.2f);
         SimpleMan.setLooping(true);
         SimpleMan.play();
-
 		t = new TextureController();
 		mainScreen = new MainScreen(this);
 		gameScreen = new GameScreen(this);
@@ -141,9 +141,6 @@ public class Game extends com.badlogic.gdx.Game {
     }
     
 	public void shoot1(Rectangle shooter, Rectangle target){
-		// float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-		// float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2;
-
 		float dx = target.getX() - shooter.getX();
 		float dy = target.getY() - shooter.getY();
 
@@ -159,7 +156,7 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
 
-		Bullet bullet = new Bullet((int)(shooter.getX() + 25 + dx1 * 150), (int)(shooter.getY() + 25 + dy1 * 150), dx1, dy1);
+		Bullet bullet = new Bullet((int)(shooter.getX() + 25 + dx1 * 200), (int)(shooter.getY() + 25 + dy1 * 200), dx1, dy1);
 		map.addBullet(bullet);
 		gameScreen.addBullet(bullet);
 	}
@@ -234,6 +231,36 @@ public class Game extends com.badlogic.gdx.Game {
 			newDy = dx*sinAlpha + dy*cosAlpha;
 
 			Bullet bullet = new Bullet((int)(player.getX() + 25 + newDx * 25), (int)(player.getY() + 25 + newDy * 25), newDx, newDy);
+			map.addBullet(bullet);
+			gameScreen.addBullet(bullet);
+
+			dx = newDx;
+			dy = newDy;
+		}
+	}
+
+	public void shoot3(Rectangle shooter, Rectangle target) {
+		//float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
+		//float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
+
+		float dx = shooter.getX() + target.getX();
+		float dy = shooter.getY() + target.getY();
+
+		float norm = (float) Math.sqrt(dx*dx + dy*dy);
+
+		dx /= norm;
+		dy /= norm;
+
+		float newDx, newDy;
+		for(int i = 0; i < 8; ++i) {
+			scatter = MathUtils.random(-2, 2);
+			sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
+			cosAlpha = (float) Math.cos(Math.toRadians((double) (45 + scatter)));
+
+			newDx = dx*cosAlpha - dy*sinAlpha;
+			newDy = dx*sinAlpha + dy*cosAlpha;
+
+			Bullet bullet = new Bullet((int)(shooter.getX() + 25 + newDx * 200), (int)(shooter.getY() + 25 + newDy * 200), newDx, newDy);
 			map.addBullet(bullet);
 			gameScreen.addBullet(bullet);
 

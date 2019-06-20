@@ -15,8 +15,9 @@ public class HumanEnemy extends HumanEntity {
     public static Sound Spank1 = Gdx.audio.newSound(Gdx.files.internal("sound/Spank1.mp3"));
     public static Sound Spank2 = Gdx.audio.newSound(Gdx.files.internal("sound/Spank2.mp3"));
 
-    public HumanEnemy(int x, int y, int hp, Rectangle target,  Map map) {
+    public HumanEnemy(int x, int y, int hp, int velocity, Rectangle target,  Map map) {
         super(x, y, hp, Depth.ENEMY, map);
+        this.velocity = velocity;
         this.target = target;
         damaged = false;
     }

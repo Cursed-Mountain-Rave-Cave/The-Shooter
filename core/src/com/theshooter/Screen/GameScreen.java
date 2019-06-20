@@ -24,6 +24,24 @@ public class GameScreen implements Screen {
 
     private BitmapFont font;
 
+    private boolean bossHere;
+
+    public String screenMessage;
+    public String targetMessage;
+
+
+    public void bossFight() {
+        game.SimpleMan.stop();
+        game.SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
+        game.SimpleMan.setVolume(0.3f);
+        game.SimpleMan.play();
+        spawnTramp(30 * 50, 4 * 50);
+        game.player.setX(99*50);
+        game.player.setY(3*50);
+        bossHere = true;
+
+        targetMessage = "Be SLAV !!!";
+    }
 
     public void placeFloor(int x, int y, int type){
         screenObjects.add(new ScreenObject(new Entity(x*50, y*50, 50, 50, Depth.FLOOR),
@@ -38,11 +56,6 @@ public class GameScreen implements Screen {
         for(int i = x0; i < x1; i++)
             for(int j = y0; j < y1; j++)
                 placeFloor(i, j, type);
-    }
-    public void placeFloors(int x0, int y0, int x1, int y1){
-        for(int i = x0; i < x1; i++)
-            for(int j = y0; j < y1; j++)
-                placeFloor(i, j, MathUtils.random(12, 12));
     }
 
     public void placeWall(int x0, int y0, int x1, int y1){
@@ -70,7 +83,7 @@ public class GameScreen implements Screen {
         Tent entity = new Tent(x, y);
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("things", "breakableThing" + MathUtils.random(2, 3)), 0));
+                game.t.getTextures("things", "breakableThing" + MathUtils.random(2, 3)), 150));
     }
     public void placeGate(int x, int y){
         Gate entity = new Gate(x, y);
@@ -88,15 +101,21 @@ public class GameScreen implements Screen {
         Palm entity = new Palm(x, y);
         game.map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing3"), 150));
+                game.t.getTexture("things", "unbreakableThing3"), 120));
+    }
+    public void placeNotPassablePalm(int x, int y) {
+        Palm entity = new Palm(x + MathUtils.random(-25, 25), y + MathUtils.random(-25, 25), true);
+        game.map.addEntity(entity);
+        screenObjects.add(new ScreenObject(entity,
+                game.t.getTexture("things", "unbreakableThing3"), 120));
     }
 
     private void spawnArabinWarrior(int x, int y) {
-        HumanEnemy entity = new HumanEnemy(x, y, 15, game.player.getRectangle(), game.getMap());
+        HumanEnemy entity = new HumanEnemy(x, y, 15, 300, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new HumanScreenObject(entity,
                 game.t.getTextures("player", "body" + MathUtils.random(2, 4)),
-                game.t.getTextures("player", "legs" + MathUtils.random(1, 4))));
+                game.t.getTextures("player", "legs" + MathUtils.random(1, 5))));
     }
     private void spawnBoss(int x, int y) {
         Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
@@ -108,10 +127,11 @@ public class GameScreen implements Screen {
         Enemy entity = new Tramp(x, y, game.player.getRectangle(), game.getMap());
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy5"), 200));
+                game.t.getTextures("enemy", "enemy5"), 250));
     }
     private void spawnTrain(int x, int y) {
         Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
+        entity.setRadius(1000);
         game.map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
                 game.t.getTextures("enemy", "enemy4"), 75));
@@ -130,13 +150,20 @@ public class GameScreen implements Screen {
     }
 
     private void generFloor(){
-        placeFloors(0, 0, 49, 10);
-        placeFloors(49, 0, 100, 4);
-        placeFloors(51, 3, 100, 10);
+        placeFloors(0, 0, 49, 10, 12);
+        placeFloors(49, 0, 100, 4, 12);
+        placeFloors(51, 3, 100, 10, 12);
         placeFloors(49,4,100,6,4);
         placeFloors(49, 6, 51, 10, 4);
-        placeFloors(0, 10, 89, 100);
-        placeFloors(89, 10, 100, 100, 13);
+        placeFloors(0, 10, 89, 100, 12);
+
+        placeFloors(-40, -40, 100, 0, 12);
+        placeFloors(100, -40, 140, 4, 12);
+        placeFloors(100, 4, 140, 6, 4);
+        placeFloors(100, 6, 140, 10, 12);
+        placeFloors(89, 10, 140, 140, 7);
+        placeFloors(-40, 0, 0, 100, 12);
+        placeFloors(-40, 100, 89, 140, 12);
     }
     private void generWalls(){
         placeWall(0, 10, 48, 11);
@@ -167,6 +194,14 @@ public class GameScreen implements Screen {
         placeInvisibleWall(100, -1, 101, 101);
     }
     private void generEnvironment(){
+        for(int i = -40; i < 140; i+=2)
+            for(int j = -40; j < 0; j+=2)
+                placeNotPassablePalm(i * 50, j * 50);
+
+        for(int i = -40; i < 0; i+=2)
+            for(int j = 0; j < 140; j+=2)
+                placeNotPassablePalm(i * 50, j * 50);
+
         for(int i = 35; i < 37; i++)
             for(int j = 26; j < 27; j++)
                 placeVase(i * 50, j * 50);
@@ -239,14 +274,23 @@ public class GameScreen implements Screen {
         placeTend(50 * 63, 50 * 20);
 
         placePalm(46 * 50, 2 * 50);
+        placePalm(50 * 90, 50 * 8);
+        placePalm(50 * 72, 50 * 2);
+        placePalm(50 * 66, 50 * 9);
+        placePalm(50 * 34, 50 * 8);
+        placePalm(50 * 8, 50 * 2);
+
+
+
+
+        placePalm(50 * 3, 50 * 5);
+        placePalm(50 * 4, 50 * 7);
+
+        //secret
+        spawnArabinWarrior(50 * 3, 50 * 7);
+        placeHookah(50 * 2, 50 * 7);
     }
     private void generEnemies(){
-        /*
-            Tramp
-        */
-//        spawnTramp(87 * 50, 5 * 50);
-//        spawnTramp(87 * 50, 1 * 50);
-//        spawnTramp(87 * 50, -5 * 50);
         /*
             Arabin warrior
         */
@@ -361,14 +405,17 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game){
         this.game = game;
+        this.screenMessage = "Ah shit, here we go again.";
+        this.targetMessage = "Kill all enemies";
+        bossHere = false;
         batch = new SpriteBatch();
 
         cameraController = new CameraController();
         guiCameraController = new CameraController();
         guiCameraController.translateCamera(960, 540);
 
-        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body1"),
-                                                          game.t.getTextures("player", "legs1"));
+        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body5"),
+                                                          game.t.getTextures("player", "legs5"));
 
         screenObjects = new ScreenObjectArray();
 
@@ -381,6 +428,7 @@ public class GameScreen implements Screen {
         generFloor();
         generWalls();
         generEnvironment();
+
         generEnemies();
     }
 
@@ -415,9 +463,17 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(guiCameraController.getCamera().combined);
 
-        font.draw(batch, "Patrons: " + game.checkAmmoSuply(), 50, 70);
+        font.getData().setScale(2);
         if(Game.config.showAdditionalInfo)
-            font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 1080);
+            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + game.player.getX() + " Y: " + game.player.getY(), 0, 1080);
+
+        font.draw(batch, "Target: " + targetMessage + "\nHP: " + game.player.getHP() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
+
+        if(bossHere){
+            font.getData().setScale(5);
+            font.draw(batch, screenMessage, 500, 780);
+        }
+
 
         batch.end();
     }
