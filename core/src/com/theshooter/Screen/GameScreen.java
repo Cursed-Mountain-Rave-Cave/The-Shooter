@@ -239,14 +239,15 @@ public class GameScreen implements Screen {
         placeTend(50 * 63, 50 * 20);
 
         placePalm(46 * 50, 2 * 50);
+
+
     }
     private void generEnemies(){
         /*
             Tramp
         */
-//        spawnTramp(87 * 50, 5 * 50);
-//        spawnTramp(87 * 50, 1 * 50);
-//        spawnTramp(87 * 50, -5 * 50);
+
+
         /*
             Arabin warrior
         */
