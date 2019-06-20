@@ -81,7 +81,7 @@ public class TextureController {
          * enemies adding
          */
 
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
             for (int j = 1; j <= 2; j++)
                 textures.add(new Texture("enemies/enemy" + i + "/" + j + ".png"));

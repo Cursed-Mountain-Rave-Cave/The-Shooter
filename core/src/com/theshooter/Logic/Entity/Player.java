@@ -9,4 +9,9 @@ public class Player extends HumanEntity{
         super(x, y, 1000, Depth.PLAYER, map);
     }
 
+    @Override
+    public void breakDown() {
+        super.breakDown();
+        if(isBroken()) delete();
+    }
 }

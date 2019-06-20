@@ -1,5 +1,7 @@
 package com.theshooter.Logic.Entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
@@ -7,10 +9,13 @@ import com.theshooter.Screen.Depth;
 public class HumanEnemy extends HumanEntity {
 
     private Rectangle target;
+    private boolean damaged;
+    public Sound Spank = Gdx.audio.newSound(Gdx.files.internal("sound/Spank.mp3"));
 
     public HumanEnemy(int x, int y, int hp, Rectangle target,  Map map) {
         super(x, y, hp, Depth.ENEMY, map);
         this.target = target;
+        damaged = false;
     }
 
     public void update() {
@@ -19,11 +24,11 @@ public class HumanEnemy extends HumanEntity {
             int dy = (int) (target.getY() - getY());
             float dist = (float) Math.hypot(dx, dy);
 
-            if(dist < 5 * 50)
+            if(dist < 5 * 50 || damaged)
                 moveAt(dx, dy);
             if (dist < 15 * 50)
                 lookAt(dx - dy, -(dx + dy)/2);
-            else {
+            else if (!damaged) {
                 lookAt(0, 0);
                 moveAt(0, 0);
             }
@@ -32,5 +37,12 @@ public class HumanEnemy extends HumanEntity {
             moveAt(0, 0);
         }
         super.update();
+    }
+
+    @Override
+    public void breakDown() {
+        super.breakDown();
+        Spank.play();
+        damaged = true;
     }
 }
