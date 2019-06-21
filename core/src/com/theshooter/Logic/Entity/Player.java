@@ -7,7 +7,7 @@ import com.theshooter.Screen.Depth;
 public class Player extends HumanEntity{
 
     public Player(int x, int y, int h, int w, Map map) {
-        super(x, y, 1000000000, Depth.PLAYER, map);
+        super(x, y, 1000, Depth.PLAYER, map);
     }
 
     @Override
