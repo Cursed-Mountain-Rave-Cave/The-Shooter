@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Player;
+import com.theshooter.Logic.EntityController;
 import com.theshooter.Logic.InputController;
 import com.theshooter.Logic.Map;
 import com.theshooter.Logic.TextureController;
@@ -24,7 +25,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private Config config;
 	public Player player;
 
-	public Map map;
+	private Map map;
 
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
@@ -33,6 +34,8 @@ public class Game extends com.badlogic.gdx.Game {
 	public boolean bossFight = false;
 
 	private InputController inputController;
+	private EntityController entityController;
+
 
 	private final int FULL_CLIP = 100;
 	private boolean isReloading;
@@ -102,8 +105,12 @@ public class Game extends com.badlogic.gdx.Game {
         SimpleMan.setLooping(true);
         SimpleMan.play();
 		t = new TextureController();
+
+
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
+
+		entityController = new EntityController(map, gameScreen.screenObjects);
 
 		setScreen(gameScreen);
 
@@ -114,6 +121,7 @@ public class Game extends com.badlogic.gdx.Game {
 		ammoSupply = FULL_CLIP;
 
 		Gdx.input.setInputProcessor(inputController);
+		entityController.gener();
 	}
 
 	public void reload() {
@@ -128,6 +136,10 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public Config getConfig() {
 		return config;
+	}
+
+	public EntityController getEntityController() {
+		return entityController;
 	}
 
 	private int scatter;
