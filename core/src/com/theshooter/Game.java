@@ -162,7 +162,10 @@ public class Game extends com.badlogic.gdx.Game {
 	}
 
     public void shoot2() {
-		if(ammoSupply < 3) return;
+		if(ammoSupply < 3) {
+			shoot1();
+			return;
+		}
 		ammoSupply -= 3;
 
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
@@ -207,7 +210,11 @@ public class Game extends com.badlogic.gdx.Game {
 	}
 
 	public void shoot3() {
-		if(ammoSupply < 8) return;
+		if(ammoSupply < 8) {
+			shoot2();
+			return;
+		}
+
 		ammoSupply -= 8;
 
 		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;

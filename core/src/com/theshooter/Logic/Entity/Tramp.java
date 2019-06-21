@@ -37,12 +37,12 @@ public class Tramp extends Enemy {
             double dist = Math.hypot(target.getX() - getX(), target.getY() - getY());
             if (getHP() > 2 * maxHp / 3)
                 tryMove(changeX, changeY);
-            else if (getHP() <= 2 * maxHp / 3 && getHP() > maxHp / 3) {
+            else if (getHP() <= 2 * maxHp / 3 && getHP() > maxHp / 10) {
                 tryMove(-changeX, -changeY);
                 map.game.shoot1(getRectangle(), target);
               //  setHp(getHP() + 1);
             }
-            if (getHP() <= maxHp / 3) {
+            if (getHP() <= maxHp / 10) {
                 for (int i = 0; i < 10; i++) {
                   //  map.game.shoot3(getRectangle(), target);
                     map.game.shoot1(getRectangle(), target);

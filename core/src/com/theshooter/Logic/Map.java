@@ -38,7 +38,7 @@ public class Map {
 
         for(IEntity entity: entities) {
             entity.update();
-            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 15000) {
+            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000) {
                 entitiesDelete.add(entity);
                 entity.delete();
             }
@@ -91,6 +91,10 @@ public class Map {
         if (enemies.isEmpty() && game.bossFight) {
             game.gameScreen.screenMessage = "             Game over!\n        Thanks for playing!";
             game.gameScreen.targetMessage = "Put the top five for the practice";
+
+
+            game.player.setX(-155*50);
+            game.player.setY(-155*50);
         }
     }
 
@@ -112,7 +116,7 @@ public class Map {
         if(entity.getClass() == Player.class)
             players.add(entity);
         breakableEntities.add(entity);
-        System.out.println(enemies.size);
+        //System.out.println(enemies.size);
     }
 
     public boolean isAllowed(Rectangle place){
