@@ -7,11 +7,21 @@ public class Entity implements IEntity{
     private Rectangle rect;
     private Depth depth;
     boolean passable;
+    boolean isDelete;
 
     public Entity(int x, int y, int w, int h, Depth depth, boolean passable){
         this.rect = new Rectangle(x, y, w, h);
         this.depth = depth;
         this.passable = passable;
+        this.isDelete = false;
+    }
+
+    public void delete(){
+        this.isDelete = true;
+    }
+
+    public boolean isDeleted(){
+        return this.isDelete;
     }
 
     public Entity(int x, int y, int w, int h, Depth depth){

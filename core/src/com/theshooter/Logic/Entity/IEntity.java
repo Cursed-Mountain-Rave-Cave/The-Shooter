@@ -15,6 +15,9 @@ public interface IEntity {
     Rectangle getRectangle();
     boolean isPassable();
 
+    void delete();
+    boolean isDeleted();
+
     void setDepth(Depth depth);
     void setX(int x);
     void setY(int y);

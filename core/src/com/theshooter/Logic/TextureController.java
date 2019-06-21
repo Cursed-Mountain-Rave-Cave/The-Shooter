@@ -24,19 +24,19 @@ public class TextureController {
          * floor adding
          */
 
-        for (int i = 1; i <= 7; i++) {
+        for (int i = 1; i <= 14; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("floor/" + i + ".png"));
             addTextureArray("floor", "floor" + i, textures);
         }
 
         /**
-         * walls adding (in the future)
+         * walls adding
          */
 
-        for (int i = 1; i <= 0; i++) {
+        for (int i = 1; i <= 3; i++) {
             Array<Texture> textures = new Array<>();
-            for (int j = 1; j <= 4; j++)
+            for (int j = 1; j <= 5; j++)
                 textures.add(new Texture("walls/wall" + i + "/" + j + ".png"));
             addTextureArray("walls", "wall" + i, textures);
         }
@@ -45,7 +45,7 @@ public class TextureController {
          * unbreakable things adding
          */
 
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 4; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("environment/unbreakable/" + i + ".png"));
             addTextureArray("things", "unbreakableThing" + i, textures);
@@ -55,7 +55,7 @@ public class TextureController {
          * breakable things adding
          */
 
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
             for (int j = 1; j <= 2; j++)
                 textures.add(new Texture("environment/breakable/breakable" + i + "/" + j + ".png"));
@@ -66,10 +66,10 @@ public class TextureController {
          * player adding
          */
 
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= 7; i++) {
             Array<Texture> texturesBody = new Array<>();
             Array<Texture> texturesLegs = new Array<>();
-            for (int j = 1; j <= 8; j++) {
+            for (int j = 1; j <= 9; j++) {
                 texturesBody.add(new Texture("player/bodies/body" + i + "/" + j + ".png"));
                 texturesLegs.add(new Texture("player/legs/legs" + i + "/" + j + ".png"));
             }
@@ -77,11 +77,12 @@ public class TextureController {
             addTextureArray("player", "body" + i, texturesBody);
         }
 
+
         /**
          * enemies adding
          */
 
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
             for (int j = 1; j <= 2; j++)
                 textures.add(new Texture("enemies/enemy" + i + "/" + j + ".png"));
@@ -92,7 +93,7 @@ public class TextureController {
          * bullets adding
          */
 
-        for (int i = 1; i <= 1; i++) {
+        for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
             textures.add(new Texture("bullets/" + i + ".png"));
             addTextureArray("bullets", "bullet" + i, textures);
