@@ -37,9 +37,9 @@ public class Game extends com.badlogic.gdx.Game {
 
 	private InputController inputController;
 
-	private final int FULL_CLIP = 1000;
+	private final int FULL_CLIP = 100;
 	private boolean isReloading;
-	private int ammoSupply;
+	private int ammoSupply, reloadStage;
 	private Thread thread;
 	public static Sound[] reloadingSound;
 
@@ -57,7 +57,7 @@ public class Game extends com.badlogic.gdx.Game {
 		isReloading = false;
 		thread = new Thread( ()-> {
 			while(true) {
-				while(!isReloading) { // без этого не работает !!!
+				while(!isReloading) {
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException ie) {
@@ -68,8 +68,12 @@ public class Game extends com.badlogic.gdx.Game {
 				int rand = MathUtils.random(1, 14);
 				reloadingSound[rand].play(0.8f);
 				ammoSupply = 0;
+				reloadStage = 0;
 				try {
-					Thread.sleep(2000);
+					for(int i = 0; i < 5; ++i) {
+						reloadStage += 20;
+						Thread.sleep(300);
+					}
 				} catch (InterruptedException ie) {
 					System.out.println(ie.getMessage());
 					Gdx.app.exit();
@@ -105,10 +109,13 @@ public class Game extends com.badlogic.gdx.Game {
 	}
 
 	public void reload() {
-		isReloading = true;
+		if(!isReloading && ammoSupply < FULL_CLIP)
+			isReloading = true;
 	}
-	public int checkAmmoSuply() {
-		return ammoSupply;
+	public String checkAmmoSuply() {
+		if(isReloading)
+			return "reloading " + reloadStage + "%";
+		return Integer.valueOf(ammoSupply).toString();
 	}
 
 	private int scatter;
