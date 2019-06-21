@@ -103,6 +103,12 @@ public class GameScreen implements Screen {
         screenObjects.add(new ScreenObject(entity,
                 game.t.getTexture("things", "unbreakableThing3"), 120));
     }
+    public void placeWoman(int x, int y) {
+        Woman entity = new Woman(x, y);
+        game.map.addEntity(entity);
+        screenObjects.add(new ScreenObject(entity,
+                game.t.getTexture("things", "unbreakableThing4"), 150));
+    }
     public void placeNotPassablePalm(int x, int y) {
         Palm entity = new Palm(x + MathUtils.random(-25, 25), y + MathUtils.random(-25, 25), true);
         game.map.addEntity(entity);
@@ -164,6 +170,9 @@ public class GameScreen implements Screen {
         placeFloors(89, 10, 140, 140, 7);
         placeFloors(-40, 0, 0, 100, 12);
         placeFloors(-40, 100, 89, 140, 12);
+
+        placeFloors(-200, -200, -110, -110, 12);
+
     }
     private void generWalls(){
         placeWall(0, 10, 48, 11);
@@ -192,8 +201,36 @@ public class GameScreen implements Screen {
         placeInvisibleWall(-1, -1, 101, 0);
         placeInvisibleWall(89, 10, 101, 11);
         placeInvisibleWall(100, -1, 101, 101);
+
+
+        placeInvisibleWall(-161, -160, -160, -151);
+        placeInvisibleWall(-151, -160, -150, -151);
+
+        placeInvisibleWall(-160, -161, -151, -160);
+        placeInvisibleWall(-160, -151, -151, -150);
+
     }
     private void generEnvironment(){
+
+        for(int i = -200; i < -110; i+=2)
+            for(int j = -151; j < -110; j+=2)
+                placeNotPassablePalm(i * 50, j * 50);
+
+        for(int i = -200; i < -110; i+=2)
+            for(int j = -200; j < -160; j+=2)
+                placeNotPassablePalm(i * 50, j * 50);
+
+        for(int i = -150; i < -110; i+=2)
+            for(int j = -160; j < -151; j+=2)
+                placeNotPassablePalm(i * 50, j * 50);
+
+        for(int i = -200; i < -160; i+=2)
+            for(int j = -160; j < -151; j+=2)
+                placeNotPassablePalm(i * 50, j * 50);
+
+
+
+
         for(int i = -40; i < 140; i+=2)
             for(int j = -40; j < 0; j+=2)
                 placeNotPassablePalm(i * 50, j * 50);
@@ -289,6 +326,12 @@ public class GameScreen implements Screen {
         //secret
         spawnArabinWarrior(50 * 3, 50 * 7);
         placeHookah(50 * 2, 50 * 7);
+
+
+        placeHookah(50 * (-157), 50 * ( -154));
+        placeHookah(50 * (-157), 50 * ( -153));
+
+        placeWoman(50 * (-153), 50 * ( -155));
     }
     private void generEnemies(){
         /*
@@ -428,7 +471,6 @@ public class GameScreen implements Screen {
         generFloor();
         generWalls();
         generEnvironment();
-
         generEnemies();
     }
 
