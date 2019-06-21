@@ -169,7 +169,7 @@ public class GameLoader {
                 }
             }
             gameScreen.dispose();
-            gameScreen = new GameScreen(game);
+            gameScreen = new GameScreen();
             game.gameScreen = gameScreen;
         }
         catch (IOException e) {

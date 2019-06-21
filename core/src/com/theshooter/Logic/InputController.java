@@ -109,7 +109,7 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.F3: {
-                Game.config.showAdditionalInfo = !Game.config.showAdditionalInfo;
+                Game.getInstance().getConfig().showAdditionalInfo = !Game.getInstance().getConfig().showAdditionalInfo;
                 break;
             }
             case Input.Keys.R: {

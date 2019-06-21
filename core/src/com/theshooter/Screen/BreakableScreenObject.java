@@ -32,7 +32,7 @@ public class BreakableScreenObject extends ScreenObject{
         if(entity.isBroken())
             setTexture(t.get(1));
 
-        if(Game.config.showAdditionalInfo && !entity.isBroken())
+        if(Game.getInstance().getConfig().showAdditionalInfo && !entity.isBroken())
             font.draw(batch, "" + entity.getHP(), entity.getX() - entity.getY() - shift, (entity.getX() + entity.getY()) / 2 + getTexture().getWidth());
 
         super.draw(batch);

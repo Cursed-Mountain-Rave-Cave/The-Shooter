@@ -19,13 +19,10 @@ import java.io.IOException;
 
 public class Game extends com.badlogic.gdx.Game {
 
-	public static Config config;
+	private static Game game;
 
-	static {
-		config = new Config();
-	}
-
-    public Player player;
+	private Config config;
+	public Player player;
 
 	public Map map;
 
@@ -42,6 +39,16 @@ public class Game extends com.badlogic.gdx.Game {
 	private int ammoSupply, reloadStage;
 	private Thread thread;
 	public static Sound[] reloadingSound;
+
+	public static Game getInstance(){
+		if(game == null)
+			game = new Game();
+		return game;
+	}
+
+	private Game(){
+		super();
+	}
 
 	private void initSound() {
 		reloadingSound = new Sound[15];
@@ -120,7 +127,8 @@ public class Game extends com.badlogic.gdx.Game {
 		thread.setDaemon(true);
 		thread.start();
 
-		map = new Map(this);
+		config = new Config();
+		map = new Map();
         player = new Player(99*50, 3*50, 25, 25, map);
 
         SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/SimpleMan.mp3"));
@@ -129,8 +137,8 @@ public class Game extends com.badlogic.gdx.Game {
         SimpleMan.setLooping(true);
         SimpleMan.play();
 		t = new TextureController();
-		mainScreen = new MainScreen(this);
-		gameScreen = new GameScreen(this);
+		mainScreen = new MainScreen();
+		gameScreen = new GameScreen();
 
 		setScreen(gameScreen);
 
@@ -151,6 +159,10 @@ public class Game extends com.badlogic.gdx.Game {
 		if(isReloading)
 			return "reloading " + reloadStage + "%";
 		return Integer.valueOf(ammoSupply).toString();
+	}
+
+	public Config getConfig() {
+		return config;
 	}
 
 	private int scatter;

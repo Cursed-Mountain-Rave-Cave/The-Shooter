@@ -46,7 +46,7 @@ public class HumanScreenObject extends ScreenObject {
         batch.draw(legs.get(currentLegs), getScreenX() - shift, getScreenY());
         batch.draw(body.get(currentBody), getScreenX() - shift, getScreenY());
 
-        if(Game.config.showAdditionalInfo && !human.isBroken())
+        if(Game.getInstance().getConfig().showAdditionalInfo && !human.isBroken())
             font.draw(batch, "" + human.getHP(), entity.getX() - entity.getY() - shift, (entity.getX() + entity.getY()) / 2 + getTexture().getWidth());
     }
 
