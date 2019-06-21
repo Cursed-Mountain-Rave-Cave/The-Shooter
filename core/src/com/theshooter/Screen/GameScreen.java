@@ -11,7 +11,6 @@ import com.theshooter.Logic.CameraController;
 import com.theshooter.Logic.Entity.*;
 
 public class GameScreen implements Screen {
-    final private Game game;
 
     public SpriteBatch batch;
 
@@ -31,13 +30,13 @@ public class GameScreen implements Screen {
 
 
     public void bossFight() {
-        game.SimpleMan.stop();
-        game.SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
-        game.SimpleMan.setVolume(0.3f);
-        game.SimpleMan.play();
+        Game.getInstance().SimpleMan.stop();
+        Game.getInstance().SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
+        Game.getInstance().SimpleMan.setVolume(0.3f);
+        Game.getInstance().SimpleMan.play();
         spawnTramp(30 * 50, 4 * 50);
-        game.player.setX(99*50);
-        game.player.setY(3*50);
+        Game.getInstance().player.setX(99*50);
+        Game.getInstance().player.setY(3*50);
         bossHere = true;
 
         targetMessage = "Be SLAV !!!";
@@ -45,12 +44,12 @@ public class GameScreen implements Screen {
 
     public void placeFloor(int x, int y, int type){
         screenObjects.add(new ScreenObject(new Entity(x*50, y*50, 50, 50, Depth.FLOOR),
-                game.t.getTexture("floor", "floor" + type), 50));
+                Game.getInstance().t.getTexture("floor", "floor" + type), 50));
     }
     public void placeWall(int x, int y){
         Wall entity = new Wall(x*50, y*50, 50, 50);
-        game.map.addEntity(entity);
-        screenObjects.add(new WallScreenObject(entity, game.t.getTextures("walls", "wall2")));
+        Game.getInstance().map.addEntity(entity);
+        screenObjects.add(new WallScreenObject(entity, Game.getInstance().t.getTextures("walls", "wall2")));
     }
     public void placeFloors(int x0, int y0, int x1, int y1, int type){
         for(int i = x0; i < x1; i++)
@@ -60,107 +59,107 @@ public class GameScreen implements Screen {
 
     public void placeWall(int x0, int y0, int x1, int y1){
         Wall entity = new Wall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
-        game.map.addEntity(entity);
+        Game.getInstance().map.addEntity(entity);
 
         for(int x = x0; x < x1; x++)
             for (int y = y0; y < y1; y++){
-                screenObjects.add(new WallScreenObject(entity, 50 * x, 50 * y, game.t.getTextures("walls", "wall2")));
+                screenObjects.add(new WallScreenObject(entity, 50 * x, 50 * y, Game.getInstance().t.getTextures("walls", "wall2")));
             }
     }
 
     public void placeInvisibleWall(int x0, int y0, int x1, int y1) {
         InvisibleWall entity = new InvisibleWall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
-        game.map.addEntity(entity);
+        Game.getInstance().map.addEntity(entity);
     }
 
     public void placeVase(int x, int y){
         Vase entity = new Vase(x, y);
-        game.map.addBreakableEntity(entity);
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("things", "breakableThing1"), 50));
+                Game.getInstance().t.getTextures("things", "breakableThing1"), 50));
     }
     public void placeTend(int x, int y){
         Tent entity = new Tent(x, y);
-        game.map.addBreakableEntity(entity);
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("things", "breakableThing" + MathUtils.random(2, 3)), 150));
+                Game.getInstance().t.getTextures("things", "breakableThing" + MathUtils.random(2, 3)), 150));
     }
     public void placeGate(int x, int y){
         Gate entity = new Gate(x, y);
-        game.map.addBreakableEntity(entity);
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
+                Game.getInstance().t.getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
     public void placeHookah(int x, int y) {
         Hookah entity = new Hookah(x, y);
-        game.map.addEntity(entity);
+        Game.getInstance().map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing2"), 0));
+                Game.getInstance().t.getTexture("things", "unbreakableThing2"), 0));
     }
     public void placePalm(int x, int y) {
         Palm entity = new Palm(x, y);
-        game.map.addEntity(entity);
+        Game.getInstance().map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing3"), 120));
+                Game.getInstance().t.getTexture("things", "unbreakableThing3"), 120));
     }
 
     public void placeHome(int x, int y) {
         Home entity = new Home(x, y);
-        game.map.addEntity(entity);
+        Game.getInstance().map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing5"), 200));
+                Game.getInstance().t.getTexture("things", "unbreakableThing5"), 200));
     }
 
     public void placeWoman(int x, int y) {
         Woman entity = new Woman(x, y);
-        game.map.addEntity(entity);
+        Game.getInstance().map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing4"), 150));
+                Game.getInstance().t.getTexture("things", "unbreakableThing4"), 150));
     }
     public void placeNotPassablePalm(int x, int y) {
         Palm entity = new Palm(x + MathUtils.random(-25, 25), y + MathUtils.random(-25, 25), true);
-        game.map.addEntity(entity);
+        Game.getInstance().map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing3"), 120));
+                Game.getInstance().t.getTexture("things", "unbreakableThing3"), 120));
     }
 
     private void spawnArabinWarrior(int x, int y) {
-        HumanEnemy entity = new HumanEnemy(x, y, 15, 300, game.player.getRectangle(), game.getMap());
-        game.map.addBreakableEntity(entity);
+        HumanEnemy entity = new HumanEnemy(x, y, 15, 300, Game.getInstance().player.getRectangle(), Game.getInstance().getMap());
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new HumanScreenObject(entity,
-                game.t.getTextures("player", "body" + MathUtils.random(2, 6)),
-                game.t.getTextures("player", "legs" + MathUtils.random(1, 6))));
+                Game.getInstance().t.getTextures("player", "body" + MathUtils.random(2, 6)),
+                Game.getInstance().t.getTextures("player", "legs" + MathUtils.random(1, 6))));
     }
     private void spawnBoss(int x, int y) {
-        Enemy entity = new Enemy(x, y,75, 75, 100, 100,game.player.getRectangle(), game.getMap());
-        game.map.addBreakableEntity(entity);
+        Enemy entity = new Enemy(x, y,75, 75, 100, 100, Game.getInstance().player.getRectangle(), Game.getInstance().getMap());
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy1"), 84));
+                Game.getInstance().t.getTextures("enemy", "enemy1"), 84));
     }
     private void spawnTramp(int x, int y) {
-        Enemy entity = new Tramp(x, y, game.player.getRectangle(), game.getMap());
-        game.map.addBreakableEntity(entity);
+        Enemy entity = new Tramp(x, y, Game.getInstance().player.getRectangle(), Game.getInstance().getMap());
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy5"), 250));
+                Game.getInstance().t.getTextures("enemy", "enemy5"), 250));
     }
     private void spawnTrain(int x, int y) {
-        Enemy entity = new Enemy(x, y,75,75,10,200, game.player.getRectangle(), game.getMap());
+        Enemy entity = new Enemy(x, y,75,75,10,200, Game.getInstance().player.getRectangle(), Game.getInstance().getMap());
         entity.setRadius(1000);
-        game.map.addBreakableEntity(entity);
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy4"), 75));
+                Game.getInstance().t.getTextures("enemy", "enemy4"), 75));
     }
     private void spawnPlane(int x, int y) {
-        Enemy entity = new Enemy(x, y, 75,75, 10,100, game.player.getRectangle(), game.getMap());
-        game.map.addBreakableEntity(entity);
+        Enemy entity = new Enemy(x, y, 75,75, 10,100, Game.getInstance().player.getRectangle(), Game.getInstance().getMap());
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy3"), 150));
+                Game.getInstance().t.getTextures("enemy", "enemy3"), 150));
     }
     private void spawnKeanu(int x, int y) {
-        Enemy entity = new Enemy(x, y,75,75, 50,100, game.player.getRectangle(), game.getMap());
-        game.map.addBreakableEntity(entity);
+        Enemy entity = new Enemy(x, y,75,75, 50,100, Game.getInstance().player.getRectangle(), Game.getInstance().getMap());
+        Game.getInstance().map.addBreakableEntity(entity);
         screenObjects.add(new BreakableScreenObject(entity,
-                game.t.getTextures("enemy", "enemy2"), 112));
+                Game.getInstance().t.getTextures("enemy", "enemy2"), 112));
     }
 
     private void generFloor(){
@@ -309,8 +308,6 @@ public class GameScreen implements Screen {
         placeVase(62 * 50, 57 * 50);
         placeVase(66 * 50, 57 * 50);
 
-
-
         placeGate(50 * 48, 50 * 10);
 
         placeTend(50 * 5, 50 * 55);
@@ -330,22 +327,11 @@ public class GameScreen implements Screen {
         placeTend(50 * 63, 50 * 20);
 
         placePalm(46 * 50, 2 * 50);
-
-
-     /*   placePalm(50 * 90, 50 * 6);
-        placePalm(50 * 72, 50 * 4);
-        placePalm(50 * 66, 50 * 8);
-        placePalm(50 * 34, 50 * 6);
-        placePalm(50 * 8, 50 * 4);*/
-
         placePalm(50 * 90, 50 * 8);
         placePalm(50 * 72, 50 * 2);
         placePalm(50 * 66, 50 * 9);
         placePalm(50 * 34, 50 * 8);
         placePalm(50 * 8, 50 * 2);
-
-
-
 
         placePalm(50 * 3, 50 * 5);
         placePalm(50 * 4, 50 * 7);
@@ -354,10 +340,9 @@ public class GameScreen implements Screen {
         spawnArabinWarrior(50 * 3, 50 * 7);
         placeHookah(50 * 2, 50 * 7);
 
-
+        //finish
         placeHookah(50 * (-157), 50 * ( -154));
         placeHookah(50 * (-157), 50 * ( -153));
-
         placeWoman(50 * (-153), 50 * ( -155));
     }
     private void generEnemies(){
@@ -473,8 +458,7 @@ public class GameScreen implements Screen {
         spawnBoss(5 * 50, 65 * 50);
     }
 
-    public GameScreen(Game game){
-        this.game = game;
+    public GameScreen(){
         this.screenMessage = "Ah shit, here we go again.";
         this.targetMessage = "Kill all enemies";
         bossHere = false;
@@ -484,8 +468,8 @@ public class GameScreen implements Screen {
         guiCameraController = new CameraController();
         guiCameraController.translateCamera(960, 540);
 
-        playerScreen = new HumanScreenObject(game.player, game.t.getTextures("player", "body7"),
-                                                          game.t.getTextures("player", "legs7"));
+        playerScreen = new HumanScreenObject(Game.getInstance().player, Game.getInstance().t.getTextures("player", "body7"),
+                Game.getInstance().t.getTextures("player", "legs7"));
 
         screenObjects = new ScreenObjectArray();
 
@@ -502,7 +486,7 @@ public class GameScreen implements Screen {
     }
 
     public void addBullet(Bullet bullet){
-        screenObjects.add(new BulletScreenObject(bullet, game.t.getTexture("bullets", "bullet" + MathUtils.random(1, 5)), 5));
+        screenObjects.add(new BulletScreenObject(bullet, Game.getInstance().t.getTexture("bullets", "bullet" + MathUtils.random(1, 5)), 5));
     }
 
     @Override
@@ -533,10 +517,10 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(guiCameraController.getCamera().combined);
 
         font.getData().setScale(2);
-        if(Game.config.showAdditionalInfo)
-            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + game.player.getX() + " Y: " + game.player.getY(), 0, 1080);
+        if(Game.getInstance().getConfig().showAdditionalInfo)
+            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + Game.getInstance().player.getX() + " Y: " + Game.getInstance().player.getY(), 0, 1080);
 
-        font.draw(batch, "Target: " + targetMessage + "\nHP: " + game.player.getHP() + "\nPatrons: " + game.checkAmmoSuply(), 0, 1080);
+        font.draw(batch, "Target: " + targetMessage + "\nHP: " + Game.getInstance().player.getHP() + "\nPatrons: " + Game.getInstance().checkAmmoSuply(), 0, 1080);
 
         if(bossHere){
             font.getData().setScale(5);
