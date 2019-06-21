@@ -332,11 +332,11 @@ public class GameScreen implements Screen {
         placePalm(46 * 50, 2 * 50);
 
 
-        placePalm(50 * 90, 50 * 6);
+     /*   placePalm(50 * 90, 50 * 6);
         placePalm(50 * 72, 50 * 4);
         placePalm(50 * 66, 50 * 8);
         placePalm(50 * 34, 50 * 6);
-        placePalm(50 * 8, 50 * 4);
+        placePalm(50 * 8, 50 * 4);*/
 
         placePalm(50 * 90, 50 * 8);
         placePalm(50 * 72, 50 * 2);
