@@ -66,8 +66,8 @@ public class GameScreen implements Screen {
             for (int y = y0; y < y1; y++){
                 screenObjects.add(new WallScreenObject(entity, 50 * x, 50 * y, game.t.getTextures("walls", "wall2")));
             }
-
     }
+
     public void placeInvisibleWall(int x0, int y0, int x1, int y1) {
         InvisibleWall entity = new InvisibleWall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
         game.map.addEntity(entity);
@@ -103,6 +103,14 @@ public class GameScreen implements Screen {
         screenObjects.add(new ScreenObject(entity,
                 game.t.getTexture("things", "unbreakableThing3"), 120));
     }
+
+    public void placeHome(int x, int y) {
+        Home entity = new Home(x, y);
+        game.map.addEntity(entity);
+        screenObjects.add(new ScreenObject(entity,
+                game.t.getTexture("things", "unbreakableThing5"), 200));
+    }
+
     public void placeWoman(int x, int y) {
         Woman entity = new Woman(x, y);
         game.map.addEntity(entity);
@@ -211,6 +219,17 @@ public class GameScreen implements Screen {
 
     }
     private void generEnvironment(){
+        placeHome(76* 50,16 * 50);
+        placeHome(63* 50,33 * 50);
+        placeHome(64* 50,63 * 50);
+        placeHome(41* 50,76 * 50);
+        placeHome(22* 50,76 * 50);
+        placeHome(13* 50,30 * 50);
+        placeHome(75* 50,51 * 50);
+        placeHome(7* 50,69 * 50);
+        placeHome(7* 50,75 * 50);
+        placeHome(7* 50,81 * 50);
+        placeHome(7* 50,87 * 50);
 
         for(int i = -200; i < -110; i+=2)
             for(int j = -151; j < -110; j+=2)
