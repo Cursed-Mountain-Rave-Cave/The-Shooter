@@ -91,6 +91,10 @@ public class Map {
         if (enemies.isEmpty() && game.bossFight) {
             game.gameScreen.screenMessage = "             Game over!\n        Thanks for playing!";
             game.gameScreen.targetMessage = "Put the top five for the practice";
+
+
+            game.player.setX(-155*50);
+            game.player.setY(-155*50);
         }
     }
 
@@ -112,7 +116,7 @@ public class Map {
         if(entity.getClass() == Player.class)
             players.add(entity);
         breakableEntities.add(entity);
-        System.out.println(enemies.size);
+        //System.out.println(enemies.size);
     }
 
     public boolean isAllowed(Rectangle place){

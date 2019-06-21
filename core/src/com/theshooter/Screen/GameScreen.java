@@ -107,7 +107,7 @@ public class GameScreen implements Screen {
         Woman entity = new Woman(x, y);
         game.map.addEntity(entity);
         screenObjects.add(new ScreenObject(entity,
-                game.t.getTexture("things", "unbreakableThing4"), 175));
+                game.t.getTexture("things", "unbreakableThing4"), 150));
     }
     public void placeNotPassablePalm(int x, int y) {
         Palm entity = new Palm(x + MathUtils.random(-25, 25), y + MathUtils.random(-25, 25), true);
@@ -330,6 +330,8 @@ public class GameScreen implements Screen {
 
         placeHookah(50 * (-157), 50 * ( -154));
         placeHookah(50 * (-157), 50 * ( -153));
+
+        placeWoman(50 * (-153), 50 * ( -155));
     }
     private void generEnemies(){
         /*
@@ -469,11 +471,7 @@ public class GameScreen implements Screen {
         generFloor();
         generWalls();
         generEnvironment();
-
         generEnemies();
-
-        //game.player.setX(-155*50);
-        //game.player.setY(-155*50);
     }
 
     public void addBullet(Bullet bullet){
