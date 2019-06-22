@@ -30,7 +30,7 @@ public class Map {
     public void update(){
         for(IEntity entity: entities) {
             entity.update();
-            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000) {
+            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 200000) {
                 if(entity instanceof Projectile)
                     bulletsDelete.add((Projectile) entity);
                 entitiesDelete.add(entity);
