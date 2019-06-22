@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
-import com.theshooter.Logic.Entity.HumanEntity;
+import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 
 public class HumanScreenObject extends ScreenObject {
 
@@ -36,12 +36,10 @@ public class HumanScreenObject extends ScreenObject {
         setCurrentLegs();
         setCurrentBody();
 
-
         if (human.isBroken()) {
             this.currentBody = 8;
             this.currentLegs = 8;
         }
-
 
         batch.draw(legs.get(currentLegs), getScreenX() - shift, getScreenY());
         batch.draw(body.get(currentBody), getScreenX() - shift, getScreenY());

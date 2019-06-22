@@ -1,10 +1,13 @@
 package com.theshooter.Logic;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
+import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
+import com.theshooter.Logic.Entity.Creatures.HumanEntity;
+import com.theshooter.Logic.Entity.Creatures.Player;
+import com.theshooter.Logic.Entity.Creatures.Tramp;
 import com.theshooter.Screen.*;
 
 import java.util.HashMap;
@@ -41,12 +44,6 @@ public class EntityController {
         map.clear();
         screenObjectArray.clear();
 
-        FileHandle levels = Gdx.files.internal("levels");
-        FileHandle[] path = levels.list();
-        for(FileHandle handle: path){
-            System.out.println(handle.name());
-        }
-
         loadPlayer(name);
         loadFloors(name);
         loadWalls(name);
@@ -57,8 +54,8 @@ public class EntityController {
     public void loadPlayer(String name){
         Scanner scanner = getScanner(name, "player");
 
-        player = new Player(scanner.nextInt(), scanner.nextInt(), 25, 25, map);
-        map.addBreakableEntity(player);
+        player = new Player(scanner.nextInt(), scanner.nextInt(), 25, 25);
+        map.addEntity(player);
         Game.getInstance().gameScreen.playerScreen = new HumanScreenObject(player, Game.getInstance().getTextureController().getTextures("player", "body7"),
                 Game.getInstance().getTextureController().getTextures("player", "legs7"));
                         screenObjectArray.add(Game.getInstance().gameScreen.playerScreen);
@@ -190,7 +187,7 @@ public class EntityController {
     }
 
     public void addBullet(Projectile projectile){
-        map.addBullet(projectile);
+        map.addEntity(projectile);
         screenObjectArray.add(new BulletScreenObject(projectile, Game.getInstance().getTextureController().getTexture("projectiles", "projectile" + MathUtils.random(1, 5)), 5));
     }
 
@@ -227,19 +224,19 @@ public class EntityController {
 
     public void placeVase(int x, int y){
         BreakableEntity entity = new BreakableEntity(x, y, 50, 50, Depth.THINGS);
-        map.addBreakableEntity(entity);
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing1"), 50));
     }
     public void placeTend(int x, int y){
         BreakableEntity entity = new BreakableEntity(x, y, 150, 150, Depth.THINGS, false);
-        map.addBreakableEntity(entity);
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(2, 3)), 150));
     }
     public void placeGate(int x, int y){
         BreakableEntity entity = new BreakableEntity(x, y, 200, 50, 300, Depth.WALLS, false);
-        map.addBreakableEntity(entity);
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
@@ -275,40 +272,39 @@ public class EntityController {
     }
 
     public void spawnArabinWarrior(int x, int y) {
-        HumanEnemy entity = new HumanEnemy(x, y, 15, 300, player.getRectangle(), map);
-        map.addBreakableEntity(entity);
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 3,Depth.ENEMY, false, player.getRectangle());
+        map.addEntity(entity);
         screenObjectArray.add(new HumanScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("player", "body" + MathUtils.random(2, 6)),
                 Game.getInstance().getTextureController().getTextures("player", "legs" + MathUtils.random(1, 6))));
     }
     public void spawnBoss(int x, int y) {
-        Enemy entity = new Enemy(x, y,75, 75, 100, 100, player.getRectangle(), map);
-        map.addBreakableEntity(entity);
+        CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy1"), 84));
     }
     public void spawnTramp(int x, int y) {
-        Enemy entity = new Tramp(x, y, player.getRectangle(), map);
-        map.addBreakableEntity(entity);
+        Tramp entity = new Tramp(x, y, player.getRectangle());
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy5"), 250));
     }
     public void spawnTrain(int x, int y) {
-        Enemy entity = new Enemy(x, y,75,75,10,200, player.getRectangle(), map);
-        entity.setRadius(1000);
-        map.addBreakableEntity(entity);
+        CreatureEntity entity = new CreatureEntity(x, y,75,75,10,200, 100, Depth.ENEMY, false, player.getRectangle());
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy4"), 75));
     }
     public void spawnPlane(int x, int y) {
-        Enemy entity = new Enemy(x, y, 75,75, 10,100, player.getRectangle(), map);
-        map.addBreakableEntity(entity);
+        CreatureEntity entity = new CreatureEntity(x, y, 75,75, 10,100, 5, Depth.ENEMY, false, player.getRectangle());
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy3"), 150));
     }
     public void spawnKeanu(int x, int y) {
-        Enemy entity = new Enemy(x, y,75,75, 50,100, player.getRectangle(), map);
-        map.addBreakableEntity(entity);
+        CreatureEntity entity = new CreatureEntity(x, y,75,75, 50,100, 5, Depth.ENEMY, false,  player.getRectangle());
+        map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy2"), 112));
     }

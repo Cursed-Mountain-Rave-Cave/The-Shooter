@@ -19,94 +19,43 @@ public class TextureController {
         addType("walls");
         addType("projectiles");
 
+        addTextureArray("floor", "floor", "floor/", 17, 1);
 
-        /**
-         * floor adding
-         */
+        addTextureArray("walls", "wall", "walls/", 3, 5);
 
-        for (int i = 1; i <= 14; i++) {
-            Array<Texture> textures = new Array<>();
-            textures.add(new Texture("floor/" + i + ".png"));
-            addTextureArray("floor", "floor" + i, textures);
-        }
+        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 6, 1);
+        addTextureArray("things", "breakableThing", "environment/breakable/", 5, 2);
 
-        /**
-         * walls adding
-         */
+        addTextureArray("player", "body", "player/bodies/", 7, 9);
+        addTextureArray("player", "legs", "player/legs/", 7, 9);
 
-        for (int i = 1; i <= 3; i++) {
-            Array<Texture> textures = new Array<>();
-            for (int j = 1; j <= 5; j++)
-                textures.add(new Texture("walls/wall" + i + "/" + j + ".png"));
-            addTextureArray("walls", "wall" + i, textures);
-        }
+        addTextureArray("enemy", "enemy", "enemies/", 5, 2);
 
-        /**
-         * unbreakable things adding
-         */
-
-        for (int i = 1; i <= 5; i++) {
-            Array<Texture> textures = new Array<>();
-            textures.add(new Texture("environment/unbreakable/" + i + ".png"));
-            addTextureArray("things", "unbreakableThing" + i, textures);
-        }
-
-        /**
-         * breakable things adding
-         */
-
-        for (int i = 1; i <= 5; i++) {
-            Array<Texture> textures = new Array<>();
-            for (int j = 1; j <= 2; j++)
-                textures.add(new Texture("environment/breakable/breakable" + i + "/" + j + ".png"));
-            addTextureArray("things", "breakableThing" + i, textures);
-        }
-
-        /**
-         * player adding
-         */
-
-        for (int i = 1; i <= 7; i++) {
-            Array<Texture> texturesBody = new Array<>();
-            Array<Texture> texturesLegs = new Array<>();
-            for (int j = 1; j <= 9; j++) {
-                texturesBody.add(new Texture("player/bodies/body" + i + "/" + j + ".png"));
-                texturesLegs.add(new Texture("player/legs/legs" + i + "/" + j + ".png"));
-            }
-            addTextureArray("player", "legs" + i, texturesLegs);
-            addTextureArray("player", "body" + i, texturesBody);
-        }
-
-
-        /**
-         * enemies adding
-         */
-
-        for (int i = 1; i <= 5; i++) {
-            Array<Texture> textures = new Array<>();
-            for (int j = 1; j <= 2; j++)
-                textures.add(new Texture("enemies/enemy" + i + "/" + j + ".png"));
-            addTextureArray("enemy", "enemy" + i, textures);
-        }
-
-        /**
-         * bullets adding
-         */
-
-        for (int i = 1; i <= 5; i++) {
-            Array<Texture> textures = new Array<>();
-            textures.add(new Texture("projectiles/" + i + ".png"));
-            addTextureArray("projectiles", "projectile" + i, textures);
-        }
+        addTextureArray("projectiles", "projectile", "projectiles/", 5, 1);
     }
+
 
     private void addType(String type) {
         Map<String, Array<Texture>> map = new TreeMap<>();
         textures.put(type, map);
     }
 
-    private void addTextureArray(String type, String name, Array<Texture> textures) {
-        this.textures.get(type).put(name, textures);
+    private void addTextureArray(String type, String name, String path, int size, int frames) {
+        if (frames > 1) {
+            for (int i = 1; i <= size; i++) {
+                Array<Texture> textures = new Array<>();
+                for (int j = 1; j <= frames; j++) {
+                    textures.add(new Texture(path + i + "/" + j + ".png"));
+                    this.textures.get(type).put(name + i, textures);
+                }
+            }
+        } else {
+            for (int i = 1; i <= size; i++) {
+                Array<Texture> textures = new Array<>();
+                textures.add(new Texture(path + i + ".png"));
+                this.textures.get(type).put(name + i, textures);
+            }
+        }
     }
 
     public Array<Texture> getTextures(String type, String name) {
