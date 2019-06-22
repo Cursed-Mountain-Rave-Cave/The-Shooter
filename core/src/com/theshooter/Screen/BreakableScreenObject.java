@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.BreakableEntity;
-import com.theshooter.Logic.Entity.Vase;
 
 public class BreakableScreenObject extends ScreenObject{
 
@@ -32,7 +31,7 @@ public class BreakableScreenObject extends ScreenObject{
         if(entity.isBroken())
             setTexture(t.get(1));
 
-        if(Game.config.showAdditionalInfo)
+        if(Game.getInstance().getConfig().showAdditionalInfo && !entity.isBroken())
             font.draw(batch, "" + entity.getHP(), entity.getX() - entity.getY() - shift, (entity.getX() + entity.getY()) / 2 + getTexture().getWidth());
 
         super.draw(batch);

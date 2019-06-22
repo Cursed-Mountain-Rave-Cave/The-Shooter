@@ -1,0 +1,10 @@
+placeWall 149 40 150 66
+placeWall 149 73 150 319
+placeWall 150 40 303 41
+placeWall 302 41 303 319
+placeWall 150 318 255 319
+placeWall 285 318 302 319
+placeWall 230 152 231 177
+placeWall 230 183 231 318
+placeWall 231 152 302 153
+
