@@ -3,6 +3,7 @@ package com.theshooter.Logic.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
 public class Projectile extends Entity {
@@ -19,6 +20,9 @@ public class Projectile extends Entity {
         this.damage = damage;
         this.dx = dx;
         this.dy = dy;
+        float norm = (float)Math.hypot(dx, dy);
+        this.dx /= norm;
+        this.dy /= norm;
         this.velocity = velocity;
         if (lifeTime == 0)
             delete();

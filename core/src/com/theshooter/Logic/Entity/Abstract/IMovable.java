@@ -1,6 +1,6 @@
 package com.theshooter.Logic.Entity.Abstract;
 
-public interface IMovable {
+public interface IMovable extends IEntity {
     void move();
     void moveAt(float dx, float dy);
     float getMovedx();

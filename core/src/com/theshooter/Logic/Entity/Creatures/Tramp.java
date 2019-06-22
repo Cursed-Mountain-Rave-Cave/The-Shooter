@@ -23,13 +23,13 @@ public class Tramp extends CreatureEntity {
                 moveAt(dx, dy);
             else if (getHP() <= 2 * maxHp / 3 && getHP() > maxHp / 10) {
                 moveAt(-dx, -dy);
-                Game.getInstance().shoot1(this, getRectangle(), getTarget());
+                //Game.getInstance().shoot1(this, getRectangle(), getTarget());
               //  setHp(getHP() + 1);
             }
             if (getHP() <= maxHp / 10) {
                 for (int i = 0; i < 10; i++) {
                   //  map.game.shoot3(getRectangle(), target);
-                    Game.getInstance().shoot1(this, getRectangle(), getTarget());
+                 //   Game.getInstance().shoot1(this, getRectangle(), getTarget());
                 }
                 if (dist > 15 * 50)
                     moveAt(dx, dy);

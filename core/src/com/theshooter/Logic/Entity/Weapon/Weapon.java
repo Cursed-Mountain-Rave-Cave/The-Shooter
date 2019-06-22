@@ -1,10 +1,13 @@
-package com.theshooter.Logic.Entity;
+package com.theshooter.Logic.Entity.Weapon;
 
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 abstract public class Weapon {
     private int damage;
+    private int w;
+    private int h;
     private Damage.Type type;
     private int velocity;
     private boolean reloadable;
@@ -12,27 +15,41 @@ abstract public class Weapon {
     private long reloadingTime;
     private long shotTime;
     private long shotLifeTime;
-    private IEntity owner;
+    private CreatureEntity owner;
 
-    protected long lastShot;
+    private long lastShot;
     private int curClipSize;
     private long reloadingEnd;
     private boolean reload;
 
-    public Weapon(int damage, Damage.Type type, int velocity, boolean reloadable, int clipSize, long reloadingTime, long shotTime, long shotLifeTime, IEntity owner) {
-        this.damage = damage;
-        this.type = type;
-        this.velocity = velocity;
-        this.clipSize = clipSize;
-        this.curClipSize = clipSize;
-        this.reloadingTime = reloadingTime;
-        this.shotTime = shotTime;
-        this.shotLifeTime = shotLifeTime;
-        this.owner = owner;
-        this.reloadable = reloadable;
+    public Weapon
+            (int            damage,
+             int            w,
+             int            h,
+             Damage.Type    type,
+             int            velocity,
+             boolean        reloadable,
+             int            clipSize,
+             long           reloadingTime,
+             long           shotTime,
+             long           shotLifeTime,
+             CreatureEntity owner)
+    {
+        this.damage              = damage;
+        this.w                   = w;
+        this.h                   = h;
+        this.type                = type;
+        this.velocity            = velocity;
+        this.clipSize            = clipSize;
+        this.curClipSize         = clipSize;
+        this.reloadingTime       = reloadingTime;
+        this.shotTime            = shotTime;
+        this.shotLifeTime        = shotLifeTime;
+        this.owner               = owner;
+        this.reloadable          = reloadable;
 
-        lastShot = 0;
-        reload = false;
+        lastShot                 = 0;
+        reload                   = false;
     }
 
     public void update() {
@@ -52,10 +69,10 @@ abstract public class Weapon {
         }
     }
 
-    abstract public void attack();
+    abstract public void attack(float dx, float dy);
 
     public boolean canAttack() {
-        return TimeUtils.millis() > lastShot + getShotTime() && getCurClipSize() > 0 && !isReload();
+        return TimeUtils.millis() > lastShot + shotTime && curClipSize > 0 && !reload;
     }
 
     public int getDamage() {
@@ -64,6 +81,34 @@ abstract public class Weapon {
 
     public Damage.Type getType() {
         return type;
+    }
+
+    public int getW() {
+        return w;
+    }
+
+    public void setW(int w) {
+        this.w = w;
+    }
+
+    public void setH(int h) {
+        this.h = h;
+    }
+
+    public void setVelocity(int velocity) {
+        this.velocity = velocity;
+    }
+
+    public void setLastShot(long lastShot) {
+        this.lastShot = lastShot;
+    }
+
+    public int getH() {
+        return h;
+    }
+
+    public long getLastShot() {
+        return lastShot;
     }
 
     public int getVelocity() {
@@ -94,7 +139,7 @@ abstract public class Weapon {
         return shotLifeTime;
     }
 
-    public IEntity getOwner() {
+    public CreatureEntity getOwner() {
         return owner;
     }
 
@@ -138,7 +183,7 @@ abstract public class Weapon {
         this.shotLifeTime = shotLifeTime;
     }
 
-    public void setOwner(IEntity owner) {
+    public void setOwner(CreatureEntity owner) {
         this.owner = owner;
     }
 

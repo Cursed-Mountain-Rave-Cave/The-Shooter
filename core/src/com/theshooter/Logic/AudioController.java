@@ -22,23 +22,15 @@ public class AudioController {
         music = new TreeMap<>();
         musicStack = new Stack<>();
 
-        FileHandle levels = Gdx.files.internal("sound");
-        FileHandle[] path = levels.list();
+        addSoundType("reloading");
+        addSoundType("damage");
 
-        for(FileHandle handle: path){
-            addSoundType(handle.name());
-            FileHandle soundsPath = Gdx.files.internal("sound/" + handle.name());
-            FileHandle[] sounds = soundsPath.list();
-            addSounds(handle.name(), "sound/" + handle.name() + "/", sounds.length);
-        }
+        addSounds("reloading", 14);
+        addSounds("damage", 3);
 
-        levels = Gdx.files.internal("music");
-        path = levels.list();
-
-        for(FileHandle handle: path) {
-            System.out.println(handle.name());
-            addMusic(handle.name().replace(".mp3", ""), "music/" + handle.name());
-        }
+        addMusic("arabian");
+        addMusic("american");
+        addMusic("casino");
 
     }
 
@@ -46,15 +38,15 @@ public class AudioController {
         sound.put(type, new Array<>());
     }
 
-    private void addSounds(String type, String path, int size) {
+    private void addSounds(String type, int size) {
         for (int i = 1; i <= size; i++) {
-            Sound sound = Gdx.audio.newSound(Gdx.files.internal(path + i + ".mp3"));
+            Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/" + type + "/" + i + ".mp3"));
             this.sound.get(type).add(sound);
         }
     }
 
-    private void addMusic(String name, String file) {
-        this.music.put(name, Gdx.audio.newMusic(Gdx.files.internal(file)));
+    private void addMusic(String name) {
+        this.music.put(name, Gdx.audio.newMusic(Gdx.files.internal("music/" + name + ".mp3")));
     }
 
     public void pauseMusic() {
