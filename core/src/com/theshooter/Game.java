@@ -56,6 +56,41 @@ public class Game extends com.badlogic.gdx.Game {
 		for(int i = 1; i <= 8; ++i)
 			reloadingSound[6 + i] = Gdx.audio.newSound(Gdx.files.internal("sound/Cover/" + i + ".mp3"));
 	}
+	private void playSound(int num) {
+		switch (num) {
+			case 1:
+			case 7:
+			case 9:
+			case 10:
+			case 12:
+			case 13:
+				reloadingSound[num].play(0.2f);
+				break;
+
+			case 2:
+			case 3:
+			case 4:
+				reloadingSound[num].play(1.0f);
+				break;
+
+			case 5:
+			case 6:
+				reloadingSound[num].play(0.1f);
+				break;
+
+			case 8:
+				reloadingSound[num].play(0.17f);
+				break;
+
+			case 11:
+				reloadingSound[num].play(0.15f);
+				break;
+
+			case 14:
+				reloadingSound[num].play(0.4f);
+				break;
+		}
+	}
 
 	@Override
 	public void create () {
@@ -72,7 +107,7 @@ public class Game extends com.badlogic.gdx.Game {
 					}
 				}
 				int rand = MathUtils.random(1, 14);
-				reloadingSound[rand].play(0.8f);
+				playSound(rand);
 				ammoSupply = 0;
 				reloadStage = 0;
 				try {
@@ -95,7 +130,7 @@ public class Game extends com.badlogic.gdx.Game {
 
         SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/SimpleMan.mp3"));
 
-        SimpleMan.setVolume(0.2f);
+        SimpleMan.setVolume(0.03f);
         SimpleMan.setLooping(true);
         SimpleMan.play();
 
@@ -319,5 +354,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void dispose () {
 		textureController.dispose();
+		for(int i = 1; i < 15; ++i)
+			reloadingSound[i].dispose();
 	}
 }
