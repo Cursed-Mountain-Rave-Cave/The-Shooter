@@ -1,17 +1,21 @@
 package com.theshooter.Logic.Entity;
 
 import com.badlogic.gdx.Gdx;
+import com.theshooter.Logic.Damage;
 import com.theshooter.Screen.Depth;
 
-public class Bullet extends Entity{
+public class Projectile extends Entity{
 
-    float dx;
-    float dy;
+    private float dx;
+    private float dy;
+
+    private Damage damage;
 
     static final int VELOCITY = 2000;
 
-    public Bullet(int x, int y, float dx, float dy){
+    public Projectile(Damage damage, int x, int y, float dx, float dy){
         super(x, y, 10, 10, Depth.EFFECTS);
+        this.damage = damage;
         this.dx = dx;
         this.dy = dy;
     }
@@ -25,4 +29,8 @@ public class Bullet extends Entity{
 
     public float getDx() { return dx; }
     public float getDy() { return dy; }
+
+    public Damage getDamage(){
+        return damage;
+    }
 }

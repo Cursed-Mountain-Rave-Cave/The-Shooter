@@ -1,6 +1,7 @@
 package com.theshooter.Logic.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.theshooter.Logic.Damage;
 import com.theshooter.Screen.Depth;
 import com.badlogic.gdx.audio.Sound;
 
@@ -37,9 +38,9 @@ public class BreakableEntity extends Entity implements IBreakableEntity {
         return hp;
     }
 
-    public void breakDown() {
+    public void breakDown(Damage damage) {
         if (hp > 0) {
-            hp--;
+            hp -= damage.getValue();
             int randomID = MathUtils.random(1, 3);
             if (randomID == 1)
                 Spank.play(0.2f);
@@ -48,7 +49,7 @@ public class BreakableEntity extends Entity implements IBreakableEntity {
             if (randomID == 3)
                 Spank2.play(0.2f);
         }
-        if (hp == 0)
+        if (hp <= 0)
             broken = true;
     }
 

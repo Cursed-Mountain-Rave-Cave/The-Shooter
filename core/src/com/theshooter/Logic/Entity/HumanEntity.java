@@ -1,6 +1,7 @@
 package com.theshooter.Logic.Entity;
 
 import com.badlogic.gdx.Gdx;
+import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
@@ -46,10 +47,10 @@ public class HumanEntity extends Entity implements ILookable, IMovable, IBreakab
     }
 
     @Override
-    public void breakDown() {
+    public void breakDown(Damage damage) {
         if(hp > 0)
-            hp--;
-        if(hp == 0)
+            hp -= damage.getValue();
+        if(hp <= 0)
             broken = true;
     }
 

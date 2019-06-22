@@ -17,7 +17,7 @@ public class TextureController {
         addType("things");
         addType("enemy");
         addType("walls");
-        addType("bullets");
+        addType("projectiles");
 
 
         /**
@@ -95,8 +95,8 @@ public class TextureController {
 
         for (int i = 1; i <= 5; i++) {
             Array<Texture> textures = new Array<>();
-            textures.add(new Texture("bullets/" + i + ".png"));
-            addTextureArray("bullets", "bullet" + i, textures);
+            textures.add(new Texture("projectiles/" + i + ".png"));
+            addTextureArray("projectiles", "projectile" + i, textures);
         }
     }
 

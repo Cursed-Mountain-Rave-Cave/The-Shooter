@@ -7,10 +7,6 @@ import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 import com.theshooter.Screen.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -193,8 +189,9 @@ public class EntityController {
         scanner.close();
     }
 
-    public void addBullet(Bullet bullet){
-        screenObjectArray.add(new BulletScreenObject(bullet, Game.getInstance().getTextureController().getTexture("bullets", "bullet" + MathUtils.random(1, 5)), 5));
+    public void addBullet(Projectile projectile){
+        map.addBullet(projectile);
+        screenObjectArray.add(new BulletScreenObject(projectile, Game.getInstance().getTextureController().getTexture("projectiles", "projectile" + MathUtils.random(1, 5)), 5));
     }
 
     public void placeFloor(int x, int y, int type){

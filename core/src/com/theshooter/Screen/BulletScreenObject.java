@@ -3,12 +3,12 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.theshooter.Logic.Entity.Bullet;
+import com.theshooter.Logic.Entity.Projectile;
 
 public class BulletScreenObject extends ScreenObject {
 
-    public BulletScreenObject(Bullet bullet, Texture texture, int shift) {
-        super(bullet, texture, shift);
+    public BulletScreenObject(Projectile projectile, Texture texture, int shift) {
+        super(projectile, texture, shift);
     }
 
     @Override
