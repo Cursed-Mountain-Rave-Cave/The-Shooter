@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.*;
 import com.theshooter.Logic.Entity.*;
+import com.theshooter.Logic.Entity.Abstract.IEntity;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Utils.Config;
@@ -87,7 +88,7 @@ public class Game extends com.badlogic.gdx.Game {
 		audioController = new AudioController();
 		entityController = new EntityController();
 
-		audioController.playMusic("casino", 0.3f);
+		audioController.playMusic("casino", 1f);
 
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();

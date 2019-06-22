@@ -1,6 +1,6 @@
 package com.theshooter.Logic;
 
-import com.theshooter.Logic.Entity.IEntity;
+import com.theshooter.Logic.Entity.Abstract.IEntity;
 
 public class Damage {
     public enum Type{

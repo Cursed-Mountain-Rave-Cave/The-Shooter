@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.Damage;
 import com.theshooter.Screen.Depth;
 
-public class Projectile extends Entity{
+public class Projectile extends Entity {
 
     private long lifeTime;
     private Damage damage;

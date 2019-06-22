@@ -1,41 +1,34 @@
 package com.theshooter.Logic.Entity;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.theshooter.Logic.Entity.Abstract.IEntity;
 import com.theshooter.Screen.Depth;
 
-public class Entity implements IEntity{
+public class Entity implements IEntity {
     private Rectangle rect;
     private Depth depth;
-    boolean passable;
-    boolean isDelete;
-
-    public Entity(int x, int y, int w, int h, Depth depth, boolean passable){
-        this.rect = new Rectangle(x, y, w, h);
-        this.depth = depth;
-        this.passable = passable;
-        this.isDelete = false;
-    }
-
-    public void delete(){
-        this.isDelete = true;
-    }
-
-    public boolean isDeleted(){
-        return this.isDelete;
-    }
-
-    public Entity(int x, int y, int w, int h, Depth depth){
-        this(x, y, w, h, depth, true);
-    }
+    private boolean passable;
+    private boolean isDelete;
 
     public Entity(Rectangle r, Depth depth, boolean passable) {
         rect = new Rectangle(r);
         this.depth = depth;
         this.passable = passable;
     }
+    public Entity(int x, int y, int w, int h, Depth depth, boolean passable){
+        this(new Rectangle(x, y, w, h), depth, passable);
+    }
+    public Entity(int x, int y, int w, int h, Depth depth){
+        this(x, y, w, h, depth, true);
+    }
 
-    public void update(){
+    public void update() {}
 
+    public void delete(){
+        this.isDelete = true;
+    }
+    public boolean isDeleted(){
+        return this.isDelete;
     }
 
     public Depth getDepth() {
