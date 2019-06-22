@@ -2,11 +2,12 @@ package com.theshooter.Logic.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Abstract.IBreakable;
 import com.theshooter.Screen.Depth;
 import com.badlogic.gdx.audio.Sound;
 
 
-public class BreakableEntity extends Entity implements IBreakableEntity {
+public class BreakableEntity extends Entity implements IBreakable {
 
     protected int hp;
     protected boolean broken;

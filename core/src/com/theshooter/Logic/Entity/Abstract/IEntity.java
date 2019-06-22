@@ -1,12 +1,9 @@
-package com.theshooter.Logic.Entity;
+package com.theshooter.Logic.Entity.Abstract;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Screen.Depth;
 
-public interface IEntity {
-
-    void update();
-
+public interface IEntity extends IUpdateble {
     Depth getDepth();
     int getX();
     int getY();

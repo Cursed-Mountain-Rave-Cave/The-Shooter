@@ -41,12 +41,6 @@ public class EntityController {
         map.clear();
         screenObjectArray.clear();
 
-        FileHandle levels = Gdx.files.internal("levels");
-        FileHandle[] path = levels.list();
-        for(FileHandle handle: path){
-            System.out.println(handle.name());
-        }
-
         loadPlayer(name);
         loadFloors(name);
         loadWalls(name);

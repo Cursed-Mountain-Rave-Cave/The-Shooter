@@ -2,10 +2,13 @@ package com.theshooter.Logic.Entity;
 
 import com.badlogic.gdx.Gdx;
 import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Abstract.IBreakable;
+import com.theshooter.Logic.Entity.Abstract.ILookable;
+import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
-public class HumanEntity extends Entity implements ILookable, IMovable, IBreakableEntity {
+public class HumanEntity extends Entity implements ILookable, IMovable, IBreakable {
 
 
     protected Map map;

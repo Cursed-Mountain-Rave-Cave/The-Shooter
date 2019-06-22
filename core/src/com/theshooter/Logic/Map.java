@@ -2,24 +2,25 @@ package com.theshooter.Logic;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
+import com.theshooter.Logic.Entity.Abstract.IBreakable;
+import com.theshooter.Logic.Entity.Abstract.IEntity;
 
 public class Map {
     private Array<IEntity> entities;
     private Array<IEntity> notPassableEntities;
-    private Array<Projectile> bullets;
-    private Array<Projectile> bulletsDelete;
-    private Array<IBreakableEntity> breakableEntities;
+    private Array<Projectile> projectoles;
+    private Array<Projectile> projectolesDelete;
+    private Array<IBreakable> breakableEntities;
     private Array<IEntity> entitiesDelete;
-    private Array<IBreakableEntity> enemies;
-    private Array<IBreakableEntity> players;
+    private Array<IBreakable> enemies;
+    private Array<IBreakable> players;
 
     public Map(){
         entities = new Array<>();
         notPassableEntities = new Array<>();
-        bullets = new Array<>();
-        bulletsDelete = new Array<>();
+        projectoles = new Array<>();
+        projectolesDelete = new Array<>();
         breakableEntities = new Array<>();
         entitiesDelete = new Array<>();
         enemies = new Array<>();
@@ -32,7 +33,7 @@ public class Map {
             entity.update();
             if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000) {
                 if(entity instanceof Projectile)
-                    bulletsDelete.add((Projectile) entity);
+                    projectolesDelete.add((Projectile) entity);
                 entitiesDelete.add(entity);
                 entity.delete();
             }
@@ -40,44 +41,44 @@ public class Map {
 
         entities.removeAll(entitiesDelete,true);
         notPassableEntities.removeAll(entitiesDelete,true);
-        bullets.removeAll(bulletsDelete,true);
+        projectoles.removeAll(projectolesDelete,true);
         entitiesDelete.clear();
-        bulletsDelete.clear();
+        projectolesDelete.clear();
 
-        for(Projectile bullet: bullets){
-            for(IBreakableEntity breakable: breakableEntities){
-                if(breakable == bullet.getDamage().getOwner())
+        for(Projectile projectole: projectoles){
+            for(IBreakable breakable: breakableEntities){
+                if(breakable == projectole.getDamage().getOwner())
                     continue;
-                if(breakable.getRectangle().overlaps(bullet.getRectangle())){
-                    breakable.breakDown(bullet.getDamage());
+                if(breakable.getRectangle().overlaps(projectole.getRectangle())){
+                    breakable.breakDown(projectole.getDamage());
                     if(breakable.isBroken()){
                         notPassableEntities.removeValue(breakable, true);
                         breakableEntities.removeValue(breakable, true);
                     }
-                    bullet.delete();
-                    bulletsDelete.add(bullet);
+                    projectole.delete();
+                    projectolesDelete.add(projectole);
                     break;
                 }
             }
 
-            if(bullet.isDeleted())
+            if(projectole.isDeleted())
                 continue;
 
             for(IEntity entity: notPassableEntities){
-                if(entity == bullet.getDamage().getOwner())
+                if(entity == projectole.getDamage().getOwner())
                     continue;
-                if(entity.getRectangle().overlaps(bullet.getRectangle())){
-                    bulletsDelete.add(bullet);
-                    bullet.delete();
+                if(entity.getRectangle().overlaps(projectole.getRectangle())){
+                    projectolesDelete.add(projectole);
+                    projectole.delete();
                 }
             }
 
         }
 
-        entities.removeAll(bulletsDelete,true);
-        bullets.removeAll(bulletsDelete,true);
+        entities.removeAll(projectolesDelete,true);
+        projectoles.removeAll(projectolesDelete,true);
         entitiesDelete.clear();
-        bulletsDelete.clear();
+        projectolesDelete.clear();
     }
 
     public void addEntity(IEntity entity){
@@ -88,10 +89,10 @@ public class Map {
 
     public void addBullet(Projectile entity){
         entities.add(entity);
-        bullets.add(entity);
+        projectoles.add(entity);
     }
 
-    public void addBreakableEntity(IBreakableEntity entity){
+    public void addBreakableEntity(IBreakable entity){
         addEntity(entity);
         if(entity.getClass() == HumanEnemy.class || entity instanceof Enemy)
             enemies.add(entity);
@@ -111,7 +112,7 @@ public class Map {
     public void clear(){
         entities.clear();
         notPassableEntities.clear();
-        bullets.clear();
+        projectoles.clear();
         breakableEntities.clear();
         entitiesDelete.clear();
         enemies.clear();

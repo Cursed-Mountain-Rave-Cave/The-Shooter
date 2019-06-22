@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Damage;
-import com.theshooter.Logic.Entity.IEntity;
+import com.theshooter.Logic.Entity.Abstract.IEntity;
 import com.theshooter.Logic.Entity.Projectile;
 import com.theshooter.Logic.EntityController;
 import com.theshooter.Logic.InputController;
