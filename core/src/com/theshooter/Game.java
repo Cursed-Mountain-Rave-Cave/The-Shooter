@@ -4,6 +4,7 @@ package com.theshooter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Logic.Entity.Player;
