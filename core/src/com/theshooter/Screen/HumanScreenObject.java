@@ -36,12 +36,10 @@ public class HumanScreenObject extends ScreenObject {
         setCurrentLegs();
         setCurrentBody();
 
-
         if (human.isBroken()) {
             this.currentBody = 8;
             this.currentLegs = 8;
         }
-
 
         batch.draw(legs.get(currentLegs), getScreenX() - shift, getScreenY());
         batch.draw(body.get(currentBody), getScreenX() - shift, getScreenY());

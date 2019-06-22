@@ -30,7 +30,7 @@ public class Map {
     public void update(){
         for(IEntity entity: entities) {
             entity.update();
-            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000) {
+            if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000 || entity.isDeleted()) {
                 if(entity instanceof Projectile)
                     bulletsDelete.add((Projectile) entity);
                 entitiesDelete.add(entity);
@@ -54,9 +54,9 @@ public class Map {
                         notPassableEntities.removeValue(breakable, true);
                         breakableEntities.removeValue(breakable, true);
                     }
-                    bullet.delete();
-                    bulletsDelete.add(bullet);
-                    break;
+                   // bullet.delete();
+                    //bulletsDelete.add(bullet);
+                    //break;
                 }
             }
 

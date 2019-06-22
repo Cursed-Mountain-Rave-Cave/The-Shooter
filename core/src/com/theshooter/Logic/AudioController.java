@@ -35,8 +35,10 @@ public class AudioController {
         levels = Gdx.files.internal("music");
         path = levels.list();
 
-        for(FileHandle handle: path)
+        for(FileHandle handle: path) {
+            System.out.println(handle.name());
             addMusic(handle.name().replace(".mp3", ""), "music/" + handle.name());
+        }
 
     }
 

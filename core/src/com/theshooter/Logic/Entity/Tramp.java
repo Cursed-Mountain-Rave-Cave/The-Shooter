@@ -40,13 +40,11 @@ public class Tramp extends Enemy {
                 tryMove(changeX, changeY);
             else if (getHP() <= 2 * maxHp / 3 && getHP() > maxHp / 10) {
                 tryMove(-changeX, -changeY);
-                Game.getInstance().shoot1(this, getRectangle(), target);
               //  setHp(getHP() + 1);
             }
             if (getHP() <= maxHp / 10) {
                 for (int i = 0; i < 10; i++) {
                   //  map.game.shoot3(getRectangle(), target);
-                    Game.getInstance().shoot1(this, getRectangle(), target);
                 }
                 if (dist > 15 * 50)
                     tryMove(changeX, changeY);

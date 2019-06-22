@@ -1,8 +1,10 @@
 package com.theshooter;
 
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.*;
@@ -11,6 +13,8 @@ import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Utils.Config;
 import com.badlogic.gdx.audio.Music;
+
+import java.io.File;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -25,6 +29,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private EntityController entityController;
 	private TextureController textureController;
 	private AudioController audioController;
+	private Weapon weapon;
 
 	private final int FULL_CLIP = 100;
 	private boolean isReloading;
@@ -44,7 +49,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void create () {
 		isReloading = false;
-		thread = new Thread( ()-> {
+		/*thread = new Thread( ()-> {
 			while(true) {
 				while(!isReloading) {
 					try {
@@ -71,7 +76,9 @@ public class Game extends com.badlogic.gdx.Game {
 			}
 		});
 		thread.setDaemon(true);
-		thread.start();
+		thread.start();*/
+
+
 
 		config = new Config();
 
@@ -80,7 +87,7 @@ public class Game extends com.badlogic.gdx.Game {
 		audioController = new AudioController();
 		entityController = new EntityController();
 
-		audioController.playMusic("arabian", 0.03f);
+		audioController.playMusic("casino", 0.3f);
 
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
@@ -93,17 +100,20 @@ public class Game extends com.badlogic.gdx.Game {
 		ammoSupply = FULL_CLIP;
 
 		Gdx.input.setInputProcessor(inputController);
+
+		weapon = new Sword(10, (long)200, entityController.getPlayer());
+
 	}
 
 	public void reload() {
-		if(!isReloading && ammoSupply < FULL_CLIP)
-			isReloading = true;
+		weapon.reload();
+		System.out.println("i'm here");
 	}
 
 	public String checkAmmoSuply() {
 		if(isReloading)
 			return "reloading " + reloadStage + "%";
-		return Integer.valueOf(ammoSupply).toString();
+		return Integer.valueOf(weapon.getCurClipSize()).toString();
 	}
 
 	public Config getConfig() {
@@ -122,176 +132,17 @@ public class Game extends com.badlogic.gdx.Game {
 		return audioController;
 	}
 
-	private int scatter;
-	private float sinAlpha, cosAlpha;
-
 	public void shoot1(IEntity owner){
-		if(ammoSupply <= 0) return;
-		ammoSupply--;
-		
-	    float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-	    float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
-
-	    float dx = sdx/2 + sdy;
-	    float dy = -sdx/2 + sdy;
-
-	    float norm = (float) Math.sqrt(dx*dx + dy*dy);
-
-	    dx /= norm;
-	    dy /= norm;
-
-	    scatter = MathUtils.random(-5, 5);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) scatter));
-		cosAlpha = (float) Math.cos(Math.toRadians((double) scatter));
-
-		float dx1 = dx*cosAlpha - dy*sinAlpha;
-		float dy1 = dx*sinAlpha + dy*cosAlpha;
-
-        Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
-									entityController.getPlayer().getY() + 25, dx1, dy1, 2000);
-        entityController.addBullet(projectile);
+		weapon.attack();
+		System.out.println(weapon.getCurClipSize());
     }
-    
-	public void shoot1(IEntity owner, Rectangle shooter, Rectangle target){
-		float dx = target.getX() - shooter.getX();
-		float dy = target.getY() - shooter.getY();
-
-		float norm = (float) Math.sqrt(dx*dx + dy*dy);
-
-		dx /= norm;
-		dy /= norm;
-
-		scatter = MathUtils.random(-5, 5);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) scatter));
-		cosAlpha = (float) Math.cos(Math.toRadians((double) scatter));
-
-		float dx1 = dx*cosAlpha - dy*sinAlpha;
-		float dy1 = dx*sinAlpha + dy*cosAlpha;
-
-		Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + shooter.getWidth()/2), (int)(shooter.getY() + shooter.getHeight()/2), dx1, dy1, 2000);
-		entityController.addBullet(projectile);
-	}
-
-    public void shoot2(IEntity owner) {
-		if(ammoSupply < 3) {
-			shoot1(owner);
-			return;
-		}
-		ammoSupply -= 3;
-
-		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
-
-		float dx = sdx/2 + sdy;
-		float dy = -sdx/2 + sdy;
-
-		float norm = (float) Math.sqrt(dx*dx + dy*dy);
-
-		dx /= norm;
-		dy /= norm;
-
-		scatter = MathUtils.random(-10, 10);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
-		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
-
-		float dx1 = dx*cosAlpha - dy*sinAlpha;
-		float dy1 = dx*sinAlpha + dy*cosAlpha;
-
-		scatter = MathUtils.random(-10, 10);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
-		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
-
-		float dx2 = dx*cosAlpha - dy*sinAlpha;
-		float dy2 = dx*sinAlpha + dy*cosAlpha;
-
-
-		scatter = MathUtils.random(-10, 10);
-		sinAlpha = (float) Math.sin(Math.toRadians((double) (15 + scatter)));
-		cosAlpha = (float) Math.cos(Math.toRadians((double) (15 + scatter)));
-
-		float dx3 = dx*cosAlpha + dy*sinAlpha;
-		float dy3 = -dx*sinAlpha + dy*cosAlpha;
-
-		Projectile projectile1 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
-									entityController.getPlayer().getY() + 25, dx1, dy1, 2000);
-		Projectile projectile2 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
-									entityController.getPlayer().getY() + 25, dx2, dy2, 2000);
-		Projectile projectile3 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
-									entityController.getPlayer().getY() + 25, dx3, dy3, 2000);
-
-		entityController.addBullet(projectile1); entityController.addBullet(projectile2); entityController.addBullet(projectile3);
-	}
-
-	public void shoot3(IEntity owner) {
-		if(ammoSupply < 8) {
-			shoot2(owner);
-			return;
-		}
-
-		ammoSupply -= 8;
-
-		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-		float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
-
-		float dx = sdx/2 + sdy;
-		float dy = -sdx/2 + sdy;
-
-		float norm = (float) Math.sqrt(dx*dx + dy*dy);
-
-		dx /= norm;
-		dy /= norm;
-
-		float newDx, newDy;
-		for(int i = 0; i < 8; ++i) {
-			scatter = MathUtils.random(-2, 2);
-			sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
-			cosAlpha = (float) Math.cos(Math.toRadians((double) (45 + scatter)));
-
-			newDx = dx*cosAlpha - dy*sinAlpha;
-			newDy = dx*sinAlpha + dy*cosAlpha;
-
-			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25), (int)(entityController.getPlayer().getY() + 25), newDx, newDy, 2000);
-			entityController.addBullet(projectile);
-
-			dx = newDx;
-			dy = newDy;
-		}
-	}
-
-	public void shoot3(IEntity owner, Rectangle shooter, Rectangle target) {
-		//float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
-		//float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
-
-		float dx = shooter.getX() + target.getX();
-		float dy = shooter.getY() + target.getY();
-
-		float norm = (float) Math.sqrt(dx*dx + dy*dy);
-
-		dx /= norm;
-		dy /= norm;
-
-		float newDx, newDy;
-		for(int i = 0; i < 8; ++i) {
-			scatter = MathUtils.random(-2, 2);
-			sinAlpha = (float) Math.sin(Math.toRadians((double) (45 + scatter)));
-			cosAlpha = (float) Math.cos(Math.toRadians((double) (45 + scatter)));
-
-			newDx = dx*cosAlpha - dy*sinAlpha;
-			newDy = dx*sinAlpha + dy*cosAlpha;
-
-			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + shooter.getWidth()/2), (int)(shooter.getY() + shooter.getHeight()/2), newDx, newDy, 2000);
-			entityController.addBullet(projectile);
-
-			dx = newDx;
-			dy = newDy;
-		}
-	}
 
 	@Override
 	public void render () {
 		super.render();
 		inputController.update();
 		entityController.update();
+		weapon.update();
 	}
 
 	@Override

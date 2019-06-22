@@ -53,12 +53,6 @@ public class InputController implements InputProcessor {
                 case 1:
                     Game.getInstance().shoot1(Game.getInstance().getEntityController().getPlayer());
                     break;
-                case 2:
-                    Game.getInstance().shoot2(Game.getInstance().getEntityController().getPlayer());
-                    break;
-                case 3:
-                    Game.getInstance().shoot3(Game.getInstance().getEntityController().getPlayer());
-                    break;
             }
     }
 
