@@ -44,14 +44,6 @@ public class Game extends com.badlogic.gdx.Game {
 		super();
 	}
 
-/*	private void initSound() {
-		reloadingSound = new Sound[15];
-		for(int i = 1; i <= 6; ++i)
-			reloadingSound[i] = Gdx.audio.newSound(Gdx.files.internal("sound/Reloading/" + i + ".mp3"));
-		for(int i = 1; i <= 8; ++i)
-			reloadingSound[6 + i] = Gdx.audio.newSound(Gdx.files.internal("sound/Cover/" + i + ".mp3"));
-	}*/
-
 	@Override
 	public void create () {
 		isReloading = false;
@@ -308,6 +300,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void dispose () {
 		textureController.dispose();
+		audioController.dispose();
 		for(int i = 1; i < 15; ++i)
 			reloadingSound[i].dispose();
 	}

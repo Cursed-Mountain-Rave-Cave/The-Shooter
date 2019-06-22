@@ -3,6 +3,7 @@ package com.theshooter.Logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
@@ -21,14 +22,21 @@ public class AudioController {
         music = new TreeMap<>();
         musicStack = new Stack<>();
 
-        addSoundType("reloading");
-        addSoundType("damage");
+        FileHandle levels = Gdx.files.internal("sound");
+        FileHandle[] path = levels.list();
 
-        addSounds("reloading", "sound/reloading/", 14);
-        addSounds("damage", "sound/damage/", 3);
+        for(FileHandle handle: path){
+            addSoundType(handle.name());
+            FileHandle soundsPath = Gdx.files.internal("sound/" + handle.name());
+            FileHandle[] sounds = soundsPath.list();
+            addSounds(handle.name(), "sound/" + handle.name() + "/", sounds.length);
+        }
 
-        addMusic("arabian", "music/arabian.mp3");
-        addMusic("american", "music/american.mp3");
+        levels = Gdx.files.internal("music");
+        path = levels.list();
+
+        for(FileHandle handle: path)
+            addMusic(handle.name().replace(".mp3", ""), "music/" + handle.name());
 
     }
 
@@ -48,26 +56,32 @@ public class AudioController {
     }
 
     public void pauseMusic() {
-        if (musicStack.isEmpty())
+        if (musicStack.empty())
             return;
         musicStack.peek().pause();
     }
 
+    public void resumeMusic() {
+        if (musicStack.empty())
+            return;
+        musicStack.peek().play();
+    }
+
     public void stopMusic() {
-        if (musicStack.isEmpty())
+        if (musicStack.empty())
             return;
         musicStack.peek().stop();
         musicStack.pop();
-        if (musicStack.isEmpty())
+        if (musicStack.empty())
             return;
         musicStack.peek().play();
     }
 
     public void stopAllMusic() {
-        if (musicStack.isEmpty())
-            return;
-        musicStack.peek().stop();
-        musicStack.pop();
+        while (!musicStack.empty()) {
+            musicStack.peek().stop();
+            musicStack.pop();
+        }
     }
 
     public void playMusic(String name, float volume) {
@@ -82,5 +96,14 @@ public class AudioController {
     public void playSound(String type) {
         int size = sound.get(type).size;
         sound.get(type).get(MathUtils.random(0, size - 1)).play();
+    }
+
+    public void dispose() {
+        for (String s : sound.keySet())
+            for (Sound sound : this.sound.get(s))
+                sound.dispose();
+
+        for (String s : music.keySet())
+            music.get(s).dispose();
     }
 }
