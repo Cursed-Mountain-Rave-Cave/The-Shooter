@@ -38,7 +38,7 @@ public class BreakableEntity extends Entity implements IBreakableEntity {
 
     public void breakDown(Damage damage) {
         if (hp > 0) {
-            Game.getInstance().getMusicController().playSound("damage");
+            Game.getInstance().getAudioController().playSound("damage");
             hp -= damage.getValue();
         }
         if (hp <= 0)

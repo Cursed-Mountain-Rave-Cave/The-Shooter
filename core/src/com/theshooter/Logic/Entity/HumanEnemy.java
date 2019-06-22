@@ -45,7 +45,7 @@ public class HumanEnemy extends HumanEntity {
     @Override
     public void breakDown(Damage damage) {
         super.breakDown(damage);
-        Game.getInstance().getMusicController().playSound("damage");
+        Game.getInstance().getAudioController().playSound("damage");
         damaged = true;
     }
 }

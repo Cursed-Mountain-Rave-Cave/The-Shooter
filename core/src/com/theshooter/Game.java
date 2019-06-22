@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.*;
+import com.theshooter.Logic.Entity.*;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Utils.Config;
@@ -128,7 +129,7 @@ public class Game extends com.badlogic.gdx.Game {
 		return textureController;
 	}
 
-	public AudioController getMusicController() {
+	public AudioController getAudioController() {
 		return audioController;
 	}
 
