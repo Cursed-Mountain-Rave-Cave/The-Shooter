@@ -43,7 +43,7 @@ public class Map {
         bullets.removeAll(bulletsDelete,true);
         entitiesDelete.clear();
         bulletsDelete.clear();
-        
+
         for(Projectile bullet: bullets){
             for(IBreakableEntity breakable: breakableEntities){
                 if(breakable == bullet.getDamage().getOwner())

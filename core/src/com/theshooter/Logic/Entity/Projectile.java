@@ -6,25 +6,26 @@ import com.theshooter.Screen.Depth;
 
 public class Projectile extends Entity{
 
-    private float dx;
-    private float dy;
 
     private Damage damage;
 
-    static final int VELOCITY = 2000;
+    private float dx;
+    private float dy;
+    private int velocity;
 
-    public Projectile(Damage damage, int x, int y, float dx, float dy){
+    public Projectile(Damage damage, int x, int y, float dx, float dy, int velocity){
         super(x, y, 10, 10, Depth.EFFECTS);
         this.damage = damage;
         this.dx = dx;
         this.dy = dy;
+        this.velocity = velocity;
     }
 
     @Override
     public void update() {
         super.update();
-        setX((int) (getX() + dx * Gdx.graphics.getDeltaTime() * VELOCITY));
-        setY((int) (getY() + dy * Gdx.graphics.getDeltaTime() * VELOCITY));
+        setX((int) (getX() + dx * Gdx.graphics.getDeltaTime() * velocity));
+        setY((int) (getY() + dy * Gdx.graphics.getDeltaTime() * velocity));
     }
 
     public float getDx() { return dx; }
