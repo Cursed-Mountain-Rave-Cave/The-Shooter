@@ -2,6 +2,8 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Logic.*;
 import com.theshooter.Logic.Entity.Abstract.IEntity;
 import com.theshooter.Logic.Entity.Weapon.*;
@@ -61,7 +63,6 @@ public class Game extends com.badlogic.gdx.Game {
 		Gdx.input.setInputProcessor(inputController);
 
 		weapon = new ThrowingKnife(entityController.getPlayer());
-
 	}
 
 	public void reload() {
@@ -94,7 +95,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 		float dx = sdx / 2 + sdy;
 		float dy = -sdx / 2 + sdy;
-		weapon.attack(dx, dy);
+		weapon.attack(new Vector2(dx, dy));
     }
 
 	@Override

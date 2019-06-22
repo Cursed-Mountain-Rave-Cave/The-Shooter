@@ -1,5 +1,6 @@
 package com.theshooter.Logic.Entity.Weapon;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
@@ -69,7 +70,7 @@ abstract public class Weapon {
         }
     }
 
-    abstract public void attack(float dx, float dy);
+    abstract public void attack(Vector2 vect);
 
     public boolean canAttack() {
         return TimeUtils.millis() > lastShot + shotTime && curClipSize > 0 && !reload;
