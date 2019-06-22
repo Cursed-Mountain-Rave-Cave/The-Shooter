@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
+import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
@@ -42,8 +43,8 @@ public class HumanEnemy extends HumanEntity {
     }
 
     @Override
-    public void breakDown() {
-        super.breakDown();
+    public void breakDown(Damage damage) {
+        super.breakDown(damage);
         Game.getInstance().getMusicController().playSound("damage");
         damaged = true;
     }

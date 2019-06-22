@@ -17,7 +17,7 @@ public class TextureController {
         addType("things");
         addType("enemy");
         addType("walls");
-        addType("bullets");
+        addType("projectiles");
 
         addTextureArray("floor", "floor", "floor/", 14, 1);
 
@@ -31,7 +31,7 @@ public class TextureController {
 
         addTextureArray("enemy", "enemy", "enemies/", 5, 2);
 
-        addTextureArray("bullets", "bullet", "bullets/", 5, 1);
+        addTextureArray("projectiles", "projectile", "projectiles/", 5, 1);
     }
 
   /*  private void*/

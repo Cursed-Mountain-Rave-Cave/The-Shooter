@@ -8,7 +8,8 @@ import com.theshooter.Logic.Entity.*;
 public class Map {
     private Array<IEntity> entities;
     private Array<IEntity> notPassableEntities;
-    private Array<IEntity> bullets;
+    private Array<Projectile> bullets;
+    private Array<Projectile> bulletsDelete;
     private Array<IBreakableEntity> breakableEntities;
     private Array<IEntity> entitiesDelete;
     private Array<IBreakableEntity> enemies;
@@ -18,6 +19,7 @@ public class Map {
         entities = new Array<>();
         notPassableEntities = new Array<>();
         bullets = new Array<>();
+        bulletsDelete = new Array<>();
         breakableEntities = new Array<>();
         entitiesDelete = new Array<>();
         enemies = new Array<>();
@@ -29,6 +31,8 @@ public class Map {
         for(IEntity entity: entities) {
             entity.update();
             if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000) {
+                if(entity instanceof Projectile)
+                    bulletsDelete.add((Projectile) entity);
                 entitiesDelete.add(entity);
                 entity.delete();
             }
@@ -36,42 +40,44 @@ public class Map {
 
         entities.removeAll(entitiesDelete,true);
         notPassableEntities.removeAll(entitiesDelete,true);
-        bullets.removeAll(entitiesDelete,true);
+        bullets.removeAll(bulletsDelete,true);
         entitiesDelete.clear();
+        bulletsDelete.clear();
 
-        for(IBreakableEntity enemy : enemies) {
-            for(IBreakableEntity player : players) {
-                if (enemy.isBroken()) {
-                    enemies.removeValue(enemy, true);
-                }
-                int dx = player.getX() - enemy.getX();
-                int dy = player.getY() - enemy.getY();
-                if (Math.hypot(dx, dy) < 2 * 50) {
-                    player.breakDown();
-                }
-            }
-        }
-
-        for(IEntity bullet: bullets){
+        for(Projectile bullet: bullets){
             for(IBreakableEntity breakable: breakableEntities){
+                if(breakable == bullet.getDamage().getOwner())
+                    continue;
                 if(breakable.getRectangle().overlaps(bullet.getRectangle())){
-                    breakable.breakDown();
+                    breakable.breakDown(bullet.getDamage());
                     if(breakable.isBroken()){
                         notPassableEntities.removeValue(breakable, true);
                         breakableEntities.removeValue(breakable, true);
                     }
+                    bullet.delete();
+                    bulletsDelete.add(bullet);
+                    break;
                 }
             }
-            for(IEntity entity: notPassableEntities)
+
+            if(bullet.isDeleted())
+                continue;
+
+            for(IEntity entity: notPassableEntities){
+                if(entity == bullet.getDamage().getOwner())
+                    continue;
                 if(entity.getRectangle().overlaps(bullet.getRectangle())){
-                    entitiesDelete.add(bullet);
+                    bulletsDelete.add(bullet);
                     bullet.delete();
                 }
+            }
+
         }
 
-        entities.removeAll(entitiesDelete,true);
-        bullets.removeAll(entitiesDelete,true);
+        entities.removeAll(bulletsDelete,true);
+        bullets.removeAll(bulletsDelete,true);
         entitiesDelete.clear();
+        bulletsDelete.clear();
     }
 
     public void addEntity(IEntity entity){
@@ -80,7 +86,7 @@ public class Map {
         entities.add(entity);
     }
 
-    public void addBullet(IEntity entity){
+    public void addBullet(Projectile entity){
         entities.add(entity);
         bullets.add(entity);
     }
@@ -111,9 +117,4 @@ public class Map {
         enemies.clear();
         players.clear();
     }
-
-    public Array<IEntity>          getEntities()            { return entities; }
-    public Array<IEntity>          getNotPassableEntities() { return notPassableEntities; }
-    public Array<IEntity>          getBullets()             { return bullets; }
-    public Array<IBreakableEntity> getBreakableEntities()   { return breakableEntities; }
 }

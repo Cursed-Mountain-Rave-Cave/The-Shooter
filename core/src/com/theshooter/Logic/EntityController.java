@@ -7,10 +7,6 @@ import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 import com.theshooter.Screen.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -44,6 +40,12 @@ public class EntityController {
     public void load(String name){
         map.clear();
         screenObjectArray.clear();
+
+        FileHandle levels = Gdx.files.internal("levels");
+        FileHandle[] path = levels.list();
+        for(FileHandle handle: path){
+            System.out.println(handle.name());
+        }
 
         loadPlayer(name);
         loadFloors(name);
@@ -150,8 +152,8 @@ public class EntityController {
                 placeWoman(x, y);
             if(command.equals("placeGate"))
                 placeGate(x, y);
-            if(command.equals("placeNotPassablePalm"))
-                placeNotPassablePalm(x, y);
+            if(command.equals("placePassablePalm"))
+                placePassablePalm(x, y);
         }
         scanner.close();
     }
@@ -187,8 +189,9 @@ public class EntityController {
         scanner.close();
     }
 
-    public void addBullet(Bullet bullet){
-        screenObjectArray.add(new BulletScreenObject(bullet, Game.getInstance().getTextureController().getTexture("bullets", "bullet" + MathUtils.random(1, 5)), 5));
+    public void addBullet(Projectile projectile){
+        map.addBullet(projectile);
+        screenObjectArray.add(new BulletScreenObject(projectile, Game.getInstance().getTextureController().getTexture("projectiles", "projectile" + MathUtils.random(1, 5)), 5));
     }
 
     public void placeFloor(int x, int y, int type){
@@ -223,51 +226,49 @@ public class EntityController {
     }
 
     public void placeVase(int x, int y){
-        Vase entity = new Vase(x, y);
+        BreakableEntity entity = new BreakableEntity(x, y, 50, 50, Depth.THINGS);
         map.addBreakableEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing1"), 50));
     }
     public void placeTend(int x, int y){
-        Tent entity = new Tent(x, y);
+        BreakableEntity entity = new BreakableEntity(x, y, 150, 150, Depth.THINGS, false);
         map.addBreakableEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(2, 3)), 150));
     }
     public void placeGate(int x, int y){
-        Gate entity = new Gate(x, y);
+        BreakableEntity entity = new BreakableEntity(x, y, 200, 50, 300, Depth.WALLS, false);
         map.addBreakableEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
     public void placeHookah(int x, int y) {
-        Hookah entity = new Hookah(x, y);
+        Entity entity = new Entity(x, y, 50, 50, Depth.THINGS, true);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 0));
     }
     public void placePalm(int x, int y) {
-        Palm entity = new Palm(x, y);
+        Entity entity = new Entity(x, y, 30, 30, Depth.THINGS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing3"), 120));
     }
-
     public void placeHome(int x, int y) {
-        Home entity = new Home(x, y);
+        Entity entity = new Entity(x, y, 210, 210, Depth.THINGS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 200));
     }
-
     public void placeWoman(int x, int y) {
-        Woman entity = new Woman(x, y);
+        Entity entity = new Entity(x, y, 50, 150, Depth.THINGS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing4"), 150));
     }
-    public void placeNotPassablePalm(int x, int y) {
-        Palm entity = new Palm(x + MathUtils.random(-25, 25), y + MathUtils.random(-25, 25), true);
+    public void placePassablePalm(int x, int y) {
+        Entity entity = new Entity(x + MathUtils.random(-25, 25), y + MathUtils.random(-25, 25), 30, 30, Depth.THINGS, true);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing3"), 120));
@@ -314,7 +315,6 @@ public class EntityController {
 
     private Scanner getScanner(String name, String type){
         String path = "levels/" + name + "/" + type + ".txt";
-        
         return new Scanner(Gdx.files.internal(path).read());
     }
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.BreakableEntity;
-import com.theshooter.Logic.Entity.Vase;
 
 public class BreakableScreenObject extends ScreenObject{
 

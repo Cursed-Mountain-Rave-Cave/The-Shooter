@@ -6,7 +6,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.*;
-import com.theshooter.Logic.Entity.Bullet;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Utils.Config;
@@ -136,7 +135,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private int scatter;
 	private float sinAlpha, cosAlpha;
 
-	public void shoot1(){
+	public void shoot1(IEntity owner){
 		if(ammoSupply <= 0) return;
 		ammoSupply--;
 		
@@ -158,13 +157,12 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
 
-        Bullet bullet = new Bullet((int)(entityController.getPlayer().getX() + 25 + dx1 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy1 * 25), dx1, dy1);
-		entityController.getMap().addBullet(bullet);
-        entityController.addBullet(bullet);
+        Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx1, dy1, 2000);
+        entityController.addBullet(projectile);
     }
     
-	public void shoot1(Rectangle shooter, Rectangle target){
+	public void shoot1(IEntity owner, Rectangle shooter, Rectangle target){
 		float dx = target.getX() - shooter.getX();
 		float dy = target.getY() - shooter.getY();
 
@@ -180,14 +178,13 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
 
-		Bullet bullet = new Bullet((int)(shooter.getX() + 25 + dx1 * 200), (int)(shooter.getY() + 25 + dy1 * 200), dx1, dy1);
-		entityController.getMap().addBullet(bullet);
-		entityController.addBullet(bullet);
+		Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + shooter.getWidth()/2), (int)(shooter.getY() + shooter.getHeight()/2), dx1, dy1, 2000);
+		entityController.addBullet(projectile);
 	}
 
-    public void shoot2() {
+    public void shoot2(IEntity owner) {
 		if(ammoSupply < 3) {
-			shoot1();
+			shoot1(owner);
 			return;
 		}
 		ammoSupply -= 3;
@@ -225,20 +222,19 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx3 = dx*cosAlpha + dy*sinAlpha;
 		float dy3 = -dx*sinAlpha + dy*cosAlpha;
 
-		Bullet bullet1 = new Bullet((int)(entityController.getPlayer().getX() + 25 + dx1 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy1 * 25), dx1, dy1);
-		Bullet bullet2 = new Bullet((int)(entityController.getPlayer().getX() + 25 + dx2 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy2 * 25), dx2, dy2);
-		Bullet bullet3 = new Bullet((int)(entityController.getPlayer().getX() + 25 + dx3 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy3 * 25), dx3, dy3);
+		Projectile projectile1 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx1, dy1, 2000);
+		Projectile projectile2 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx2, dy2, 2000);
+		Projectile projectile3 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx3, dy3, 2000);
 
-		entityController.getMap().addBullet(bullet1); 	   entityController.getMap().addBullet(bullet2);        entityController.getMap().addBullet(bullet3);
-		entityController.addBullet(bullet1); entityController.addBullet(bullet2); entityController.addBullet(bullet3);
+		entityController.addBullet(projectile1); entityController.addBullet(projectile2); entityController.addBullet(projectile3);
 	}
 
-	public void shoot3() {
+	public void shoot3(IEntity owner) {
 		if(ammoSupply < 8) {
-			shoot2();
+			shoot2(owner);
 			return;
 		}
 
@@ -264,16 +260,15 @@ public class Game extends com.badlogic.gdx.Game {
 			newDx = dx*cosAlpha - dy*sinAlpha;
 			newDy = dx*sinAlpha + dy*cosAlpha;
 
-			Bullet bullet = new Bullet((int)(entityController.getPlayer().getX() + 25 + newDx * 25), (int)(entityController.getPlayer().getY() + 25 + newDy * 25), newDx, newDy);
-			entityController.getMap().addBullet(bullet);
-			entityController.addBullet(bullet);
+			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25), (int)(entityController.getPlayer().getY() + 25), newDx, newDy, 2000);
+			entityController.addBullet(projectile);
 
 			dx = newDx;
 			dy = newDy;
 		}
 	}
 
-	public void shoot3(Rectangle shooter, Rectangle target) {
+	public void shoot3(IEntity owner, Rectangle shooter, Rectangle target) {
 		//float sdx = Gdx.input.getX() - Gdx.graphics.getWidth()/2;
 		//float sdy = - Gdx.input.getY() + Gdx.graphics.getHeight()/2 - 100;
 
@@ -294,9 +289,8 @@ public class Game extends com.badlogic.gdx.Game {
 			newDx = dx*cosAlpha - dy*sinAlpha;
 			newDy = dx*sinAlpha + dy*cosAlpha;
 
-			Bullet bullet = new Bullet((int)(shooter.getX() + 25 + newDx * 200), (int)(shooter.getY() + 25 + newDy * 200), newDx, newDy);
-			entityController.getMap().addBullet(bullet);
-			entityController.addBullet(bullet);
+			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + shooter.getWidth()/2), (int)(shooter.getY() + shooter.getHeight()/2), newDx, newDy, 2000);
+			entityController.addBullet(projectile);
 
 			dx = newDx;
 			dy = newDy;
