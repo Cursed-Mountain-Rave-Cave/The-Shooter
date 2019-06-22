@@ -1,6 +1,7 @@
 package com.theshooter.Logic.Entity.Weapon;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Game;
 import com.theshooter.Logic.Damage;
@@ -31,7 +32,7 @@ public class OneShotWeapon extends Weapon {
     }
 
 
-    public void attack(float dx, float dy) {
+    public void attack(Vector2 vect) {
         if (canAttack()) {
             Damage damage = new Damage(getOwner(), getType(), getDamage());
             Projectile projectile =
@@ -41,8 +42,8 @@ public class OneShotWeapon extends Weapon {
                             getOwner().getY() + getOwner().getHeight() / 2 - getH() / 2,
                             getW(),
                             getH(),
-                            dx,
-                            dy,
+                            vect.x,
+                            vect.y,
                             getVelocity(),
                             getShotLifeTime());
 
