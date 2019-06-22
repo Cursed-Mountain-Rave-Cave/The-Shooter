@@ -26,13 +26,10 @@ public class Game extends com.badlogic.gdx.Game {
 	private TextureController textureController;
 	private AudioController audioController;
 
-	public Music SimpleMan;
-
 	private final int FULL_CLIP = 100;
 	private boolean isReloading;
 	private int ammoSupply, reloadStage;
 	private Thread thread;
-	public static Sound[] reloadingSound;
 
 	public static Game getInstance(){
 		if(game == null)
@@ -301,7 +298,5 @@ public class Game extends com.badlogic.gdx.Game {
 	public void dispose () {
 		textureController.dispose();
 		audioController.dispose();
-		for(int i = 1; i < 15; ++i)
-			reloadingSound[i].dispose();
 	}
 }
