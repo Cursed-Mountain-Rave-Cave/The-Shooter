@@ -43,42 +43,38 @@ public class Map {
         bullets.removeAll(bulletsDelete,true);
         entitiesDelete.clear();
         bulletsDelete.clear();
-
-        /*
-        enemy demage
-        for(IBreakableEntity enemy : enemies) {
-            for(IBreakableEntity player : players) {
-                if (enemy.isBroken()) {
-                    enemies.removeValue(enemy, true);
-                }
-                int dx = player.getX() - enemy.getX();
-                int dy = player.getY() - enemy.getY();
-                if (Math.hypot(dx, dy) < 2 * 50) {
-                    player.breakDown();
-                }
-            }
-        }
-         */
+        
         for(Projectile bullet: bullets){
             for(IBreakableEntity breakable: breakableEntities){
                 if(breakable == bullet.getDamage().getOwner())
-                    continue;;
+                    continue;
                 if(breakable.getRectangle().overlaps(bullet.getRectangle())){
                     breakable.breakDown(bullet.getDamage());
                     if(breakable.isBroken()){
                         notPassableEntities.removeValue(breakable, true);
                         breakableEntities.removeValue(breakable, true);
                     }
+                    bullet.delete();
+                    bulletsDelete.add(bullet);
+                    break;
                 }
             }
-            for(IEntity entity: notPassableEntities)
+
+            if(bullet.isDeleted())
+                continue;
+
+            for(IEntity entity: notPassableEntities){
+                if(entity == bullet.getDamage().getOwner())
+                    continue;
                 if(entity.getRectangle().overlaps(bullet.getRectangle())){
                     bulletsDelete.add(bullet);
                     bullet.delete();
                 }
+            }
+
         }
 
-        entities.removeAll(entitiesDelete,true);
+        entities.removeAll(bulletsDelete,true);
         bullets.removeAll(bulletsDelete,true);
         entitiesDelete.clear();
         bulletsDelete.clear();

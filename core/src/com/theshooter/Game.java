@@ -197,8 +197,8 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
 
-        Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25 + dx1 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy1 * 25), dx1, dy1);
+        Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx1, dy1);
         entityController.addBullet(projectile);
     }
     
@@ -218,7 +218,7 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx1 = dx*cosAlpha - dy*sinAlpha;
 		float dy1 = dx*sinAlpha + dy*cosAlpha;
 
-		Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + 25 + dx1 * 200), (int)(shooter.getY() + 25 + dy1 * 200), dx1, dy1);
+		Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + shooter.getWidth()/2), (int)(shooter.getY() + shooter.getHeight()/2), dx1, dy1);
 		entityController.addBullet(projectile);
 	}
 
@@ -262,12 +262,12 @@ public class Game extends com.badlogic.gdx.Game {
 		float dx3 = dx*cosAlpha + dy*sinAlpha;
 		float dy3 = -dx*sinAlpha + dy*cosAlpha;
 
-		Projectile projectile1 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25 + dx1 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy1 * 25), dx1, dy1);
-		Projectile projectile2 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25 + dx2 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy2 * 25), dx2, dy2);
-		Projectile projectile3 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25 + dx3 * 25),
-									(int)(entityController.getPlayer().getY() + 25 + dy3 * 25), dx3, dy3);
+		Projectile projectile1 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx1, dy1);
+		Projectile projectile2 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx2, dy2);
+		Projectile projectile3 = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), entityController.getPlayer().getX() + 25,
+									entityController.getPlayer().getY() + 25, dx3, dy3);
 
 		entityController.addBullet(projectile1); entityController.addBullet(projectile2); entityController.addBullet(projectile3);
 	}
@@ -300,7 +300,7 @@ public class Game extends com.badlogic.gdx.Game {
 			newDx = dx*cosAlpha - dy*sinAlpha;
 			newDy = dx*sinAlpha + dy*cosAlpha;
 
-			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25 + newDx * 25), (int)(entityController.getPlayer().getY() + 25 + newDy * 25), newDx, newDy);
+			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(entityController.getPlayer().getX() + 25), (int)(entityController.getPlayer().getY() + 25), newDx, newDy);
 			entityController.addBullet(projectile);
 
 			dx = newDx;
@@ -329,7 +329,7 @@ public class Game extends com.badlogic.gdx.Game {
 			newDx = dx*cosAlpha - dy*sinAlpha;
 			newDy = dx*sinAlpha + dy*cosAlpha;
 
-			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + 25 + newDx * 200), (int)(shooter.getY() + 25 + newDy * 200), newDx, newDy);
+			Projectile projectile = new Projectile(new Damage(owner, Damage.Type.PHYSICAL, 100), (int)(shooter.getX() + shooter.getWidth()/2), (int)(shooter.getY() + shooter.getHeight()/2), newDx, newDy);
 			entityController.addBullet(projectile);
 
 			dx = newDx;
