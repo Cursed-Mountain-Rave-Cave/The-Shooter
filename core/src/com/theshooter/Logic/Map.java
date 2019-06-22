@@ -1,6 +1,5 @@
 package com.theshooter.Logic;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
@@ -73,19 +72,6 @@ public class Map {
         entities.removeAll(entitiesDelete,true);
         bullets.removeAll(entitiesDelete,true);
         entitiesDelete.clear();
-
-        if (enemies.isEmpty() && !Game.getInstance().bossFight) {
-            Game.getInstance().bossFight = true;
-            Game.getInstance().gameScreen.bossFight();
-        }
-        if (enemies.isEmpty() && Game.getInstance().bossFight) {
-            Game.getInstance().gameScreen.screenMessage = "             Game over!\n        Thanks for playing!";
-            Game.getInstance().gameScreen.targetMessage = "Put the top five for the practice";
-
-
-            Game.getInstance().player.setX(-155*50);
-            Game.getInstance().player.setY(-155*50);
-        }
     }
 
     public void addEntity(IEntity entity){
@@ -114,6 +100,16 @@ public class Map {
                 return false;
 
         return true;
+    }
+
+    public void clear(){
+        entities.clear();
+        notPassableEntities.clear();
+        bullets.clear();
+        breakableEntities.clear();
+        entitiesDelete.clear();
+        enemies.clear();
+        players.clear();
     }
 
     public Array<IEntity>          getEntities()            { return entities; }

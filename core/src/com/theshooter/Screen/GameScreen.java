@@ -5,10 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.theshooter.Game;
 import com.theshooter.Logic.CameraController;
-import com.theshooter.Logic.Entity.*;
 
 public class GameScreen implements Screen {
 
@@ -23,51 +21,24 @@ public class GameScreen implements Screen {
 
     private BitmapFont font;
 
-    private boolean bossHere;
-
     public String screenMessage;
     public String targetMessage;
-
-
-    public void bossFight() {
-        Game.getInstance().SimpleMan.stop();
-        Game.getInstance().SimpleMan = Gdx.audio.newMusic(Gdx.files.internal("music/Trump.mp3"));
-        Game.getInstance().SimpleMan.setVolume(0.3f);
-        Game.getInstance().SimpleMan.play();
-        Game.getInstance().getEntityController().spawnTramp(30 * 50, 4 * 50);
-        Game.getInstance().player.setX(99*50);
-        Game.getInstance().player.setY(3*50);
-        bossHere = true;
-
-        targetMessage = "Be SLAV !!!";
-    }
 
     public GameScreen(){
         this.screenMessage = "Ah shit, here we go again.";
         this.targetMessage = "Kill all enemies";
-        bossHere = false;
+
         batch = new SpriteBatch();
 
         cameraController = new CameraController();
         guiCameraController = new CameraController();
         guiCameraController.translateCamera(960, 540);
 
-        playerScreen = new HumanScreenObject(Game.getInstance().player, Game.getInstance().t.getTextures("player", "body7"),
-                Game.getInstance().t.getTextures("player", "legs7"));
-
-        screenObjects = new ScreenObjectArray();
-
-        screenObjects.add(playerScreen);
-
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         font.getData().setScale(2);
     }
 
-
-    public void addBullet(Bullet bullet){
-        screenObjects.add(new BulletScreenObject(bullet, Game.getInstance().t.getTexture("bullets", "bullet" + MathUtils.random(1, 5)), 5));
-    }
 
     @Override
     public void show() {
@@ -98,15 +69,9 @@ public class GameScreen implements Screen {
 
         font.getData().setScale(2);
         if(Game.getInstance().getConfig().showAdditionalInfo)
-            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + Game.getInstance().player.getX() + " Y: " + Game.getInstance().player.getY(), 0, 1080);
+            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + Game.getInstance().getEntityController().getPlayer().getX() + " Y: " + Game.getInstance().getEntityController().getPlayer().getY(), 0, 1080);
 
-        font.draw(batch, "Target: " + targetMessage + "\nHP: " + Game.getInstance().player.getHP() + "\nPatrons: " + Game.getInstance().checkAmmoSuply(), 0, 1080);
-
-        if(bossHere){
-            font.getData().setScale(5);
-            font.draw(batch, screenMessage, 500, 780);
-        }
-
+        font.draw(batch, "Target: " + targetMessage + "\nHP: " + Game.getInstance().getEntityController().getPlayer().getHP() + "\nPatrons: " + Game.getInstance().checkAmmoSuply(), 0, 1080);
 
         batch.end();
     }
