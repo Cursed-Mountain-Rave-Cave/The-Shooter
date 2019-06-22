@@ -19,7 +19,7 @@ public class TextureController {
         addType("walls");
         addType("projectiles");
 
-        addTextureArray("floor", "floor", "floor/", 14, 1);
+        addTextureArray("floor", "floor", "floor/", 17, 1);
 
         addTextureArray("walls", "wall", "walls/", 3, 5);
 

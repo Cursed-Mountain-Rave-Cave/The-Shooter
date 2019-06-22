@@ -3,7 +3,7 @@ package com.theshooter.Logic.Entity.Abstract;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Screen.Depth;
 
-public interface IEntity extends IUpdateble {
+public interface IEntity{
     Depth getDepth();
     int getX();
     int getY();
@@ -11,6 +11,8 @@ public interface IEntity extends IUpdateble {
     int getHeight();
     Rectangle getRectangle();
     boolean isPassable();
+
+    void update();
 
     void delete();
     boolean isDeleted();

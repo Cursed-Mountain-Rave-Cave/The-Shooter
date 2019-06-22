@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.theshooter.Logic.Damage;
 import com.theshooter.Screen.Depth;
 
-public class Projectile extends Entity{
+public class Projectile extends Entity {
 
 
     private Damage damage;

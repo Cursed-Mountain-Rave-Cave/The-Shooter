@@ -2,14 +2,13 @@ package com.theshooter.Logic.Entity;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Abstract.IUpdateble;
 import com.theshooter.Screen.Depth;
 
 public class Entity implements IEntity {
     private Rectangle rect;
     private Depth depth;
-    boolean passable;
-    boolean isDelete;
+    private boolean passable;
+    private boolean isDelete;
 
     public Entity(Rectangle r, Depth depth, boolean passable) {
         rect = new Rectangle(r);

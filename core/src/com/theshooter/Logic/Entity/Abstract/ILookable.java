@@ -1,7 +1,8 @@
 package com.theshooter.Logic.Entity.Abstract;
 
 public interface ILookable {
-    void lookAt(int dx, int dy);
+    void look();
+    void lookAt(float dx, float dy);
     float getLookdx();
     float getLookdy();
 }

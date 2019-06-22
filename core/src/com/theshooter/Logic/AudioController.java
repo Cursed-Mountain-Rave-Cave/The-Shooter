@@ -91,7 +91,7 @@ public class AudioController {
 
     public void playSound(String type) {
         int size = sound.get(type).size;
-        sound.get(type).get(MathUtils.random(0, size - 1)).play();
+        sound.get(type).get(MathUtils.random(0, size - 1)).play(0.2f);
     }
 
     public void dispose() {
