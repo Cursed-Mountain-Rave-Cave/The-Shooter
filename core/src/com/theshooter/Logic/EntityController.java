@@ -1,6 +1,7 @@
 package com.theshooter.Logic;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
@@ -9,6 +10,7 @@ import com.theshooter.Screen.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -312,17 +314,7 @@ public class EntityController {
 
     private Scanner getScanner(String name, String type){
         String path = "levels/" + name + "/" + type + ".txt";
-        File file;
-        Scanner scanner;
-
-        try{
-            file = new File(Gdx.files.getLocalStoragePath() + path);
-            scanner = new Scanner(new FileInputStream(file));
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-
-        return scanner;
+        
+        return new Scanner(Gdx.files.internal(path).read());
     }
 }
