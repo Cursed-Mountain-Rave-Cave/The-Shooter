@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.theshooter.Game;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
@@ -11,9 +12,6 @@ public class HumanEnemy extends HumanEntity {
 
     private Rectangle target;
     private boolean damaged;
-    public static Sound Spank = Gdx.audio.newSound(Gdx.files.internal("sound/Spank.mp3"));
-    public static Sound Spank1 = Gdx.audio.newSound(Gdx.files.internal("sound/Spank1.mp3"));
-    public static Sound Spank2 = Gdx.audio.newSound(Gdx.files.internal("sound/Spank2.mp3"));
 
     public HumanEnemy(int x, int y, int hp, int velocity, Rectangle target,  Map map) {
         super(x, y, hp, Depth.ENEMY, map);
@@ -46,13 +44,7 @@ public class HumanEnemy extends HumanEntity {
     @Override
     public void breakDown() {
         super.breakDown();
-        int randomID = MathUtils.random(1,3);
-        if(randomID == 1)
-            Spank.play(0.2f);
-        if(randomID == 2)
-            Spank1.play(0.2f);
-        if(randomID == 3)
-            Spank2.play(0.2f);
+        Game.getInstance().getMusicController().playSound("damage");
         damaged = true;
     }
 }
