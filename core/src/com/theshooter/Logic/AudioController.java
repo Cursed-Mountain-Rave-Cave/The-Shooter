@@ -70,23 +70,19 @@ public class AudioController {
     public void stopMusic() {
         if (musicStack.empty())
             return;
-        musicStack.peek().stop();
-        musicStack.pop();
+        musicStack.pop().stop();
         if (musicStack.empty())
             return;
         musicStack.peek().play();
     }
 
     public void stopAllMusic() {
-        while (!musicStack.empty()) {
-            musicStack.peek().stop();
-            musicStack.pop();
-        }
+        while (!musicStack.empty())
+            musicStack.pop().stop();
     }
 
     public void playMusic(String name, float volume) {
-        if (!musicStack.empty())
-            pauseMusic();
+        pauseMusic();
         musicStack.push(music.get(name));
         musicStack.peek().play();
         musicStack.peek().setVolume(volume);
