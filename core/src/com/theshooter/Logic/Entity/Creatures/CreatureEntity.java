@@ -2,12 +2,17 @@ package com.theshooter.Logic.Entity.Creatures;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Entity.BreakableEntity;
-import com.theshooter.Logic.Map;
+import com.theshooter.Logic.Entity.Weapon.Weapon;
+import com.theshooter.Logic.Entity.Weapon.WeaponType;
 import com.theshooter.Screen.Depth;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 public class CreatureEntity extends BreakableEntity implements IMovable {
 
@@ -16,6 +21,9 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
     private boolean damaged;
     private float movedx, movedy;
     private int radius;
+    private Array<Weapon> weapons;
+    private Weapon currentWeapon;
+    private Map<WeaponType, Integer> ammo;
 
     public CreatureEntity(int x, int y, int w, int h, int hp, int velocity, int radius, Depth depth, boolean passable, Rectangle target){
         super(x, y, w, h, hp, depth, passable);
@@ -23,6 +31,8 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
         this.velocity = velocity;
         this.damaged = false;
         this.radius = radius;
+        weapons = new Array<>();
+        ammo = new TreeMap<>();
     }
 
     @Override
@@ -71,6 +81,34 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
 
         movedx = dx;
         movedy = dy;
+    }
+
+    public Array<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void addWeapon(Weapon weapon) {
+        weapons.add(weapon);
+    }
+
+    public void selectWeapon(int n) {
+        if (n > weapons.size)
+            return;
+        currentWeapon = weapons.get(n - 1);
+    }
+
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    public int getAmmo(WeaponType type) {
+        if (ammo.containsKey(type))
+            return ammo.get(type);
+        return 0;
+    }
+
+    public void addAmmo(WeaponType type, int ammo) {
+        this.ammo.put(type, getAmmo(type) + ammo);
     }
 
     public boolean isDamaged() {

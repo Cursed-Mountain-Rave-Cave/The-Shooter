@@ -71,7 +71,7 @@ public class GameScreen implements Screen {
         if(Game.getInstance().getConfig().showAdditionalInfo)
             font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + Game.getInstance().getEntityController().getPlayer().getX() + " Y: " + Game.getInstance().getEntityController().getPlayer().getY(), 0, 1080);
 
-        font.draw(batch, "Target: " + targetMessage + "\nHP: " + Game.getInstance().getEntityController().getPlayer().getHP() + "\nPatrons: " + Game.getInstance().checkAmmoSuply(), 0, 1080);
+        font.draw(batch, "Target: " + targetMessage + "\nHP: " + Game.getInstance().getEntityController().getPlayer().getHP() + "\nPatrons: " + Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getCurClipSize() + " / " + Game.getInstance().getEntityController().getPlayer().getAmmo(Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getWeaponType()), 0, 1080);
 
         batch.end();
     }

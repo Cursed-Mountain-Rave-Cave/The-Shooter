@@ -2,7 +2,6 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Logic.*;
 import com.theshooter.Logic.Entity.Abstract.IEntity;
@@ -24,9 +23,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private EntityController entityController;
 	private TextureController textureController;
 	private AudioController audioController;
-	private Weapon weapon;
 
-	private boolean isReloading;
 
 	public static Game getInstance(){
 		if(game == null)
@@ -40,7 +37,6 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void create () {
-		isReloading = false;
 
 		config = new Config();
 
@@ -61,16 +57,6 @@ public class Game extends com.badlogic.gdx.Game {
 
 
 		Gdx.input.setInputProcessor(inputController);
-
-		weapon = new ThrowingKnife(entityController.getPlayer());
-	}
-
-	public void reload() {
-		weapon.reload();
-	}
-
-	public String checkAmmoSuply() {
-		return Integer.valueOf(weapon.getCurClipSize()).toString();
 	}
 
 	public Config getConfig() {
@@ -89,21 +75,11 @@ public class Game extends com.badlogic.gdx.Game {
 		return audioController;
 	}
 
-	public void shoot1(IEntity owner){
-		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
-		float sdy = -Gdx.input.getY() + Gdx.graphics.getHeight() / 2 - 100;
-
-		float dx = sdx / 2 + sdy;
-		float dy = -sdx / 2 + sdy;
-		weapon.attack(new Vector2(dx, dy));
-    }
-
 	@Override
 	public void render () {
 		super.render();
 		inputController.update();
 		entityController.update();
-		weapon.update();
 	}
 
 	@Override

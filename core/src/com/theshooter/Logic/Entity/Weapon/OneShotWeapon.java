@@ -9,21 +9,25 @@ import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Projectile;
 
 public class OneShotWeapon extends Weapon {
-    public OneShotWeapon(int            damage,
+    public OneShotWeapon(WeaponType weaponType,
+                         int            damage,
                          int            w,
                          int            h,
                          Damage.Type    type,
                          int            velocity,
+                         boolean        needAmmo,
                          long           shotTime,
                          long           shotLifeTime,
                          CreatureEntity owner) {
         super(
+                weaponType,
                 damage,
                 w,
                 h,
                 type,
                 velocity,
                 true,
+                needAmmo,
                 1,
                 0,
                 shotTime,
