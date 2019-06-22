@@ -39,4 +39,10 @@ public class ScreenObjectArray extends Array<ScreenObject> {
         this.removeAll(deleteThis,true);
         deleteThis.clear();
     }
+
+    public void clear(){
+        super.clear();
+        floor.clear();
+        deleteThis.clear();
+    }
 }

@@ -5,10 +5,9 @@ import com.theshooter.Game;
 
 public class MainScreen implements Screen {
 
-    final private Game game;
 
-    public MainScreen(Game game){
-        this.game = game;
+    public MainScreen(){
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.theshooter.Logic.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.theshooter.Game;
 import com.theshooter.Logic.Map;
 
 public class Tramp extends Enemy {
@@ -39,13 +40,13 @@ public class Tramp extends Enemy {
                 tryMove(changeX, changeY);
             else if (getHP() <= 2 * maxHp / 3 && getHP() > maxHp / 10) {
                 tryMove(-changeX, -changeY);
-                map.game.shoot1(getRectangle(), target);
+                Game.getInstance().shoot1(getRectangle(), target);
               //  setHp(getHP() + 1);
             }
             if (getHP() <= maxHp / 10) {
                 for (int i = 0; i < 10; i++) {
                   //  map.game.shoot3(getRectangle(), target);
-                    map.game.shoot1(getRectangle(), target);
+                    Game.getInstance().shoot1(getRectangle(), target);
                 }
                 if (dist > 15 * 50)
                     tryMove(changeX, changeY);

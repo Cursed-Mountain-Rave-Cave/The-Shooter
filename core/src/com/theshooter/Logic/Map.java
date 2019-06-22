@@ -1,13 +1,11 @@
 package com.theshooter.Logic;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 
 public class Map {
-
     private Array<IEntity> entities;
     private Array<IEntity> notPassableEntities;
     private Array<IEntity> bullets;
@@ -15,9 +13,8 @@ public class Map {
     private Array<IEntity> entitiesDelete;
     private Array<IBreakableEntity> enemies;
     private Array<IBreakableEntity> players;
-    public Game game;
 
-    public Map(Game game){
+    public Map(){
         entities = new Array<>();
         notPassableEntities = new Array<>();
         bullets = new Array<>();
@@ -25,17 +22,10 @@ public class Map {
         entitiesDelete = new Array<>();
         enemies = new Array<>();
         players = new Array<>();
-        this.game = game;
 
     }
 
     public void update(){
-        /*
-        System.out.println("=========================");
-        System.out.println(Gdx.graphics.getFramesPerSecond() + "   " + entities.size);
-        System.out.println(bullets.size + "   " + breakableEntities.size);
-        */
-
         for(IEntity entity: entities) {
             entity.update();
             if (Math.abs(entity.getX()) + Math.abs( entity.getY()) > 20000) {
@@ -82,20 +72,6 @@ public class Map {
         entities.removeAll(entitiesDelete,true);
         bullets.removeAll(entitiesDelete,true);
         entitiesDelete.clear();
-
-        if (enemies.isEmpty() && !game.bossFight) {
-            game.bossFight = true;
-            game.gameScreen.bossFight();
-  //          System.out.println(enemies.size);
-        }
-        if (enemies.isEmpty() && game.bossFight) {
-            game.gameScreen.screenMessage = "             Game over!\n        Thanks for playing!";
-            game.gameScreen.targetMessage = "Put the top five for the practice";
-
-
-            game.player.setX(-155*50);
-            game.player.setY(-155*50);
-        }
     }
 
     public void addEntity(IEntity entity){
@@ -116,7 +92,6 @@ public class Map {
         if(entity.getClass() == Player.class)
             players.add(entity);
         breakableEntities.add(entity);
-        //System.out.println(enemies.size);
     }
 
     public boolean isAllowed(Rectangle place){
@@ -125,6 +100,16 @@ public class Map {
                 return false;
 
         return true;
+    }
+
+    public void clear(){
+        entities.clear();
+        notPassableEntities.clear();
+        bullets.clear();
+        breakableEntities.clear();
+        entitiesDelete.clear();
+        enemies.clear();
+        players.clear();
     }
 
     public Array<IEntity>          getEntities()            { return entities; }

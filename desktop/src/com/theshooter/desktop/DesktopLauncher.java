@@ -18,6 +18,6 @@ public class DesktopLauncher {
 		config.title = "The Shooter";
 		config.forceExit = false;
 
-		new LwjglApplication(new Game(), config);
+		new LwjglApplication(Game.getInstance(), config);
 	}
 }

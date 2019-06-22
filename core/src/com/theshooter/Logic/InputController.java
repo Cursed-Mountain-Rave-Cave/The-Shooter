@@ -8,8 +8,6 @@ import com.theshooter.Game;
 
 public class InputController implements InputProcessor {
 
-    final private Game game;
-
     private boolean keyWPressed;
     private boolean keySPressed;
     private boolean keyAPressed;
@@ -19,8 +17,7 @@ public class InputController implements InputProcessor {
 
     int typeOfShooting;
 
-    public InputController(Game game){
-        this.game = game;
+    public InputController(){
         keyWPressed = false;
         keySPressed = false;
         keyAPressed = false;
@@ -49,18 +46,18 @@ public class InputController implements InputProcessor {
             dy--;
         }
 
-        game.player.moveAt(dx, dy);
+        Game.getInstance().getEntityController().getPlayer().moveAt(dx, dy);
 
         if (leftMouseBottomPressed)
             switch (typeOfShooting) {
                 case 1:
-                    game.shoot1();
+                    Game.getInstance().shoot1();
                     break;
                 case 2:
-                    game.shoot2();
+                    Game.getInstance().shoot2();
                     break;
                 case 3:
-                    game.shoot3();
+                    Game.getInstance().shoot3();
                     break;
             }
     }
@@ -109,11 +106,11 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.F3: {
-                Game.config.showAdditionalInfo = !Game.config.showAdditionalInfo;
+                Game.getInstance().getConfig().showAdditionalInfo = !Game.getInstance().getConfig().showAdditionalInfo;
                 break;
             }
             case Input.Keys.R: {
-                game.reload();
+                Game.getInstance().reload();
                 break;
             }
         }
@@ -171,7 +168,7 @@ public class InputController implements InputProcessor {
         int curX = screenX - Gdx.graphics.getWidth() / 2;
         int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        game.player.lookAt(curX, curY);
+        Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
         return false;
     }
 
@@ -180,14 +177,14 @@ public class InputController implements InputProcessor {
         int curX = screenX - Gdx.graphics.getWidth() / 2;
         int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        game.player.lookAt(curX, curY);
+        Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
 
         return false;
     }
 
     @Override
     public boolean scrolled(int amount) {
-        game.gameScreen.getCameraController().zoom(amount);
+        Game.getInstance().gameScreen.getCameraController().zoom(amount);
         return false;
     }
 }
