@@ -78,11 +78,11 @@ public class HumanScreenObject extends ScreenObject {
         if (dx < 0 && dy < 0)
             this.currentLegs = 0;
 
-        if ((dx == 0 && dy == 0) || last != currentLegs)
+        if (((dx == 0 && dy == 0) || last != currentLegs) && currentLegs != 8)
             for (Animation current : legs)
                 current.reset();
 
-        else if (last == currentLegs)
+        else if (last == currentLegs || last == 8)
             legs.get(last).update();
     }
 

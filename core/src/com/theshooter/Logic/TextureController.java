@@ -34,8 +34,8 @@ public class TextureController {
         addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 9, 1);
         addTextureArray("things", "breakableThing", "environment/breakable/", 5, 2);
 
-        addBodyAnimationArray("player", "body", "player/bodies/", 2, 9, 3);
-        addAnimationArray("player", "legs", "player/legs/", 3, 9, 4);
+        addBodyAnimationArray("player", "body", "player/bodies/", 3, 9, 3);
+        addAnimationArray("player", "legs", "player/legs/", 7, 9, 4);
 
         addTextureArray("enemy", "enemy", "enemies/", 5, 2);
 
