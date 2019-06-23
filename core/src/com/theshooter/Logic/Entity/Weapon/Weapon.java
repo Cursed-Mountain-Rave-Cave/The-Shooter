@@ -64,16 +64,14 @@ abstract public class Weapon {
         if (!needAmmo) {
             curClipSize = clipSize;
             reload = false;
-            System.out.println("+");
         }
         if (reload && TimeUtils.millis() > reloadingEnd) {
-            System.out.println("-");
-            curClipSize = Math.min(clipSize, getOwner().getAmmo(weaponType));
-            getOwner().addAmmo(weaponType, -curClipSize);
+            int tmp = curClipSize;
+            curClipSize +=  Math.min(getOwner().getAmmo(weaponType), clipSize - curClipSize);
+            getOwner().addAmmo(weaponType, tmp - curClipSize);
             reload = false;
         }
         if (curClipSize == 0 && reloadable) {
-            System.out.println("?");
             reload();
         }
     }

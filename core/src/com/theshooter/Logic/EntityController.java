@@ -137,6 +137,8 @@ public class EntityController {
 
             if(command.equals("placeHome"))
                 placeHome(x, y);
+            if(command.equals("placeBigHome"))
+                placeBigHome(x, y);
             if(command.equals("placeVase"))
                 placeVase(x, y);
             if(command.equals("placeTend"))
@@ -257,6 +259,12 @@ public class EntityController {
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 200));
+    }
+    public void placeBigHome(int x, int y) {
+        Entity entity = new Entity(x, y, 9 * 50, 11 * 50, Depth.THINGS, false);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing8"), 514));
     }
     public void placeWoman(int x, int y) {
         Entity entity = new Entity(x, y, 50, 150, Depth.THINGS, false);

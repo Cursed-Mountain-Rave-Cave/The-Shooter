@@ -8,6 +8,13 @@ import com.theshooter.Screen.MainScreen;
 import com.theshooter.Utils.Config;
 
 import java.io.IOException;
+import com.badlogic.gdx.math.Vector2;
+import com.theshooter.Logic.*;
+import com.theshooter.Logic.Entity.Abstract.IEntity;
+import com.theshooter.Logic.Entity.Weapon.*;
+import com.theshooter.Screen.GameScreen;
+import com.theshooter.Screen.MainScreen;
+import com.theshooter.Utils.Config;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -49,7 +56,7 @@ public class Game extends com.badlogic.gdx.Game {
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
 
-		entityController.load("test"); // ----------------------------------------------------------------------------------------------------
+//		entityController.load("test"); // ----------------------------------------------------------------------------------------------------
 //		GameLoader gl = new GameLoader();
 //		try { gl.load("test2"); }
 //		catch (IOException e) {
@@ -58,6 +65,7 @@ public class Game extends com.badlogic.gdx.Game {
 //		}
 //		entityController.load("test2");
 		// entityController.load("level1");
+		entityController.load("level1");
 
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
