@@ -1,22 +1,22 @@
-placeHome 87 89
-placeHome 276 113
-placeHome 229 79
-placeHome 202 79
-placeHome 168 76
-placeHome 154 76
-placeHome 153 51
-placeHome 166 53
-placeHome 186 48
-placeHome 157 125
-placeHome 158 146
-placeHome 173 152
-placeHome 187 149
-placeHome 198 158
-placeHome 176 168
-placeHome 193 125
-placeHome 187 125
-placeHome 181 125
-placeHome 175 125
+placeBigHome 87 89
+placeBigHome 276 113
+placeBigHome 229 79
+placeBigHome 202 79
+placeBigHome 168 76
+placeBigHome 154 76
+placeBigHome 153 51
+placeBigHome 166 53
+placeBigHome 186 48
+placeBigHome 157 125
+placeBigHome 158 146
+placeBigHome 173 152
+placeBigHome 187 149
+placeBigHome 198 158
+placeBigHome 176 168
+placeBigHome 193 125
+placeBigHome 187 125
+placeBigHome 181 125
+placeBigHome 175 125
 
 placePalm 83 84
 placePalm 89 84
@@ -79,9 +79,3 @@ placeVase 82 101
 placeVase 82 102
 placeVase 83 101
 placeVase 83 102
-
-
-
-
-
-

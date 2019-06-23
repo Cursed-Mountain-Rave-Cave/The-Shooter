@@ -6,17 +6,19 @@ import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 abstract public class Weapon {
-    private int damage;
-    private int w;
-    private int h;
-    private Damage.Type type;
-    private int velocity;
-    private boolean reloadable;
-    private int clipSize;
-    private long reloadingTime;
-    private long shotTime;
-    private long shotLifeTime;
-    private CreatureEntity owner;
+    private WeaponType      weaponType;
+    private int             damage;
+    private int             w;
+    private int             h;
+    private Damage.Type     type;
+    private int             velocity;
+    private boolean         reloadable;
+    private boolean         needAmmo;
+    private int             clipSize;
+    private long            reloadingTime;
+    private long            shotTime;
+    private long            shotLifeTime;
+    private CreatureEntity  owner;
 
     private long lastShot;
     private int curClipSize;
@@ -24,38 +26,49 @@ abstract public class Weapon {
     private boolean reload;
 
     public Weapon
-            (int            damage,
+            (WeaponType     weaponType,
+             int            damage,
              int            w,
              int            h,
              Damage.Type    type,
              int            velocity,
              boolean        reloadable,
+             boolean        needAmmo,
              int            clipSize,
              long           reloadingTime,
              long           shotTime,
              long           shotLifeTime,
              CreatureEntity owner)
     {
+        this.weaponType          = weaponType;
         this.damage              = damage;
         this.w                   = w;
         this.h                   = h;
         this.type                = type;
         this.velocity            = velocity;
+        this.reloadable          = reloadable;
+        this.needAmmo            = needAmmo;
         this.clipSize            = clipSize;
-        this.curClipSize         = clipSize;
         this.reloadingTime       = reloadingTime;
         this.shotTime            = shotTime;
         this.shotLifeTime        = shotLifeTime;
         this.owner               = owner;
-        this.reloadable          = reloadable;
 
+        curClipSize              = 0;
         lastShot                 = 0;
         reload                   = false;
+        reload();
     }
 
     public void update() {
-        if (reload && TimeUtils.millis() > reloadingEnd) {
+        if (!needAmmo) {
             curClipSize = clipSize;
+            reload = false;
+        }
+        if (reload && TimeUtils.millis() > reloadingEnd) {
+            int tmp = curClipSize;
+            curClipSize +=  Math.min(getOwner().getAmmo(weaponType), clipSize - curClipSize);
+            getOwner().addAmmo(weaponType, tmp - curClipSize);
             reload = false;
         }
         if (curClipSize == 0 && reloadable) {
@@ -63,8 +76,12 @@ abstract public class Weapon {
         }
     }
 
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
     public void reload() {
-        if (!reload && curClipSize < clipSize) {
+        if (!reload && curClipSize < clipSize && (getOwner().getAmmo(weaponType) > 0 || !needAmmo)) {
             reloadingEnd = TimeUtils.millis() + reloadingTime;
             reload = true;
         }
@@ -142,6 +159,14 @@ abstract public class Weapon {
 
     public CreatureEntity getOwner() {
         return owner;
+    }
+
+    public boolean isNeedAmmo() {
+        return needAmmo;
+    }
+
+    public void setNeedAmmo(boolean needAmmo) {
+        this.needAmmo = needAmmo;
     }
 
     public long getReloadingEnd() {

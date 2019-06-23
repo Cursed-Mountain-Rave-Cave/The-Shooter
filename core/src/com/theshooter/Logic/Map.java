@@ -8,6 +8,7 @@ import com.theshooter.Logic.Entity.Abstract.IEntity;
 import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Creatures.Player;
+import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
 
 public class Map {
     private Array<IEntity> entities;
@@ -15,9 +16,10 @@ public class Map {
     private Array<Projectile> projectiles;
     private Array<IBreakable> breakableEntities;
     private Array<IMovable> movableEntities;
+    private Array<LiftableEntity> liftableEntities;
 
+    private Array<LiftableEntity> liftableDelete;
     private Array<Projectile> projectilesDelete;
-
     private Array<IEntity> entitiesDelete;
     private Array<IBreakable> enemies;
     private Array<IBreakable> players;
@@ -32,6 +34,8 @@ public class Map {
         enemies = new Array<>();
         players = new Array<>();
         movableEntities = new Array<>();
+        liftableEntities = new Array<>();
+        liftableDelete = new Array<>();
     }
 
     public void update(){
@@ -89,6 +93,21 @@ public class Map {
         projectiles.removeAll(projectilesDelete,true);
         entitiesDelete.clear();
         projectilesDelete.clear();
+
+        for (IBreakable player: players){
+            for(LiftableEntity entity: liftableEntities){
+                if(entity.getRectangle().overlaps(player.getRectangle())){
+                    entity.use();
+                    entity.delete();
+                    liftableDelete.add(entity);
+                    entitiesDelete.add(entity);
+                }
+            }
+        }
+        liftableEntities.removeAll(liftableDelete, true);
+        entities.removeAll(entitiesDelete, true);
+        liftableDelete.clear();
+        entitiesDelete.clear();
     }
 
     public void addEntity(IEntity entity){
@@ -110,6 +129,9 @@ public class Map {
 
         if (entity instanceof IMovable)
             movableEntities.add((IMovable) entity);
+
+        if (entity instanceof LiftableEntity)
+            liftableEntities.add((LiftableEntity) entity);
     }
 
     public boolean isAllowed(Rectangle place){
