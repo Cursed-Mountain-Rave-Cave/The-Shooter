@@ -8,3 +8,11 @@ placeWall 230 152 231 177
 placeWall 230 183 231 318
 placeWall 231 152 302 153
 
+placeInvisibleWall 52 53 60 54
+placeInvisibleWall 51 54 52 74
+placeInvisibleWall 49 75 50 108
+placeInvisibleWall 59 54 60 66
+placeInvisibleWall 60 65 149 66
+placeInvisibleWall 52 73 122 74
+placeInvisibleWall 131 73 149 74
+placeInvisibleWall 50 108 149 109

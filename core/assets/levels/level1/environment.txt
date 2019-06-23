@@ -1,1 +1,81 @@
-placeBigHome 10 10
+placeBigHome 87 89
+placeBigHome 276 113
+placeBigHome 229 79
+placeBigHome 202 79
+placeBigHome 168 76
+placeBigHome 154 76
+placeBigHome 153 51
+placeBigHome 166 53
+placeBigHome 186 48
+placeBigHome 157 125
+placeBigHome 158 146
+placeBigHome 173 152
+placeBigHome 187 149
+placeBigHome 198 158
+placeBigHome 176 168
+placeBigHome 193 125
+placeBigHome 187 125
+placeBigHome 181 125
+placeBigHome 175 125
+
+placePalm 83 84
+placePalm 89 84
+placePalm 97 88
+placePalm 95 97
+placePalm 89 100
+placePalm 114 82
+placePalm 117 78
+placePalm 120 80
+placePalm 134 82
+placePalm 138 85
+placePalm 133 87
+placePalm 132 94
+placePalm 132 101
+placePalm 122 102
+placePalm 116 103
+placePalm 162 60
+placePalm 162 74
+placePalm 173 60
+placePalm 177 74
+placePalm 272 68
+placePalm 268 94
+placePalm 277 83
+placePalm 252 92
+placePalm 246 101
+placePalm 249 108
+placePalm 257 117
+placePalm 264 117
+placePalm 247 118
+placePalm 253 126
+placePalm 273 130
+placePalm 261 133
+placePalm 155 262
+placePalm 162 265
+placePalm 167 261
+placePalm 172 263 
+placePalm 178 266
+placePalm 121 74
+placePalm 131 74
+placePalms 59 65 149 66
+placePalms 59 53 60 65
+placePalms 47 53 59 54
+placePalms 47 54 52 74
+placePalms 52 73 122 74
+placePalms 131 73 149 74
+placePalms 47 74 50 108
+placePalms 248 71 256 74
+placePalms 259 51 262 62
+placePalms 216 93 221 131
+placePalms 221 126 231 131
+placePalms 229 131 231 152
+placePalms 199 125 216 131
+
+placeVase 81 100
+placeVase 81 101
+placeVase 81 102
+placeVase 82 100
+placeVase 83 100
+placeVase 82 101
+placeVase 82 102
+placeVase 83 101
+placeVase 83 102
