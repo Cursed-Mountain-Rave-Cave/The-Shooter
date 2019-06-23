@@ -14,7 +14,7 @@ public class Player extends HumanEntity {
         addWeapon(new ThrowingKnife(this));
 
         addAmmo(WeaponType.BOW, 100);
-        addAmmo(WeaponType.THROWING_KNIFE, 20);
+        addAmmo(WeaponType.THROWING_KNIFE, 5);
         selectWeapon(1);
     }
 

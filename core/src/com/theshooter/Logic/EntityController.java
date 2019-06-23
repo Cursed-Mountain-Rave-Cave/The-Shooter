@@ -56,8 +56,9 @@ public class EntityController {
 
         player = new Player(scanner.nextInt(), scanner.nextInt(), 25, 25);
         map.addEntity(player);
-        Game.getInstance().gameScreen.playerScreen = new HumanScreenObject(player, Game.getInstance().getTextureController().getTextures("player", "body7"),
-                Game.getInstance().getTextureController().getTextures("player", "legs7"));
+        Game.getInstance().gameScreen.playerScreen = new HumanScreenObject(player,
+                Game.getInstance().getTextureController().getBody("player", "body1"),
+                Game.getInstance().getTextureController().getAnimations("player", "legs1"));
                         screenObjectArray.add(Game.getInstance().gameScreen.playerScreen);
 
         scanner.close();
@@ -283,8 +284,8 @@ public class EntityController {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 3,Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
         screenObjectArray.add(new HumanScreenObject(entity,
-                Game.getInstance().getTextureController().getTextures("player", "body" + MathUtils.random(2, 6)),
-                Game.getInstance().getTextureController().getTextures("player", "legs" + MathUtils.random(1, 6))));
+                Game.getInstance().getTextureController().getBody("player", "body" + MathUtils.random(1, 1)),
+                Game.getInstance().getTextureController().getAnimations("player", "legs" + MathUtils.random(1, 1))));
     }
     public void spawnBoss(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());

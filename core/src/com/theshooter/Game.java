@@ -45,7 +45,7 @@ public class Game extends com.badlogic.gdx.Game {
 		audioController = new AudioController();
 		entityController = new EntityController();
 
-		audioController.playMusic("casino", 1f);
+		//audioController.playMusic("casino", 1f);
 
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
