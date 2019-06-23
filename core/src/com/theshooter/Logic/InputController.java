@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
 
 public class InputController implements InputProcessor {
@@ -15,15 +16,12 @@ public class InputController implements InputProcessor {
 
     private boolean leftMouseBottomPressed;
 
-    int typeOfShooting;
-
     public InputController(){
         keyWPressed = false;
         keySPressed = false;
         keyAPressed = false;
         keyDPressed = false;
         leftMouseBottomPressed = false;
-        typeOfShooting = 1;
     }
 
     public void update(){
@@ -47,19 +45,15 @@ public class InputController implements InputProcessor {
         }
 
         Game.getInstance().getEntityController().getPlayer().moveAt(dx, dy);
+        float sdx = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
+        float sdy = -Gdx.input.getY() + Gdx.graphics.getHeight() / 2 - 100;
+
+        float deltaX = sdx / 2 + sdy;
+        float deltaY = -sdx / 2 + sdy;
+        Vector2 vect = new Vector2(deltaX, deltaY);
 
         if (leftMouseBottomPressed)
-            switch (typeOfShooting) {
-                case 1:
-                    Game.getInstance().shoot1();
-                    break;
-                case 2:
-                    Game.getInstance().shoot2();
-                    break;
-                case 3:
-                    Game.getInstance().shoot3();
-                    break;
-            }
+            Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().attack(vect);
     }
 
     @Override
@@ -94,15 +88,43 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.NUM_1: {
-                typeOfShooting = 1;
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(1);
                 break;
             }
             case Input.Keys.NUM_2: {
-                typeOfShooting = 2;
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(2);
                 break;
             }
             case Input.Keys.NUM_3: {
-                typeOfShooting = 3;
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(3);
+                break;
+            }
+            case Input.Keys.NUM_4: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(4);
+                break;
+            }
+            case Input.Keys.NUM_5: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(5);
+                break;
+            }
+            case Input.Keys.NUM_6: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(6);
+                break;
+            }
+            case Input.Keys.NUM_7: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(7);
+                break;
+            }
+            case Input.Keys.NUM_8: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(8);
+                break;
+            }
+            case Input.Keys.NUM_9: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(9);
+                break;
+            }
+            case Input.Keys.NUM_0: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(0);
                 break;
             }
             case Input.Keys.F3: {
@@ -110,7 +132,7 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.R: {
-                Game.getInstance().reload();
+                Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().reload();
                 break;
             }
         }
