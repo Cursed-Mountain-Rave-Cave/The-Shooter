@@ -1,0 +1,17 @@
+placeWall 357 293 358 295
+placeWall 358 293 359 295
+placeWall 359 293 360 295
+placeWall 360 293 361 295
+placeWall 361 293 362 295
+placeWall 362 293 363 295
+placeWall 363 293 364 295
+placeWall 364 293 365 295
+placeWall 365 293 366 295
+placeWall 366 293 367 295
+placeWall 367 293 368 295
+placeWall 368 293 369 295
+placeWall 374 292 375 296
+placeWall 375 298 376 300
+placeWall 377 295 378 297
+placeWall 377 299 378 301
+placeWall 378 295 379 301

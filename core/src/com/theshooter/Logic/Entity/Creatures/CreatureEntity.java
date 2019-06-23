@@ -20,6 +20,7 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
     private int velocity;
     private boolean damaged;
     private float movedx, movedy;
+    private float velocityMultiplier;
     private int radius;
     private Array<Weapon> weapons;
     private Weapon currentWeapon;
@@ -33,10 +34,12 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
         this.radius = radius;
         weapons = new Array<>();
         ammo = new TreeMap<>();
+        velocityMultiplier = 1;
     }
 
     @Override
     public void update() {
+        setVelocityMultiplier(Game.getInstance().getConfig().enemiesVelocityMultiplier);
         if (!isBroken()) {
             float dx = target.getX() - getX();
             float dy = target.getY() - getY();
@@ -57,8 +60,8 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
 
     @Override
     public void move() {
-        int changeX = (int) (movedx * Gdx.graphics.getDeltaTime() * velocity);
-        int changeY = (int) (movedy * Gdx.graphics.getDeltaTime() * velocity);
+        int changeX = (int) (movedx * Gdx.graphics.getDeltaTime() * velocity * velocityMultiplier);
+        int changeY = (int) (movedy * Gdx.graphics.getDeltaTime() * velocity * velocityMultiplier);
 
         setX(getX() + changeX);
         setY(getY() + changeY);
@@ -141,5 +144,8 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
     }
     public void setRadius(int radius) {
         this.radius = radius;
+    }
+    public void setVelocityMultiplier(float velocityMultiplier) {
+        this.velocityMultiplier = velocityMultiplier;
     }
 }

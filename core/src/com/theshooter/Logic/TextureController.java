@@ -31,7 +31,7 @@ public class TextureController {
 
         addTextureArray("walls", "wall", "walls/", 3, 5);
 
-        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 8, 1);
+        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 9, 1);
         addTextureArray("things", "breakableThing", "environment/breakable/", 5, 2);
 
         for (int i = 0; i < WEAPONS; i++)

@@ -2,6 +2,12 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
+import com.theshooter.Logic.*;
+import com.theshooter.Screen.GameScreen;
+import com.theshooter.Screen.MainScreen;
+import com.theshooter.Utils.Config;
+
+import java.io.IOException;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Logic.*;
 import com.theshooter.Logic.Entity.Abstract.IEntity;
@@ -50,11 +56,19 @@ public class Game extends com.badlogic.gdx.Game {
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
 
-		entityController.load("level1");
+//		entityController.load("test"); // ----------------------------------------------------------------------------------------------------
+//		GameLoader gl = new GameLoader();
+//		try { gl.load("test2"); }
+//		catch (IOException e) {
+//			System.out.println(e.getMessage());
+//			Gdx.app.exit();
+//		}
+//		entityController.load("test2");
+		// entityController.load("level1");
+		entityController.load("itemsTest");
 
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
-
 
 		Gdx.input.setInputProcessor(inputController);
 	}
@@ -80,6 +94,19 @@ public class Game extends com.badlogic.gdx.Game {
 		super.render();
 		inputController.update();
 		entityController.update();
+
+		config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
+		if(config.remainingHookahTime <= 0){
+			config.remainingHookahTime = 0;
+			config.enemiesVelocityMultiplier = 1;
+		}
+
+		config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
+		if(config.remainingVelocityUpTime <= 0){
+			config.remainingVelocityUpTime = 0;
+			config.playerVelocityMultiplier = 1;
+		}
+
 	}
 
 	@Override

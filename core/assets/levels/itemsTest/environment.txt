@@ -1,0 +1,11 @@
+placeHookah 10 10
+placeHookah 11 11
+placeHookah 12 12
+
+placeCoverAirplane 0 10
+placeCoverAirplane 0 11
+placeCoverAirplane 0 12
+
+placeHeal 10 0
+placeHeal 11 0
+placeHeal 12 0
