@@ -95,8 +95,6 @@ public class Game extends com.badlogic.gdx.Game {
 		inputController.update();
 		entityController.update();
 
-		System.out.println(config.remainingVelocityUpTime);
-
 		config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
 		if(config.remainingHookahTime <= 0){
 			config.remainingHookahTime = 0;
