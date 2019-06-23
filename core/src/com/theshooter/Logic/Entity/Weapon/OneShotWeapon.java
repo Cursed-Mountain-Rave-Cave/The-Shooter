@@ -35,7 +35,6 @@ public class OneShotWeapon extends Weapon {
                 owner);
     }
 
-
     public void attack(Vector2 vect) {
         if (canAttack()) {
             Damage damage = new Damage(getOwner(), getType(), getDamage());
