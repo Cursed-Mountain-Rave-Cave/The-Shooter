@@ -165,4 +165,6 @@ public class Map {
         enemies.clear();
         players.clear();
     }
+
+    public Array<IEntity> getEntities() { return entities; }
 }

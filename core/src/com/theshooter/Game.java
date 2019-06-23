@@ -6,16 +6,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
+import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
 
 import java.io.IOException;
-import com.badlogic.gdx.math.Vector2;
-import com.theshooter.Logic.*;
-import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Weapon.*;
-import com.theshooter.Screen.GameScreen;
-import com.theshooter.Screen.MainScreen;
-import com.theshooter.Utils.Config;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -25,6 +19,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
+	public MapScreen mapScreen;
 
 	private InputController inputController;
 	private EntityController entityController;
@@ -73,6 +68,7 @@ public class Game extends com.badlogic.gdx.Game {
 		// entityController.load("level1");
 		entityController.load("itemsTest");
 
+		mapScreen = new MapScreen(getEntityController().getMap());
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
 
@@ -110,6 +106,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void render () {
 		super.render();
+		mapScreen.view();
 		if (!paused) {
 			inputController.update();
 			entityController.update();
