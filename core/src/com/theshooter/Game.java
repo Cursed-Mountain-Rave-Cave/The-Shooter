@@ -5,16 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
+import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
 
 import java.io.IOException;
-import com.badlogic.gdx.math.Vector2;
-import com.theshooter.Logic.*;
-import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Weapon.*;
-import com.theshooter.Screen.GameScreen;
-import com.theshooter.Screen.MainScreen;
-import com.theshooter.Utils.Config;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -24,6 +18,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
+	public MapScreen mapScreen;
 
 	private InputController inputController;
 	private EntityController entityController;
@@ -64,12 +59,11 @@ public class Game extends com.badlogic.gdx.Game {
 //			Gdx.app.exit();
 //		}
 //		entityController.load("test2");
-		// entityController.load("level1");
 		entityController.load("level1");
 
+		mapScreen = new MapScreen(getEntityController().getMap());
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
-
 
 		Gdx.input.setInputProcessor(inputController);
 	}
@@ -93,6 +87,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void render () {
 		super.render();
+		mapScreen.view();
 		inputController.update();
 		entityController.update();
 	}

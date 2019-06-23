@@ -42,7 +42,7 @@ placePalm   3    5
 placePalm   4    7
 
 placeHookah   2   7
-
+end
 placeHookah    -157     -154
 placeHookah    -157     -153
 placeWoman    -153    -155

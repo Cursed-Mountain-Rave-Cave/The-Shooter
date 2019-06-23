@@ -7,4 +7,4 @@ placeWall 285 318 302 319
 placeWall 230 152 231 177
 placeWall 230 183 231 318
 placeWall 231 152 302 153
-
+placeInvisibleWall 56 57 57 58
