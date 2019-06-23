@@ -13,6 +13,7 @@ public class Player extends HumanEntity {
         addWeapon(new Stone(this));
         addWeapon(new Bow(this));
         addWeapon(new ThrowingKnife(this));
+        addWeapon(new Dagger(this));
 
         addAmmo(WeaponType.BOW, 10000);
         addAmmo(WeaponType.THROWING_KNIFE, 20000);

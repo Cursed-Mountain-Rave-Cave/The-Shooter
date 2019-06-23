@@ -89,6 +89,8 @@ abstract public class Weapon {
 
     abstract public void attack(Vector2 vect);
 
+    public void levelUp() {};
+
     public boolean canAttack() {
         return TimeUtils.millis() > lastShot + shotTime && curClipSize > 0 && !reload;
     }

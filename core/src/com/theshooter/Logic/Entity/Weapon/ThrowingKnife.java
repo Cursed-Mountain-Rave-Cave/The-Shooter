@@ -32,4 +32,9 @@ public class ThrowingKnife extends OneShotWeapon {
                 setLastShot(0);
             }
     }
+
+    @Override
+    public void levelUp() {
+        setDamage(getDamage() + 5);
+    }
 }
