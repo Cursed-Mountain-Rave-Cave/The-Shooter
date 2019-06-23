@@ -1,0 +1,36 @@
+place
+[
+    500
+    0
+    100
+    flag1
+    true
+]
+
+place
+[
+    0
+    500
+    100
+    flag2
+    true
+]
+
+event
+[
+    flag1 true
+    flag2 true
+]
+{
+    tp 15000 15000
+    sout Hello there!
+    set flag3 true
+}
+
+event
+[
+    all_killed true
+]
+{
+    sout Fuk MAX
+}

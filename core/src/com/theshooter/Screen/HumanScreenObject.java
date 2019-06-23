@@ -122,7 +122,6 @@ public class HumanScreenObject extends ScreenObject {
             if (end != 0) {
                 float current = TimeUtils.millis() - human.getCurrentWeapon().getLastShot();
                 float percent = current * 100 / end;
-                System.out.println(percent);
                 if (percent < 40)
                     body.get(lastWeapon).get(currentBody).setFrame(0);
                 else if (percent >= 50 && percent < 80)

@@ -29,6 +29,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private EntityController entityController;
 	private TextureController textureController;
 	private AudioController audioController;
+	private EventController eventController;
 
 
 	public static Game getInstance(){
@@ -50,6 +51,7 @@ public class Game extends com.badlogic.gdx.Game {
 		textureController = new TextureController();
 		audioController = new AudioController();
 		entityController = new EntityController();
+		eventController = new EventController();
 
 		//audioController.playMusic("casino", 1f);
 
@@ -89,11 +91,16 @@ public class Game extends com.badlogic.gdx.Game {
 		return audioController;
 	}
 
+	public EventController getEventController() {
+		return eventController;
+	}
+
 	@Override
 	public void render () {
 		super.render();
 		inputController.update();
 		entityController.update();
+		eventController.update();
 
 		config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
 		if(config.remainingHookahTime <= 0){
