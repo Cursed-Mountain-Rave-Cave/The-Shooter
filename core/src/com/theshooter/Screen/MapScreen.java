@@ -95,7 +95,11 @@ public class MapScreen implements Screen {
 
         for(int i = -radius; i < radius; ++i)
             for(int j = -radius; j < radius; ++j)
-                if(i*i + j*j < radius * radius) {
+                if(i*i + j*j < radius * radius &&
+                        (playerX + i) / 10 >= 0 &&
+                        (playerX + i) / 10 < map.length &&
+                        (playerY + j) / 10 >= 0 &&
+                        (playerY + j) / 10 < map[0].length) {
                     visited[(playerX + i) / 10][(playerY + j) / 10] = true;
                     renderer.rect(playerX, playerY, 1, 1);
                 }

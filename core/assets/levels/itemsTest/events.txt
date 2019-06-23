@@ -30,6 +30,7 @@ event
 event
 [
     all_killed true
+    flag3 true
 ]
 {
     sout Fuk MAX
