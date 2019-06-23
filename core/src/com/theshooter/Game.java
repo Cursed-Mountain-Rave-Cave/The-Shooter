@@ -2,6 +2,7 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
@@ -25,6 +26,9 @@ public class Game extends com.badlogic.gdx.Game {
 	private TextureController textureController;
 	private AudioController audioController;
 
+	private boolean paused;
+	private long pausedTime;
+	private long pauseBegin;
 
 	public static Game getInstance(){
 		if(game == null)
@@ -46,7 +50,7 @@ public class Game extends com.badlogic.gdx.Game {
 		audioController = new AudioController();
 		entityController = new EntityController();
 
-		audioController.playMusic("casino", 1f);
+		//audioController.playMusic("casino", 1f);
 
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
@@ -59,13 +63,18 @@ public class Game extends com.badlogic.gdx.Game {
 //			Gdx.app.exit();
 //		}
 //		entityController.load("test2");
-		entityController.load("level1");
+		// entityController.load("level1");
+		entityController.load("itemsTest");
 
 		mapScreen = new MapScreen(getEntityController().getMap());
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
+
+		paused = false;
+		pausedTime = 0;
+		pauseBegin = 0;
 	}
 
 	public Config getConfig() {
@@ -84,12 +93,43 @@ public class Game extends com.badlogic.gdx.Game {
 		return audioController;
 	}
 
+	public long getGameTime() {
+		return TimeUtils.millis() - pausedTime;
+	}
+
 	@Override
 	public void render () {
 		super.render();
 		mapScreen.view();
-		inputController.update();
-		entityController.update();
+		if (!paused) {
+			inputController.update();
+			entityController.update();
+
+			config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingHookahTime <= 0) {
+				config.remainingHookahTime = 0;
+				config.enemiesVelocityMultiplier = 1;
+			}
+
+			config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingVelocityUpTime <= 0) {
+				config.remainingVelocityUpTime = 0;
+				config.playerVelocityMultiplier = 1;
+
+			}
+			pauseBegin = TimeUtils.millis();
+		} else {
+			pausedTime += TimeUtils.millis() - pauseBegin;
+			pauseBegin = TimeUtils.millis();
+		}
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
+	public boolean isPaused() {
+		return paused;
 	}
 
 	@Override

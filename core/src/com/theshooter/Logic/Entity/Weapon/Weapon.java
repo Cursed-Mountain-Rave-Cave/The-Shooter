@@ -2,6 +2,7 @@ package com.theshooter.Logic.Entity.Weapon;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.theshooter.Game;
 import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
@@ -65,7 +66,7 @@ abstract public class Weapon {
             curClipSize = clipSize;
             reload = false;
         }
-        if (reload && TimeUtils.millis() > reloadingEnd) {
+        if (reload && Game.getInstance().getGameTime() > reloadingEnd) {
             int tmp = curClipSize;
             curClipSize +=  Math.min(getOwner().getAmmo(weaponType), clipSize - curClipSize);
             getOwner().addAmmo(weaponType, tmp - curClipSize);
@@ -82,15 +83,17 @@ abstract public class Weapon {
 
     public void reload() {
         if (!reload && curClipSize < clipSize && (getOwner().getAmmo(weaponType) > 0 || !needAmmo)) {
-            reloadingEnd = TimeUtils.millis() + reloadingTime;
+            reloadingEnd = Game.getInstance().getGameTime() + reloadingTime;
             reload = true;
         }
     }
 
     abstract public void attack(Vector2 vect);
 
+    public void levelUp() {};
+
     public boolean canAttack() {
-        return TimeUtils.millis() > lastShot + shotTime && curClipSize > 0 && !reload;
+        return Game.getInstance().getGameTime() > lastShot + shotTime && curClipSize > 0 && !reload;
     }
 
     public int getDamage() {

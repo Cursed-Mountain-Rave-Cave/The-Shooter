@@ -19,4 +19,9 @@ public class Stone extends OneShotWeapon {
 
         );
     }
+
+    @Override
+    public void levelUp() {
+        setDamage(getDamage() + 5);
+    }
 }

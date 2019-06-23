@@ -21,7 +21,7 @@ public class ScreenObject implements IScreenObject {
     }
 
     @Override
-    public int compareTo(IScreenObject s) {
+    final public int compareTo(IScreenObject s) {
         if(getDepth() != Depth.FLOOR || s.getDepth() != Depth.FLOOR){
             if (getDepth() == Depth.FLOOR)
                 return -1;
@@ -38,8 +38,23 @@ public class ScreenObject implements IScreenObject {
 
         return getDepth().compareTo(s.getDepth());
     }
+/**
+    final public int compareTo(IScreenObject s) {
+        if(getDepth() != Depth.FLOOR || s.getDepth() != Depth.FLOOR){
+            if (getDepth() == Depth.FLOOR)
+                return -1;
+            if (s.getDepth() == Depth.FLOOR)
+                return 1;
+        }
 
+        if (getWidth() * (s.getY() + s.getHeight() / 2 - getY() - getHeight()) + getHeight() * (s.getX() + s.getWidth()/2 - getX()) < 0)
+            return -1;
+        if (getWidth() * (s.getY() + s.getHeight() / 2 - getY() - getHeight()) + getHeight() * (s.getX() + s.getWidth()/2 - getX()) > 0)
+            return 1;
 
+        return getDepth().compareTo(s.getDepth());
+    }
+ */
     public int getX() {
         return entity.getX();
     }

@@ -8,6 +8,10 @@ import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 import com.theshooter.Logic.Entity.Creatures.Player;
 import com.theshooter.Logic.Entity.Creatures.Tramp;
+import com.theshooter.Logic.Entity.LiftableEntities.CoverAirplane;
+import com.theshooter.Logic.Entity.LiftableEntities.Heal;
+import com.theshooter.Logic.Entity.LiftableEntities.Hookah;
+import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
 import com.theshooter.Screen.*;
 
 import java.util.HashMap;
@@ -56,8 +60,9 @@ public class EntityController {
 
         player = new Player(scanner.nextInt(), scanner.nextInt(), 25, 25);
         map.addEntity(player);
-        Game.getInstance().gameScreen.playerScreen = new HumanScreenObject(player, Game.getInstance().getTextureController().getTextures("player", "body7"),
-                Game.getInstance().getTextureController().getTextures("player", "legs7"));
+        Game.getInstance().gameScreen.playerScreen = new HumanScreenObject(player,
+                Game.getInstance().getTextureController().getBody("player", "body1"),
+                Game.getInstance().getTextureController().getAnimations("player", "legs1"));
                         screenObjectArray.add(Game.getInstance().gameScreen.playerScreen);
 
         scanner.close();
@@ -123,7 +128,7 @@ public class EntityController {
         Scanner scanner = getScanner(name, "environment");
 
         String command;
-        int x, y;
+        int x, y, x1, y1;
 
         while(scanner.hasNext()){
             command = scanner.next();
@@ -131,28 +136,81 @@ public class EntityController {
             if(command.equals("end"))
                 break;
 
-            x = 50 * scanner.nextInt();
-            y = 50 * scanner.nextInt();
-
-
-            if(command.equals("placeHome"))
+            if(command.equals("placeHome")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placeHome(x, y);
-            if(command.equals("placeBigHome"))
-                placeBigHome(x, y);
-            if(command.equals("placeVase"))
+            }
+
+            if(command.equals("placeVase")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placeVase(x, y);
-            if(command.equals("placeTend"))
+            }
+
+            if(command.equals("placeBigHome")){
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                placeBigHome(x, y);
+            }
+
+
+            if(command.equals("placeTend")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placeTend(x, y);
-            if(command.equals("placePalm"))
+            }
+
+            if(command.equals("placePalm")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placePalm(x, y);
-            if(command.equals("placeHookah"))
+            }
+
+            if(command.equals("placePalms")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                x1 = 50 * scanner.nextInt();
+                y1 = 50 * scanner.nextInt();
+                placePalms(x, y, x1, y1);
+            }
+
+            if(command.equals("placeHookah")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placeHookah(x, y);
-            if(command.equals("placeWoman"))
+            }
+
+            if(command.equals("placeWoman")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placeWoman(x, y);
-            if(command.equals("placeGate"))
+            }
+
+            if(command.equals("placeHeal")){
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                placeHeal(x, y);
+            }
+
+            if(command.equals("placeCoverAirplane")){
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                placeCoverAirplane(x, y);
+            }
+
+            if(command.equals("placeGate")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placeGate(x, y);
-            if(command.equals("placePassablePalm"))
+            }
+
+            if(command.equals("placePassablePalm")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 placePassablePalm(x, y);
+            }
+
         }
         scanner.close();
     }
@@ -161,7 +219,7 @@ public class EntityController {
         Scanner scanner = getScanner(name, "enemies");
 
         String command;
-        int x, y;
+        int x, y, x1, y1;
 
         while(scanner.hasNext()){
             command = scanner.next();
@@ -169,21 +227,44 @@ public class EntityController {
             if(command.equals("end"))
                 break;
 
-            x = 50 * scanner.nextInt();
-            y = 50 * scanner.nextInt();
-
-            if(command.equals("spawnPlane"))
+            if(command.equals("spawnPlane")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 spawnPlane(x, y);
-            if(command.equals("spawnKeanu"))
+            }
+
+            if(command.equals("spawnKeanu")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 spawnKeanu(x, y);
-            if(command.equals("spawnTrain"))
+            }
+
+            if(command.equals("spawnTrain")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 spawnTrain(x, y);
-            if(command.equals("spawnArabinWarrior"))
+            }
+
+            if(command.equals("spawnArabinWarrior")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 spawnArabinWarrior(x, y);
-            if(command.equals("spawnBoss"))
+            }
+
+            if(command.equals("spawnBoss")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 spawnBoss(x, y);
-            if(command.equals("spawnTramp"))
+            }
+
+            if(command.equals("spawnTramp")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
                 spawnTramp(x, y);
+            }
+
+
+
         }
         scanner.close();
     }
@@ -243,10 +324,22 @@ public class EntityController {
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
     public void placeHookah(int x, int y) {
-        Entity entity = new Entity(x, y, 50, 50, Depth.THINGS, true);
+        LiftableEntity entity = new Hookah(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 0));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 50));
+    }
+    public void placeHeal(int x, int y) {
+        LiftableEntity entity = new Heal(x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
+    }
+    public void placeCoverAirplane(int x, int y) {
+        LiftableEntity entity = new CoverAirplane(x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
     }
     public void placePalm(int x, int y) {
         Entity entity = new Entity(x, y, 30, 30, Depth.THINGS, false);
@@ -255,13 +348,13 @@ public class EntityController {
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing3"), 120));
     }
     public void placeHome(int x, int y) {
-        Entity entity = new Entity(x, y, 210, 210, Depth.THINGS, false);
+        Entity entity = new Entity(x, y, 200, 200, Depth.THINGS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 200));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 213));
     }
     public void placeBigHome(int x, int y) {
-        Entity entity = new Entity(x, y, 9 * 50, 11 * 50, Depth.THINGS, false);
+        Entity entity = new Entity(x , y , 8 * 50 , 10 * 50, Depth.WALLS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing8"), 514));
@@ -283,8 +376,8 @@ public class EntityController {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 3,Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
         screenObjectArray.add(new HumanScreenObject(entity,
-                Game.getInstance().getTextureController().getTextures("player", "body" + MathUtils.random(2, 6)),
-                Game.getInstance().getTextureController().getTextures("player", "legs" + MathUtils.random(1, 6))));
+                Game.getInstance().getTextureController().getBody("player", "body1"),
+                Game.getInstance().getTextureController().getAnimations("player", "legs1")));
     }
     public void spawnBoss(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());
@@ -315,6 +408,14 @@ public class EntityController {
         map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy2"), 112));
+    }
+
+    public void placePalms(int x, int y, int x1, int y1){
+        for(int i = x; i < x1; i+= 50){
+            for(int j = y; j < y1; j+= 50){
+                placePassablePalm(i,j);
+            }
+        }
     }
 
     private Scanner getScanner(String name, String type){

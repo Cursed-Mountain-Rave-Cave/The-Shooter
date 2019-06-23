@@ -1,6 +1,7 @@
 package com.theshooter.Logic.Entity.Creatures;
 
 import com.badlogic.gdx.Gdx;
+import com.theshooter.Game;
 import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Entity.Weapon.*;
 import com.theshooter.Screen.Depth;
@@ -12,13 +13,15 @@ public class Player extends HumanEntity {
         addWeapon(new Stone(this));
         addWeapon(new Bow(this));
         addWeapon(new ThrowingKnife(this));
+        addWeapon(new Dagger(this));
 
-        addAmmo(WeaponType.BOW, 100);
-        addAmmo(WeaponType.THROWING_KNIFE, 20);
+        addAmmo(WeaponType.BOW, 10000);
+        addAmmo(WeaponType.THROWING_KNIFE, 20000);
         selectWeapon(1);
     }
 
     public void update(){
+        setVelocityMultiplier(Game.getInstance().getConfig().playerVelocityMultiplier);
         for (Weapon weapon : getWeapons())
             weapon.update();
     }

@@ -13,8 +13,13 @@ public class Bow extends OneShotWeapon {
                 Damage.Type.PHYSICAL,
                 2000,
                 true,
-                200,
+                800,
                 100_000_000,
                 owner);
+    }
+
+    @Override
+    public void levelUp() {
+        setDamage(getDamage() + 5);
     }
 }

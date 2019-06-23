@@ -35,7 +35,6 @@ public class OneShotWeapon extends Weapon {
                 owner);
     }
 
-
     public void attack(Vector2 vect) {
         if (canAttack()) {
             Damage damage = new Damage(getOwner(), getType(), getDamage());
@@ -52,7 +51,7 @@ public class OneShotWeapon extends Weapon {
                             getShotLifeTime());
 
             Game.getInstance().getEntityController().addBullet(projectile);
-            setLastShot(TimeUtils.millis());
+            setLastShot(Game.getInstance().getGameTime());
             setCurClipSize(getCurClipSize() - 1);
         }
     }
