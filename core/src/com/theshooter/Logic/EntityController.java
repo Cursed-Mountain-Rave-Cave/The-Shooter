@@ -8,6 +8,10 @@ import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 import com.theshooter.Logic.Entity.Creatures.Player;
 import com.theshooter.Logic.Entity.Creatures.Tramp;
+import com.theshooter.Logic.Entity.LiftableEntities.CoverAirplane;
+import com.theshooter.Logic.Entity.LiftableEntities.Heal;
+import com.theshooter.Logic.Entity.LiftableEntities.Hookah;
+import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
 import com.theshooter.Screen.*;
 
 import java.util.HashMap;
@@ -147,6 +151,10 @@ public class EntityController {
                 placePalm(x, y);
             if(command.equals("placeHookah"))
                 placeHookah(x, y);
+            if(command.equals("placeHeal"))
+                placeHeal(x, y);
+            if(command.equals("placeCoverAirplane"))
+                placeCoverAirplane(x, y);
             if(command.equals("placeWoman"))
                 placeWoman(x, y);
             if(command.equals("placeGate"))
@@ -243,10 +251,22 @@ public class EntityController {
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
     public void placeHookah(int x, int y) {
-        Entity entity = new Entity(x, y, 50, 50, Depth.THINGS, true);
+        LiftableEntity entity = new Hookah(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 0));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 50));
+    }
+    public void placeHeal(int x, int y) {
+        LiftableEntity entity = new Heal(x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
+    }
+    public void placeCoverAirplane(int x, int y) {
+        LiftableEntity entity = new CoverAirplane(x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
     }
     public void placePalm(int x, int y) {
         Entity entity = new Entity(x, y, 30, 30, Depth.THINGS, false);
@@ -255,13 +275,13 @@ public class EntityController {
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing3"), 120));
     }
     public void placeHome(int x, int y) {
-        Entity entity = new Entity(x, y, 210, 210, Depth.THINGS, false);
+        Entity entity = new Entity(x, y, 200, 200, Depth.THINGS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 200));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 213));
     }
     public void placeBigHome(int x, int y) {
-        Entity entity = new Entity(x, y, 9 * 50, 11 * 50, Depth.THINGS, false);
+        Entity entity = new Entity(x , y , 8 * 50 , 10 * 50, Depth.WALLS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing8"), 514));

@@ -50,11 +50,10 @@ public class Game extends com.badlogic.gdx.Game {
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
 
-		entityController.load("level1");
+		entityController.load("itemsTest");
 
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
-
 
 		Gdx.input.setInputProcessor(inputController);
 	}
@@ -80,6 +79,21 @@ public class Game extends com.badlogic.gdx.Game {
 		super.render();
 		inputController.update();
 		entityController.update();
+
+		System.out.println(config.remainingVelocityUpTime);
+
+		config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
+		if(config.remainingHookahTime <= 0){
+			config.remainingHookahTime = 0;
+			config.enemiesVelocityMultiplier = 1;
+		}
+
+		config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
+		if(config.remainingVelocityUpTime <= 0){
+			config.remainingVelocityUpTime = 0;
+			config.playerVelocityMultiplier = 1;
+		}
+
 	}
 
 	@Override
