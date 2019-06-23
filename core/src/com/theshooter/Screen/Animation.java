@@ -3,6 +3,7 @@ package com.theshooter.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.theshooter.Game;
 
 public class Animation {
     private Array<Texture> textures;
@@ -19,8 +20,8 @@ public class Animation {
     }
 
     public void update() {
-        currentFrameTime += TimeUtils.millis() - lastUpdate;
-        lastUpdate = TimeUtils.millis();
+        currentFrameTime += Game.getInstance().getGameTime() - lastUpdate;
+        lastUpdate = Game.getInstance().getGameTime();
         if (currentFrameTime > frameTime) {
             frame++;
             currentFrameTime = 0;

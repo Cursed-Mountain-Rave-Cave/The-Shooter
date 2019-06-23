@@ -45,7 +45,7 @@ public class ThrowingKnife extends OneShotWeapon {
                                     getShotLifeTime());
 
                     Game.getInstance().getEntityController().addBullet(projectile);
-                    setLastShot(TimeUtils.millis());
+                    setLastShot(Game.getInstance().getGameTime());
                     setCurClipSize(getCurClipSize() - 1);
                 }
             }

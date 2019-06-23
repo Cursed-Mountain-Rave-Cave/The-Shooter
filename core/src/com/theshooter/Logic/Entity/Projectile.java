@@ -2,6 +2,7 @@ package com.theshooter.Logic.Entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.theshooter.Game;
 import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
@@ -26,7 +27,7 @@ public class Projectile extends Entity {
         this.velocity = velocity;
         if (lifeTime == 0)
             delete();
-        this.lifeTime = lifeTime + TimeUtils.millis();
+        this.lifeTime = lifeTime + Game.getInstance().getGameTime();
     }
 
     @Override
