@@ -4,6 +4,7 @@ public enum WeaponType {
     STONE,
     THROWING_KNIFE,
     BOW,
+    DAGGER,
     NO_TYPE;
 
     public String toString() {
@@ -14,6 +15,8 @@ public enum WeaponType {
                 return "throwing knife";
             case BOW:
                 return "bow";
+            case DAGGER:
+                return "dagger";
         }
         return "no type";
     }
@@ -26,6 +29,8 @@ public enum WeaponType {
                 return WeaponType.THROWING_KNIFE;
             case 2:
                 return WeaponType.BOW;
+            case 3:
+                return WeaponType.DAGGER;
         }
         return NO_TYPE;
     }

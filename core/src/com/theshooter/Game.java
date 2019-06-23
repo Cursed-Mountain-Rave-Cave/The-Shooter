@@ -2,6 +2,7 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
@@ -31,6 +32,9 @@ public class Game extends com.badlogic.gdx.Game {
 	private AudioController audioController;
 	private EventController eventController;
 
+	private boolean paused;
+	private long pausedTime;
+	private long pauseBegin;
 
 	public static Game getInstance(){
 		if(game == null)
@@ -73,6 +77,10 @@ public class Game extends com.badlogic.gdx.Game {
 		setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
+
+		paused = false;
+		pausedTime = 0;
+		pauseBegin = 0;
 	}
 
 	public Config getConfig() {
@@ -95,25 +103,43 @@ public class Game extends com.badlogic.gdx.Game {
 		return eventController;
 	}
 
+	public long getGameTime() {
+		return TimeUtils.millis() - pausedTime;
+	}
+
 	@Override
 	public void render () {
 		super.render();
-		inputController.update();
-		entityController.update();
-		eventController.update();
+		if (!paused) {
+			inputController.update();
+			entityController.update();
+			eventController.update();
 
-		config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
-		if(config.remainingHookahTime <= 0){
-			config.remainingHookahTime = 0;
-			config.enemiesVelocityMultiplier = 1;
+			config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingHookahTime <= 0) {
+				config.remainingHookahTime = 0;
+				config.enemiesVelocityMultiplier = 1;
+			}
+
+			config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingVelocityUpTime <= 0) {
+				config.remainingVelocityUpTime = 0;
+				config.playerVelocityMultiplier = 1;
+
+			}
+			pauseBegin = TimeUtils.millis();
+		} else {
+			pausedTime += TimeUtils.millis() - pauseBegin;
+			pauseBegin = TimeUtils.millis();
 		}
+	}
 
-		config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
-		if(config.remainingVelocityUpTime <= 0){
-			config.remainingVelocityUpTime = 0;
-			config.playerVelocityMultiplier = 1;
-		}
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
 
+	public boolean isPaused() {
+		return paused;
 	}
 
 	@Override

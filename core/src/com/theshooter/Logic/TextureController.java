@@ -12,7 +12,7 @@ public class TextureController {
     private Map<String, Map<String, Array<Texture>>> textures;
     private Map<String, Map<String, Array<Animation>>> animations;
 
-    private final int WEAPONS = 3;
+    private final int WEAPONS = 4;
 
     public TextureController() {
         textures = new TreeMap<>();
@@ -34,9 +34,8 @@ public class TextureController {
         addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 9, 1);
         addTextureArray("things", "breakableThing", "environment/breakable/", 5, 2);
 
-        for (int i = 0; i < WEAPONS; i++)
-            addBodyAnimationArray("player", "body", "player/bodies/", WeaponType.fromInt(i), 1, 9, 3);
-        addAnimationArray("player", "legs", "player/legs/", 1, 9, 4);
+        addBodyAnimationArray("player", "body", "player/bodies/", 3, 9, 3);
+        addAnimationArray("player", "legs", "player/legs/", 7, 9, 4);
 
         addTextureArray("enemy", "enemy", "enemies/", 5, 2);
 
@@ -81,23 +80,24 @@ public class TextureController {
                     textures.add(new Texture(path + i + "/" + j + "/" + k + ".png"));
                 Animation animation = new Animation(textures, 200);
                 animations.add(animation);
+
             }
             this.animations.get(type).put(name + i, animations);
         }
     }
 
-    private void addBodyAnimationArray(String type, String name, String path, WeaponType wType, int size, int states, int frames) {
-        for (int i = 1; i <= size; i++) {
-            Array<Animation> animations = new Array<>();
-            for (int j = 0; j < WEAPONS; j++)
+    private void addBodyAnimationArray(String type, String name, String path, int size, int states, int frames) {
+        for (int i = 1; i <= size; i++)
+            for (int j = 0; j < WEAPONS; j++) {
+                Array<Animation> animations = new Array<>();
                 for (int k = 1; k <= states; k++) {
                     Array<Texture> textures = new Array<>();
                     for (int l = 1; l <= frames; l++)
                         textures.add(new Texture(path + i + "/" + WeaponType.fromInt(j).toString() + "/" + k + "/" + l + ".png"));
                     Animation animation = new Animation(textures, 300);
                     animations.add(animation);
+                    this.animations.get(type).put(name + i + "/" + WeaponType.fromInt(j).toString(), animations);
                 }
-            this.animations.get(type).put(name + i + "/" + wType.toString(), animations);
         }
     }
 
