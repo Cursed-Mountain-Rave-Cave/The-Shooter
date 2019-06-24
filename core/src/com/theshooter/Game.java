@@ -48,6 +48,8 @@ public class Game extends com.badlogic.gdx.Game {
 
 		config = new Config();
 
+		mapScreen = new MapScreen();
+
 		inputController = new InputController();
 		textureController = new TextureController();
 		audioController = new AudioController();
@@ -73,7 +75,6 @@ public class Game extends com.badlogic.gdx.Game {
 
 		entityController.load("level1");
 
-		//mapScreen = new MapScreen();
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 
 		setScreen(gameScreen);

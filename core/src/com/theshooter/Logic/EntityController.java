@@ -68,7 +68,7 @@ public class EntityController {
         loadEnvironment(name);
         loadEnemies(name);
         loadEvents(name);
-        Game.getInstance().mapScreen = new MapScreen(); /** переписать без вызова конструктора*/
+        Game.getInstance().mapScreen.load();
     }
 
     public void loadEvents(String name){
