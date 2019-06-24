@@ -1,5 +1,4 @@
-spawnKnifeJuggler 72 70
-spawnArabinWarrior 74 71
+spawnSuicide 74 71
 spawnArabinWarrior 81 66
 spawnArabinWarrior 92 70
 spawnArabinWarrior 98 67

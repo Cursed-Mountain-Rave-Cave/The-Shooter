@@ -5,10 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
-import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
-import com.theshooter.Logic.Entity.Creatures.HumanEntity;
-import com.theshooter.Logic.Entity.Creatures.Player;
-import com.theshooter.Logic.Entity.Creatures.Tramp;
+import com.theshooter.Logic.Entity.Creatures.*;
 import com.theshooter.Logic.Entity.LiftableEntities.CoverAirplane;
 import com.theshooter.Logic.Entity.LiftableEntities.Heal;
 import com.theshooter.Logic.Entity.LiftableEntities.Hookah;
@@ -248,6 +245,14 @@ public class EntityController {
                 placePalms(x, y, x1, y1);
             }
 
+            if(command.equals("placeVases")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                x1 = 50 * scanner.nextInt();
+                y1 = 50 * scanner.nextInt();
+                placeVases(x, y, x1, y1);
+            }
+
             if(command.equals("placeHookah")) {
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
@@ -340,6 +345,12 @@ public class EntityController {
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
                 spawnKnifeJuggler(x, y);
+            }
+
+            if(command.equals("spawnSuicide")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                spawnSuicide(x, y);
             }
 
 
@@ -460,6 +471,15 @@ public class EntityController {
                         Game.getInstance().getTextureController().getBody("player", "body2"),
                         Game.getInstance().getTextureController().getAnimations("player", "legs2")));
     }
+
+    public void spawnSuicide(int x, int y){
+        SuicideEntity entity = new SuicideEntity(x, y, 30, 30, 5, 300, 10,Depth.ENEMY, false, player.getRectangle());
+        map.addEntity(entity);
+        screenObjectArray.add(new HumanScreenObject(entity,
+                Game.getInstance().getTextureController().getBody("player", "body4"),
+                Game.getInstance().getTextureController().getAnimations("player", "legs4")));
+    }
+
     public void spawnKnifeJuggler(int x, int y) {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new ThrowingKnife(entity));
@@ -505,6 +525,14 @@ public class EntityController {
         for(int i = x; i < x1; i+= 50){
             for(int j = y; j < y1; j+= 50){
                 placePassablePalm(i,j);
+            }
+        }
+    }
+
+    public void placeVases(int x, int y, int x1, int y1){
+        for(int i = x; i < x1; i+= 50){
+            for(int j = y; j < y1; j+= 50){
+                placeVase(i,j);
             }
         }
     }

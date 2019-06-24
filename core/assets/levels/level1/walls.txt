@@ -16,3 +16,17 @@ placeInvisibleWall 60 65 149 66
 placeInvisibleWall 52 73 122 74
 placeInvisibleWall 131 73 149 74
 placeInvisibleWall 50 108 149 109
+placeInvisibleWall 161 91 187 104
+placeInvisibleWall 50 108 149 109
+placeInvisibleWall 92 82 96 86
+placeInvisibleWall 248 71 256 74
+placeInvisibleWall 259 51 262 62
+placeInvisibleWall 216 93 221 131
+placeInvisibleWall 199 125 216 131
+placeInvisibleWall 221 126 231 131
+placeInvisibleWall 229 131 231 152
+placeInvisibleWall 150 257 233 258
+placeInvisibleWall 231 258 233 312
+placeInvisibleWall 233 310 243 312
+placeInvisibleWall 241 306 243 310
+placeInvisibleWall 241 288 252 307
