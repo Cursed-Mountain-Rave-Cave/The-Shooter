@@ -397,7 +397,7 @@ public class EntityController {
         LiftableEntity entity = new WeaponUpgrade(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 50));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing11"), 50));
     }
     public void placeHookah(int x, int y) {
         LiftableEntity entity = new Hookah(x, y);
@@ -409,7 +409,7 @@ public class EntityController {
         LiftableEntity entity = new Heal(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing12"), 25));
     }
     public void placeKey(int x, int y, String flag, boolean value) {
         LiftableEntity entity = new Key(x, y, flag, value);
@@ -421,7 +421,7 @@ public class EntityController {
         LiftableEntity entity = new CoverAirplane(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing13"), 25));
     }
     public void placePalm(int x, int y) {
         Entity entity = new Entity(x, y, 30, 30, Depth.THINGS, false);

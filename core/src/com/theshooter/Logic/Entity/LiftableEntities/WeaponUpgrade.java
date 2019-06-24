@@ -10,5 +10,6 @@ public class WeaponUpgrade extends LiftableEntity {
     @Override
     public void use() {
         Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().levelUp();
+        Game.getInstance().getAudioController().playSound("upgrade");
     }
 }
