@@ -10,5 +10,6 @@ public class Heal extends LiftableEntity {
     @Override
     public void use() {
         Game.getInstance().getEntityController().getPlayer().setHp(Game.getInstance().getEntityController().getPlayer().getHP() + 100);
+        Game.getInstance().getAudioController().playSound("healing");
     }
 }

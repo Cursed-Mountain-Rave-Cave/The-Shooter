@@ -68,6 +68,7 @@ public class EntityController {
         loadEnvironment(name);
         loadEnemies(name);
         loadEvents(name);
+        Game.getInstance().mapScreen = new MapScreen(); /** переписать без вызова конструктора*/
     }
 
     public void loadEvents(String name){
@@ -135,6 +136,12 @@ public class EntityController {
                         params.add(command);
                         params.add(scanner.next());
                         params.add(scanner.nextFloat());
+                        event.addCommand(params);
+                    }
+                    if (command.equals("load")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        params.add(scanner.next());
                         event.addCommand(params);
                     }
 
@@ -410,7 +417,7 @@ public class EntityController {
         LiftableEntity entity = new WeaponUpgrade(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 50));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing11"), 50));
     }
     public void placeHookah(int x, int y) {
         LiftableEntity entity = new Hookah(x, y);
@@ -422,7 +429,7 @@ public class EntityController {
         LiftableEntity entity = new Heal(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing12"), 25));
     }
     public void placeKey(int x, int y, String flag, boolean value) {
         LiftableEntity entity = new Key(x, y, flag, value);
@@ -434,7 +441,7 @@ public class EntityController {
         LiftableEntity entity = new CoverAirplane(x, y);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
-                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing13"), 25));
     }
     public void placePalm(int x, int y) {
         Entity entity = new Entity(x, y, 30, 30, Depth.THINGS, false);

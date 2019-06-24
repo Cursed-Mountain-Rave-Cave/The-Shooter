@@ -31,7 +31,7 @@ public class TextureController {
 
         addTextureArray("walls", "wall", "walls/", 3, 5);
 
-        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 10, 1);
+        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 13, 1);
         addTextureArray("things", "breakableThing", "environment/breakable/", 6, 2);
 
         addBodyAnimationArray("player", "body", "player/bodies/", 4, 9, 3);
@@ -41,7 +41,6 @@ public class TextureController {
 
         addTextureArray("projectiles", "projectile", "projectiles/", 5, 1);
     }
-
 
     private void addTextureType(String type) {
         Map<String, Array<Texture>> map = new TreeMap<>();

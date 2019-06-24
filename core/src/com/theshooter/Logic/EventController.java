@@ -88,6 +88,9 @@ public class EventController {
          if (((String)command.get(0)).contains("music")){
              Game.getInstance().getAudioController().playMusic((String) command.get(1), (Float) command.get(2));
          }
+         if (((String)command.get(0)).contains("load")){
+             Game.getInstance().getEntityController().load((String) command.get(1));
+         }
     }
 
     public void addFlag(String name, boolean value){

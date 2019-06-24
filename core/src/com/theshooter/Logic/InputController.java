@@ -152,10 +152,10 @@ public class InputController implements InputProcessor {
                 Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().reload();
                 break;
             }
-            case Input.Keys.P: {
+            /*case Input.Keys.P: {
                 Game.getInstance().setPaused(!Game.getInstance().isPaused());
                 break;
-            }
+            }*/
         }
 
         return false;
