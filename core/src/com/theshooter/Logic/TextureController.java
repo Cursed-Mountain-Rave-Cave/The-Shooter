@@ -34,7 +34,7 @@ public class TextureController {
         addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 9, 1);
         addTextureArray("things", "breakableThing", "environment/breakable/", 5, 2);
 
-        addBodyAnimationArray("player", "body", "player/bodies/", 3, 9, 3);
+        addBodyAnimationArray("player", "body", "player/bodies/", 4, 9, 3);
         addAnimationArray("player", "legs", "player/legs/", 7, 9, 4);
 
         addTextureArray("enemy", "enemy", "enemies/", 5, 2);
@@ -78,7 +78,7 @@ public class TextureController {
                 Array<Texture> textures = new Array<>();
                 for (int k = 1; k <= frames; k++)
                     textures.add(new Texture(path + i + "/" + j + "/" + k + ".png"));
-                Animation animation = new Animation(textures, 200);
+                Animation animation = new Animation(textures, 300);
                 animations.add(animation);
 
             }
@@ -113,7 +113,10 @@ public class TextureController {
     }
 
     public Array<Animation> getAnimations(String type, String name) {
-        return animations.get(type).get(name);
+        Array<Animation> animations = new Array<>();
+        for (Animation animation : this.animations.get(type).get(name))
+            animations.add(new Animation(animation));
+        return animations;
     }
 
     public Texture getTexture(String type, String name, int n) {
