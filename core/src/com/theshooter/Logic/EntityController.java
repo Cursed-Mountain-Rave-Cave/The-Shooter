@@ -105,6 +105,20 @@ public class EntityController {
                         params.add(scanner.nextBoolean());
                         event.addCommand(params);
                     }
+                    if (command.equals("spawn")){
+                        Array<Object> params = new Array<>();
+                        params.add(command + scanner.next());
+                        params.add(scanner.nextInt());
+                        params.add(scanner.nextInt());
+                        event.addCommand(params);
+                    }
+                    if (command.equals("place")){
+                        Array<Object> params = new Array<>();
+                        params.add(command + scanner.next());
+                        params.add(scanner.nextInt());
+                        params.add(scanner.nextInt());
+                        event.addCommand(params);
+                    }
 
                 }
 
@@ -205,88 +219,17 @@ public class EntityController {
 
             if(command.equals("end"))
                 break;
-
-            if(command.equals("placeHome")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeHome(x, y);
-            }
-
-            if(command.equals("placeVase")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeVase(x, y);
-            }
-
-            if(command.equals("placeBigHome")){
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeBigHome(x, y);
-            }
-
-
-            if(command.equals("placeTend")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeTend(x, y);
-            }
-
-            if(command.equals("placePalm")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placePalm(x, y);
-            }
-
             if(command.equals("placePalms")) {
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
                 x1 = 50 * scanner.nextInt();
                 y1 = 50 * scanner.nextInt();
                 placePalms(x, y, x1, y1);
+            }else{
+                x = scanner.nextInt();
+                y = scanner.nextInt();
+                place(command, x, y);
             }
-
-            if(command.equals("placeHookah")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeHookah(x, y);
-            }
-
-            if(command.equals("placeWoman")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeWoman(x, y);
-            }
-
-            if(command.equals("placeHeal")){
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeHeal(x, y);
-            }
-
-            if(command.equals("placeCoverAirplane")){
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeCoverAirplane(x, y);
-            }
-
-            if(command.equals("placeWeaponUpgrade")){
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeWeaponUpgrade(x, y);
-            }
-
-            if(command.equals("placeGate")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placeGate(x, y);
-            }
-
-            if(command.equals("placePassablePalm")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                placePassablePalm(x, y);
-            }
-
         }
         scanner.close();
     }
@@ -303,52 +246,61 @@ public class EntityController {
             if(command.equals("end"))
                 break;
 
-            if(command.equals("spawnPlane")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                spawnPlane(x, y);
-            }
+            x = scanner.nextInt();
+            y = scanner.nextInt();
 
-            if(command.equals("spawnKeanu")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                spawnKeanu(x, y);
-            }
-
-            if(command.equals("spawnTrain")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                spawnTrain(x, y);
-            }
-
-            if(command.equals("spawnArabinWarrior")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                spawnArabinWarrior(x, y);
-            }
-
-            if(command.equals("spawnBoss")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                spawnBoss(x, y);
-            }
-
-            if(command.equals("spawnTramp")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                spawnTramp(x, y);
-            }
-
-            if(command.equals("spawnKnifeJuggler")) {
-                x = 50 * scanner.nextInt();
-                y = 50 * scanner.nextInt();
-                spawnKnifeJuggler(x, y);
-            }
-
-
-
+            spawn(command, x, y);
         }
         scanner.close();
+    }
+
+
+    public void spawn(String command, int x, int y){
+        x *= 50;
+        y *= 50;
+        if(command.equals("spawnPlane"))
+            spawnPlane(x, y);
+        if(command.equals("spawnKeanu"))
+            spawnKeanu(x, y);
+        if(command.equals("spawnTrain"))
+            spawnTrain(x, y);
+        if(command.equals("spawnArabinWarrior"))
+            spawnArabinWarrior(x, y);
+        if(command.equals("spawnBoss"))
+            spawnBoss(x, y);
+        if(command.equals("spawnTramp"))
+            spawnTramp(x, y);
+        if(command.equals("spawnKnifeJuggler"))
+            spawnKnifeJuggler(x, y);
+    }
+
+    public void place(String command, int x, int y){
+        x *= 50;
+        y *= 50;
+        if(command.equals("placeHome"))
+            placeHome(x, y);
+        if(command.equals("placeVase"))
+            placeVase(x, y);
+        if(command.equals("placeBigHome"))
+            placeBigHome(x, y);
+        if(command.equals("placeTend"))
+            placeTend(x, y);
+        if(command.equals("placePalm"))
+            placePalm(x, y);
+        if(command.equals("placeHookah"))
+            placeHookah(x, y);
+        if(command.equals("placeWoman"))
+            placeWoman(x, y);
+        if(command.equals("placeHeal"))
+            placeHeal(x, y);
+        if(command.equals("placeCoverAirplane"))
+            placeCoverAirplane(x, y);
+        if(command.equals("placeWeaponUpgrade"))
+            placeWeaponUpgrade(x, y);
+        if(command.equals("placeGate"))
+            placeGate(x, y);
+        if(command.equals("placePassablePalm"))
+            placePassablePalm(x, y);
     }
 
     public void addBullet(Projectile projectile){
