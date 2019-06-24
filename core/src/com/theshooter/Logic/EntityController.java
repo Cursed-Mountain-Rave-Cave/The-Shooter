@@ -375,9 +375,9 @@ public class EntityController {
     public void spawnArabinWarrior(int x, int y) {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 3,Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
-        screenObjectArray.add(new HumanScreenObject(entity,
-                Game.getInstance().getTextureController().getBody("player", "body" + MathUtils.random(1, 1)),
-                Game.getInstance().getTextureController().getAnimations("player", "legs" + MathUtils.random(1, 1))));
+        //screenObjectArray.add(new HumanScreenObject(entity,
+                //Game.getInstance().getTextureController().getBody("player", "body1"),
+                //Game.getInstance().getTextureController().getAnimations("player", "legs1")));
     }
     public void spawnBoss(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());
