@@ -1,5 +1,6 @@
 package com.theshooter.Logic.Entity.Weapon;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Damage;
@@ -57,10 +58,9 @@ abstract public class Weapon {
         this.shotLifeTime        = shotLifeTime;
         this.owner               = owner;
 
-        curClipSize              = 0;
+        curClipSize              = MathUtils.random(0, clipSize);
         lastShot                 = 0;
         reload                   = false;
-        reload();
     }
 
     public void update() {
@@ -85,6 +85,8 @@ abstract public class Weapon {
 
     public void reload() {
         if (!reload && curClipSize < clipSize && (getOwner().getAmmo(weaponType) > 0 || !needAmmo)) {
+            if (!reloadable)
+                Game.getInstance().getAudioController().playSound("reloading");
             reloadingStart = Game.getInstance().getGameTime();
             reloadingEnd = Game.getInstance().getGameTime() + reloadingTime;
             reload = true;
@@ -98,6 +100,7 @@ abstract public class Weapon {
     }
 
     public boolean canAttack() {
+        System.out.println(Game.getInstance().getGameTime() > lastShot + shotTime);
         return Game.getInstance().getGameTime() > lastShot + shotTime && curClipSize > 0 && !reload;
     }
 

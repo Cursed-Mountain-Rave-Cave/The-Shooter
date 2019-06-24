@@ -16,3 +16,11 @@ placeWeaponUpgrade 4 0
 
 placeKey 20 0 key true
 placeConditionGate 20 10 key true
+
+placeKnifeAmmo 14 0
+placeKnifeAmmo 15 0
+placeKnifeAmmo 16 0
+
+placeBowAmmo 18 0
+placeBowAmmo 19 0
+placeBowAmmo 20 0

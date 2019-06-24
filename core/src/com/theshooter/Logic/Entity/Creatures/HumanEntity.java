@@ -22,8 +22,7 @@ public class HumanEntity extends CreatureEntity implements ILookable{
     public void update() {
         super.update();
         lookAt(getMovedx(), getMovedy());
-        for (Weapon weapon : getWeapons())
-            weapon.update();
+
     }
 
     public void look(){

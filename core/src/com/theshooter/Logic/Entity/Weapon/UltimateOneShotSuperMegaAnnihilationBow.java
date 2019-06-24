@@ -18,7 +18,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
                 20,
                 Damage.Type.PHYSICAL,
                 2000,
-                true,
+                false,
                 true,
                 200,
                 1000,
@@ -63,6 +63,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
     public void levelUp() {
         super.levelUp();
         shots += 2;
+        setClipSize(getClipSize() + 2);
     }
 
     @Override

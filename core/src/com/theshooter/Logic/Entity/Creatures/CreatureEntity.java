@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class CreatureEntity extends BreakableEntity implements IMovable {
-
     private Rectangle target;
     private int velocity;
     private boolean damaged;
@@ -44,6 +43,12 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
         if (!isBroken()) {
             float dx = target.getX() - getX();
             float dy = target.getY() - getY();
+            for (Weapon weapon : getWeapons()) {
+                weapon.update();
+                if (weapon.getCurClipSize() == 0 && !weapon.isReload()) {
+                    weapon.reload();
+                }
+            }
             double len = Math.hypot(dx, dy);
             if (len < radius * 50 || damaged)
                 moveAt(dx, dy);
@@ -51,6 +56,7 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
                 moveAt(0, 0);
             if (len < radius * 30)
                 currentWeapon.attack(new Vector2(dx, dy));
+
         }else
             moveAt(0, 0);
     }
