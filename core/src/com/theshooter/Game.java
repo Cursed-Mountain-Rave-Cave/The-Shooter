@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
+import com.theshooter.Screen.MainMenu;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
@@ -20,6 +21,7 @@ public class Game extends com.badlogic.gdx.Game {
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
 	public MapScreen mapScreen;
+	public MainMenu mainMenu;
 
 	private InputController inputController;
 	private EntityController entityController;
@@ -27,7 +29,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private AudioController audioController;
 	private EventController eventController;
 
-	private boolean paused;
+	private boolean started;
 	private long pausedTime;
 	private long pauseBegin;
 
@@ -54,6 +56,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 		//audioController.playMusic("casino", 1f);
 
+		mainMenu = new MainMenu();
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
 
@@ -65,17 +68,21 @@ public class Game extends com.badlogic.gdx.Game {
 //			Gdx.app.exit();
 //		}
 //		entityController.load("test2");
+
+		setScreen(mainMenu);
+
 		entityController.load("itemsTest");
 
 		mapScreen = new MapScreen(getEntityController().getMap(), getEntityController().getScreenObjectArray());
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
+
 		setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
 
-		paused = false;
 		pausedTime = 0;
 		pauseBegin = 0;
+		started = true;
 	}
 
 	public Config getConfig() {
@@ -104,9 +111,9 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void render () {
-		mapScreen.view();
 		super.render();
-		if (!paused) {
+		if (started) {
+			mapScreen.view();
 			inputController.update();
 			entityController.update();
 			eventController.update();
@@ -130,12 +137,12 @@ public class Game extends com.badlogic.gdx.Game {
 		}
 	}
 
-	public void setPaused(boolean paused) {
-		this.paused = paused;
+	public void setStarted(boolean paused) {
+		this.started = paused;
 	}
 
-	public boolean isPaused() {
-		return paused;
+	public boolean isStarted() {
+		return started;
 	}
 
 	@Override
@@ -143,4 +150,5 @@ public class Game extends com.badlogic.gdx.Game {
 		textureController.dispose();
 		audioController.dispose();
 	}
+
 }

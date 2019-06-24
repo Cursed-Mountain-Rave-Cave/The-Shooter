@@ -25,6 +25,7 @@ public class Stone extends OneShotWeapon {
 
     @Override
     public void levelUp() {
+        super.levelUp();
         setDamage(getDamage() + 5);
     }
 }

@@ -18,6 +18,7 @@ public class MeleeWeapon extends Weapon {
                        Damage.Type    type,
                        int            velocity,
                        long           shotTime,
+                       long           shotLifeTime,
                        int splash,
                        CreatureEntity owner) {
         super(weaponType,
@@ -32,7 +33,7 @@ public class MeleeWeapon extends Weapon {
               1,
               0,
               shotTime,
-              shotTime,
+              shotLifeTime,
               owner);
         this.splash = splash;
     }

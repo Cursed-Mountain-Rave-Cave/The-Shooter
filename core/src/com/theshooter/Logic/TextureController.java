@@ -42,7 +42,6 @@ public class TextureController {
         addTextureArray("projectiles", "projectile", "projectiles/", 5, 1);
     }
 
-
     private void addTextureType(String type) {
         Map<String, Array<Texture>> map = new TreeMap<>();
         textures.put(type, map);

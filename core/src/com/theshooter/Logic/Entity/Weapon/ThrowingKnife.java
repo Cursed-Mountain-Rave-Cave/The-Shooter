@@ -57,6 +57,7 @@ public class ThrowingKnife extends OneShotWeapon {
 
     @Override
     public void levelUp() {
+        super.levelUp();
         setDamage(getDamage() + 3);
     }
 }

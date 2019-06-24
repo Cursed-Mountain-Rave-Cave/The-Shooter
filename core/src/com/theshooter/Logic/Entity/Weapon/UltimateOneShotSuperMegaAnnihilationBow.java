@@ -61,6 +61,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
 
     @Override
     public void levelUp() {
+        super.levelUp();
         shots += 2;
     }
 
