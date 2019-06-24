@@ -450,7 +450,7 @@ public class EntityController {
 
     public void spawnArabinWarrior(int x, int y) {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
-        entity.addWeapon(new Dagger(entity));
+        entity.addWeapon(new Dagger(0, entity));
         entity.selectWeapon(1);
         map.addEntity(entity);
         screenObjectArray.add(new HumanScreenObject(entity,
@@ -459,7 +459,7 @@ public class EntityController {
     }
     public void spawnKnifeJuggler(int x, int y) {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
-        entity.addWeapon(new ThrowingKnife(entity));
+        entity.addWeapon(new ThrowingKnife(0, entity));
         entity.selectWeapon(1);
         entity.addAmmo(WeaponType.THROWING_KNIFE, 50000);
         map.addEntity(entity);
@@ -494,7 +494,7 @@ public class EntityController {
     public void spawnKeanu(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75,75, 50,100, 5, Depth.ENEMY, false,  player.getRectangle());
         map.addEntity(entity);
-        entity.addWeapon(new Dagger(entity));
+        entity.addWeapon(new Dagger(0, entity));
         entity.selectWeapon(1);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy2"), 112));

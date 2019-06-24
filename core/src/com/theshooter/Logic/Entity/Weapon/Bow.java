@@ -4,9 +4,10 @@ import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 public class Bow extends OneShotWeapon {
-    public Bow(CreatureEntity owner) {
+    public Bow(int level, CreatureEntity owner) {
         super(
                 WeaponType.BOW,
+                level,
                 15,
                 10,
                 10,
@@ -16,6 +17,8 @@ public class Bow extends OneShotWeapon {
                 800,
                 1500,
                 owner);
+        for (int i = 0; i < level; i++)
+            levelUp();
     }
 
     @Override

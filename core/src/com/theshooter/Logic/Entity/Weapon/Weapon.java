@@ -7,6 +7,7 @@ import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 abstract public class Weapon {
     private WeaponType      weaponType;
+    private int             level;
     private int             damage;
     private int             w;
     private int             h;
@@ -28,6 +29,7 @@ abstract public class Weapon {
 
     public Weapon
             (WeaponType     weaponType,
+             int            level,
              int            damage,
              int            w,
              int            h,
@@ -42,6 +44,7 @@ abstract public class Weapon {
              CreatureEntity owner)
     {
         this.weaponType          = weaponType;
+        this.level               = level;
         this.damage              = damage;
         this.w                   = w;
         this.h                   = h;
@@ -91,10 +94,14 @@ abstract public class Weapon {
 
     abstract public void attack(Vector2 vect);
 
-    public void levelUp() {};
+    public void levelUp() {}
 
     public boolean canAttack() {
         return Game.getInstance().getGameTime() > lastShot + shotTime && curClipSize > 0 && !reload;
+    }
+
+    public String toString() {
+        return weaponType.toString();
     }
 
     public int getDamage() {
@@ -223,6 +230,10 @@ abstract public class Weapon {
 
     public void setReload(boolean reload) {
         this.reload = reload;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public long getReloadingStart() {

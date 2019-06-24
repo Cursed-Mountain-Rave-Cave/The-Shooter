@@ -10,6 +10,7 @@ public class MeleeWeapon extends Weapon {
     private int splash;
 
     public MeleeWeapon(WeaponType weaponType,
+                       int            level,
                        int            damage,
                        int            w,
                        int            h,
@@ -19,6 +20,7 @@ public class MeleeWeapon extends Weapon {
                        int splash,
                        CreatureEntity owner) {
         super(weaponType,
+              level,
               damage,
               w,
               h,
