@@ -18,6 +18,14 @@ place
 
 event
 [
+    all_killed true
+]
+{
+    place Home 10 0
+}
+
+event
+[
     flag1 true
     flag2 true
 ]
