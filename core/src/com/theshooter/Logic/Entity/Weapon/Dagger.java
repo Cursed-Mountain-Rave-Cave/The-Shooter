@@ -4,8 +4,10 @@ import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 public class Dagger extends MeleeWeapon {
-    public Dagger(CreatureEntity owner) {
-        super(WeaponType.DAGGER,
+    public Dagger(int level, CreatureEntity owner) {
+        super(
+                WeaponType.DAGGER,
+                level,
                 10,
                 50,
                 50,

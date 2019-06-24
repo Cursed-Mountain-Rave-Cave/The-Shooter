@@ -10,6 +10,7 @@ import com.theshooter.Logic.Entity.Projectile;
 
 public class OneShotWeapon extends Weapon {
     public OneShotWeapon(WeaponType weaponType,
+                         int            level,
                          int            damage,
                          int            w,
                          int            h,
@@ -21,6 +22,7 @@ public class OneShotWeapon extends Weapon {
                          CreatureEntity owner) {
         super(
                 weaponType,
+                level,
                 damage,
                 w,
                 h,

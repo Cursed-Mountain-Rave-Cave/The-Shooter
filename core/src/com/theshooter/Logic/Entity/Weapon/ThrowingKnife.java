@@ -9,9 +9,10 @@ import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Projectile;
 
 public class ThrowingKnife extends OneShotWeapon {
-    public ThrowingKnife(CreatureEntity owner) {
+    public ThrowingKnife(int level, CreatureEntity owner) {
         super(
                 WeaponType.THROWING_KNIFE,
+                level,
                 10,
                 10,
                 10,
@@ -22,6 +23,8 @@ public class ThrowingKnife extends OneShotWeapon {
                 1500,
                 owner
         );
+        for (int i = 0; i < level; i++)
+            levelUp();
         setClipSize(3);
     }
 

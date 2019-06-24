@@ -9,9 +9,10 @@ import com.theshooter.Logic.Entity.Projectile;
 public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
     private int shots;
 
-    public UltimateOneShotSuperMegaAnnihilationBow(CreatureEntity owner) {
+    public UltimateOneShotSuperMegaAnnihilationBow(int level, CreatureEntity owner) {
         super(
                 WeaponType.BOW,
+                level,
                 50,
                 20,
                 20,
@@ -26,6 +27,8 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
                 owner
                 );
         shots = 3;
+        for (int i = 0; i < level; i++)
+            levelUp();
     }
 
     @Override
@@ -58,7 +61,11 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
 
     @Override
     public void levelUp() {
-        System.out.println(shots);
         shots += 2;
+    }
+
+    @Override
+    public String toString() {
+        return "ULTIMATE SUPER DUPER MEGA BOW";
     }
 }
