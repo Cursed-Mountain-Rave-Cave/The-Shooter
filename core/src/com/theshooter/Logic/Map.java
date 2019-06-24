@@ -63,7 +63,7 @@ public class Map {
 
         for(Projectile projectile: projectiles){
             for(IBreakable breakable: breakableEntities){
-                if(breakable == projectile.getDamage().getOwner())
+                if(breakable.getClass() == projectile.getDamage().getOwner().getClass())
                     continue;
                 if(breakable.getRectangle().overlaps(projectile.getRectangle())){
                     breakable.breakDown(projectile.getDamage());

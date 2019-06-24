@@ -19,6 +19,13 @@ public class Animation {
         frame = 0;
     }
 
+    public Animation(Animation animation) {
+        this.textures = animation.getTextures();
+        this.frameTime = animation.getFrameTime();
+        currentFrameTime = 0;
+        frame = 0;
+    }
+
     public void update() {
         currentFrameTime += Game.getInstance().getGameTime() - lastUpdate;
         lastUpdate = Game.getInstance().getGameTime();
@@ -49,5 +56,13 @@ public class Animation {
     public void dispose() {
         for (Texture texture : textures)
             texture.dispose();
+    }
+
+    public Array<Texture> getTextures() {
+        return textures;
+    }
+
+    public long getFrameTime() {
+        return frameTime;
     }
 }
