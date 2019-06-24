@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Creatures.Player;
 import com.theshooter.Logic.Entity.Wall;
 import com.theshooter.Logic.Map;
 
@@ -24,7 +23,7 @@ public class MapScreen implements Screen {
 
     OrthographicCamera camera;
 
-    public MapScreen(final Map map) {
+    public MapScreen(final Map map, final ScreenObjectArray array) {
         entities = map.getEntities();
         renderer = new ShapeRenderer();
 
@@ -33,6 +32,10 @@ public class MapScreen implements Screen {
             maxHeight = Math.max(maxHeight, entities.get(i).getX() / 50);
             maxWidth = Math.max(maxWidth, entities.get(i).getY() / 50);
         }
+        for(int i = 0; i < array.size; ++i) {
+            maxHeight = Math.max(maxHeight, array.floor.get(i).getX() / 50);
+            maxWidth = Math.max(maxWidth, array.floor.get(i).getY() / 50);
+        }
 
         this.map = new object[maxHeight + 1][maxWidth + 1];
         visited = new boolean[maxHeight + 1][maxWidth + 1];
@@ -40,18 +43,31 @@ public class MapScreen implements Screen {
         getMap();
 
         camera = new OrthographicCamera(1920, 1080);
-        camera.translate(this.map.length * 5, this.map[0].length * 5);
+    }
+
+    private int lastPlayerX = 0;
+    private int lastPlayerY = 0;
+    public void center() {
+        int playerX = Game.getInstance().getEntityController().getPlayer().getX() / 5;
+        int playerY = Game.getInstance().getEntityController().getPlayer().getY() / 5;
+
+        camera.translate(playerX - lastPlayerX, playerY - lastPlayerY);
+
+        lastPlayerX = playerX;
+        lastPlayerY = playerY;
     }
 
     @Override
     public void show() {
-
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        int playerX = Game.getInstance().getEntityController().getPlayer().getX() / 5;
+        int playerY = Game.getInstance().getEntityController().getPlayer().getY() / 5;
 
         camera.update();
         renderer.setProjectionMatrix(camera.combined);
@@ -72,9 +88,6 @@ public class MapScreen implements Screen {
                 renderer.rect(i * 10, j * 10, 10, 10);
             }
         }
-
-        int playerX = Game.getInstance().getEntityController().getPlayer().getX() / 5;
-        int playerY = Game.getInstance().getEntityController().getPlayer().getY() / 5;
 
         renderer.end();
         view();
