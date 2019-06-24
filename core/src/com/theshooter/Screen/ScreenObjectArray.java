@@ -2,7 +2,7 @@ package com.theshooter.Screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.theshooter.Screen.ScreenObject;
+import com.theshooter.Screen.ScreenObjects.ScreenObject;
 
 public class ScreenObjectArray extends Array<ScreenObject> {
 
@@ -30,7 +30,7 @@ public class ScreenObjectArray extends Array<ScreenObject> {
             object.draw(batch);
 
         for (ScreenObject object : this) {
-            if (object.entity.isDeleted())
+            if (object.getEntity().isDeleted())
                 deleteThis.add(object);
             else
                 object.draw(batch);

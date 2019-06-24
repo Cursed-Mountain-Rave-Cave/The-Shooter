@@ -1,39 +1,43 @@
 package com.theshooter.Logic.Entity.Weapon;
 
-
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Projectile;
 
-public class ThrowingKnife extends OneShotWeapon {
-    public ThrowingKnife(int level, CreatureEntity owner) {
+public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
+    private int shots;
+
+    public UltimateOneShotSuperMegaAnnihilationBow(int level, CreatureEntity owner) {
         super(
-                WeaponType.THROWING_KNIFE,
+                WeaponType.BOW,
                 level,
-                10,
-                10,
-                10,
+                50,
+                20,
+                20,
                 Damage.Type.PHYSICAL,
-                1500,
+                2000,
                 true,
-                400,
-                1500,
+                true,
+                200,
+                1000,
+                100,
+                2000,
                 owner
-        );
+                );
+        shots = 3;
         for (int i = 0; i < level; i++)
             levelUp();
-        setClipSize(3);
     }
 
     @Override
     public void attack(Vector2 vect) {
         if (canAttack()) {
-            for (int i = 0; i < 3; i++) {
+            vect.rotate(- 5 * (shots / 2));
+            for (int i = 0; i < shots; i++) {
                 if (getCurClipSize() > 0) {
                     Damage damage = new Damage(getOwner(), getType(), getDamage());
-                    vect.rotate((float)Math.pow(-1, i) * i * 15);
                     Projectile projectile =
                             new Projectile(
                                     damage,
@@ -49,6 +53,7 @@ public class ThrowingKnife extends OneShotWeapon {
                     Game.getInstance().getEntityController().addBullet(projectile);
                     setLastShot(Game.getInstance().getGameTime());
                     setCurClipSize(getCurClipSize() - 1);
+                    vect.rotate(5);
                 }
             }
         }
@@ -56,6 +61,11 @@ public class ThrowingKnife extends OneShotWeapon {
 
     @Override
     public void levelUp() {
-        setDamage(getDamage() + 3);
+        shots += 2;
+    }
+
+    @Override
+    public String toString() {
+        return "ULTIMATE SUPER DUPER MEGA BOW";
     }
 }

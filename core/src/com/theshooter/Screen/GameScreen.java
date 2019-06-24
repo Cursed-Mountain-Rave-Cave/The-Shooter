@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.theshooter.Game;
 import com.theshooter.Logic.CameraController;
+import com.theshooter.Screen.ScreenObjects.HumanScreenObject;
 
 public class GameScreen implements Screen {
 
@@ -73,6 +74,15 @@ public class GameScreen implements Screen {
 
         font.draw(batch, "Target: " + targetMessage + "\nHP: " + Game.getInstance().getEntityController().getPlayer().getHP() + "\nPatrons: " + Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getCurClipSize() + " / " + Game.getInstance().getEntityController().getPlayer().getAmmo(Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getWeaponType()), 0, 1080);
 
+        font.draw(batch,"\n\n\n" + Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().toString() + "(" +
+                                       Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getLevel() + ")", 0, 1080);
+
+        if(Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().isReload() &&
+                Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getReloadingTime() > 0)
+                    font.draw(batch, "\n\n\n\nReloading " + (Math.min(100,
+                    (Game.getInstance().getGameTime() -
+                    Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getReloadingStart()) * 100
+                    / Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getReloadingTime())) + "%", 0, 1080);
         batch.end();
     }
 

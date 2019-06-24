@@ -65,7 +65,7 @@ public class Game extends com.badlogic.gdx.Game {
 //			Gdx.app.exit();
 //		}
 //		entityController.load("test2");
-		entityController.load("level1");
+		entityController.load("itemsTest");
 
 		mapScreen = new MapScreen();
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
@@ -104,8 +104,8 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void render () {
-		super.render();
 		mapScreen.view();
+		super.render();
 		if (!paused) {
 			inputController.update();
 			entityController.update();

@@ -1,9 +1,8 @@
 package com.theshooter.Logic.Entity.Weapon;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Projectile;
 
@@ -11,6 +10,7 @@ public class MeleeWeapon extends Weapon {
     private int splash;
 
     public MeleeWeapon(WeaponType weaponType,
+                       int            level,
                        int            damage,
                        int            w,
                        int            h,
@@ -20,6 +20,7 @@ public class MeleeWeapon extends Weapon {
                        int splash,
                        CreatureEntity owner) {
         super(weaponType,
+              level,
               damage,
               w,
               h,
