@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Entity.BreakableEntity;
 import com.theshooter.Logic.Entity.Weapon.Weapon;

@@ -2,7 +2,7 @@ package com.theshooter.Logic.Entity.Creatures;
 
 import com.badlogic.gdx.Gdx;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Weapon.*;
 import com.theshooter.Screen.Depth;
 

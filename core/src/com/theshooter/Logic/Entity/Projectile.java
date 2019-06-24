@@ -3,8 +3,6 @@ package com.theshooter.Logic.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
-import com.theshooter.Logic.Map;
 import com.theshooter.Screen.Depth;
 
 public class Projectile extends Entity {

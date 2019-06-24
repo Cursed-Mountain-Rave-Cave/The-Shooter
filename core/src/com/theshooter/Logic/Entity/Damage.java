@@ -1,4 +1,4 @@
-package com.theshooter.Logic;
+package com.theshooter.Logic.Entity;
 
 import com.theshooter.Logic.Entity.Abstract.IEntity;
 

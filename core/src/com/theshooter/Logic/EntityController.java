@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
+import com.theshooter.Logic.Entity.ConditionEntities.ConditionEntity;
+import com.theshooter.Logic.Entity.ConditionEntities.Gate;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 import com.theshooter.Logic.Entity.Creatures.Player;
@@ -16,6 +18,7 @@ import com.theshooter.Logic.Entity.Weapon.WeaponType;
 import com.theshooter.Logic.Event.Event;
 import com.theshooter.Logic.Event.Place;
 import com.theshooter.Screen.*;
+import com.theshooter.Screen.ScreenObjects.*;
 
 import java.util.*;
 
@@ -119,6 +122,19 @@ public class EntityController {
                         params.add(scanner.nextInt());
                         event.addCommand(params);
                     }
+                    if (command.equals("music")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        params.add(scanner.next());
+                        params.add(scanner.nextFloat());
+                        event.addCommand(params);
+                    }
+                    if (command.equals("load")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        params.add(scanner.next());
+                        event.addCommand(params);
+                    }
 
                 }
 
@@ -212,6 +228,8 @@ public class EntityController {
         Scanner scanner = getScanner(name, "environment");
 
         String command;
+        String flag;
+        boolean value;
         int x, y, x1, y1;
 
         while(scanner.hasNext()){
@@ -225,6 +243,18 @@ public class EntityController {
                 x1 = 50 * scanner.nextInt();
                 y1 = 50 * scanner.nextInt();
                 placePalms(x, y, x1, y1);
+            }else if(command.equals("placeKey")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                flag = scanner.next();
+                value =  scanner.nextBoolean();
+                placeKey(x, y, flag, value);
+            }else if(command.equals("placeConditionGate")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                flag = scanner.next();
+                value =  scanner.nextBoolean();
+                placeConditionGate(x, y, flag, value);
             }else{
                 x = scanner.nextInt();
                 y = scanner.nextInt();
@@ -357,6 +387,12 @@ public class EntityController {
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
+    public void placeConditionGate(int x, int y, String flag, boolean value){
+        ConditionEntity entity = new Gate(x, y, flag, value);
+        map.addEntity(entity);
+        screenObjectArray.add(new ConditionScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("things", "breakableThing6"), 0));
+    }
     public void placeWeaponUpgrade(int x, int y) {
         LiftableEntity entity = new WeaponUpgrade(x, y);
         map.addEntity(entity);
@@ -374,6 +410,12 @@ public class EntityController {
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing9"), 25));
+    }
+    public void placeKey(int x, int y, String flag, boolean value) {
+        LiftableEntity entity = new Key(x, y, flag, value);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing10"), 25));
     }
     public void placeCoverAirplane(int x, int y) {
         LiftableEntity entity = new CoverAirplane(x, y);
@@ -394,7 +436,7 @@ public class EntityController {
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 213));
     }
     public void placeBigHome(int x, int y) {
-        Entity entity = new Entity(x , y , 8 * 50 , 10 * 50, Depth.WALLS, false);
+        Entity entity = new Entity(x , y , 8 * 50 , 10 * 50, Depth.THINGS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing8"), 514));
