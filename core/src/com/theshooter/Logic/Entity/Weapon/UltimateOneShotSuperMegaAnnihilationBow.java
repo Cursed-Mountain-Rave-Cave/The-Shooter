@@ -20,7 +20,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
                 2000,
                 false,
                 true,
-                200,
+                800,
                 1000,
                 100,
                 2000,
@@ -64,6 +64,13 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
         super.levelUp();
         shots += 2;
         setClipSize(getClipSize() + 2);
+    }
+
+    @Override
+    public void reload() {
+        super.reload();
+        if (getLevel() > 50)
+            getOwner().addAmmo(WeaponType.BOW, getClipSize());
     }
 
     @Override

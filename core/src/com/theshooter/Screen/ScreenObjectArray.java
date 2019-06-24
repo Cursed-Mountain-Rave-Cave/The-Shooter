@@ -23,6 +23,7 @@ public class ScreenObjectArray extends Array<ScreenObject> {
             super.add(value);
     }
 
+
     public void draw(SpriteBatch batch) {
         sort();
 

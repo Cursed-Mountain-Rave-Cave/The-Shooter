@@ -225,6 +225,8 @@ public class EntityController {
 
             if(command.equals("placeWall"))
                 placeWall(x0, y0, x1, y1);
+            if(command.equals("placeMonoWall"))
+                placeMonoWall(x0, y0, x1, y1);
             if(command.equals("placeInvisibleWall"))
                 placeInvisibleWall(x0, y0, x1, y1);
         }
@@ -319,6 +321,8 @@ public class EntityController {
             spawnKnifeJuggler(x, y);
         if(command.equals("spawnSuicide"))
             spawnSuicide(x,y);
+        if(command.equals("spawnGenie"))
+            spawnGenie(x,y);
     }
 
     public void place(String command, int x, int y){
@@ -376,13 +380,22 @@ public class EntityController {
                 placeFloor(i, j, type);
     }
 
+    public void placeMonoWall(int x0, int y0, int x1, int y1){
+        Wall entity = new Wall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
+        map.addEntity(entity);
+
+        for(int x = x0; x < x1; x++)
+            for (int y = y0; y < y1; y++)
+                screenObjectArray.add(new MonoWallScreenObject(entity, 50 * x, 50 * y, Game.getInstance().getTextureController().getTextures("wall", "wall1")));
+    }
+
     public void placeWall(int x0, int y0, int x1, int y1){
         Wall entity = new Wall(x0*50, y0*50, 50 * (x1 - x0), 50 * (y1 - y0));
         map.addEntity(entity);
 
         for(int x = x0; x < x1; x++)
             for (int y = y0; y < y1; y++)
-                screenObjectArray.add(new WallScreenObject(entity, 50 * x, 50 * y, Game.getInstance().getTextureController().getTextures("walls", "wall2")));
+                screenObjectArray.add(new MonoWallScreenObject(entity, 50 * x, 50 * y, Game.getInstance().getTextureController().getTextures("wall", "wall1")));
     }
 
     public void placeInvisibleWall(int x0, int y0, int x1, int y1) {
@@ -498,7 +511,6 @@ public class EntityController {
                         Game.getInstance().getTextureController().getBody("player", "body2"),
                         Game.getInstance().getTextureController().getAnimations("player", "legs2")));
     }
-
     public void spawnSuicide(int x, int y){
         SuicideEntity entity = new SuicideEntity(x, y, 30, 30, 5, 300, 10,Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
@@ -506,7 +518,6 @@ public class EntityController {
                 Game.getInstance().getTextureController().getBody("player", "body4"),
                 Game.getInstance().getTextureController().getAnimations("player", "legs4")));
     }
-
     public void spawnKnifeJuggler(int x, int y) {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new ThrowingKnife(0, entity));
@@ -516,6 +527,15 @@ public class EntityController {
         screenObjectArray.add(new HumanScreenObject(entity,
                 Game.getInstance().getTextureController().getBody("player", "body3"),
                 Game.getInstance().getTextureController().getAnimations("player", "legs3")));
+    }
+    public void spawnGenie(int x, int y) {
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 35, 350, 20,Depth.ENEMY, false, player.getRectangle());
+        entity.addWeapon(new Fireball(0, entity));
+        entity.selectWeapon(1);
+        map.addEntity(entity);
+        screenObjectArray.add(new HumanScreenObject(entity,
+                Game.getInstance().getTextureController().getBody("player", "body5"),
+                Game.getInstance().getTextureController().getAnimations("player", "legs12")));
     }
     public void spawnBoss(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());
