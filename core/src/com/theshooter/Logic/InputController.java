@@ -98,7 +98,10 @@ public class InputController implements InputProcessor {
             }
             case Input.Keys.M: {
                 if(mapIsOpen) mapIsOpen = false;
-                else mapIsOpen = true;
+                else {
+                    mapIsOpen = true;
+                    Game.getInstance().mapScreen.center();
+                }
                 break;
             }
             case Input.Keys.NUM_1: {
