@@ -254,7 +254,7 @@ public class EntityController {
                 y1 = 50 * scanner.nextInt();
                 placeVases(x, y, x1, y1);
             }
-            else if(command.equals("placeKey"))
+            else if(command.equals("placeKey")){
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
                 flag = scanner.next();
@@ -314,7 +314,7 @@ public class EntityController {
         if(command.equals("spawnKnifeJuggler"))
             spawnKnifeJuggler(x, y);
         if(command.equals("spawnSuicide"))
-            spawnSucide(x,y);
+            spawnSuicide(x,y);
     }
 
     public void place(String command, int x, int y){

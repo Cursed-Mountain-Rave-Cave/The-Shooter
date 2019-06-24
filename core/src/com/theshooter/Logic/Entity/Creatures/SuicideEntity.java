@@ -16,7 +16,7 @@ import java.util.TreeMap;
 public class SuicideEntity extends HumanEntity {
     public SuicideEntity(int x, int y, int w, int h, int hp, int velocity, int radius, Depth depth, boolean passable, Rectangle target){
         super(x, y, w, h, hp, velocity, radius, depth, passable, target);
-        this.addWeapon(new Boom(this));
+        this.addWeapon(new Boom(0,this));
         this.selectWeapon(1);
         this.addAmmo(WeaponType.DAGGER, 1);
     }
