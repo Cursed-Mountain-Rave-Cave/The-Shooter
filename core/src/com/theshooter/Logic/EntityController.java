@@ -433,7 +433,7 @@ public class EntityController {
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing5"), 213));
     }
     public void placeBigHome(int x, int y) {
-        Entity entity = new Entity(x , y , 8 * 50 , 10 * 50, Depth.WALLS, false);
+        Entity entity = new Entity(x , y , 8 * 50 , 10 * 50, Depth.THINGS, false);
         map.addEntity(entity);
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing8"), 514));

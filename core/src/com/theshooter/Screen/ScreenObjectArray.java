@@ -9,7 +9,6 @@ public class ScreenObjectArray extends Array<ScreenObject> {
     Array<ScreenObject> floor;
     Array<ScreenObject> deleteThis;
 
-
     public ScreenObjectArray() {
         super();
         floor = new Array<>();
@@ -39,6 +38,8 @@ public class ScreenObjectArray extends Array<ScreenObject> {
         this.removeAll(deleteThis,true);
         deleteThis.clear();
     }
+
+    public Array<ScreenObject> getFloor() { return floor; }
 
     public void clear(){
         super.clear();

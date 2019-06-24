@@ -67,7 +67,7 @@ public class Game extends com.badlogic.gdx.Game {
 //		entityController.load("test2");
 		entityController.load("level1");
 
-		mapScreen = new MapScreen(getEntityController().getMap(), getEntityController().getScreenObjectArray());
+		mapScreen = new MapScreen();
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
 
