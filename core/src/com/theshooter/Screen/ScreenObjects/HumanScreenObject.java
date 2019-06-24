@@ -1,14 +1,13 @@
-package com.theshooter.Screen;
+package com.theshooter.Screen.ScreenObjects;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 import com.theshooter.Logic.Entity.Weapon.WeaponType;
+import com.theshooter.Screen.Animation;
 
 import java.util.Map;
 
@@ -52,7 +51,7 @@ public class HumanScreenObject extends ScreenObject {
         batch.draw(body.get(human.getCurrentWeapon().getWeaponType()).get(currentBody).getFrame(), getScreenX() - shift, getScreenY());
 
         if(Game.getInstance().getConfig().showAdditionalInfo && !human.isBroken())
-            font.draw(batch, "" + human.getHP(), entity.getX() - entity.getY() - shift, (entity.getX() + entity.getY()) / 2 + getTexture().getWidth());
+            font.draw(batch, "" + human.getHP(), getEntity().getX() - getEntity().getY() - shift, (getEntity().getX() + getEntity().getY()) / 2 + getTexture().getWidth());
     }
 
     public void setCurrentLegs() {

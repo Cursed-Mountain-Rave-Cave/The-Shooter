@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Entity.BreakableEntity;
 import com.theshooter.Logic.Entity.Weapon.Weapon;
@@ -49,7 +49,7 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
                 moveAt(dx, dy);
             else
                 moveAt(0, 0);
-            if (len < radius / 2 * 50)
+            if (len < radius * 30)
                 currentWeapon.attack(new Vector2(dx, dy));
         }else
             moveAt(0, 0);

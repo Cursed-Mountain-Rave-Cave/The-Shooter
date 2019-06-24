@@ -1,12 +1,13 @@
 package com.theshooter.Logic.Entity.Weapon;
 
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 public class Stone extends OneShotWeapon {
-    public Stone(CreatureEntity owner) {
+    public Stone(int level, CreatureEntity owner) {
         super(
                 WeaponType.STONE,
+                level,
                 5,
                 15,
                 15,
@@ -18,6 +19,8 @@ public class Stone extends OneShotWeapon {
                 owner
 
         );
+        for (int i = 0; i < level; i++)
+            levelUp();
     }
 
     @Override

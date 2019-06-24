@@ -1,6 +1,4 @@
 package com.theshooter.Logic.Entity;
-import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
 import com.theshooter.Logic.Entity.Abstract.IBreakable;
 import com.theshooter.Screen.Depth;
 

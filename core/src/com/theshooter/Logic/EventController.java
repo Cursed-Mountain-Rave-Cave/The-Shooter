@@ -79,6 +79,15 @@ public class EventController {
          if (command.get(0).equals("set")){
              addFlag((String) command.get(1), (Boolean) command.get(2));
          }
+         if (((String)command.get(0)).contains("spawn")){
+             Game.getInstance().getEntityController().spawn((String) command.get(0),(Integer) command.get(1),(Integer) command.get(2));
+         }
+         if (((String)command.get(0)).contains("place")){
+             Game.getInstance().getEntityController().place((String) command.get(0),(Integer) command.get(1),(Integer) command.get(2));
+         }
+         if (((String)command.get(0)).contains("music")){
+             Game.getInstance().getAudioController().playMusic((String) command.get(1), (Float) command.get(2));
+         }
     }
 
     public void addFlag(String name, boolean value){
@@ -91,5 +100,9 @@ public class EventController {
 
     public void addPlace(Place place){
         places.add(place);
+    }
+
+    public boolean checkFlag(String flag, Boolean value){
+        return value.equals(flags.get(flag));
     }
 }

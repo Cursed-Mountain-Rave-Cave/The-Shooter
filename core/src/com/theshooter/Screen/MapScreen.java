@@ -5,53 +5,66 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
-import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Creatures.Player;
-import com.theshooter.Logic.Entity.Wall;
-import com.theshooter.Logic.Map;
+import com.theshooter.Screen.ScreenObjects.ScreenObject;
 
 public class MapScreen implements Screen {
-    public enum object { floor, wall }
+    public enum object { floor, wall, tree, water, house }
+    private ScreenObjectArray screenObjectArray;
     private boolean[][] visited;
     private object[][] map;
-    private Array<IEntity> entities;
     private ShapeRenderer renderer;
 
     private int radius;
 
     OrthographicCamera camera;
 
-    public MapScreen(final Map map) {
-        entities = map.getEntities();
+    public MapScreen() {
+        screenObjectArray = Game.getInstance().getEntityController().getScreenObjectArray();
         renderer = new ShapeRenderer();
 
         int maxHeight = 0, maxWidth = 0;
-        for(int i = 0; i < entities.size; ++i) {
-            maxHeight = Math.max(maxHeight, entities.get(i).getX() / 50);
-            maxWidth = Math.max(maxWidth, entities.get(i).getY() / 50);
+        for(int i = 0; i < screenObjectArray.floor.size; ++i) {
+            maxHeight = Math.max(maxHeight, screenObjectArray.floor.get(i).getX() / 50);
+            maxWidth = Math.max(maxWidth, screenObjectArray.floor.get(i).getY() / 50);
         }
 
         this.map = new object[maxHeight + 1][maxWidth + 1];
         visited = new boolean[maxHeight + 1][maxWidth + 1];
 
+        System.out.println(maxHeight + " " + maxWidth);
+
         getMap();
 
         camera = new OrthographicCamera(1920, 1080);
-        camera.translate(this.map.length * 5, this.map[0].length * 5);
+    }
+
+    private int lastPlayerX = 0;
+    private int lastPlayerY = 0;
+    public void center() {
+        int playerX = Game.getInstance().getEntityController().getPlayer().getX() / 5;
+        int playerY = Game.getInstance().getEntityController().getPlayer().getY() / 5;
+
+        camera.translate(playerX - lastPlayerX, playerY - lastPlayerY);
+
+        lastPlayerX = playerX;
+        lastPlayerY = playerY;
     }
 
     @Override
     public void show() {
-
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        int playerX = Game.getInstance().getEntityController().getPlayer().getX() / 5;
+        int playerY = Game.getInstance().getEntityController().getPlayer().getY() / 5;
 
         camera.update();
         renderer.setProjectionMatrix(camera.combined);
@@ -66,23 +79,30 @@ public class MapScreen implements Screen {
                 if (map[i][j] == object.wall)
                     renderer.setColor(Color.BLACK);
                 else if(visited[i][j])
-                    renderer.setColor(new Color(Color.argb8888(1.0f, 254.0f, 180.0f, 127.0f)));
+                    switch(map[i][j]) {
+                        case water:
+                            renderer.setColor(Color.BLUE);
+                            break;
+                        case tree:
+                            renderer.setColor(Color.GREEN);
+                            break;
+                        case floor:
+                            renderer.setColor(new Color(Color.argb8888(1.0f, 254.0f, 180.0f, 127.0f)));
+                            break;
+                        case house:
+                            renderer.setColor(Color.BROWN);
+                            break;
+                    }
                 else
                     renderer.setColor(new Color(Color.GRAY));
                 renderer.rect(i * 10, j * 10, 10, 10);
             }
         }
 
-        int playerX = Game.getInstance().getEntityController().getPlayer().getX() / 5;
-        int playerY = Game.getInstance().getEntityController().getPlayer().getY() / 5;
-
-        renderer.end();
-        view();
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-
         renderer.setColor(Color.FOREST);
         renderer.rect(playerX, playerY, 10, 10);
         renderer.end();
+        view();
     }
 
     public void view() {
@@ -107,16 +127,62 @@ public class MapScreen implements Screen {
     }
 
     private void getMap() {
-        for(int i = 0; i < entities.size; ++i)
-            if(entities.get(i) instanceof  Wall) {
-                int x1 = entities.get(i).getX() , y1 = entities.get(i).getY();
-                int x2 = x1 + entities.get(i).getWidth(), y2 = y1 + entities.get(i).getHeight();
-                for(int k = x1; k < x2; k += 50)
-                    for(int j = y1; j < y2; j += 50)
-                        map[k / 50][j / 50] = object.wall;
-            }
+        Array<ScreenObject> floor = screenObjectArray.floor;
+        for(int i = 0; i < floor.size; ++i) {
+            ScreenObject currentTile = floor.get(i);
+            int tileX = currentTile.getX();
+            int tileY = currentTile.getY();
+
+            Array<Texture> textures = Game.getInstance().getTextureController().getTextures("floor", "floor17");
+
+            if(textures.get(0).equals(currentTile.getTexture()))
+                map[tileX / 50][tileY / 50] = object.water;
             else
-                map[entities.get(i).getX() / 50][entities.get(i).getY() / 50] = object.floor;
+                map[tileX / 50][tileY / 50] = object.floor;
+        }
+
+        for(int i = 0; i < screenObjectArray.size; ++i) {
+            ScreenObject currentObject = screenObjectArray.get(i);
+            int objectX = currentObject.getX();
+            int objectY = currentObject.getY();
+
+            Array<Texture> textures;
+
+            for(int j = 1; j <= 3; ++j) {
+                textures = Game.getInstance().getTextureController().getTextures("walls", "wall" + j);
+                for (int k = 0; k < textures.size; ++k)
+                    if (textures.get(k).equals(currentObject.getTexture()))
+                        map[objectX / 50][objectY / 50] = object.wall;
+            }
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing3");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                map[objectX / 50][objectY / 50] = object.tree;
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing6");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                map[objectX / 50][objectY / 50] = object.tree;
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing7");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                map[objectX / 50][objectY / 50] = object.tree;
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing5");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                paintArea(objectX, objectY, objectX + currentObject.getWidth(),
+                        objectY + currentObject.getHeight(), object.house);
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing8");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                paintArea(objectX, objectY, objectX + currentObject.getWidth(),
+                        objectY + currentObject.getHeight(), object.house);
+        }
+    }
+
+    public void paintArea(int x1, int y1, int x2, int y2, object type) {
+        for(int k = x1; k < x2; k += 50)
+            for(int j = y1; j < y2; j += 50)
+                map[k / 50][j / 50] = type;
     }
 
     public OrthographicCamera getCamera() {

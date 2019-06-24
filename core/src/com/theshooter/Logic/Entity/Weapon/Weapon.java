@@ -1,13 +1,13 @@
 package com.theshooter.Logic.Entity.Weapon;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 abstract public class Weapon {
     private WeaponType      weaponType;
+    private int             level;
     private int             damage;
     private int             w;
     private int             h;
@@ -22,12 +22,14 @@ abstract public class Weapon {
     private CreatureEntity  owner;
 
     private long lastShot;
+    private long reloadingStart;
     private int curClipSize;
     private long reloadingEnd;
     private boolean reload;
 
     public Weapon
             (WeaponType     weaponType,
+             int            level,
              int            damage,
              int            w,
              int            h,
@@ -42,6 +44,7 @@ abstract public class Weapon {
              CreatureEntity owner)
     {
         this.weaponType          = weaponType;
+        this.level               = level;
         this.damage              = damage;
         this.w                   = w;
         this.h                   = h;
@@ -83,6 +86,7 @@ abstract public class Weapon {
 
     public void reload() {
         if (!reload && curClipSize < clipSize && (getOwner().getAmmo(weaponType) > 0 || !needAmmo)) {
+            reloadingStart = Game.getInstance().getGameTime();
             reloadingEnd = Game.getInstance().getGameTime() + reloadingTime;
             reload = true;
         }
@@ -90,10 +94,14 @@ abstract public class Weapon {
 
     abstract public void attack(Vector2 vect);
 
-    public void levelUp() {};
+    public void levelUp() {}
 
     public boolean canAttack() {
         return Game.getInstance().getGameTime() > lastShot + shotTime && curClipSize > 0 && !reload;
+    }
+
+    public String toString() {
+        return weaponType.toString();
     }
 
     public int getDamage() {
@@ -222,5 +230,13 @@ abstract public class Weapon {
 
     public void setReload(boolean reload) {
         this.reload = reload;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public long getReloadingStart() {
+        return reloadingStart;
     }
 }

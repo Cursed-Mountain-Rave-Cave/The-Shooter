@@ -31,8 +31,8 @@ public class TextureController {
 
         addTextureArray("walls", "wall", "walls/", 3, 5);
 
-        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 9, 1);
-        addTextureArray("things", "breakableThing", "environment/breakable/", 5, 2);
+        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 10, 1);
+        addTextureArray("things", "breakableThing", "environment/breakable/", 6, 2);
 
         addBodyAnimationArray("player", "body", "player/bodies/", 4, 9, 3);
         addAnimationArray("player", "legs", "player/legs/", 7, 9, 4);
@@ -108,9 +108,7 @@ public class TextureController {
         return animations;
     }
 
-    public Array<Texture> getTextures(String type, String name) {
-        return textures.get(type).get(name);
-    }
+    public Array<Texture> getTextures(String type, String name) { return textures.get(type).get(name); }
 
     public Array<Animation> getAnimations(String type, String name) {
         Array<Animation> animations = new Array<>();
@@ -119,13 +117,9 @@ public class TextureController {
         return animations;
     }
 
-    public Texture getTexture(String type, String name, int n) {
-        return textures.get(type).get(name).get(n);
-    }
+    public Texture getTexture(String type, String name, int n) { return textures.get(type).get(name).get(n); }
 
-    public Texture getTexture(String type, String name) {
-        return this.getTexture(type, name, 0);
-    }
+    public Texture getTexture(String type, String name) { return this.getTexture(type, name, 0); }
 
     public void dispose() {
         for (String s : textures.keySet())

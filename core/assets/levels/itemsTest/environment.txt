@@ -9,3 +9,10 @@ placeCoverAirplane 0 12
 placeHeal 10 0
 placeHeal 11 0
 placeHeal 12 0
+
+placeWeaponUpgrade 6 0
+placeWeaponUpgrade 5 0
+placeWeaponUpgrade 4 0
+
+placeKey 20 0 key true
+placeConditionGate 20 10 key true
