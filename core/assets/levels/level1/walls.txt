@@ -1,12 +1,12 @@
-placeWall 149 40 150 66
-placeWall 149 73 150 319
-placeWall 150 40 303 41
-placeWall 302 41 303 319
-placeWall 150 318 255 319
-placeWall 285 318 302 319
-placeWall 230 152 231 177
-placeWall 230 183 231 318
-placeWall 231 152 302 153
+placeMonoWall 149 40 150 66
+placeMonoWall 149 73 150 319
+placeMonoWall 150 40 303 41
+placeMonoWall 302 41 303 319
+placeMonoWall 150 318 255 319
+placeMonoWall 285 318 302 319
+placeMonoWall 230 152 231 177
+placeMonoWall 230 183 231 318
+placeMonoWall 231 152 302 153
 
 placeInvisibleWall 52 53 60 54
 placeInvisibleWall 51 54 52 74

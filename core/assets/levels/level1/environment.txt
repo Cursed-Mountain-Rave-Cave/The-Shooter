@@ -106,6 +106,7 @@ placeVase 184 212
 placeVase 183 213
 placeVase 184 213
 
+
 placePassablePalm 59 65
 placePassablePalm 60 65
 placePassablePalm 61 65

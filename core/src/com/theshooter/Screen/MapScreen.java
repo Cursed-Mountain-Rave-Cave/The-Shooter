@@ -148,8 +148,8 @@ public class MapScreen implements Screen {
 
             Array<Texture> textures;
 
-            for(int j = 1; j <= 3; ++j) {
-                textures = Game.getInstance().getTextureController().getTextures("walls", "wall" + j);
+            for(int j = 1; j <= 1; ++j) {
+                textures = Game.getInstance().getTextureController().getTextures("wall", "wall" + j);
                 for (int k = 0; k < textures.size; ++k)
                     if (textures.get(k).equals(currentObject.getTexture()))
                         map[objectX / 50][objectY / 50] = object.wall;

@@ -4,13 +4,14 @@ import com.theshooter.Screen.Depth;
 
 
 public class BreakableEntity extends Entity implements IBreakable {
-
+    protected int maxHp;
     protected int hp;
     protected boolean broken;
 
     public BreakableEntity(int x, int y, int w, int h, int hp, Depth depth, boolean passable) {
         super(x, y, w, h, depth, passable);
         this.hp = hp;
+        maxHp = hp;
         this.broken = false;
     }
 
@@ -39,8 +40,12 @@ public class BreakableEntity extends Entity implements IBreakable {
             broken = true;
     }
 
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
+
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp = Math.min(maxHp, hp);
         if(hp == 0)
             broken = true;
     }

@@ -22,20 +22,22 @@ public class TextureController {
         addTextureType("floor");
         addTextureType("things");
         addTextureType("enemy");
-        addTextureType("walls");
+        //addTextureType("walls");
         addTextureType("projectiles");
+        addTextureType("wall");
 
         addAnimationType("player");
 
         addTextureArray("floor", "floor", "floor/", 17, 1);
 
-        addTextureArray("walls", "wall", "walls/", 3, 5);
+        //addTextureArray("walls", "wall", "walls/", 3, 5);
+        addTextureArray("wall", "wall", "wall/", 1, 1);
 
-        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 13, 1);
+        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 18, 1);
         addTextureArray("things", "breakableThing", "environment/breakable/", 6, 2);
 
-        addBodyAnimationArray("player", "body", "player/bodies/", 4, 9, 3);
-        addAnimationArray("player", "legs", "player/legs/", 7, 9, 4);
+        addBodyAnimationArray("player", "body", "player/bodies/", 5, 9, 3);
+        addAnimationArray("player", "legs", "player/legs/", 12, 9, 4);
 
         addTextureArray("enemy", "enemy", "enemies/", 5, 2);
 
