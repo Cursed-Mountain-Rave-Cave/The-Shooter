@@ -43,14 +43,3 @@ event
 {
     sout You got the Key!!
 }
-
-event
-[
-    all_killed true
-]
-{
-    placeHome 10 0
-    set key false
-    music casino 0,5
-    load test
-}

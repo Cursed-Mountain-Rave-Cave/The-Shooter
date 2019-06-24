@@ -54,6 +54,9 @@ public class HumanScreenObject extends ScreenObject {
             font.draw(batch, "" + human.getHP(), getEntity().getX() - getEntity().getY() - shift, (getEntity().getX() + getEntity().getY()) / 2 + getTexture().getWidth());
     }
 
+    private float lastDx;
+    private float lastDy;
+
     public void setCurrentLegs() {
         if (human.isBroken()) {
             legs.get(currentLegs).update();
@@ -83,10 +86,9 @@ public class HumanScreenObject extends ScreenObject {
             this.currentLegs = 0;
 
         if ((dx == 0 && dy == 0) || last != currentLegs)
-            for (Animation current : legs)
-                current.reset();
+            legs.get(last).reset();
 
-        else /*if (last == currentLegs)*/
+        else
             legs.get(last).update();
     }
 
@@ -120,13 +122,11 @@ public class HumanScreenObject extends ScreenObject {
         else
             this.currentBody = 2;
 
-        if (last != currentBody || !lastWeapon.equals(human.getCurrentWeapon().getWeaponType())) {
-            for (int i = 0; i < body.size(); i++)
-                for (int j = 0; j < body.get(WeaponType.fromInt(i)).size; j++)
-                    body.get(WeaponType.fromInt(i)).get(j).reset();
+        if (!lastWeapon.equals(human.getCurrentWeapon().getWeaponType())) {
+            body.get(lastWeapon).get(last).reset();
         }
 
-        if (last == currentBody && lastWeapon.equals(human.getCurrentWeapon().getWeaponType())) {
+        else {
             long end = human.getCurrentWeapon().getShotTime();
             if (end != 0) {
                 float current = Game.getInstance().getGameTime() - human.getCurrentWeapon().getLastShot();

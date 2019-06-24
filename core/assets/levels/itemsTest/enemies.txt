@@ -1,1 +1,1 @@
-spawnKeanu 10 10
+spawnGenie 10 10
