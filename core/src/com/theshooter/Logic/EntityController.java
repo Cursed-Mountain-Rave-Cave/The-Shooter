@@ -129,6 +129,12 @@ public class EntityController {
                         params.add(scanner.nextFloat());
                         event.addCommand(params);
                     }
+                    if (command.equals("load")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        params.add(scanner.next());
+                        event.addCommand(params);
+                    }
 
                 }
 
