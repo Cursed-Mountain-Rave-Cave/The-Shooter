@@ -60,6 +60,7 @@ public class EntityController {
         loadEnvironment(name);
         loadEnemies(name);
         loadEvents(name);
+        Game.getInstance().mapScreen.load();
     }
 
     public void loadEvents(String name){
