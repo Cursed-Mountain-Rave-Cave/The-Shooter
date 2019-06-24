@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
-import com.theshooter.Logic.Entity.Wall;
+import com.theshooter.Screen.ScreenObjects.ScreenObject;
 
 public class MapScreen implements Screen {
     public enum object { floor, wall, tree, water, house }
@@ -99,13 +99,10 @@ public class MapScreen implements Screen {
             }
         }
 
-        renderer.end();
-        view();
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-
         renderer.setColor(Color.FOREST);
         renderer.rect(playerX, playerY, 10, 10);
         renderer.end();
+        view();
     }
 
     public void view() {
@@ -149,36 +146,36 @@ public class MapScreen implements Screen {
             int objectX = currentObject.getX();
             int objectY = currentObject.getY();
 
-            switch (screenObjectArray.get(i).getDepth()) {
-                case WALLS:
-                    paintArea(objectX, objectY, objectX + currentObject.getWidth(),
-                            objectY + currentObject.getHeight(), object.wall);
-                    break;
-                case THINGS:
-                    Array<Texture> textures;
+            Array<Texture> textures;
 
-                    textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing3");
-                    if(textures.get(0).equals(currentObject.getTexture()))
-                        map[objectX / 50][objectY / 50] = object.tree;
-
-                    textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing6");
-                    if(textures.get(0).equals(currentObject.getTexture()))
-                        map[objectX / 50][objectY / 50] = object.tree;
-
-                    textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing7");
-                    if(textures.get(0).equals(currentObject.getTexture()))
-                        map[objectX / 50][objectY / 50] = object.tree;
-
-                    textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing5");
-                    if(textures.get(0).equals(currentObject.getTexture()))
-                        paintArea(objectX, objectY, objectX + currentObject.getWidth(),
-                                objectY + currentObject.getHeight(), object.house);
-
-                    textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing8");
-                    if(textures.get(0).equals(currentObject.getTexture()))
-                        paintArea(objectX, objectY, objectX + currentObject.getWidth(),
-                                objectY + currentObject.getHeight(), object.house);
+            for(int j = 1; j <= 3; ++j) {
+                textures = Game.getInstance().getTextureController().getTextures("walls", "wall" + j);
+                for (int k = 0; k < textures.size; ++k)
+                    if (textures.get(k).equals(currentObject.getTexture()))
+                        map[objectX / 50][objectY / 50] = object.wall;
             }
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing3");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                map[objectX / 50][objectY / 50] = object.tree;
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing6");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                map[objectX / 50][objectY / 50] = object.tree;
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing7");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                map[objectX / 50][objectY / 50] = object.tree;
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing5");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                paintArea(objectX, objectY, objectX + currentObject.getWidth(),
+                        objectY + currentObject.getHeight(), object.house);
+
+            textures = Game.getInstance().getTextureController().getTextures("things", "unbreakableThing8");
+            if(textures.get(0).equals(currentObject.getTexture()))
+                paintArea(objectX, objectY, objectX + currentObject.getWidth(),
+                        objectY + currentObject.getHeight(), object.house);
         }
     }
 
