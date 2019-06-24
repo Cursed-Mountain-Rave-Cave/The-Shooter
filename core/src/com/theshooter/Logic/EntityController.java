@@ -2,6 +2,7 @@ package com.theshooter.Logic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
@@ -13,6 +14,8 @@ import com.theshooter.Logic.Entity.LiftableEntities.Heal;
 import com.theshooter.Logic.Entity.LiftableEntities.Hookah;
 import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
 import com.theshooter.Logic.Entity.Weapon.Dagger;
+import com.theshooter.Logic.Event.Event;
+import com.theshooter.Logic.Event.Place;
 import com.theshooter.Screen.*;
 
 import java.util.HashMap;
@@ -48,12 +51,80 @@ public class EntityController {
     public void load(String name){
         map.clear();
         screenObjectArray.clear();
+        Game.getInstance().getEventController().clear();
 
         loadPlayer(name);
         loadFloors(name);
         loadWalls(name);
         loadEnvironment(name);
         loadEnemies(name);
+        loadEvents(name);
+    }
+
+    public void loadEvents(String name){
+        Scanner scanner = getScanner(name, "events");
+        while (scanner.hasNext()){
+            String head = scanner.next();
+            if (head.equals("event")){
+                Event event = new Event();
+                scanner.next();
+                while (true){
+                    String flag;
+                    boolean value;
+
+                    flag = scanner.next();
+
+                    if (flag.equals("]")) break;
+
+                    value = scanner.nextBoolean();
+
+                    event.addFlag(flag, value);
+                }
+                scanner.next();
+                while (true){
+                    String command;
+
+                    command = scanner.next();
+                    if (command.equals("}")) break;
+                    if (command.equals("sout")){
+                        String text = scanner.nextLine();
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        params.add(text);
+                        event.addCommand(params);
+                    }
+                    if (command.equals("tp")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        params.add(scanner.nextInt());
+                        params.add(scanner.nextInt());
+                        event.addCommand(params);
+                    }
+                    if (command.equals("set")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        params.add(scanner.next());
+                        params.add(scanner.nextBoolean());
+                        event.addCommand(params);
+                    }
+
+                }
+
+                Game.getInstance().getEventController().addEvent(event);
+            }
+            if (head.equals("place")){
+                scanner.next();
+                int x = scanner.nextInt();
+                int y = scanner.nextInt();
+                int r = scanner.nextInt();
+                String flag = scanner.next();
+                boolean value = scanner.nextBoolean();
+                scanner.next();
+
+                Place place = new Place(x, y, r, flag, value);
+                Game.getInstance().getEventController().addPlace(place);
+            }
+        }
     }
 
     public void loadPlayer(String name){

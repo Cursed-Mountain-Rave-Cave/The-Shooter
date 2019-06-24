@@ -21,6 +21,7 @@ public class Map {
     private Array<LiftableEntity> liftableDelete;
     private Array<Projectile> projectilesDelete;
     private Array<IEntity> entitiesDelete;
+    private Array<IBreakable> enemiesDelete;
     private Array<IBreakable> enemies;
     private Array<IBreakable> players;
 
@@ -36,6 +37,7 @@ public class Map {
         movableEntities = new Array<>();
         liftableEntities = new Array<>();
         liftableDelete = new Array<>();
+        enemiesDelete = new Array<>();
     }
 
     public void update(){
@@ -108,6 +110,14 @@ public class Map {
         entities.removeAll(entitiesDelete, true);
         liftableDelete.clear();
         entitiesDelete.clear();
+
+        for (IBreakable enemy: enemies){
+            if (enemy.getHP() <= 0){
+                enemiesDelete.add(enemy);
+            }
+        }
+        enemies.removeAll(enemiesDelete, true);
+        enemiesDelete.clear();
     }
 
     public void addEntity(IEntity entity){
@@ -142,6 +152,10 @@ public class Map {
         return true;
     }
 
+    public int getEnemiesCount(){
+        return enemies.size;
+    }
+
     public void clear(){
         entities.clear();
         notPassableEntities.clear();
@@ -151,4 +165,6 @@ public class Map {
         enemies.clear();
         players.clear();
     }
+
+    public Array<IEntity> getEntities() { return entities; }
 }

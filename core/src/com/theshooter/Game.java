@@ -6,16 +6,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
+import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
 
 import java.io.IOException;
-import com.badlogic.gdx.math.Vector2;
-import com.theshooter.Logic.*;
-import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Weapon.*;
-import com.theshooter.Screen.GameScreen;
-import com.theshooter.Screen.MainScreen;
-import com.theshooter.Utils.Config;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -25,11 +19,13 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
+	public MapScreen mapScreen;
 
 	private InputController inputController;
 	private EntityController entityController;
 	private TextureController textureController;
 	private AudioController audioController;
+	private EventController eventController;
 
 	private boolean paused;
 	private long pausedTime;
@@ -54,6 +50,7 @@ public class Game extends com.badlogic.gdx.Game {
 		textureController = new TextureController();
 		audioController = new AudioController();
 		entityController = new EntityController();
+		eventController = new EventController();
 
 		//audioController.playMusic("casino", 1f);
 
@@ -68,10 +65,10 @@ public class Game extends com.badlogic.gdx.Game {
 //			Gdx.app.exit();
 //		}
 //		entityController.load("test2");
-		//entityController.load("level1");
-		entityController.load("itemsTest");
-//		entityController.load("test");
+		// entityController.load("level1");
+		entityController.load("level1");
 
+		mapScreen = new MapScreen(getEntityController().getMap());
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
 
@@ -98,6 +95,10 @@ public class Game extends com.badlogic.gdx.Game {
 		return audioController;
 	}
 
+	public EventController getEventController() {
+		return eventController;
+	}
+
 	public long getGameTime() {
 		return TimeUtils.millis() - pausedTime;
 	}
@@ -105,9 +106,11 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void render () {
 		super.render();
+		mapScreen.view();
 		if (!paused) {
 			inputController.update();
 			entityController.update();
+			eventController.update();
 
 			config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
 			if (config.remainingHookahTime <= 0) {

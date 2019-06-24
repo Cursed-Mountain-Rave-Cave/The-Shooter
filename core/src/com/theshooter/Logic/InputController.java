@@ -3,9 +3,11 @@ package com.theshooter.Logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
+import com.theshooter.Screen.MapScreen;
 
 public class InputController implements InputProcessor {
 
@@ -13,6 +15,7 @@ public class InputController implements InputProcessor {
     private boolean keySPressed;
     private boolean keyAPressed;
     private boolean keyDPressed;
+    private boolean mapIsOpen;
 
     private boolean leftMouseBottomPressed;
 
@@ -22,6 +25,7 @@ public class InputController implements InputProcessor {
         keyAPressed = false;
         keyDPressed = false;
         leftMouseBottomPressed = false;
+        mapIsOpen = false;
     }
 
     public void update(){
@@ -54,6 +58,11 @@ public class InputController implements InputProcessor {
 
         if (leftMouseBottomPressed)
             Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().attack(vect);
+
+        if (mapIsOpen)
+            Game.getInstance().setScreen(Game.getInstance().mapScreen);
+        else
+            Game.getInstance().setScreen(Game.getInstance().gameScreen);
     }
 
     @Override
@@ -85,6 +94,11 @@ public class InputController implements InputProcessor {
             }
             case Input.Keys.D:{
                 keyDPressed = true;
+                break;
+            }
+            case Input.Keys.M: {
+                if(mapIsOpen) mapIsOpen = false;
+                else mapIsOpen = true;
                 break;
             }
             case Input.Keys.NUM_1: {
@@ -173,10 +187,13 @@ public class InputController implements InputProcessor {
         return false;
     }
 
+    private int lastScreenX, lastScreenY;
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
             leftMouseBottomPressed = true;
+            lastScreenX = screenX;
+            lastScreenY = screenY;
         }
         return false;
     }
@@ -191,10 +208,18 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        int curX = screenX - Gdx.graphics.getWidth() / 2;
-        int curY = screenY - Gdx.graphics.getHeight() / 2;
+        if(mapIsOpen) {
+            Game.getInstance().mapScreen.getCamera().translate((-screenX + lastScreenX) * Game.getInstance().mapScreen.getCamera().zoom,
+                    (screenY - lastScreenY) * Game.getInstance().mapScreen.getCamera().zoom);
+            lastScreenX = screenX;
+            lastScreenY = screenY;
+        }
+        else {
+            int curX = screenX - Gdx.graphics.getWidth() / 2;
+            int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+            Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+        }
         return false;
     }
 
@@ -210,7 +235,10 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean scrolled(int amount) {
-        Game.getInstance().gameScreen.getCameraController().zoom(amount);
+        if(mapIsOpen)
+            Game.getInstance().mapScreen.zoom(amount);
+        else
+            Game.getInstance().gameScreen.getCameraController().zoom(amount);
         return false;
     }
 }
