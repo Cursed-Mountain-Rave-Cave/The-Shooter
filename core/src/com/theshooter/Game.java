@@ -68,8 +68,9 @@ public class Game extends com.badlogic.gdx.Game {
 //			Gdx.app.exit();
 //		}
 //		entityController.load("test2");
-		// entityController.load("level1");
+		//entityController.load("level1");
 		entityController.load("itemsTest");
+//		entityController.load("test");
 
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);

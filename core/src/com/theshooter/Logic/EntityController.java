@@ -12,6 +12,7 @@ import com.theshooter.Logic.Entity.LiftableEntities.CoverAirplane;
 import com.theshooter.Logic.Entity.LiftableEntities.Heal;
 import com.theshooter.Logic.Entity.LiftableEntities.Hookah;
 import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
+import com.theshooter.Logic.Entity.Weapon.Dagger;
 import com.theshooter.Screen.*;
 
 import java.util.HashMap;
@@ -374,10 +375,12 @@ public class EntityController {
 
     public void spawnArabinWarrior(int x, int y) {
         HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 3,Depth.ENEMY, false, player.getRectangle());
+        entity.addWeapon(new Dagger(entity));
+        entity.selectWeapon(1);
         map.addEntity(entity);
         screenObjectArray.add(new HumanScreenObject(entity,
-                Game.getInstance().getTextureController().getBody("player", "body1"),
-                Game.getInstance().getTextureController().getAnimations("player", "legs1")));
+                Game.getInstance().getTextureController().getBody("player", "body2"),
+                Game.getInstance().getTextureController().getAnimations("player", "legs5")));
     }
     public void spawnBoss(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());

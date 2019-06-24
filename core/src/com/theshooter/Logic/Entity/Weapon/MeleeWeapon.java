@@ -43,7 +43,7 @@ public class MeleeWeapon extends Weapon {
                                          getOwner().getY() + getOwner().getHeight() / 2 - getH() / 2);
             vect.rotate(-splash / 2);
             for (int i = 0; i < attacks; i++) {
-                Damage damage = new Damage(getOwner(), getType(), Math.min(getDamage() / attacks, 1));
+                Damage damage = new Damage(getOwner(), getType(), Math.max(getDamage() / attacks, 1));
                 Projectile projectile =
                         new Projectile(
                                 damage,
