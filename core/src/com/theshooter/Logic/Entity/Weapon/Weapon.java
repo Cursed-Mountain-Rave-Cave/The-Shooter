@@ -22,6 +22,7 @@ abstract public class Weapon {
     private CreatureEntity  owner;
 
     private long lastShot;
+    private long reloadingStart;
     private int curClipSize;
     private long reloadingEnd;
     private boolean reload;
@@ -83,6 +84,7 @@ abstract public class Weapon {
 
     public void reload() {
         if (!reload && curClipSize < clipSize && (getOwner().getAmmo(weaponType) > 0 || !needAmmo)) {
+            reloadingStart = Game.getInstance().getGameTime();
             reloadingEnd = Game.getInstance().getGameTime() + reloadingTime;
             reload = true;
         }
@@ -222,5 +224,9 @@ abstract public class Weapon {
 
     public void setReload(boolean reload) {
         this.reload = reload;
+    }
+
+    public long getReloadingStart() {
+        return reloadingStart;
     }
 }

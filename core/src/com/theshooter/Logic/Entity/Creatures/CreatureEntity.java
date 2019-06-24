@@ -49,7 +49,7 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
                 moveAt(dx, dy);
             else
                 moveAt(0, 0);
-            if (len < radius / 2 * 50)
+            if (len < radius * 30)
                 currentWeapon.attack(new Vector2(dx, dy));
         }else
             moveAt(0, 0);

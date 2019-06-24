@@ -9,10 +9,7 @@ import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 import com.theshooter.Logic.Entity.Creatures.Player;
 import com.theshooter.Logic.Entity.Creatures.Tramp;
-import com.theshooter.Logic.Entity.LiftableEntities.CoverAirplane;
-import com.theshooter.Logic.Entity.LiftableEntities.Heal;
-import com.theshooter.Logic.Entity.LiftableEntities.Hookah;
-import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
+import com.theshooter.Logic.Entity.LiftableEntities.*;
 import com.theshooter.Logic.Entity.Weapon.Dagger;
 import com.theshooter.Logic.Entity.Weapon.ThrowingKnife;
 import com.theshooter.Logic.Entity.Weapon.WeaponType;
@@ -272,6 +269,12 @@ public class EntityController {
                 placeCoverAirplane(x, y);
             }
 
+            if(command.equals("placeWeaponUpgrade")){
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                placeWeaponUpgrade(x, y);
+            }
+
             if(command.equals("placeGate")) {
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
@@ -402,6 +405,12 @@ public class EntityController {
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("things", "breakableThing" + MathUtils.random(4, 5)), 0));
     }
+    public void placeWeaponUpgrade(int x, int y) {
+        LiftableEntity entity = new WeaponUpgrade(x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing2"), 50));
+    }
     public void placeHookah(int x, int y) {
         LiftableEntity entity = new Hookah(x, y);
         map.addEntity(entity);
@@ -497,6 +506,8 @@ public class EntityController {
     public void spawnKeanu(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75,75, 50,100, 5, Depth.ENEMY, false,  player.getRectangle());
         map.addEntity(entity);
+        entity.addWeapon(new Dagger(entity));
+        entity.selectWeapon(1);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy2"), 112));
     }

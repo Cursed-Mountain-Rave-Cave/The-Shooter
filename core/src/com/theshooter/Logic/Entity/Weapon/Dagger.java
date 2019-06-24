@@ -11,7 +11,7 @@ public class Dagger extends MeleeWeapon {
                 50,
                 Damage.Type.PHYSICAL,
                 500,
-                400,
+                200,
                 10,
                 owner);
     }
