@@ -1,9 +1,8 @@
 package com.theshooter.Logic.Entity.Weapon;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 
 abstract public class Weapon {

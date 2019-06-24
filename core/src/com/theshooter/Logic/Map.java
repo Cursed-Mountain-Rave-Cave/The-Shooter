@@ -146,7 +146,7 @@ public class Map {
 
     public boolean isAllowed(Rectangle place){
         for(IEntity entity: notPassableEntities)
-            if(place.overlaps(entity.getRectangle()) && entity.getRectangle() != place)
+            if(!entity.isPassable() && place.overlaps(entity.getRectangle()) && entity.getRectangle() != place)
                 return false;
 
         return true;

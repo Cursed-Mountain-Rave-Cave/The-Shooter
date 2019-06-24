@@ -1,4 +1,4 @@
-package com.theshooter.Screen;
+package com.theshooter.Screen.ScreenObjects;
 
 
 import com.badlogic.gdx.graphics.Texture;

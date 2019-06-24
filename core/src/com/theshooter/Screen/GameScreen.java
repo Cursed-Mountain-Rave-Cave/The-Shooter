@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.theshooter.Game;
 import com.theshooter.Logic.CameraController;
+import com.theshooter.Screen.ScreenObjects.HumanScreenObject;
 
 public class GameScreen implements Screen {
 

@@ -1,13 +1,14 @@
-package com.theshooter.Screen;
+package com.theshooter.Screen.ScreenObjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.theshooter.Logic.Entity.Entity;
+import com.theshooter.Screen.Depth;
 
 public class ScreenObject implements IScreenObject {
 
-    Entity entity;
-    int shift;
+    private Entity entity;
+    protected int shift;
     private Texture texture;
 
     public ScreenObject(Entity entity, Texture texture, int shift){
