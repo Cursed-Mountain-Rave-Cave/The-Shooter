@@ -69,8 +69,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
     @Override
     public void reload() {
         super.reload();
-        if (getLevel() > 50)
-            getOwner().addAmmo(WeaponType.BOW, getClipSize());
+        getOwner().addAmmo(WeaponType.BOW, getClipSize() - getCurClipSize());
     }
 
     @Override
