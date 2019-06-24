@@ -19,7 +19,7 @@ public class ThrowingKnife extends OneShotWeapon {
                 1500,
                 true,
                 400,
-                100_000_000,
+                1500,
                 owner
         );
         setClipSize(3);

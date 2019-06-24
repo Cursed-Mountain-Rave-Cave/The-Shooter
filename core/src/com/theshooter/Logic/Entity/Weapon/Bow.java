@@ -8,13 +8,13 @@ public class Bow extends OneShotWeapon {
         super(
                 WeaponType.BOW,
                 15,
-                5,
-                5,
+                10,
+                10,
                 Damage.Type.PHYSICAL,
                 2000,
                 true,
                 800,
-                100_000_000,
+                1500,
                 owner);
     }
 

@@ -40,13 +40,13 @@ public class HumanScreenObject extends ScreenObject {
     }
 
     public void draw(SpriteBatch batch) {
-        setCurrentLegs();
-        setCurrentBody();
-
         if (human.isBroken()) {
             this.currentBody = 8;
             this.currentLegs = 8;
         }
+
+        setCurrentLegs();
+        setCurrentBody();
 
         batch.draw(legs.get(currentLegs).getFrame(), getScreenX() - shift, getScreenY());
         batch.draw(body.get(human.getCurrentWeapon().getWeaponType()).get(currentBody).getFrame(), getScreenX() - shift, getScreenY());
@@ -56,6 +56,11 @@ public class HumanScreenObject extends ScreenObject {
     }
 
     public void setCurrentLegs() {
+        if (human.isBroken()) {
+            legs.get(currentLegs).update();
+            return;
+        }
+
         float dx = human.getMovedx();
         float dy = human.getMovedy();
 
@@ -78,15 +83,20 @@ public class HumanScreenObject extends ScreenObject {
         if (dx < 0 && dy < 0)
             this.currentLegs = 0;
 
-        if (((dx == 0 && dy == 0) || last != currentLegs) && currentLegs != 8)
+        if ((dx == 0 && dy == 0) || last != currentLegs)
             for (Animation current : legs)
                 current.reset();
 
-        else if (last == currentLegs || last == 8)
+        else /*if (last == currentLegs)*/
             legs.get(last).update();
     }
 
     public void setCurrentBody() {
+        if (human.isBroken()) {
+            body.get(lastWeapon).get(currentBody).update();
+            return;
+        }
+
         float dx = human.getLookdx();
         float dy = human.getLookdy();
 
@@ -134,5 +144,16 @@ public class HumanScreenObject extends ScreenObject {
             }
         }
         lastWeapon = human.getCurrentWeapon().getWeaponType();
+    }
+
+    public void setLegsAnimationFrameTime(int frameTime) {
+        for (Animation animation : legs)
+            animation.setFrameTime(frameTime);
+    }
+
+    public void setBodyAnimationFrameTime(int frameTime) {
+        for (WeaponType type : body.keySet())
+            for (Animation animation : body.get(type))
+                animation.setFrameTime(frameTime);
     }
 }

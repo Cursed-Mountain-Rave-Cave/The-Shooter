@@ -13,12 +13,14 @@ import com.theshooter.Logic.Entity.LiftableEntities.CoverAirplane;
 import com.theshooter.Logic.Entity.LiftableEntities.Heal;
 import com.theshooter.Logic.Entity.LiftableEntities.Hookah;
 import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
+import com.theshooter.Logic.Entity.Weapon.Dagger;
+import com.theshooter.Logic.Entity.Weapon.ThrowingKnife;
+import com.theshooter.Logic.Entity.Weapon.WeaponType;
 import com.theshooter.Logic.Event.Event;
 import com.theshooter.Logic.Event.Place;
 import com.theshooter.Screen.*;
 
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class EntityController {
 
@@ -334,6 +336,12 @@ public class EntityController {
                 spawnTramp(x, y);
             }
 
+            if(command.equals("spawnKnifeJuggler")) {
+                x = 50 * scanner.nextInt();
+                y = 50 * scanner.nextInt();
+                spawnKnifeJuggler(x, y);
+            }
+
 
 
         }
@@ -444,11 +452,23 @@ public class EntityController {
     }
 
     public void spawnArabinWarrior(int x, int y) {
-        HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 3,Depth.ENEMY, false, player.getRectangle());
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
+        entity.addWeapon(new Dagger(entity));
+        entity.selectWeapon(1);
         map.addEntity(entity);
         screenObjectArray.add(new HumanScreenObject(entity,
-                Game.getInstance().getTextureController().getBody("player", "body1"),
-                Game.getInstance().getTextureController().getAnimations("player", "legs1")));
+                        Game.getInstance().getTextureController().getBody("player", "body2"),
+                        Game.getInstance().getTextureController().getAnimations("player", "legs2")));
+    }
+    public void spawnKnifeJuggler(int x, int y) {
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
+        entity.addWeapon(new ThrowingKnife(entity));
+        entity.selectWeapon(1);
+        entity.addAmmo(WeaponType.THROWING_KNIFE, 50000);
+        map.addEntity(entity);
+        screenObjectArray.add(new HumanScreenObject(entity,
+                Game.getInstance().getTextureController().getBody("player", "body3"),
+                Game.getInstance().getTextureController().getAnimations("player", "legs3")));
     }
     public void spawnBoss(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());
