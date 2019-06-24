@@ -16,7 +16,6 @@ public class Dagger extends MeleeWeapon {
                 200,
                 200,
                 10,
-                10,
                 owner);
     }
 }
