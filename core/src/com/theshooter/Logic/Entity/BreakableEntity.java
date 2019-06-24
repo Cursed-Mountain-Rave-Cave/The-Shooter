@@ -46,5 +46,7 @@ public class BreakableEntity extends Entity implements IBreakable {
 
     public void setHp(int hp) {
         this.hp = Math.min(maxHp, hp);
+        if(hp == 0)
+            broken = true;
     }
 }

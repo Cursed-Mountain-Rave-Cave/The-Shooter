@@ -22,7 +22,7 @@ public class MapScreen implements Screen {
 
     OrthographicCamera camera;
 
-    public MapScreen() {
+    public void load() {
         screenObjectArray = Game.getInstance().getEntityController().getScreenObjectArray();
         renderer = new ShapeRenderer();
 
