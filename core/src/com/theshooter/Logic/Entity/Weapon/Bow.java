@@ -17,4 +17,9 @@ public class Bow extends OneShotWeapon {
                 100_000_000,
                 owner);
     }
+
+    @Override
+    public void levelUp() {
+        setDamage(getDamage() + 5);
+    }
 }

@@ -62,27 +62,27 @@ public class HumanScreenObject extends ScreenObject {
         int last = currentLegs;
 
         if (dx == 0 && dy > 0)
-            this.currentLegs = 5;
-        if (dx == 0 && dy < 0)
-            this.currentLegs = 6;
-        if (dx > 0 && dy == 0)
-            this.currentLegs = 4;
-        if (dx < 0 && dy == 0)
-            this.currentLegs = 7;
-        if (dx > 0 && dy > 0)
-            this.currentLegs = 2;
-        if (dx < 0 && dy > 0)
             this.currentLegs = 3;
-        if (dx > 0 && dy < 0)
+        if (dx == 0 && dy < 0)
+            this.currentLegs = 7;
+        if (dx > 0 && dy == 0)
+            this.currentLegs = 5;
+        if (dx < 0 && dy == 0)
             this.currentLegs = 1;
+        if (dx > 0 && dy > 0)
+            this.currentLegs = 4;
+        if (dx < 0 && dy > 0)
+            this.currentLegs = 2;
+        if (dx > 0 && dy < 0)
+            this.currentLegs = 6;
         if (dx < 0 && dy < 0)
             this.currentLegs = 0;
 
-        if ((dx == 0 && dy == 0) || last != currentLegs)
+        if (((dx == 0 && dy == 0) || last != currentLegs) && currentLegs != 8)
             for (Animation current : legs)
                 current.reset();
 
-        else if (last == currentLegs)
+        else if (last == currentLegs || last == 8)
             legs.get(last).update();
     }
 
@@ -95,21 +95,21 @@ public class HumanScreenObject extends ScreenObject {
         int last = currentBody;
 
         if (angle > 112.5 && angle < 157.5)
-            this.currentBody = 7;
+            this.currentBody = 1;
         else if (angle > 67.5 && angle < 112.5)
             this.currentBody = 0;
         else if (angle > 22.5 && angle < 67.5)
-            this.currentBody = 6;
+            this.currentBody = 7;
         else if (angle > -22.5 && angle < 22.5)
-            this.currentBody = 1;
+            this.currentBody = 6;
         else if (angle < -22.5 && angle > -67.5)
-            this.currentBody = 4;
-        else if (angle < -67.5 && angle > -112.5)
-            this.currentBody = 2;
-        else if (angle < -112.5 && angle > -157.5)
             this.currentBody = 5;
-        else
+        else if (angle < -67.5 && angle > -112.5)
+            this.currentBody = 4;
+        else if (angle < -112.5 && angle > -157.5)
             this.currentBody = 3;
+        else
+            this.currentBody = 2;
 
         if (last != currentBody || !lastWeapon.equals(human.getCurrentWeapon().getWeaponType())) {
             for (int i = 0; i < body.size(); i++)
@@ -120,9 +120,8 @@ public class HumanScreenObject extends ScreenObject {
         if (last == currentBody && lastWeapon.equals(human.getCurrentWeapon().getWeaponType())) {
             long end = human.getCurrentWeapon().getShotTime();
             if (end != 0) {
-                float current = TimeUtils.millis() - human.getCurrentWeapon().getLastShot();
+                float current = Game.getInstance().getGameTime() - human.getCurrentWeapon().getLastShot();
                 float percent = current * 100 / end;
-                System.out.println(percent);
                 if (percent < 40)
                     body.get(lastWeapon).get(currentBody).setFrame(0);
                 else if (percent >= 50 && percent < 80)

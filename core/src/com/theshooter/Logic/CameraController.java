@@ -14,9 +14,7 @@ public class CameraController {
         camera.update();
     }
 
-    public OrthographicCamera getCamera() {
-        return camera;
-    }
+    public OrthographicCamera getCamera() { return camera; }
 
     public void translateCamera(int dx, int dy){
         camera.translate(dx, dy);
@@ -26,7 +24,7 @@ public class CameraController {
         camera.position.set(x, y, 0);
     }
 
-    public void zoom(int ammount){
-        camera.zoom = Math.max(0.5f, Math.min(camera.zoom + ammount* 0.2f, 1.5f));
+    public void zoom(int amount){
+        camera.zoom = Math.max(0.5f, Math.min(camera.zoom + amount * 0.1f, 1.5f));
     }
 }

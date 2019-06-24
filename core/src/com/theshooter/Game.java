@@ -2,19 +2,14 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
 import com.theshooter.Screen.MainScreen;
+import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
 
 import java.io.IOException;
-import com.badlogic.gdx.math.Vector2;
-import com.theshooter.Logic.*;
-import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Weapon.*;
-import com.theshooter.Screen.GameScreen;
-import com.theshooter.Screen.MainScreen;
-import com.theshooter.Utils.Config;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -24,12 +19,17 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
+	public MapScreen mapScreen;
 
 	private InputController inputController;
 	private EntityController entityController;
 	private TextureController textureController;
 	private AudioController audioController;
+	private EventController eventController;
 
+	private boolean paused;
+	private long pausedTime;
+	private long pauseBegin;
 
 	public static Game getInstance(){
 		if(game == null)
@@ -50,6 +50,7 @@ public class Game extends com.badlogic.gdx.Game {
 		textureController = new TextureController();
 		audioController = new AudioController();
 		entityController = new EntityController();
+		eventController = new EventController();
 
 		//audioController.playMusic("casino", 1f);
 
@@ -67,10 +68,15 @@ public class Game extends com.badlogic.gdx.Game {
 		// entityController.load("level1");
 		entityController.load("level1");
 
+		mapScreen = new MapScreen(getEntityController().getMap());
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 		setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
+
+		paused = false;
+		pausedTime = 0;
+		pauseBegin = 0;
 	}
 
 	public Config getConfig() {
@@ -89,24 +95,48 @@ public class Game extends com.badlogic.gdx.Game {
 		return audioController;
 	}
 
+	public EventController getEventController() {
+		return eventController;
+	}
+
+	public long getGameTime() {
+		return TimeUtils.millis() - pausedTime;
+	}
+
 	@Override
 	public void render () {
 		super.render();
-		inputController.update();
-		entityController.update();
+		mapScreen.view();
+		if (!paused) {
+			inputController.update();
+			entityController.update();
+			eventController.update();
 
-		config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
-		if(config.remainingHookahTime <= 0){
-			config.remainingHookahTime = 0;
-			config.enemiesVelocityMultiplier = 1;
+			config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingHookahTime <= 0) {
+				config.remainingHookahTime = 0;
+				config.enemiesVelocityMultiplier = 1;
+			}
+
+			config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingVelocityUpTime <= 0) {
+				config.remainingVelocityUpTime = 0;
+				config.playerVelocityMultiplier = 1;
+
+			}
+			pauseBegin = TimeUtils.millis();
+		} else {
+			pausedTime += TimeUtils.millis() - pauseBegin;
+			pauseBegin = TimeUtils.millis();
 		}
+	}
 
-		config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
-		if(config.remainingVelocityUpTime <= 0){
-			config.remainingVelocityUpTime = 0;
-			config.playerVelocityMultiplier = 1;
-		}
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
 
+	public boolean isPaused() {
+		return paused;
 	}
 
 	@Override
