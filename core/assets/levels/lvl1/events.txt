@@ -1,0 +1,15 @@
+place
+[
+	150
+	150
+	10
+	spawn
+	true
+]
+event
+[
+	spawn true
+]
+{
+	sout Find the key. Open the gate.
+}

@@ -1,5 +1,6 @@
 package com.theshooter.Logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Logic.Entity.*;
@@ -41,6 +42,9 @@ public class Map {
     }
 
     public void update(){
+        System.out.println(entities.size);
+        System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
+
         for(IEntity entity: entities) {
             entity.update();
 

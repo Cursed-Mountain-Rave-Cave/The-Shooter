@@ -18,8 +18,6 @@ public class EventController {
     Array<Event> eventsToDelete;
     Array<Place> placesToDelete;
 
-
-
     public EventController(){
         flags = new TreeMap<>();
         events = new Array<>();
@@ -71,6 +69,7 @@ public class EventController {
     private void executeCommand(Array<Object> command){
          if (command.get(0).equals("sout")){
              System.out.println(command.get(1));
+             Game.getInstance().gameScreen.targetMessage = (String) command.get(1);
          }
          if (command.get(0).equals("tp")){
              Game.getInstance().getEntityController().getPlayer().setX((int) command.get(1));
