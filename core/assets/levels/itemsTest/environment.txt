@@ -13,6 +13,15 @@ placeHeal 12 0
 placeWeaponUpgrade 6 0
 placeWeaponUpgrade 5 0
 placeWeaponUpgrade 4 0
+placeWeaponUpgrade 6 1
+placeWeaponUpgrade 5 1
+placeWeaponUpgrade 4 1
+placeWeaponUpgrade 6 2
+placeWeaponUpgrade 5 2
+placeWeaponUpgrade 4 2
+placeWeaponUpgrade 6 -1
+placeWeaponUpgrade 5 -1
+placeWeaponUpgrade 4 -1
 
 placeKey 20 0 key true
 placeConditionGate 20 10 key true

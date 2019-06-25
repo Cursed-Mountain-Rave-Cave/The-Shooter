@@ -51,6 +51,8 @@ event
 ]
 {
     spawn BiggerBoss 10 10
+    spawn Genie 8 8
+    spawn Genie 6 6
 }
 
 event
