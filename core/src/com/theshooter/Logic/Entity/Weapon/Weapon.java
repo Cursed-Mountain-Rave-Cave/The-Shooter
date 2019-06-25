@@ -100,7 +100,6 @@ abstract public class Weapon {
     }
 
     public boolean canAttack() {
-        System.out.println(Game.getInstance().getGameTime() > lastShot + shotTime);
         return Game.getInstance().getGameTime() > lastShot + shotTime && curClipSize > 0 && !reload;
     }
 

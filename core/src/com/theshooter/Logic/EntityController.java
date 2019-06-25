@@ -351,6 +351,12 @@ public class EntityController {
             placeKnifeAmmo(x, y);
         if(command.equals("placeBowAmmo"))
             placeBowAmmo(x, y);
+        if(command.equals("placeLiftableBow"))
+            placeLiftableBow(x, y);
+        if(command.equals("placeLiftableGodBow"))
+            placeLiftableGodBow(x, y);
+        if(command.equals("placeLiftableThrowingKnife"))
+            placeLiftableThrowingKnife(x, y);
         if(command.equals("placeGate"))
             placeGate(x, y);
         if(command.equals("placePassablePalm"))
@@ -469,7 +475,24 @@ public class EntityController {
         screenObjectArray.add(new ScreenObject(entity,
                 Game.getInstance().getTextureController().getTexture("things", "unbreakableThing14"), 25));
     }
-
+    public void placeLiftableBow(int x, int y) {
+        LiftableEntity entity = new LiftableBow(MathUtils.random(0, 2), x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing16"), 50));
+    }
+    public void placeLiftableGodBow(int x, int y) {
+        LiftableEntity entity = new LiftableGodBow(MathUtils.random(0, 2), x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing17"), 75));
+    }
+    public void placeLiftableThrowingKnife(int x, int y) {
+        LiftableEntity entity = new LiftableThrowingKnife(MathUtils.random(0, 2), x, y);
+        map.addEntity(entity);
+        screenObjectArray.add(new ScreenObject(entity,
+                Game.getInstance().getTextureController().getTexture("things", "unbreakableThing18"), 50));
+    }
     public void placePalm(int x, int y) {
         Entity entity = new Entity(x, y, 30, 30, Depth.THINGS, false);
         map.addEntity(entity);
