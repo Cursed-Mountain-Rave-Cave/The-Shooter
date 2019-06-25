@@ -39,7 +39,7 @@ public class TextureController {
         addBodyAnimationArray("player", "body", "player/bodies/", 5, 9, 3);
         addAnimationArray("player", "legs", "player/legs/", 12, 9, 4);
 
-        addTextureArray("enemy", "enemy", "enemies/", 5, 2);
+        addTextureArray("enemy", "enemy", "enemies/", 14, 2);
 
         addTextureArray("projectiles", "projectile", "projectiles/", 5, 1);
     }
@@ -79,7 +79,7 @@ public class TextureController {
                 Array<Texture> textures = new Array<>();
                 for (int k = 1; k <= frames; k++)
                     textures.add(new Texture(path + i + "/" + j + "/" + k + ".png"));
-                Animation animation = new Animation(textures, 300);
+                Animation animation = new Animation(textures, 200);
                 animations.add(animation);
 
             }

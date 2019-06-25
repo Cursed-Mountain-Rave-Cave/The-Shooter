@@ -336,6 +336,17 @@ public class EntityController {
             spawnSuicide(x,y);
         if(command.equals("spawnGenie"))
             spawnGenie(x,y);
+
+        if(command.equals("spawnDisign"))
+            spawnDisign(x, y);
+        if(command.equals("spawnUprajka"))
+            spawnUprajka(x, y);
+        if(command.equals("spawnGarbage"))
+            spawnGarbage(x, y);
+        if (command.equals("spawnBigBoss"))
+            spawnBigBoss(x, y);
+        if (command.equals("spawnBiggerBoss"))
+            spawnBiggerBoss(x,y);
     }
 
     public void place(String command, int x, int y){
@@ -590,6 +601,56 @@ public class EntityController {
         map.addEntity(entity);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy4"), 75));
+    }
+    public void spawnDisign(int x, int y) {
+        CreatureEntity entity = new Disign(x, y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new Dagger(0, entity));
+        entity.selectWeapon(1);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy7"), 104));
+    }
+    public void spawnUprajka(int x, int y) {
+        CreatureEntity entity = new Uprajka(x, y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new Bow(0, entity));
+        entity.addAmmo(WeaponType.BOW, 8000);
+        entity.setRadius(500);
+        entity.selectWeapon(1);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy8"), 175));
+    }
+    public void spawnGarbage(int x, int y) {
+        for (int i = 0; i < 4; i++) {
+            CreatureEntity entity = new Uprajka(x + 100 * i, y + 100 * i, player.getRectangle());
+            map.addEntity(entity);
+            entity.addWeapon(new Bow(0, entity));
+            entity.selectWeapon(1);
+            entity.getCurrentWeapon().setCurClipSize(0);
+            screenObjectArray.add(new BreakableScreenObject(entity,
+                    Game.getInstance().getTextureController().getTextures("enemy", "enemy" + (9 + i)), 72));
+        }
+    }
+    public void spawnBigBoss(int x, int y) {
+        CreatureEntity entity = new BigBoss(x , y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new UltimateOneShotSuperMegaAnnihilationBow(1, entity));
+        entity.selectWeapon(1);
+        entity.getCurrentWeapon().setReloadable(true);
+        entity.addAmmo(WeaponType.BOW, 500000);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy14"), 80));
+
+    }
+    public void spawnBiggerBoss(int x, int y) {
+        CreatureEntity entity = new BiggerBoss(x , y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new Dagger(0, entity));
+        entity.selectWeapon(1);
+        entity.addAmmo(WeaponType.DAGGER, 1);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy13"), 200));
+
     }
     public void spawnPlane(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y, 75,75, 10,100, 5, Depth.ENEMY, false, player.getRectangle());

@@ -94,6 +94,7 @@ public class EventController {
              Game.getInstance().getAudioController().playMusic((String) command.get(1), (Float) command.get(2));
          }
          if (((String)command.get(0)).contains("load")){
+             Game.getInstance().level = (String) command.get(1);
              Game.getInstance().getEntityController().load((String) command.get(1));
          }
     }

@@ -26,6 +26,8 @@ public class AudioController {
         addSounds("damage", 3);
         addSounds("healing", 10);
         addSounds("upgrade", 1);
+        addSounds("boss1", 1);
+        addSounds("boss2", 1);
 
         addMusic("arabian");
         addMusic("american");

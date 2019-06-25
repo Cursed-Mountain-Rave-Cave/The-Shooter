@@ -1,1 +1,1 @@
-spawnGenie 10 10
+spawnGarbage 10 10

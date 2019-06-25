@@ -10,7 +10,6 @@ public class Tramp extends CreatureEntity {
 
     public Tramp(int x, int y, Rectangle target) {
         super(x, y, 150,150,1000,300, 1, Depth.ENEMY, false, target);
-        maxHp = getHP();
     }
 
     @Override

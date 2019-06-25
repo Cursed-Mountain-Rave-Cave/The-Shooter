@@ -25,7 +25,7 @@ public class Player extends HumanEntity {
         super.breakDown(damage);
         if(isBroken()){
             delete();
-            Gdx.app.exit();
+            Game.getInstance().getEntityController().load(Game.getInstance().level);
         }
     }
 }

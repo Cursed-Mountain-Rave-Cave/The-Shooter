@@ -35,8 +35,6 @@ public class MapScreen implements Screen {
         this.map = new object[maxHeight + 1][maxWidth + 1];
         visited = new boolean[maxHeight + 1][maxWidth + 1];
 
-        System.out.println(maxHeight + " " + maxWidth);
-
         getMap();
 
         camera = new OrthographicCamera(1920, 1080);
