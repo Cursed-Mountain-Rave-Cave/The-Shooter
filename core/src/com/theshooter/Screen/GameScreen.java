@@ -71,16 +71,19 @@ public class GameScreen implements Screen {
 
         font.getData().setScale(2);
         if(Game.getInstance().getConfig().showAdditionalInfo)
-            font.draw(batch, "\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + Game.getInstance().getEntityController().getPlayer().getX() + " Y: " + Game.getInstance().getEntityController().getPlayer().getY(), 0, 1080);
+            font.draw(batch, "\n\n\n\n\n\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nX: " + Game.getInstance().getEntityController().getPlayer().getX() + " Y: " + Game.getInstance().getEntityController().getPlayer().getY(), 0, 1080);
 
-        font.draw(batch, "Target: " + targetMessage + "\nHP: " + Game.getInstance().getEntityController().getPlayer().getHP() + "\nPatrons: " + Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getCurClipSize() + " / " + Game.getInstance().getEntityController().getPlayer().getAmmo(Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getWeaponType()), 0, 1080);
+        font.draw(batch, "Target: " + targetMessage +
+                "\nEnemies left: " + Game.getInstance().getEntityController().getMap().getEnemiesCount() +
+                "\nHP: " + Game.getInstance().getEntityController().getPlayer().getHP() +
+                "\nPatrons: " + Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getCurClipSize() + " / " + Game.getInstance().getEntityController().getPlayer().getAmmo(Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getWeaponType()), 0, 1080);
 
-        font.draw(batch,"\n\n\n" + Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().toString() + "(" +
+        font.draw(batch,"\n\n\n\n" + Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().toString() + "(" +
                                        Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getLevel() + ")", 0, 1080);
 
         if(Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().isReload() &&
                 Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getReloadingTime() > 0)
-                    font.draw(batch, "\n\n\n\nReloading " + (Math.min(100,
+                    font.draw(batch, "\n\n\n\n\nReloading " + (Math.min(100,
                     (Game.getInstance().getGameTime() -
                     Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getReloadingStart()) * 100
                     / Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().getReloadingTime())) + "%", 0, 1080);
