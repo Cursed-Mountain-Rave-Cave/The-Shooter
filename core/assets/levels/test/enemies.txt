@@ -1,0 +1,3 @@
+spawnKnifeJuggler 98  3
+spawnKnifeJuggler 97 3
+spawnKnifeJuggler 96 3

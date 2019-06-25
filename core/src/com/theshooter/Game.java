@@ -23,6 +23,8 @@ public class Game extends com.badlogic.gdx.Game {
 	public MapScreen mapScreen;
 	public MainMenu mainMenu;
 
+	public String level;
+
 	private InputController inputController;
 	private EntityController entityController;
 	private TextureController textureController;
@@ -45,7 +47,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void create () {
-
+		level = "itemsTest";
 		config = new Config();
 
 		mapScreen = new MapScreen();
@@ -73,7 +75,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 		setScreen(mainMenu);
 
-		entityController.load("itemsTest");
+		entityController.load(level);
 
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 
