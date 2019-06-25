@@ -1,0 +1,17 @@
+event
+[
+]
+{
+    music vdamki 0,3
+    place LiftableGodBow 58 69
+    place BowAmmo       57 69
+    place BowAmmo       57 69
+    place BowAmmo       57 69
+    place BowAmmo       57 69
+    place BowAmmo       57 69
+    place BowAmmo       57 69
+    place WeaponUpgrade 62 70
+    place WeaponUpgrade 62 71
+    place WeaponUpgrade 61 70
+    place WeaponUpgrade 60 71
+}
