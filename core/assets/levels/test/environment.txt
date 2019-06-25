@@ -42,7 +42,46 @@ placePalm   3    5
 placePalm   4    7
 
 placeHookah   2   7
-end
+
 placeHookah    -157     -154
 placeHookah    -157     -153
 placeWoman    -153    -155
+
+placeLiftableGodBow 99 3
+placeLiftableBow    99 3
+placeLiftableThrowingKnife 99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+placeBowAmmo    99 3
+
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+placeKnifeAmmo 99 3
+
+
+
+
