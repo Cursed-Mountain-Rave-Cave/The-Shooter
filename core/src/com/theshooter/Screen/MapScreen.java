@@ -16,7 +16,9 @@ public class MapScreen implements Screen {
     private ScreenObjectArray screenObjectArray;
     private boolean[][] visited;
     private object[][] map;
+
     private ShapeRenderer renderer;
+    private ShapeRenderer minimap;
 
     private int radius;
 
@@ -27,12 +29,20 @@ public class MapScreen implements Screen {
         renderer = new ShapeRenderer();
 
         int maxHeight = 0, maxWidth = 0;
+        for(int i = 0; i < screenObjectArray.size; ++i) {
+            maxHeight = Math.max(maxHeight, screenObjectArray.get(i).getX() / 50);
+            maxWidth = Math.max(maxWidth, screenObjectArray.get(i).getY() / 50);
+        }
+
         for(int i = 0; i < screenObjectArray.floor.size; ++i) {
             maxHeight = Math.max(maxHeight, screenObjectArray.floor.get(i).getX() / 50);
             maxWidth = Math.max(maxWidth, screenObjectArray.floor.get(i).getY() / 50);
         }
 
-        this.map = new object[maxHeight + 1][maxWidth + 1];
+        maxHeight = Math.max(maxHeight, Game.getInstance().getEntityController().getPlayer().getX() / 50);
+        maxWidth = Math.max(maxWidth, Game.getInstance().getEntityController().getPlayer().getY() / 50);
+
+        map = new object[maxHeight + 1][maxWidth + 1];
         visited = new boolean[maxHeight + 1][maxWidth + 1];
 
         getMap();
