@@ -1,3 +1,7 @@
+placeLiftableBow 45 21
+placeLiftableThrowingKnife 52 36
+placeLiftableGodBow 24 94
+
 placeConditionGate 22 14 gate1 true
 placeConditionGate 12 17 gate1 true
 placeConditionGate 12 60 gate2 true
@@ -6,3 +10,21 @@ placeConditionGate 32 93 gate4 true
 
 placeKey 50 26 gate1 true
 placeKey 37 80 gate3 true
+
+
+end
+
+
+placeHome 1 22
+placeHome 1 29
+placeHome 1 40
+placeHome 15 49
+placeHome 1 50
+
+
+placeTend 7 31
+placeTend 11 23
+placeTend 16 26
+placeTend 12 31
+placeTend 9 40
+placeTend 14 37
