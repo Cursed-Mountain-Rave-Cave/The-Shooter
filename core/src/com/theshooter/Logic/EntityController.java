@@ -273,15 +273,13 @@ public class EntityController {
                 x1 = 50 * scanner.nextInt();
                 y1 = 50 * scanner.nextInt();
                 placePalms(x, y, x1, y1);
-            }
-            if(command.equals("placeVases")) {
+            }else if(command.equals("placeVases")) {
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
                 x1 = 50 * scanner.nextInt();
                 y1 = 50 * scanner.nextInt();
                 placeVases(x, y, x1, y1);
-            }
-            else if(command.equals("placeKey")){
+            }else if(command.equals("placeKey")){
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
                 flag = scanner.next();

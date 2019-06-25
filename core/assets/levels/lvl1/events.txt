@@ -179,9 +179,11 @@ event
 
 event
 [
+	all_killed true
 	flag7 true
 ]
 {
 	sout Thanks for playing!
-	load itemTest
+	load level3
+	music arabian 1 
 }

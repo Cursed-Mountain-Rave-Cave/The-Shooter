@@ -86,7 +86,7 @@ public class MapScreen implements Screen {
             for (int j = 0; j < width; ++j) {
                 if (map[i][j] == object.wall)
                     renderer.setColor(Color.BLACK);
-                else if(visited[i][j])
+                else if(visited[i][j] && map[i][j] != null)
                     switch(map[i][j]) {
                         case water:
                             renderer.setColor(Color.BLUE);
@@ -141,6 +141,8 @@ public class MapScreen implements Screen {
             int tileX = currentTile.getX();
             int tileY = currentTile.getY();
 
+            if(tileX < 0 || tileY < 0) continue;
+
             Array<Texture> textures = Game.getInstance().getTextureController().getTextures("floor", "floor17");
 
             if(textures.get(0).equals(currentTile.getTexture()))
@@ -153,6 +155,8 @@ public class MapScreen implements Screen {
             ScreenObject currentObject = screenObjectArray.get(i);
             int objectX = currentObject.getX();
             int objectY = currentObject.getY();
+
+            if(objectX < 0 || objectY < 0) continue;
 
             Array<Texture> textures;
 

@@ -1,0 +1,16 @@
+placeMonoWall 0 0 71 1
+placeMonoWall 0 0 1 71
+placeMonoWall 0 70 71 71
+placeMonoWall 70 0 71 71
+
+placeMonoWall 0 10 16 11
+placeMonoWall 20 10 55 11
+placeMonoWall 20 10 21 41
+placeMonoWall 30 30 71 31
+placeMonoWall 30 40 71 41
+placeMonoWall 58 4 59 31
+placeMonoWall 58 4 66 5
+placeMonoWall 5 20 21 21
+
+placeMonoWall 0 50 21 51
+placeMonoWall 20 60 21 71

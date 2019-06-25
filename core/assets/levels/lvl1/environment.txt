@@ -61,8 +61,8 @@ placeWeaponUpgrade 29 87
 placeWeaponUpgrade 30 87
 placeWeaponUpgrade 7 39
 placeWeaponUpgrade 5 70
-placeWeaponUpgrade 64 87
-placeWeaponUpgrade 65 87
+placeWeaponUpgrade 41 87
+placeWeaponUpgrade 42 87
 
 placeCoverAirplane 51 27
 placeCoverAirplane 38 53
@@ -73,3 +73,10 @@ placeHookah 18 87
 placeHookah 52 92
 
 placeVase 34 101
+
+placePalms -40 -40 140 0
+placePalms -40 0 0 170
+placePalms 55 0 95 170
+placePalms 0 131 54 171
+placePalms 0 95 18 130
+placePalms 51 95 54 130

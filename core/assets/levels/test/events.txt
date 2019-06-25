@@ -1,0 +1,16 @@
+event
+[
+]
+{
+    music arabian 0,2
+}
+
+event
+[
+all_killed true
+]
+{
+    tp 4950 150
+    music american 0,2
+    spawn Tramp 50 5
+}
