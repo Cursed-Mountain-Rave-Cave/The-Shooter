@@ -1,4 +1,4 @@
-spawnArabinWarrior 22 4
+spawnArabinWarrior 33 23
 spawnArabinWarrior 25 9
 spawnArabinWarrior 42 7
 spawnArabinWarrior 42 20
