@@ -193,6 +193,14 @@ placePassablePalm 59 69
 placePassablePalm 60 69
 placePassablePalm 61 69
 placePassablePalm 62 69
+placePassablePalm 70 50
+placePassablePalm 70 15
+placePassablePalm 75 52
+placePassablePalm 75 13
+placePassablePalm 80 51
+placePassablePalm 80 14
+placePassablePalm 84 49
+placePassablePalm 84 16
 placeBigHome 3 56
 placeVase 52 12
 placeVase 54 12

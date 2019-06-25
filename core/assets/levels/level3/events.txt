@@ -2,8 +2,10 @@ event
 [
 ]
 {
+agr
 sout Wave1!
 place LiftableBow 16 53
+place BowAmmo 16 55
 }
 
 event

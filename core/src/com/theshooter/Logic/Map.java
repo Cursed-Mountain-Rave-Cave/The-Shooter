@@ -167,5 +167,5 @@ public class Map {
         players.clear();
     }
 
-    public Array<IEntity> getEntities() { return entities; }
+    public Array<IMovable> getEntities() { return movableEntities; }
 }

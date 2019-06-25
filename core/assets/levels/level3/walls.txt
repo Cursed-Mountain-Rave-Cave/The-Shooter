@@ -4,8 +4,3 @@ placeInvisibleWall 1 1 70 2
 placeInvisibleWall 1 1 2 70
 placeInvisibleWall 2 69 70 70
 placeInvisibleWall 70 1 71 70 
-
-placeInvisibleWall 49 20 51 52
-placeInvisibleWall 19 20 50 21
-placeInvisibleWall 19 20 20 51
-placeInvisibleWall 20 50 51 52 
