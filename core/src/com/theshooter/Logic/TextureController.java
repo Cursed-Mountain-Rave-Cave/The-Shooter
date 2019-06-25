@@ -104,8 +104,13 @@ public class TextureController {
 
     public Map<WeaponType, Array<Animation>> getBody(String type, String name) {
         Map<WeaponType, Array<Animation>> animations = new TreeMap<>();
-        for (int i = 0; i < WEAPONS; i++)
-            animations.put(WeaponType.fromInt(i), getAnimations(type, name + "/" + WeaponType.fromInt(i).toString()));
+        for (int i = 0; i < WEAPONS; i++) {
+            Array<Animation> array = new Array<>();
+            for (Animation animation : getAnimations(type, name + "/" + WeaponType.fromInt(i).toString()))
+                array.add(animation);
+            animations.put(WeaponType.fromInt(i), array);
+
+        }
         return animations;
     }
 

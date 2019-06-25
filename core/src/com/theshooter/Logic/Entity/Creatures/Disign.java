@@ -1,5 +1,6 @@
 package com.theshooter.Logic.Entity.Creatures;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Damage;
@@ -9,7 +10,7 @@ import com.theshooter.Screen.Depth;
 
 public class Disign extends CreatureEntity {
     public Disign(int x, int y, Rectangle target) {
-        super(x, y, 75, 75, 75, 300, 500, Depth.ENEMY, false, target);
+        super(x, y, 100, 100, 75, 200, 500, Depth.ENEMY, false, target);
     }
 
     @Override
@@ -19,7 +20,8 @@ public class Disign extends CreatureEntity {
         if (getHP() <= 0)
             setBroken(true);
         setDamaged(true);
-        Game.getInstance().getAudioController().playSound("boss1");
+        if (MathUtils.random(1, 100) > 50)
+            Game.getInstance().getAudioController().playSound("boss1");
     }
 
 }

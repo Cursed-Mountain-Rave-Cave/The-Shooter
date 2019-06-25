@@ -13,7 +13,7 @@ public class Boom extends MeleeWeapon {
                 Damage.Type.PHYSICAL,
                 0,
                 100000000,
-                200,
+                40,
                 5,
                 owner);
     }

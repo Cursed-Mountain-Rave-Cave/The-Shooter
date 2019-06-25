@@ -1,5 +1,6 @@
 package com.theshooter.Logic.Entity.Weapon;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Damage;
@@ -13,7 +14,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
         super(
                 WeaponType.BOW,
                 level,
-                50,
+                4,
                 20,
                 20,
                 Damage.Type.PHYSICAL,
@@ -34,9 +35,11 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
     @Override
     public void attack(Vector2 vect) {
         if (canAttack()) {
-            vect.rotate(- 5 * (shots / 2));
+            vect.rotate(- 3 * (shots / 2));
             for (int i = 0; i < shots; i++) {
                 if (getCurClipSize() > 0) {
+                    float angle = MathUtils.random(-1.5f, 1.5f);
+                    vect.rotate(angle);
                     Damage damage = new Damage(getOwner(), getType(), getDamage());
                     Projectile projectile =
                             new Projectile(
@@ -49,11 +52,11 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
                                     vect.y,
                                     getVelocity(),
                                     getShotLifeTime());
-
+                    vect.rotate(-angle);
                     Game.getInstance().getEntityController().addBullet(projectile);
                     setLastShot(Game.getInstance().getGameTime());
                     setCurClipSize(getCurClipSize() - 1);
-                    vect.rotate(5);
+                    vect.rotate(3);
                 }
             }
         }
@@ -62,14 +65,18 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
     @Override
     public void levelUp() {
         super.levelUp();
-        shots += 2;
-        setClipSize(getClipSize() + 2);
+        if (getLevel() < 3) {
+            shots += 2;
+            setDamage(getDamage() + 1);
+            setClipSize(getClipSize() + 2);
+        }
     }
 
     @Override
     public void reload() {
         super.reload();
-        getOwner().addAmmo(WeaponType.BOW, getClipSize() - getCurClipSize());
+        if (isReload())
+            getOwner().addAmmo(WeaponType.BOW, getClipSize() - getCurClipSize());
     }
 
     @Override

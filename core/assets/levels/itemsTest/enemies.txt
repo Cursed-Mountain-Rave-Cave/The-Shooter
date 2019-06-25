@@ -1,1 +1,1 @@
-spawnGarbage 10 10
+spawnBoss 10 10

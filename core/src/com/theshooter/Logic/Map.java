@@ -8,6 +8,7 @@ import com.theshooter.Logic.Entity.Abstract.IBreakable;
 import com.theshooter.Logic.Entity.Abstract.IEntity;
 import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
+import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 import com.theshooter.Logic.Entity.Creatures.Player;
 import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
 
@@ -64,7 +65,8 @@ public class Map {
 
         for(Projectile projectile: projectiles){
             for(IBreakable breakable: breakableEntities){
-                if(breakable.getClass() == projectile.getDamage().getOwner().getClass())
+                if(breakable.getClass() == projectile.getDamage().getOwner().getClass() ||
+                        (breakable.getClass() != Player.class && projectile.getDamage().getOwner().getClass() != Player.class))
                     continue;
                 if(breakable.getRectangle().overlaps(projectile.getRectangle())){
                     breakable.breakDown(projectile.getDamage());

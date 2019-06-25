@@ -47,6 +47,40 @@ event
 event
 [
     all_killed true
+    flag6 true
 ]
 {
+    spawn BiggerBoss 10 10
+    spawn Genie 8 8
+    spawn Genie 6 6
+}
+
+event
+[
+    all_killed true
+    flag5 true
+]
+{
+    spawn BigBoss 10 10
+    set flag6 true
+}
+
+event
+[
+    all_killed true
+    flag4 true
+]
+{
+    spawn Garbage 10 10
+    set flag5 true
+}
+
+event
+[
+    all_killed true
+]
+{
+    music vdamki 0,3
+    spawn Uprajka 10 10
+    set flag4 true
 }

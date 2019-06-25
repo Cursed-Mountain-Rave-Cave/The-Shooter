@@ -56,6 +56,7 @@ public class EntityController {
     }
 
     public void load(String name){
+        Game.getInstance().level = name;
         map.clear();
         screenObjectArray.clear();
         Game.getInstance().getEventController().clear();
@@ -557,7 +558,7 @@ public class EntityController {
     }
 
     public void spawnArabinWarrior(int x, int y) {
-        HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 20, 300, 10,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new Dagger(0, entity));
         entity.selectWeapon(1);
         map.addEntity(entity);
@@ -573,7 +574,7 @@ public class EntityController {
                 Game.getInstance().getTextureController().getAnimations("player", "legs4")));
     }
     public void spawnKnifeJuggler(int x, int y) {
-        HumanEntity entity = new HumanEntity(x, y, 30, 30, 15, 300, 10,Depth.ENEMY, false, player.getRectangle());
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 30, 300, 12,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new ThrowingKnife(0, entity));
         entity.selectWeapon(1);
         entity.addAmmo(WeaponType.THROWING_KNIFE, 50000);
@@ -583,7 +584,7 @@ public class EntityController {
                 Game.getInstance().getTextureController().getAnimations("player", "legs3")));
     }
     public void spawnGenie(int x, int y) {
-        HumanEntity entity = new HumanEntity(x, y, 30, 30, 35, 350, 20,Depth.ENEMY, false, player.getRectangle());
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 50, 350, 15,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new Fireball(0, entity));
         entity.selectWeapon(1);
         map.addEntity(entity);
@@ -592,8 +593,11 @@ public class EntityController {
                 Game.getInstance().getTextureController().getAnimations("player", "legs12")));
     }
     public void spawnBoss(int x, int y) {
-        CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 6, Depth.ENEMY, false,  player.getRectangle());
+        CreatureEntity entity = new CreatureEntity(x, y,75, 75, 100, 100, 15, Depth.ENEMY, false,  player.getRectangle());
         map.addEntity(entity);
+        entity.addWeapon(new Dagger(0, entity));
+        entity.selectWeapon(1);
+        entity.addAmmo(WeaponType.DAGGER, 1);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy1"), 84));
     }
@@ -604,16 +608,20 @@ public class EntityController {
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy5"), 250));
     }
     public void spawnTrain(int x, int y) {
-        CreatureEntity entity = new CreatureEntity(x, y,75,75,10,200, 100, Depth.ENEMY, false, player.getRectangle());
+        CreatureEntity entity = new CreatureEntity(x, y,75,75,20,200, 20, Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
+        entity.addWeapon(new Dagger(0, entity));
+        entity.selectWeapon(1);
+        entity.addAmmo(WeaponType.DAGGER, 1);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy4"), 75));
     }
     public void spawnDisign(int x, int y) {
         CreatureEntity entity = new Disign(x, y, player.getRectangle());
         map.addEntity(entity);
-        entity.addWeapon(new Dagger(0, entity));
+        entity.addWeapon(new Bow(0, entity));
         entity.selectWeapon(1);
+        entity.getCurrentWeapon().setCurClipSize(0);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy7"), 104));
     }
@@ -629,7 +637,7 @@ public class EntityController {
     }
     public void spawnGarbage(int x, int y) {
         for (int i = 0; i < 4; i++) {
-            CreatureEntity entity = new Uprajka(x + 100 * i, y + 100 * i, player.getRectangle());
+            CreatureEntity entity = new Garbage(x + 100 * i, y + 100 * i, player.getRectangle());
             map.addEntity(entity);
             entity.addWeapon(new Bow(0, entity));
             entity.selectWeapon(1);
@@ -641,9 +649,11 @@ public class EntityController {
     public void spawnBigBoss(int x, int y) {
         CreatureEntity entity = new BigBoss(x , y, player.getRectangle());
         map.addEntity(entity);
-        entity.addWeapon(new UltimateOneShotSuperMegaAnnihilationBow(1, entity));
+        entity.addWeapon(new Bow(0, entity));
         entity.selectWeapon(1);
-        entity.getCurrentWeapon().setReloadable(true);
+        entity.getCurrentWeapon().setDamage(5);
+        entity.getCurrentWeapon().setNeedAmmo(false);
+        entity.getCurrentWeapon().setShotTime(1);
         entity.addAmmo(WeaponType.BOW, 500000);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy14"), 80));
@@ -652,25 +662,29 @@ public class EntityController {
     public void spawnBiggerBoss(int x, int y) {
         CreatureEntity entity = new BiggerBoss(x , y, player.getRectangle());
         map.addEntity(entity);
-        entity.addWeapon(new Dagger(0, entity));
+        entity.addWeapon(new UltimateOneShotSuperMegaAnnihilationBow(10, entity));
         entity.selectWeapon(1);
-        entity.addAmmo(WeaponType.DAGGER, 1);
+        entity.getCurrentWeapon().setDamage(2);
+        entity.getCurrentWeapon().setNeedAmmo(false);
+        entity.addAmmo(WeaponType.BOW, 500000);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy13"), 200));
 
     }
     public void spawnPlane(int x, int y) {
-        CreatureEntity entity = new CreatureEntity(x, y, 75,75, 10,100, 5, Depth.ENEMY, false, player.getRectangle());
+        CreatureEntity entity = new CreatureEntity(x, y, 75,75, 25,100, 15, Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
+        entity.addWeapon(new Dagger(0, entity));
+        entity.selectWeapon(1);
+        entity.addAmmo(WeaponType.DAGGER, 1);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy3"), 150));
     }
     public void spawnKeanu(int x, int y) {
-        CreatureEntity entity = new CreatureEntity(x, y,75,75, 50,100, 5, Depth.ENEMY, false,  player.getRectangle());
+        CreatureEntity entity = new CreatureEntity(x, y,75,75, 50,100, 10, Depth.ENEMY, false,  player.getRectangle());
         map.addEntity(entity);
         entity.addWeapon(new UltimateOneShotSuperMegaAnnihilationBow(0, entity));
         entity.addAmmo(WeaponType.BOW, 8000);
-        entity.setRadius(500);
         entity.selectWeapon(1);
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy2"), 112));

@@ -141,7 +141,7 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.NUM_0: {
-                Game.getInstance().getEntityController().getPlayer().selectWeapon(0);
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(10);
                 break;
             }
             case Input.Keys.F3: {

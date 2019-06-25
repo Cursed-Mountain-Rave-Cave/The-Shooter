@@ -44,6 +44,7 @@ public class EventController {
         }
 
         for (Event event : events) {
+            addFlag("all_killed", Game.getInstance().getEntityController().getMap().getEnemiesCount() == 0);
             if (checkEvent(event)) {
                 eventsToDelete.add(event);
                 for (Array<Object> command : event.getCommands())

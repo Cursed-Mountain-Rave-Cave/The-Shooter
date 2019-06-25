@@ -13,7 +13,7 @@ event
 all_killed true
 ]
 {
-sout go home
+sout Go home
 placeFlag
 [
     300
@@ -29,7 +29,7 @@ event
 flag1 true
 ]
 {
-sout Wave2!
+sout Wave 2!
 spawn ArabinWarrior 60 35
 spawn ArabinWarrior 60 36
 spawn ArabinWarrior 60 37
@@ -63,7 +63,7 @@ flag2 true
 all_killed true
 ]
 {
-sout go Home
+sout Go home
 placeFlag
 [
     300
@@ -79,7 +79,7 @@ event
 flag3 true
 ]
 {
-sout Wave3!
+sout Wave 3!
 spawn ArabinWarrior 60 35
 spawn ArabinWarrior 60 36
 spawn ArabinWarrior 60 37
@@ -118,7 +118,7 @@ flag4 true
 all_killed true
 ]
 {
-sout go Home
+sout Go home
 placeFlag
 [
     300
@@ -134,7 +134,7 @@ event
 flag5 true
 ]
 {
-sout Wave4!
+sout Wave 4!
 spawn ArabinWarrior 60 35
 spawn ArabinWarrior 60 36
 spawn ArabinWarrior 60 37
@@ -178,7 +178,7 @@ flag6 true
 all_killed true
 ]
 {
-sout go Home
+sout Go home
 placeFlag
 [
     300
@@ -194,7 +194,7 @@ event
 flag7 true
 ]
 {
-sout Wave5!
+sout Wave 5!
 spawn ArabinWarrior 60 35
 spawn ArabinWarrior 60 36
 spawn ArabinWarrior 60 37
@@ -243,7 +243,7 @@ flag8 true
 all_killed true
 ]
 {
-sout go Home
+sout Go home
 placeFlag
 [
     300
@@ -259,7 +259,7 @@ event
 flag9 true
 ]
 {
-sout Wave6!
+sout Wave 6!
 spawn ArabinWarrior 60 35
 spawn ArabinWarrior 60 36
 spawn ArabinWarrior 60 37
@@ -314,7 +314,7 @@ flag10 true
 all_killed true
 ]
 {
-sout go Home
+sout Go home
 placeFlag
 [
     300
@@ -330,7 +330,7 @@ event
 flag11 true
 ]
 {
-sout Wave7!
+sout Wave 7!
 spawn ArabinWarrior 60 35
 spawn ArabinWarrior 60 36
 spawn ArabinWarrior 60 37
@@ -387,7 +387,7 @@ flag12 true
 all_killed true
 ]
 {
-sout go Home
+sout Go home
 placeFlag
 [
     300
@@ -403,7 +403,7 @@ event
 flag13 true
 ]
 {
-sout Wave8!
+sout Wave 8!
 spawn ArabinWarrior 60 35
 spawn ArabinWarrior 60 36
 spawn ArabinWarrior 60 37
@@ -470,7 +470,7 @@ flag14 true
 all_killed true
 ]
 {
-sout go Home
+sout Go home
 placeFlag
 [
     300
@@ -488,8 +488,6 @@ flag15 true
 {
 sout What the F##K???!
 
-
-spawn BiggerBoss 60 38
 spawn KnifeJuggler 61 42
 spawn KnifeJuggler 61 43
 spawn KnifeJuggler 61 44
@@ -541,7 +539,7 @@ flag16 true
 all_killed true
 ]
 {
-sout go to Hell-#@!5%ome!
+sout Go to hell-#@!5%ome!
 placeFlag
 [
     300
@@ -558,9 +556,6 @@ flag17 true
 ]
 {
 sout iQQwXZaC?n|\t}{t@#o56ddfihke!
-spawn BigBoss 58 38
-spawn BiggerBoss 60 38
-spawn Uprajka 57 20
 spawn KnifeJuggler 61 42
 spawn KnifeJuggler 61 43
 spawn KnifeJuggler 61 44
