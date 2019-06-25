@@ -86,7 +86,7 @@ public class MapScreen implements Screen {
             for (int j = 0; j < width; ++j) {
                 if (map[i][j] == object.wall)
                     renderer.setColor(Color.BLACK);
-                else if(visited[i][j])
+                else if(visited[i][j] && map[i][j] != null)
                     switch(map[i][j]) {
                         case water:
                             renderer.setColor(Color.BLUE);

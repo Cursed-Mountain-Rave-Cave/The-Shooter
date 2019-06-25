@@ -184,5 +184,6 @@ event
 ]
 {
 	sout Thanks for playing!
-	load itemsTest
+	load level3
+	music arabian 1 
 }
