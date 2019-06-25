@@ -179,9 +179,10 @@ event
 
 event
 [
+	all_killed true
 	flag7 true
 ]
 {
 	sout Thanks for playing!
-	load itemTest
+	load itemsTest
 }
