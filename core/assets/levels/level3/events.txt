@@ -1,0 +1,45 @@
+place
+[
+    950
+    450
+    100
+    flag1
+    true
+]
+
+event
+[
+flag1 true
+]
+{
+sout Oh shit, they want to steal my precious!
+place Tend 35 34
+spawn ArabinWarrior 35 60
+}
+
+event
+[
+all_killed true
+flag1 true
+]
+{
+sout go home
+placeFlag
+[
+    2950
+    3050
+    1000
+    flag2
+    true
+]
+}
+
+event
+[
+flag2 true
+]
+{
+sout Oh shit, he we go again!
+spawn ArabinWarrior 35 60
+}
+
