@@ -1,0 +1,26 @@
+spawnArabinWarrior 22 4
+spawnArabinWarrior 25 9
+spawnArabinWarrior 42 7
+spawnArabinWarrior 42 20
+spawnArabinWarrior 47 8
+spawnArabinWarrior 47 23
+spawnArabinWarrior 51 6
+spawnArabinWarrior 6 23
+spawnArabinWarrior 7 23
+spawnArabinWarrior 8 23
+spawnArabinWarrior 16 32
+spawnArabinWarrior 17 32
+spawnArabinWarrior 18 32
+spawnArabinWarrior 4 37
+spawnArabinWarrior 5 37
+spawnArabinWarrior 6 37
+spawnArabinWarrior 7 37
+
+spawnKeanu 22 18
+spawnKeanu 26 24
+spawnKeanu 26 16
+
+spawnKnifeJuggler 12 57
+spawnKnifeJuggler 13 57
+spawnKnifeJuggler 14 57
+spawnKnifeJuggler 15 57

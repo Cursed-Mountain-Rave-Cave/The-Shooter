@@ -24,6 +24,17 @@ place
 	true
 ]
 
+place
+[
+	1700 
+	4600
+	250
+	boss1
+	true
+]
+
+
+
 event
 [
 	all_killed true
@@ -32,6 +43,9 @@ event
 {
 	set gate2 true
 	sout "Gate 2"
+	spawn Suicide 4 66
+	spawn Suicide 4 70
+	spawn Boss 14 84
 }
 
 event
@@ -41,5 +55,52 @@ event
 {
 	set gate3 false
 	set gate4 true
+	spawn Disign 33 126
 	sout "Boss"
+}
+
+
+
+
+event
+[
+    all_killed true
+    flag6 true
+]
+{
+    spawn BiggerBoss 33 126
+	tp 1700 4600
+}
+
+event
+[
+    all_killed true
+    flag5 true
+]
+{
+    spawn BigBoss 33 126
+	tp 1700 4600
+    set flag6 true
+}
+
+event
+[
+    all_killed true
+    flag4 true
+]
+{
+    spawn Garbage 33 120
+	tp 1700 4600
+    set flag5 true
+}
+
+event
+[
+	boss1 true
+    all_killed true
+]
+{
+    spawn Uprajka 33 126
+	tp 1700 4600
+    set flag4 true
 }

@@ -55,6 +55,7 @@ public class EntityController {
     }
 
     public void load(String name){
+        Game.getInstance().level = name;
         map.clear();
         screenObjectArray.clear();
         Game.getInstance().getEventController().clear();
