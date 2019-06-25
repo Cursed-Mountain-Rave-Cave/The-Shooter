@@ -5,4 +5,5 @@ public interface IMovable extends IEntity {
     void moveAt(float dx, float dy);
     float getMovedx();
     float getMovedy();
+    void setChangeRadius();
 }

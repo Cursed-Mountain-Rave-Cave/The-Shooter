@@ -89,6 +89,10 @@ public class EventController {
             Game.getInstance().getEventController().addPlace(place);
          }
 
+        if (((String)command.get(0)).contains("agr")){
+            Game.getInstance().getEntityController().AllRadius();
+        }
+
          if (((String)command.get(0)).contains("place")){
              Game.getInstance().getEntityController().place((String) command.get(0),(Integer) command.get(1),(Integer) command.get(2));
          }
