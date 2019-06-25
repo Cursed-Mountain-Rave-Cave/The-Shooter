@@ -33,20 +33,20 @@ public class EventController {
         places.clear();
     }
 
-    public void update(){
+    public void update() {
         addFlag("all_killed", Game.getInstance().getEntityController().getMap().getEnemiesCount() == 0);
         Player player = Game.getInstance().getEntityController().getPlayer();
-        for (Place place: places){
-            if (Math.hypot(player.getX() - place.getX(), player.getY() - place.getY()) < place.getR()){
+        for (Place place : places) {
+            if (Math.hypot(player.getX() - place.getX(), player.getY() - place.getY()) < place.getR()) {
                 flags.put(place.getFlag(), place.getValue());
                 placesToDelete.add(place);
             }
         }
 
-        for (Event event: events){
-            if(checkEvent(event)){
+        for (Event event : events) {
+            if (checkEvent(event)) {
                 eventsToDelete.add(event);
-                for (Array<Object> command: event.getCommands())
+                for (Array<Object> command : event.getCommands())
                     executeCommand(command);
             }
         }
@@ -55,6 +55,7 @@ public class EventController {
         events.removeAll(eventsToDelete, true);
         placesToDelete.clear();
         eventsToDelete.clear();
+        addFlag("all_killed", false);
     }
 
     private boolean checkEvent(Event event){

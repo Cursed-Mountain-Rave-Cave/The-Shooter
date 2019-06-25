@@ -1,0 +1,10 @@
+spawnArabinWarrior 58 23
+spawnArabinWarrior 58 24
+spawnArabinWarrior 58 25
+spawnArabinWarrior 58 26 
+spawnArabinWarrior 58 27
+spawnArabinWarrior 58 28
+spawnArabinWarrior 58 29
+spawnArabinWarrior 58 30
+spawnArabinWarrior 58 31
+spawnArabinWarrior 58 32
