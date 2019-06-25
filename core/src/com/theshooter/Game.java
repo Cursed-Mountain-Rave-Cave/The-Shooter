@@ -2,14 +2,15 @@ package com.theshooter;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
-import com.theshooter.Logic.Entity.Abstract.IEntity;
-import com.theshooter.Logic.Entity.Weapon.*;
 import com.theshooter.Screen.GameScreen;
+import com.theshooter.Screen.MainMenu;
 import com.theshooter.Screen.MainScreen;
+import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
+
+import java.io.IOException;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -19,14 +20,20 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public MainScreen mainScreen;
 	public GameScreen gameScreen;
+	public MapScreen mapScreen;
+	public MainMenu mainMenu;
+
+	public String level;
 
 	private InputController inputController;
 	private EntityController entityController;
 	private TextureController textureController;
 	private AudioController audioController;
-	private Weapon weapon;
+	private EventController eventController;
 
-	private boolean isReloading;
+	private boolean started;
+	private long pausedTime;
+	private long pauseBegin;
 
 	public static Game getInstance(){
 		if(game == null)
@@ -40,37 +47,33 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void create () {
-		isReloading = false;
-
+		level = "lvl1";
 		config = new Config();
 
 		inputController = new InputController();
 		textureController = new TextureController();
 		audioController = new AudioController();
 		entityController = new EntityController();
+		eventController = new EventController();
 
-		audioController.playMusic("casino", 1f);
-
+		mainMenu = new MainMenu();
+		mapScreen = new MapScreen();
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
 
-		entityController.load("level1");
+		setScreen(mainMenu);
+
+		entityController.load(level);
 
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
-		setScreen(gameScreen);
 
+		setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
 
-		weapon = new ThrowingKnife(entityController.getPlayer());
-	}
-
-	public void reload() {
-		weapon.reload();
-	}
-
-	public String checkAmmoSuply() {
-		return Integer.valueOf(weapon.getCurClipSize()).toString();
+		pausedTime = 0;
+		pauseBegin = 0;
+		started = true;
 	}
 
 	public Config getConfig() {
@@ -89,21 +92,48 @@ public class Game extends com.badlogic.gdx.Game {
 		return audioController;
 	}
 
-	public void shoot1(IEntity owner){
-		float sdx = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
-		float sdy = -Gdx.input.getY() + Gdx.graphics.getHeight() / 2 - 100;
+	public EventController getEventController() {
+		return eventController;
+	}
 
-		float dx = sdx / 2 + sdy;
-		float dy = -sdx / 2 + sdy;
-		weapon.attack(new Vector2(dx, dy));
-    }
+	public long getGameTime() {
+		return TimeUtils.millis() - pausedTime;
+	}
 
 	@Override
 	public void render () {
 		super.render();
-		inputController.update();
-		entityController.update();
-		weapon.update();
+		if (started) {
+			mapScreen.view();
+			inputController.update();
+			entityController.update();
+			eventController.update();
+
+			config.remainingHookahTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingHookahTime <= 0) {
+				config.remainingHookahTime = 0;
+				config.enemiesVelocityMultiplier = 1;
+			}
+
+			config.remainingVelocityUpTime -= Gdx.graphics.getDeltaTime();
+			if (config.remainingVelocityUpTime <= 0) {
+				config.remainingVelocityUpTime = 0;
+				config.playerVelocityMultiplier = 1;
+
+			}
+			pauseBegin = TimeUtils.millis();
+		} else {
+			pausedTime += TimeUtils.millis() - pauseBegin;
+			pauseBegin = TimeUtils.millis();
+		}
+	}
+
+	public void setStarted(boolean paused) {
+		this.started = paused;
+	}
+
+	public boolean isStarted() {
+		return started;
 	}
 
 	@Override
@@ -111,4 +141,5 @@ public class Game extends com.badlogic.gdx.Game {
 		textureController.dispose();
 		audioController.dispose();
 	}
+
 }

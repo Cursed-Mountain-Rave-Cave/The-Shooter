@@ -1,0 +1,112 @@
+spawnArabinWarrior 66 11
+spawnArabinWarrior 67 10
+spawnArabinWarrior 64 9
+spawnSuicide 66 8
+spawnKnifeJuggler 65 12
+
+spawnKnifeJuggler 14 17
+spawnKnifeJuggler 14 13
+
+spawnArabinWarrior 15 9
+spawnArabinWarrior 21 9
+
+spawnSuicide 5 35
+spawnArabinWarrior 7 37
+spawnArabinWarrior 7 32
+spawnArabinWarrior 3 37
+spawnArabinWarrior 3 32
+
+spawnKnifeJuggler 12 36
+spawnKnifeJuggler 12 30
+spawnKnifeJuggler 5 47
+spawnKnifeJuggler 5 44
+
+spawnSuicide 10 40
+spawnArabinWarrior 12 42
+spawnArabinWarrior 12 37
+spawnArabinWarrior 8 42
+spawnArabinWarrior 8 37
+
+spawnSuicide 10 45
+spawnArabinWarrior 12 47
+spawnArabinWarrior 12 42
+spawnArabinWarrior 8 47
+spawnArabinWarrior 8 42
+
+spawnSuicide 5 30
+spawnArabinWarrior 7 31
+spawnArabinWarrior 7 27
+spawnArabinWarrior 3 32
+spawnArabinWarrior 3 27
+
+spawnSuicide 10 25
+spawnArabinWarrior 12 26
+spawnArabinWarrior 12 22
+spawnArabinWarrior 8 27
+spawnArabinWarrior 8 22
+
+spawnSuicide 40 20
+spawnArabinWarrior 42 22
+spawnArabinWarrior 42 18
+spawnArabinWarrior 38 22
+spawnArabinWarrior 38 18
+
+spawnSuicide 30 15
+spawnArabinWarrior 32 17
+spawnArabinWarrior 32 13
+spawnArabinWarrior 28 17
+spawnArabinWarrior 28 13
+
+spawnSuicide 30 25
+spawnArabinWarrior 22 27
+spawnArabinWarrior 32 23
+spawnArabinWarrior 28 27
+spawnArabinWarrior 28 23
+
+spawnSuicide 50 15
+spawnArabinWarrior 52 17
+spawnArabinWarrior 52 13
+spawnArabinWarrior 48 17
+spawnArabinWarrior 48 13
+
+spawnSuicide 50 25
+spawnArabinWarrior 52 27
+spawnArabinWarrior 52 23
+spawnArabinWarrior 48 27
+spawnArabinWarrior 48 23
+
+spawnSuicide 50 50
+spawnArabinWarrior 52 52
+spawnArabinWarrior 48 48
+spawnArabinWarrior 52 48
+spawnArabinWarrior 48 52
+
+spawnSuicide 55 55
+spawnArabinWarrior 57 57
+spawnArabinWarrior 53 53
+spawnArabinWarrior 57 53
+spawnArabinWarrior 53 57
+
+spawnSuicide 55 45
+spawnArabinWarrior 57 47
+spawnArabinWarrior 53 43
+spawnArabinWarrior 57 43
+spawnArabinWarrior 53 47
+
+spawnSuicide 45 55
+spawnArabinWarrior 47 57
+spawnArabinWarrior 43 53
+spawnArabinWarrior 47 53
+spawnArabinWarrior 43 57
+
+spawnSuicide 45 5
+spawnArabinWarrior 47 7
+spawnArabinWarrior 43 3
+spawnArabinWarrior 47 3
+spawnArabinWarrior 43 7
+
+spawnSuicide 35 5
+spawnArabinWarrior 37 7
+spawnArabinWarrior 33 3
+spawnArabinWarrior 37 3
+spawnArabinWarrior 33 7

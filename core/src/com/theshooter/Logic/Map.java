@@ -1,5 +1,6 @@
 package com.theshooter.Logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Logic.Entity.*;
@@ -7,7 +8,9 @@ import com.theshooter.Logic.Entity.Abstract.IBreakable;
 import com.theshooter.Logic.Entity.Abstract.IEntity;
 import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
+import com.theshooter.Logic.Entity.Creatures.HumanEntity;
 import com.theshooter.Logic.Entity.Creatures.Player;
+import com.theshooter.Logic.Entity.LiftableEntities.LiftableEntity;
 
 public class Map {
     private Array<IEntity> entities;
@@ -15,10 +18,12 @@ public class Map {
     private Array<Projectile> projectiles;
     private Array<IBreakable> breakableEntities;
     private Array<IMovable> movableEntities;
+    private Array<LiftableEntity> liftableEntities;
 
+    private Array<LiftableEntity> liftableDelete;
     private Array<Projectile> projectilesDelete;
-
     private Array<IEntity> entitiesDelete;
+    private Array<IBreakable> enemiesDelete;
     private Array<IBreakable> enemies;
     private Array<IBreakable> players;
 
@@ -32,6 +37,9 @@ public class Map {
         enemies = new Array<>();
         players = new Array<>();
         movableEntities = new Array<>();
+        liftableEntities = new Array<>();
+        liftableDelete = new Array<>();
+        enemiesDelete = new Array<>();
     }
 
     public void update(){
@@ -57,7 +65,8 @@ public class Map {
 
         for(Projectile projectile: projectiles){
             for(IBreakable breakable: breakableEntities){
-                if(breakable == projectile.getDamage().getOwner())
+                if(breakable.getClass() == projectile.getDamage().getOwner().getClass() ||
+                        (breakable.getClass() != Player.class && projectile.getDamage().getOwner().getClass() != Player.class))
                     continue;
                 if(breakable.getRectangle().overlaps(projectile.getRectangle())){
                     breakable.breakDown(projectile.getDamage());
@@ -77,7 +86,7 @@ public class Map {
             for(IEntity entity: notPassableEntities){
                 if(entity == projectile.getDamage().getOwner())
                     continue;
-                if(entity.getRectangle().overlaps(projectile.getRectangle())){
+                if(entity.getRectangle().overlaps(projectile.getRectangle()) && !entity.isPassable()){
                     projectilesDelete.add(projectile);
                     projectile.delete();
                 }
@@ -89,6 +98,29 @@ public class Map {
         projectiles.removeAll(projectilesDelete,true);
         entitiesDelete.clear();
         projectilesDelete.clear();
+
+        for (IBreakable player: players){
+            for(LiftableEntity entity: liftableEntities){
+                if(entity.getRectangle().overlaps(player.getRectangle())){
+                    entity.use();
+                    entity.delete();
+                    liftableDelete.add(entity);
+                    entitiesDelete.add(entity);
+                }
+            }
+        }
+        liftableEntities.removeAll(liftableDelete, true);
+        entities.removeAll(entitiesDelete, true);
+        liftableDelete.clear();
+        entitiesDelete.clear();
+
+        for (IBreakable enemy: enemies){
+            if (enemy.getHP() <= 0){
+                enemiesDelete.add(enemy);
+            }
+        }
+        enemies.removeAll(enemiesDelete, true);
+        enemiesDelete.clear();
     }
 
     public void addEntity(IEntity entity){
@@ -110,14 +142,21 @@ public class Map {
 
         if (entity instanceof IMovable)
             movableEntities.add((IMovable) entity);
+
+        if (entity instanceof LiftableEntity)
+            liftableEntities.add((LiftableEntity) entity);
     }
 
     public boolean isAllowed(Rectangle place){
         for(IEntity entity: notPassableEntities)
-            if(place.overlaps(entity.getRectangle()) && entity.getRectangle() != place)
+            if(!entity.isPassable() && place.overlaps(entity.getRectangle()) && entity.getRectangle() != place)
                 return false;
 
         return true;
+    }
+
+    public int getEnemiesCount(){
+        return enemies.size;
     }
 
     public void clear(){
@@ -129,4 +168,6 @@ public class Map {
         enemies.clear();
         players.clear();
     }
+
+    public Array<IMovable> getEntities() { return movableEntities; }
 }

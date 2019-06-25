@@ -1,9 +1,15 @@
 package com.theshooter.Logic.Entity.Creatures;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 import com.theshooter.Logic.Entity.Abstract.ILookable;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
+import com.theshooter.Logic.Entity.Weapon.Weapon;
+import com.theshooter.Logic.Entity.Weapon.WeaponType;
 import com.theshooter.Screen.Depth;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 public class HumanEntity extends CreatureEntity implements ILookable{
 
@@ -16,6 +22,7 @@ public class HumanEntity extends CreatureEntity implements ILookable{
     public void update() {
         super.update();
         lookAt(getMovedx(), getMovedy());
+
     }
 
     public void look(){

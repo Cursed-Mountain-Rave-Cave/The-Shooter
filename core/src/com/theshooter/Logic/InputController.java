@@ -3,8 +3,11 @@ package com.theshooter.Logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
+import com.theshooter.Screen.MapScreen;
 
 public class InputController implements InputProcessor {
 
@@ -12,10 +15,9 @@ public class InputController implements InputProcessor {
     private boolean keySPressed;
     private boolean keyAPressed;
     private boolean keyDPressed;
+    private boolean mapIsOpen;
 
     private boolean leftMouseBottomPressed;
-
-    int typeOfShooting;
 
     public InputController(){
         keyWPressed = false;
@@ -23,7 +25,7 @@ public class InputController implements InputProcessor {
         keyAPressed = false;
         keyDPressed = false;
         leftMouseBottomPressed = false;
-        typeOfShooting = 1;
+        mapIsOpen = false;
     }
 
     public void update(){
@@ -47,13 +49,20 @@ public class InputController implements InputProcessor {
         }
 
         Game.getInstance().getEntityController().getPlayer().moveAt(dx, dy);
+        float sdx = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
+        float sdy = -Gdx.input.getY() + Gdx.graphics.getHeight() / 2 - 100;
+
+        float deltaX = sdx / 2 + sdy;
+        float deltaY = -sdx / 2 + sdy;
+        Vector2 vect = new Vector2(deltaX, deltaY);
 
         if (leftMouseBottomPressed)
-            switch (typeOfShooting) {
-                case 1:
-                    Game.getInstance().shoot1(Game.getInstance().getEntityController().getPlayer());
-                    break;
-            }
+            Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().attack(vect);
+
+        if (mapIsOpen)
+            Game.getInstance().setScreen(Game.getInstance().mapScreen);
+        else
+            Game.getInstance().setScreen(Game.getInstance().gameScreen);
     }
 
     @Override
@@ -87,16 +96,52 @@ public class InputController implements InputProcessor {
                 keyDPressed = true;
                 break;
             }
+            case Input.Keys.M: {
+                if(mapIsOpen) mapIsOpen = false;
+                else {
+                    mapIsOpen = true;
+                    Game.getInstance().mapScreen.center();
+                }
+                break;
+            }
             case Input.Keys.NUM_1: {
-                typeOfShooting = 1;
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(1);
                 break;
             }
             case Input.Keys.NUM_2: {
-                typeOfShooting = 2;
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(2);
                 break;
             }
             case Input.Keys.NUM_3: {
-                typeOfShooting = 3;
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(3);
+                break;
+            }
+            case Input.Keys.NUM_4: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(4);
+                break;
+            }
+            case Input.Keys.NUM_5: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(5);
+                break;
+            }
+            case Input.Keys.NUM_6: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(6);
+                break;
+            }
+            case Input.Keys.NUM_7: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(7);
+                break;
+            }
+            case Input.Keys.NUM_8: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(8);
+                break;
+            }
+            case Input.Keys.NUM_9: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(9);
+                break;
+            }
+            case Input.Keys.NUM_0: {
+                Game.getInstance().getEntityController().getPlayer().selectWeapon(10);
                 break;
             }
             case Input.Keys.F3: {
@@ -104,9 +149,13 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.R: {
-                Game.getInstance().reload();
+                Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().reload();
                 break;
             }
+            /*case Input.Keys.P: {
+                Game.getInstance().setPaused(!Game.getInstance().isPaused());
+                break;
+            }*/
         }
 
         return false;
@@ -141,10 +190,13 @@ public class InputController implements InputProcessor {
         return false;
     }
 
+    private int lastScreenX, lastScreenY;
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
             leftMouseBottomPressed = true;
+            lastScreenX = screenX;
+            lastScreenY = screenY;
         }
         return false;
     }
@@ -159,10 +211,18 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        int curX = screenX - Gdx.graphics.getWidth() / 2;
-        int curY = screenY - Gdx.graphics.getHeight() / 2;
+        if(mapIsOpen) {
+            Game.getInstance().mapScreen.getCamera().translate((-screenX + lastScreenX) * Game.getInstance().mapScreen.getCamera().zoom,
+                    (screenY - lastScreenY) * Game.getInstance().mapScreen.getCamera().zoom);
+            lastScreenX = screenX;
+            lastScreenY = screenY;
+        }
+        else {
+            int curX = screenX - Gdx.graphics.getWidth() / 2;
+            int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+            Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+        }
         return false;
     }
 
@@ -178,7 +238,10 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean scrolled(int amount) {
-        Game.getInstance().gameScreen.getCameraController().zoom(amount);
+        if(mapIsOpen)
+            Game.getInstance().mapScreen.zoom(amount);
+        else
+            Game.getInstance().gameScreen.getCameraController().zoom(amount);
         return false;
     }
 }

@@ -1,0 +1,86 @@
+place
+[
+    500
+    0
+    100
+    flag1
+    true
+]
+
+place
+[
+    0
+    500
+    100
+    flag2
+    true
+]
+
+event
+[
+    flag1 true
+    flag2 true
+]
+{
+    tp 15000 15000
+    sout Hello there!
+    set flag3 true
+}
+
+event
+[
+    all_killed true
+    flag3 true
+]
+{
+    sout Fuk MAX
+}
+
+event
+[
+    key true
+]
+{
+    sout You got the Key!!
+}
+
+event
+[
+    all_killed true
+    flag6 true
+]
+{
+    spawn BiggerBoss 10 10
+    spawn Genie 8 8
+    spawn Genie 6 6
+}
+
+event
+[
+    all_killed true
+    flag5 true
+]
+{
+    spawn BigBoss 10 10
+    set flag6 true
+}
+
+event
+[
+    all_killed true
+    flag4 true
+]
+{
+    spawn Garbage 10 10
+    set flag5 true
+}
+
+event
+[
+    all_killed true
+]
+{
+    music vdamki 0,3
+    spawn Uprajka 10 10
+    set flag4 true
+}

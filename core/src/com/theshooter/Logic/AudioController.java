@@ -22,23 +22,22 @@ public class AudioController {
         music = new TreeMap<>();
         musicStack = new Stack<>();
 
-        addSoundType("reloading");
-        addSoundType("damage");
-
         addSounds("reloading", 14);
         addSounds("damage", 3);
+        addSounds("healing", 10);
+        addSounds("upgrade", 1);
+        addSounds("boss1", 1);
+        addSounds("boss2", 1);
 
         addMusic("arabian");
         addMusic("american");
         addMusic("casino");
+        addMusic("vdamki");
 
-    }
-
-    private void addSoundType(String type) {
-        sound.put(type, new Array<>());
     }
 
     private void addSounds(String type, int size) {
+        sound.put(type, new Array<>());
         for (int i = 1; i <= size; i++) {
             Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/" + type + "/" + i + ".mp3"));
             this.sound.get(type).add(sound);

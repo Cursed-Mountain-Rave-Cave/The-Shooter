@@ -1,36 +1,39 @@
 package com.theshooter.Logic.Entity.Weapon;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Game;
-import com.theshooter.Logic.Damage;
+import com.theshooter.Logic.Entity.Damage;
 import com.theshooter.Logic.Entity.Creatures.CreatureEntity;
 import com.theshooter.Logic.Entity.Projectile;
 
 public class OneShotWeapon extends Weapon {
-    public OneShotWeapon(int            damage,
+    public OneShotWeapon(WeaponType weaponType,
+                         int            level,
+                         int            damage,
                          int            w,
                          int            h,
                          Damage.Type    type,
                          int            velocity,
+                         boolean        needAmmo,
                          long           shotTime,
                          long           shotLifeTime,
                          CreatureEntity owner) {
         super(
+                weaponType,
+                level,
                 damage,
                 w,
                 h,
                 type,
                 velocity,
                 true,
+                needAmmo,
                 1,
                 0,
                 shotTime,
                 shotLifeTime,
                 owner);
     }
-
 
     public void attack(Vector2 vect) {
         if (canAttack()) {
@@ -48,7 +51,7 @@ public class OneShotWeapon extends Weapon {
                             getShotLifeTime());
 
             Game.getInstance().getEntityController().addBullet(projectile);
-            setLastShot(TimeUtils.millis());
+            setLastShot(Game.getInstance().getGameTime());
             setCurClipSize(getCurClipSize() - 1);
         }
     }
