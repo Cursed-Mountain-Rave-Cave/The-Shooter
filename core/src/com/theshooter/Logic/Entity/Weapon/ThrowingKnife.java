@@ -34,7 +34,6 @@ public class ThrowingKnife extends OneShotWeapon {
         vect.rotate(-15);
         if (canAttack()) {
             for (int i = 0; i < attacks; i++) {
-                System.out.println("+");
                 if (getCurClipSize() > 0) {
                     Damage damage = new Damage(getOwner(), getType(), getDamage());
                     Projectile projectile =
