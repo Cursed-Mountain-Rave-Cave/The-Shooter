@@ -11,16 +11,11 @@ placeConditionGate 32 93 gate4 true
 placeKey 50 26 gate1 true
 placeKey 37 80 gate3 true
 
-
-end
-
-
 placeHome 1 22
 placeHome 1 29
 placeHome 1 40
 placeHome 15 49
 placeHome 1 50
-
 
 placeTend 7 31
 placeTend 11 23
@@ -28,3 +23,53 @@ placeTend 16 26
 placeTend 12 31
 placeTend 9 40
 placeTend 14 37
+
+placeBowAmmo 52 10
+placeBowAmmo 52 11
+placeBowAmmo 52 12
+placeBowAmmo 18 42
+placeBowAmmo 18 43
+placeBowAmmo 28 92
+placeBowAmmo 29 92
+placeBowAmmo 30 32
+placeBowAmmo 62 108
+placeBowAmmo 64 110
+
+placeKnifeAmmo 43 92
+placeKnifeAmmo 44 92
+placeKnifeAmmo 45 92
+placeKnifeAmmo 36 90
+placeKnifeAmmo 36 91
+placeKnifeAmmo 36 92
+
+placeHeal 35 90
+placeHeal 35 91
+placeHeal 35 92
+placeHeal 30 20
+placeHeal 13 70
+placeHeal 16 74
+placeHeal 22 73
+placeHeal 22 74
+placeHeal 42 85
+placeHeal 43 85
+
+placeWeaponUpgrade 23 27
+placeWeaponUpgrade 25 27
+placeWeaponUpgrade 29 86
+placeWeaponUpgrade 30 86
+placeWeaponUpgrade 29 87
+placeWeaponUpgrade 30 87
+placeWeaponUpgrade 7 39
+placeWeaponUpgrade 5 70
+placeWeaponUpgrade 41 87
+placeWeaponUpgrade 42 87
+
+placeCoverAirplane 51 27
+placeCoverAirplane 38 53
+placeCoverAirplane 48 126
+placeCoverAirplane 22 116
+
+placeHookah 18 87
+placeHookah 52 92
+
+placeVase 34 101

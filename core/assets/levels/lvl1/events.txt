@@ -7,14 +7,6 @@ place
 	true
 ]
 
-event
-[
-	spawn true
-]
-{
-	sout Find the key. Open the gate.
-}
-
 place
 [
 	1550
@@ -24,6 +16,24 @@ place
 	true
 ]
 
+place
+[
+	1700 
+	4600
+	250
+	boss1
+	true
+]
+
+event
+[
+	spawn true
+]
+{
+	music arabian 1
+	sout Find the key. Open the gate.
+}
+
 event
 [
 	all_killed true
@@ -31,7 +41,83 @@ event
 ]
 {
 	set gate2 true
-	sout "Gate 2"
+	sout Kill them all
+	spawn Genie 13 79
+	spawn Genie 15 79
+	spawn Boss 14 84
+	spawn Train 13 66
+	spawn Train 13 68
+	spawn Train 13 70
+	spawn Train 27 30
+	spawn Train 30 30
+	spawn Boss 41 87
+	spawn Keanu 20 37
+	spawn Keanu 22 37
+	spawn Keanu 24 37
+	spawn Keanu 34 32
+	spawn Keanu 37 32
+	spawn Keanu 40 32
+	spawn Keanu 35 51
+	spawn Keanu 35 54
+	spawn Keanu 35 57
+	spawn Genie 48 50
+	spawn Genie 49 50
+	spawn Genie 50 50
+	spawn Genie 51 50
+	spawn Genie 48 77
+	spawn Genie 49 77
+	spawn Genie 50 77
+	spawn Genie 51 77
+	spawn ArabinWarrior 21 76
+	spawn ArabinWarrior 22 76
+	spawn ArabinWarrior 23 76
+	spawn ArabinWarrior 20 46
+	spawn ArabinWarrior 21 46
+	spawn ArabinWarrior 22 46
+	spawn ArabinWarrior 23 46
+	spawn ArabinWarrior 24 46
+	spawn ArabinWarrior 25 46
+}
+
+event
+[
+	gate3 true
+]
+{
+	spawn KnifeJuggler 49 44
+	spawn KnifeJuggler 50 44
+	spawn KnifeJuggler 51 44
+	spawn KnifeJuggler 52 44
+	spawn KnifeJuggler 49 46
+	spawn KnifeJuggler 50 46
+	spawn KnifeJuggler 51 46
+	spawn KnifeJuggler 52 46
+	spawn KnifeJuggler 49 48
+	spawn KnifeJuggler 50 48
+	spawn KnifeJuggler 51 48
+	spawn KnifeJuggler 52 48
+	spawn KnifeJuggler 49 50
+	spawn KnifeJuggler 50 50
+	spawn KnifeJuggler 51 50
+	spawn KnifeJuggler 52 50
+	spawn Keanu 49 66
+	spawn Keanu 49 68
+	spawn Keanu 49 70
+	spawn Keanu 49 72
+	spawn Keanu 49 74
+	spawn Keanu 49 76
+	spawn Keanu 29 47
+	spawn Keanu 29 55
+	spawn Keanu 29 61
+	spawn Keanu 29 68
+	spawn Keanu 29 74
+	spawn Genie 40 37
+	spawn Genie 40 38
+	spawn Genie 40 39
+	spawn Genie 40 40
+	spawn Genie 40 41
+	spawn Genie 40 42
+	
 }
 
 event
@@ -41,5 +127,62 @@ event
 {
 	set gate3 false
 	set gate4 true
-	sout "Boss"
+	spawn Disign 33 126
+	sout Fight boss
+	music vdamki 1
+}
+
+
+event
+[
+	boss1 true
+    all_killed true
+]
+{
+    spawn Uprajka 33 126
+	tp 1700 4600
+    set flag4 true
+}
+
+event
+[
+    all_killed true
+    flag4 true
+]
+{
+    spawn Garbage 33 120
+	tp 1700 4600
+    set flag5 true
+}
+
+event
+[
+    all_killed true
+    flag5 true
+]
+{
+    spawn BigBoss 33 126
+	tp 1700 4600
+    set flag6 true
+}
+
+event
+[
+    all_killed true
+    flag6 true
+]
+{
+    spawn BiggerBoss 33 126
+	tp 1700 4600
+	set flag7 true
+}
+
+event
+[
+	all_killed true
+	flag7 true
+]
+{
+	sout Thanks for playing!
+	load itemsTest
 }

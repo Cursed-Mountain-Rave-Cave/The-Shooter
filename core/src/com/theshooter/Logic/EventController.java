@@ -44,6 +44,7 @@ public class EventController {
         }
 
         for (Event event : events) {
+            addFlag("all_killed", Game.getInstance().getEntityController().getMap().getEnemiesCount() == 0);
             if (checkEvent(event)) {
                 eventsToDelete.add(event);
                 for (Array<Object> command : event.getCommands())
@@ -87,6 +88,10 @@ public class EventController {
             Place place = new Place((Integer) command.get(1), (Integer) command.get(2), (Integer) command.get(3), (String) command.get(4), (Boolean) command.get(5));
             Game.getInstance().getEventController().addPlace(place);
          }
+
+        if (((String)command.get(0)).contains("agr")){
+            Game.getInstance().getEntityController().AllRadius();
+        }
 
          if (((String)command.get(0)).contains("place")){
              Game.getInstance().getEntityController().place((String) command.get(0),(Integer) command.get(1),(Integer) command.get(2));

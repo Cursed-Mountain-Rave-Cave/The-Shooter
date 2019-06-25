@@ -44,6 +44,7 @@ placeMonoWall 39 49 40 83
 placeMonoWall 33 43 34 83
 placeMonoWall 36 0 37 10
 placeMonoWall 46 28 47 30
-placeMonoWall 23 124 45 125
-placeMonoWall 23 93 24 125
-placeMonoWall 44 93 45 125
+
+placeMonoWall 18 129 50 130
+placeMonoWall 18 93 19 130
+placeMonoWall 49 93 50 130

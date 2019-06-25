@@ -25,12 +25,14 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
     private Array<Weapon> weapons;
     private Weapon currentWeapon;
     private Map<WeaponType, Integer> ammo;
+    private boolean changeRadius;
 
     public CreatureEntity(int x, int y, int w, int h, int hp, int velocity, int radius, Depth depth, boolean passable, Rectangle target){
         super(x, y, w, h, hp, depth, passable);
         this.target = target;
         this.velocity = velocity;
         this.damaged = false;
+        this.changeRadius = false;
         this.radius = radius;
         weapons = new Array<>();
         ammo = new TreeMap<>();
@@ -59,6 +61,10 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
 
         }else
             moveAt(0, 0);
+        if(changeRadius) {
+            setRadius(10000000);
+            changeRadius = false;
+        }
     }
 
     public void breakDown(Damage damage) {
@@ -156,5 +162,9 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
     }
     public void setVelocityMultiplier(float velocityMultiplier) {
         this.velocityMultiplier = velocityMultiplier;
+    }
+
+    public void setChangeRadius(){
+        changeRadius = true;
     }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.*;
 
+import com.theshooter.Logic.Entity.Abstract.IMovable;
 import com.theshooter.Logic.Entity.Creatures.*;
 import com.theshooter.Logic.Entity.LiftableEntities.CoverAirplane;
 import com.theshooter.Logic.Entity.LiftableEntities.Heal;
@@ -55,6 +56,7 @@ public class EntityController {
     }
 
     public void load(String name){
+        Game.getInstance().level = name;
         map.clear();
         screenObjectArray.clear();
         Game.getInstance().getEventController().clear();
@@ -93,6 +95,12 @@ public class EntityController {
 
                     command = scanner.next();
                     if (command.equals("}")) break;
+
+                    if (command.equals("agr")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        event.addCommand(params);
+                    }
 
                     if (command.equals("placeFlag")){
                         Array<Object> params = new Array<>();
@@ -701,5 +709,10 @@ public class EntityController {
     private Scanner getScanner(String name, String type){
         String path = "levels/" + name + "/" + type + ".txt";
         return new Scanner(Gdx.files.internal(path).read());
+    }
+    public void AllRadius(){
+       for(IMovable entity : map.getEntities()){
+            entity.setChangeRadius();
+        }
     }
 }
