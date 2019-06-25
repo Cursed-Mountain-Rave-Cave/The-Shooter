@@ -1,1 +1,2 @@
 placeMonoWall 63 49 64 70
+placeMonoWall 63 0 64 21
