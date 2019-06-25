@@ -80,6 +80,7 @@ event
     all_killed true
 ]
 {
+    music vdamki 0,3
     spawn Uprajka 10 10
     set flag4 true
 }

@@ -52,7 +52,7 @@ public class BreakableEntity extends Entity implements IBreakable {
                         break;
                 }
             }
-            if (MathUtils.random(1, 100) <= 8)
+            if (MathUtils.random(1, 100) <= 3)
                 Game.getInstance().getEntityController().placeWeaponUpgrade(getX(), getY());
             broken = true;
         }
