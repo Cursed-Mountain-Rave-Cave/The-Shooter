@@ -1,0 +1,138 @@
+placeConditionGate 16 10 gate1 true
+placeConditionGate 1 21 gate1 true
+placeConditionGate 66 4 gate1 true
+placeKey 5 65 gate1 true
+
+placeCoverAirplane  5 5
+placeLiftableGodBow 7 8
+
+placeWoman 16 15
+
+placeBigHome 61 19
+placeHome 61 15
+placeHome 66 15
+placeTend 60 11
+placeTend 60 8
+
+placeVase 54 9
+placeVase 53 9
+placeVase 52 9
+
+placeCoverAirplane 31 39
+
+placeVase 60 31
+placeVase 60 32
+placeVase 60 33
+placeVase 60 34
+placeVase 60 35
+placeVase 60 36
+placeVase 60 37
+placeVase 60 38
+placeVase 60 39
+placeVase 61 31
+placeVase 61 32
+placeVase 61 33
+placeVase 61 34
+placeVase 61 35
+placeVase 61 36
+placeVase 61 37
+placeVase 61 38
+placeVase 61 39
+placeVase 62 31
+placeVase 62 32
+placeVase 62 33
+placeVase 62 34
+placeVase 62 35
+placeVase 62 36
+placeVase 62 37
+placeVase 62 38
+placeVase 62 39
+placeVase 63 31
+placeVase 63 32
+placeVase 63 33
+placeVase 63 34
+placeVase 63 35
+placeVase 63 36
+placeVase 63 37
+placeVase 63 38
+placeVase 63 39
+placeVase 64 31
+placeVase 64 32
+placeVase 64 33
+placeVase 64 34
+placeVase 64 35
+placeVase 64 36
+placeVase 64 37
+placeVase 64 38
+placeVase 64 39
+placeVase 65 31
+placeVase 65 32
+placeVase 65 33
+placeVase 65 34
+placeVase 65 35
+placeVase 65 36
+placeVase 65 37
+placeVase 65 38
+placeVase 65 39
+placeVase 66 31
+placeVase 66 32
+placeVase 66 33
+placeVase 66 34
+placeVase 66 35
+placeVase 66 36
+placeVase 66 37
+placeVase 66 38
+placeVase 66 39
+placeVase 67 31
+placeVase 67 32
+placeVase 67 33
+placeVase 67 34
+placeVase 67 35
+placeVase 67 36
+placeVase 67 37
+placeVase 67 38
+placeVase 67 39
+placeVase 68 31
+placeVase 68 32
+placeVase 68 33
+placeVase 68 34
+placeVase 68 35
+placeVase 68 36
+placeVase 68 37
+placeVase 68 38
+placeVase 68 39
+placeVase 69 31
+placeVase 69 32
+placeVase 69 33
+placeVase 69 34
+placeVase 69 35
+placeVase 69 36
+placeVase 69 37
+placeVase 69 38
+placeVase 69 39
+
+placeBigHome 30 60
+placeBigHome 50 60
+
+placeTend 0 52
+placeTend 5 52
+placeTend 10 52
+
+placeHome 5 66
+placeHome 10 66
+placeHome 15 66
+
+placePalm 65 53
+placePalm 64 52
+placePalm 66 52
+
+placeHome 14 38
+placeHome 14 32
+placeHome 14 27
+placeHome 14 22
+
+placeVase 5 8
+placeVase 4 9
+placeVase 6 9
+placeVase 6 7
+placeVase 4 7
