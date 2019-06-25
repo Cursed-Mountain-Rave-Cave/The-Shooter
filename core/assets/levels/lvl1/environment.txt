@@ -1,0 +1,8 @@
+placeConditionGate 22 14 gate1 true
+placeConditionGate 12 17 gate1 true
+placeConditionGate 12 60 gate2 true
+placeConditionGate 28 82 gate3 true
+placeConditionGate 32 93 gate4 true
+
+placeKey 50 26 gate1 true
+placeKey 37 80 gate3 true

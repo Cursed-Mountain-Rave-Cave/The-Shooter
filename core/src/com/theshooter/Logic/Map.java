@@ -42,9 +42,6 @@ public class Map {
     }
 
     public void update(){
-        System.out.println(entities.size);
-        System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
-
         for(IEntity entity: entities) {
             entity.update();
 
@@ -87,7 +84,7 @@ public class Map {
             for(IEntity entity: notPassableEntities){
                 if(entity == projectile.getDamage().getOwner())
                     continue;
-                if(entity.getRectangle().overlaps(projectile.getRectangle())){
+                if(entity.getRectangle().overlaps(projectile.getRectangle()) && !entity.isPassable()){
                     projectilesDelete.add(projectile);
                     projectile.delete();
                 }

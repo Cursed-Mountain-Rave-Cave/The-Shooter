@@ -53,7 +53,8 @@ public class GameScreen implements Screen {
         cameraController.update();
         guiCameraController.update();
 
-        Gdx.gl.glClearColor(0xDC / 265f, 0xC2 / 265f, 0x76 / 265f, 1);
+        Gdx.gl.glClearColor(0xDD / 265f, 0xC2 / 265f, 0x76 / 265f, 1);
+        //Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();

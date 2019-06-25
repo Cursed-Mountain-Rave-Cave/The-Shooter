@@ -28,7 +28,7 @@ public class TextureController {
 
         addAnimationType("player");
 
-        addTextureArray("floor", "floor", "floor/", 17, 1);
+        addTextureArray("floor", "floor", "floor/", 18, 1);
 
         //addTextureArray("walls", "wall", "walls/", 3, 5);
         addTextureArray("wall", "wall", "wall/", 1, 1);

@@ -10,6 +10,6 @@ public class Hookah extends LiftableEntity {
     @Override
     public void use() {
         Game.getInstance().getConfig().remainingHookahTime += 10;
-        Game.getInstance().getConfig().enemiesVelocityMultiplier = 0.33f;
+        Game.getInstance().getConfig().enemiesVelocityMultiplier = 0.5f;
     }
 }
