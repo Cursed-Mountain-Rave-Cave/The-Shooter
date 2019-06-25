@@ -51,6 +51,8 @@ event
 ]
 {
     spawn BiggerBoss 10 10
+    spawn Genie 8 8
+    spawn Genie 6 6
 }
 
 event
@@ -78,6 +80,7 @@ event
     all_killed true
 ]
 {
+    music vdamki 0,3
     spawn Uprajka 10 10
     set flag4 true
 }

@@ -14,7 +14,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
         super(
                 WeaponType.BOW,
                 level,
-                2,
+                4,
                 20,
                 20,
                 Damage.Type.PHYSICAL,
@@ -38,7 +38,7 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
             vect.rotate(- 3 * (shots / 2));
             for (int i = 0; i < shots; i++) {
                 if (getCurClipSize() > 0) {
-                    int angle = MathUtils.random(-2, 2);
+                    float angle = MathUtils.random(-1.5f, 1.5f);
                     vect.rotate(angle);
                     Damage damage = new Damage(getOwner(), getType(), getDamage());
                     Projectile projectile =
@@ -65,9 +65,11 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
     @Override
     public void levelUp() {
         super.levelUp();
-        shots += 2;
-        setDamage(getDamage() + 1);
-        setClipSize(getClipSize() + 2);
+        if (getLevel() < 3) {
+            shots += 2;
+            setDamage(getDamage() + 1);
+            setClipSize(getClipSize() + 2);
+        }
     }
 
     @Override

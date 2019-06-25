@@ -50,11 +50,10 @@ public class BreakableEntity extends Entity implements IBreakable {
                     case 3:
                         Game.getInstance().getEntityController().placeKnifeAmmo(getX(), getY());
                         break;
-                    case 4:
-                        Game.getInstance().getEntityController().placeWeaponUpgrade(getX(), getY());
-                        break;
                 }
             }
+            if (MathUtils.random(1, 100) <= 3)
+                Game.getInstance().getEntityController().placeWeaponUpgrade(getX(), getY());
             broken = true;
         }
     }
@@ -71,5 +70,9 @@ public class BreakableEntity extends Entity implements IBreakable {
 
     public void setBroken(boolean broken) {
         this.broken = broken;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 }

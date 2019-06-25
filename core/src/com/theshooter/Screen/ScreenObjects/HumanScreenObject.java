@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Game;
 import com.theshooter.Logic.Entity.Creatures.HumanEntity;
+import com.theshooter.Logic.Entity.Creatures.Player;
 import com.theshooter.Logic.Entity.Weapon.WeaponType;
 import com.theshooter.Screen.Animation;
 
@@ -104,29 +105,29 @@ public class HumanScreenObject extends ScreenObject {
         double angle = Math.atan2(dy, dx) * 180 / 3.14;
 
         int last = currentBody;
-
-        if (angle > 112.5 && angle < 157.5)
-            this.currentBody = 1;
-        else if (angle > 67.5 && angle < 112.5)
-            this.currentBody = 0;
-        else if (angle > 22.5 && angle < 67.5)
-            this.currentBody = 7;
-        else if (angle > -22.5 && angle < 22.5)
-            this.currentBody = 6;
-        else if (angle < -22.5 && angle > -67.5)
-            this.currentBody = 5;
-        else if (angle < -67.5 && angle > -112.5)
-            this.currentBody = 4;
-        else if (angle < -112.5 && angle > -157.5)
-            this.currentBody = 3;
-        else
-            this.currentBody = 2;
-
+        if (this.human.getClass() == Player.class) {
+            if (angle > 112.5 && angle < 157.5)
+                this.currentBody = 1;
+            else if (angle > 67.5 && angle < 112.5)
+                this.currentBody = 0;
+            else if (angle > 22.5 && angle < 67.5)
+                this.currentBody = 7;
+            else if (angle > -22.5 && angle < 22.5)
+                this.currentBody = 6;
+            else if (angle < -22.5 && angle > -67.5)
+                this.currentBody = 5;
+            else if (angle < -67.5 && angle > -112.5)
+                this.currentBody = 4;
+            else if (angle < -112.5 && angle > -157.5)
+                this.currentBody = 3;
+            else
+                this.currentBody = 2;
+        }
+        else {
+            currentBody = currentLegs;
         if (!lastWeapon.equals(human.getCurrentWeapon().getWeaponType())) {
             body.get(lastWeapon).get(last).reset();
-        }
-
-        else {
+        } else {
             long end = human.getCurrentWeapon().getShotTime();
             if (end != 0) {
                 float current = Game.getInstance().getGameTime() - human.getCurrentWeapon().getLastShot();
@@ -143,6 +144,7 @@ public class HumanScreenObject extends ScreenObject {
             }
         }
         lastWeapon = human.getCurrentWeapon().getWeaponType();
+        }
     }
 
     public void setLegsAnimationFrameTime(int frameTime) {
