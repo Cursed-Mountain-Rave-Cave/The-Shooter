@@ -30,7 +30,7 @@ event
 	spawn true
 ]
 {
-	music arabian 1
+	music arabian 0,2
 	sout Find the key. Open the gate.
 }
 
@@ -129,7 +129,7 @@ event
 	set gate4 true
 	spawn Disign 33 126
 	sout Fight boss
-	music vdamki 1
+	music vdamki 0,3
 }
 
 
@@ -185,5 +185,5 @@ event
 {
 	sout Thanks for playing!
 	load level3
-	music arabian 1 
+	music arabian 0,2 
 }
