@@ -29,11 +29,14 @@ public class ThrowingKnife extends OneShotWeapon {
 
     @Override
     public void attack(Vector2 vect) {
+        int attacks = 3 + (getLevel() > 4 ? 2 : 0);
+        float angle = (attacks == 3 ? 15 : 7.5f);
+        vect.rotate(-15);
         if (canAttack()) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < attacks; i++) {
+                System.out.println("+");
                 if (getCurClipSize() > 0) {
                     Damage damage = new Damage(getOwner(), getType(), getDamage());
-                    vect.rotate((float)Math.pow(-1, i) * i * 15);
                     Projectile projectile =
                             new Projectile(
                                     damage,
@@ -49,6 +52,7 @@ public class ThrowingKnife extends OneShotWeapon {
                     Game.getInstance().getEntityController().addBullet(projectile);
                     setLastShot(Game.getInstance().getGameTime());
                     setCurClipSize(getCurClipSize() - 1);
+                    vect.rotate(angle);
                 }
             }
         }
@@ -57,6 +61,8 @@ public class ThrowingKnife extends OneShotWeapon {
     @Override
     public void levelUp() {
         super.levelUp();
-        setDamage(getDamage() + 3);
+        setDamage(getDamage() + 1);
+        if (getLevel() > 4)
+            setClipSize(5);
     }
 }
