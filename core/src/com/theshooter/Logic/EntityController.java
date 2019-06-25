@@ -266,7 +266,6 @@ public class EntityController {
                 y1 = 50 * scanner.nextInt();
                 placePalms(x, y, x1, y1);
             }
-
             if(command.equals("placeVases")) {
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
@@ -674,8 +673,8 @@ public class EntityController {
     }
 
     public void placePalms(int x, int y, int x1, int y1){
-        for(int i = x; i < x1; i+= 50){
-            for(int j = y; j < y1; j+= 50){
+        for(int i = x; i < x1; i+= 100){
+            for(int j = y; j < y1; j+= 100){
                 placePassablePalm(i,j);
             }
         }

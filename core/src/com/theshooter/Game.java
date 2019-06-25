@@ -50,28 +50,16 @@ public class Game extends com.badlogic.gdx.Game {
 		level = "itemsTest";
 		config = new Config();
 
-		mapScreen = new MapScreen();
-
 		inputController = new InputController();
 		textureController = new TextureController();
 		audioController = new AudioController();
 		entityController = new EntityController();
 		eventController = new EventController();
 
-		//audioController.playMusic("casino", 1f);
-
 		mainMenu = new MainMenu();
+		mapScreen = new MapScreen();
 		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
-
-//		entityController.load("test"); // ----------------------------------------------------------------------------------------------------
-//		GameLoader gl = new GameLoader();
-//		try { gl.load("test2"); }
-//		catch (IOException e) {
-//			System.out.println(e.getMessage());
-//			Gdx.app.exit();
-//		}
-//		entityController.load("test2");
 
 		setScreen(mainMenu);
 

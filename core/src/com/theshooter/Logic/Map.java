@@ -1,5 +1,6 @@
 package com.theshooter.Logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Logic.Entity.*;
@@ -83,7 +84,7 @@ public class Map {
             for(IEntity entity: notPassableEntities){
                 if(entity == projectile.getDamage().getOwner())
                     continue;
-                if(entity.getRectangle().overlaps(projectile.getRectangle())){
+                if(entity.getRectangle().overlaps(projectile.getRectangle()) && !entity.isPassable()){
                     projectilesDelete.add(projectile);
                     projectile.delete();
                 }

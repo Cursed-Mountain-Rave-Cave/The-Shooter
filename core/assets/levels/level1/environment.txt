@@ -1956,6 +1956,3 @@ placeVase 240 267
 placeVase 240 268
 placeVase 240 269
 placeVase 240 270
-
-
-																																																								

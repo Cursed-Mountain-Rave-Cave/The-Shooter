@@ -1,0 +1,45 @@
+place
+[
+	150
+	150
+	10
+	spawn
+	true
+]
+
+event
+[
+	spawn true
+]
+{
+	sout Find the key. Open the gate.
+}
+
+place
+[
+	1550
+	4400
+	250
+	boss
+	true
+]
+
+event
+[
+	all_killed true
+	gate1 true
+]
+{
+	set gate2 true
+	sout "Gate 2"
+}
+
+event
+[
+	boss true
+]
+{
+	set gate3 false
+	set gate4 true
+	sout "Boss"
+}
