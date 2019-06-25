@@ -63,7 +63,6 @@ public class CreatureEntity extends BreakableEntity implements IMovable {
             moveAt(0, 0);
         if(changeRadius) {
             setRadius(10000000);
-            changeRadius = false;
         }
     }
 
