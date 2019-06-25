@@ -36,12 +36,19 @@ event
 
 event
 [
+	gate1 true
+]
+{
+	sout Kill them all
+}
+
+event
+[
 	all_killed true
 	gate1 true
 ]
 {
 	set gate2 true
-	sout Kill them all
 	spawn Genie 13 79
 	spawn Genie 15 79
 	spawn Boss 14 84
