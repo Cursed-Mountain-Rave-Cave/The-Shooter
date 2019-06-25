@@ -81,6 +81,12 @@ public class EventController {
          if (((String)command.get(0)).contains("spawn")){
              Game.getInstance().getEntityController().spawn((String) command.get(0),(Integer) command.get(1),(Integer) command.get(2));
          }
+
+         if (((String)command.get(0)).contains("placeFlag")){
+            Place place = new Place((Integer) command.get(1), (Integer) command.get(2), (Integer) command.get(3), (String) command.get(4), (Boolean) command.get(5));
+            Game.getInstance().getEventController().addPlace(place);
+         }
+
          if (((String)command.get(0)).contains("place")){
              Game.getInstance().getEntityController().place((String) command.get(0),(Integer) command.get(1),(Integer) command.get(2));
          }
