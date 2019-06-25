@@ -93,6 +93,20 @@ public class EntityController {
 
                     command = scanner.next();
                     if (command.equals("}")) break;
+
+                    if (command.equals("placeFlag")){
+                        Array<Object> params = new Array<>();
+                        params.add(command);
+                        scanner.next();
+                        params.add(scanner.nextInt());
+                        params.add(scanner.nextInt());
+                        params.add(scanner.nextInt());
+                        params.add(scanner.next());
+                        params.add(scanner.nextBoolean());
+                        scanner.next();
+                        event.addCommand(params);
+                    }
+
                     if (command.equals("sout")){
                         String text = scanner.nextLine();
                         Array<Object> params = new Array<>();

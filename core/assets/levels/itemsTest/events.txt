@@ -49,5 +49,4 @@ event
     all_killed true
 ]
 {
-
 }
