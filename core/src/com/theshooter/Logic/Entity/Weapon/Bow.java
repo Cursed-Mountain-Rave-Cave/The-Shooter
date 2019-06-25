@@ -27,11 +27,13 @@ public class Bow extends OneShotWeapon {
 
     @Override
     public void levelUp() {
-        super.levelUp();
-        setDamage(getDamage() + 2);
-        setShotTime(Math.max(getShotTime() - 50, 200));
-        if (getLevel() > 4)
-            setClipSize(3);
+        if (getLevel() < 8) {
+            super.levelUp();
+            setDamage(getDamage() + 2);
+            setShotTime(Math.max(getShotTime() - 50, 200));
+            if (getLevel() > 4)
+                setClipSize(3);
+        }
     }
 
     @Override

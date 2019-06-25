@@ -550,7 +550,7 @@ public class EntityController {
     }
 
     public void spawnArabinWarrior(int x, int y) {
-        HumanEntity entity = new HumanEntity(x, y, 30, 30, 20, 300, 15,Depth.ENEMY, false, player.getRectangle());
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 20, 300, 10,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new Dagger(0, entity));
         entity.selectWeapon(1);
         map.addEntity(entity);
@@ -559,14 +559,14 @@ public class EntityController {
                         Game.getInstance().getTextureController().getAnimations("player", "legs2")));
     }
     public void spawnSuicide(int x, int y){
-        SuicideEntity entity = new SuicideEntity(x, y, 30, 30, 5, 300, 15,Depth.ENEMY, false, player.getRectangle());
+        SuicideEntity entity = new SuicideEntity(x, y, 30, 30, 5, 300, 10,Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
         screenObjectArray.add(new HumanScreenObject(entity,
                 Game.getInstance().getTextureController().getBody("player", "body4"),
                 Game.getInstance().getTextureController().getAnimations("player", "legs4")));
     }
     public void spawnKnifeJuggler(int x, int y) {
-        HumanEntity entity = new HumanEntity(x, y, 30, 30, 30, 300, 15,Depth.ENEMY, false, player.getRectangle());
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 30, 300, 12,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new ThrowingKnife(0, entity));
         entity.selectWeapon(1);
         entity.addAmmo(WeaponType.THROWING_KNIFE, 50000);
@@ -576,7 +576,7 @@ public class EntityController {
                 Game.getInstance().getTextureController().getAnimations("player", "legs3")));
     }
     public void spawnGenie(int x, int y) {
-        HumanEntity entity = new HumanEntity(x, y, 30, 30, 50, 350, 20,Depth.ENEMY, false, player.getRectangle());
+        HumanEntity entity = new HumanEntity(x, y, 30, 30, 50, 350, 15,Depth.ENEMY, false, player.getRectangle());
         entity.addWeapon(new Fireball(0, entity));
         entity.selectWeapon(1);
         map.addEntity(entity);
