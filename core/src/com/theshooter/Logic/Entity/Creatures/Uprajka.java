@@ -1,5 +1,6 @@
 package com.theshooter.Logic.Entity.Creatures;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
@@ -9,7 +10,7 @@ import com.theshooter.Screen.Depth;
 
 public class Uprajka extends CreatureEntity{
     public Uprajka(int x, int y, Rectangle target) {
-        super(x, y, 100, 100, 100, 400, 500, Depth.ENEMY, false, target);
+        super(x, y, 100, 100, 100, 250, 500, Depth.ENEMY, false, target);
     }
 
     @Override
@@ -19,6 +20,7 @@ public class Uprajka extends CreatureEntity{
         if (getHP() <= 0)
             setBroken(true);
         setDamaged(true);
-        Game.getInstance().getAudioController().playSound("boss1");
+        if (MathUtils.random(1, 100) > 50)
+            Game.getInstance().getAudioController().playSound("boss1");
     }
 }

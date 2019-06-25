@@ -1,1 +1,1 @@
-spawnGarbage 10 10
+spawnDisign 10 10

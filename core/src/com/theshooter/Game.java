@@ -47,7 +47,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void create () {
-		level = "level3";
+		level = "itemsTest";
 		config = new Config();
 
 		mapScreen = new MapScreen();
