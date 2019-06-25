@@ -18,8 +18,6 @@ public class EventController {
     Array<Event> eventsToDelete;
     Array<Place> placesToDelete;
 
-
-
     public EventController(){
         flags = new TreeMap<>();
         events = new Array<>();
@@ -35,20 +33,20 @@ public class EventController {
         places.clear();
     }
 
-    public void update(){
+    public void update() {
         addFlag("all_killed", Game.getInstance().getEntityController().getMap().getEnemiesCount() == 0);
         Player player = Game.getInstance().getEntityController().getPlayer();
-        for (Place place: places){
-            if (Math.hypot(player.getX() - place.getX(), player.getY() - place.getY()) < place.getR()){
+        for (Place place : places) {
+            if (Math.hypot(player.getX() - place.getX(), player.getY() - place.getY()) < place.getR()) {
                 flags.put(place.getFlag(), place.getValue());
                 placesToDelete.add(place);
             }
         }
 
-        for (Event event: events){
-            if(checkEvent(event)){
+        for (Event event : events) {
+            if (checkEvent(event)) {
                 eventsToDelete.add(event);
-                for (Array<Object> command: event.getCommands())
+                for (Array<Object> command : event.getCommands())
                     executeCommand(command);
             }
         }
@@ -57,6 +55,7 @@ public class EventController {
         events.removeAll(eventsToDelete, true);
         placesToDelete.clear();
         eventsToDelete.clear();
+        addFlag("all_killed", false);
     }
 
     private boolean checkEvent(Event event){
@@ -71,6 +70,7 @@ public class EventController {
     private void executeCommand(Array<Object> command){
          if (command.get(0).equals("sout")){
              System.out.println(command.get(1));
+             Game.getInstance().gameScreen.targetMessage = (String) command.get(1);
          }
          if (command.get(0).equals("tp")){
              Game.getInstance().getEntityController().getPlayer().setX((int) command.get(1));
@@ -95,6 +95,7 @@ public class EventController {
              Game.getInstance().getAudioController().playMusic((String) command.get(1), (Float) command.get(2));
          }
          if (((String)command.get(0)).contains("load")){
+             Game.getInstance().level = (String) command.get(1);
              Game.getInstance().getEntityController().load((String) command.get(1));
          }
     }

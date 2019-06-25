@@ -11,6 +11,6 @@ public class CoverAirplane extends LiftableEntity {
     @Override
     public void use() {
         Game.getInstance().getConfig().remainingVelocityUpTime += 10;
-        Game.getInstance().getConfig().playerVelocityMultiplier = 3;
+        Game.getInstance().getConfig().playerVelocityMultiplier = 2;
     }
 }

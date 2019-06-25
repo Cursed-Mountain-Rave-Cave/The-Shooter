@@ -1,33 +1,54 @@
-place
-[
-    950
-    450
-    100
-    flag1
-    true
-]
-
 event
 [
-flag1 true
 ]
 {
-sout Oh shit, they want to steal my precious!
-place Tend 35 34
-spawn ArabinWarrior 35 60
+sout Wave1!
+place LiftableBow 16 53
 }
 
 event
 [
 all_killed true
-flag1 true
 ]
 {
 sout go home
 placeFlag
 [
-    2950
-    3050
+    300
+    2750
+    1000
+    flag1
+    true
+]
+}
+
+event
+[
+flag1 true
+]
+{
+sout Wave2!
+spawn ArabinWarrior 60 35
+spawn ArabinWarrior 60 36
+spawn ArabinWarrior 60 37
+spawn ArabinWarrior 60 38
+spawn ArabinWarrior 60 39
+spawn ArabinWarrior 60 40
+spawn ArabinWarrior 60 41
+spawn ArabinWarrior 60 42
+spawn ArabinWarrior 60 43
+spawn ArabinWarrior 60 44
+spawn ArabinWarrior 60 45
+spawn ArabinWarrior 60 46
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+placeFlag
+[
+    300
+    2750
     1000
     flag2
     true
@@ -37,9 +58,572 @@ placeFlag
 event
 [
 flag2 true
+all_killed true
 ]
 {
-sout Oh shit, he we go again!
-spawn ArabinWarrior 35 60
+sout go Home
+placeFlag
+[
+    300
+    2750
+    1000
+    flag3
+    true
+]
 }
 
+event
+[
+flag3 true
+]
+{
+sout Wave3!
+spawn ArabinWarrior 60 35
+spawn ArabinWarrior 60 36
+spawn ArabinWarrior 60 37
+spawn ArabinWarrior 60 38
+spawn ArabinWarrior 60 39
+spawn ArabinWarrior 60 40
+spawn ArabinWarrior 60 41
+spawn ArabinWarrior 60 42
+spawn ArabinWarrior 60 43
+spawn ArabinWarrior 60 44
+spawn ArabinWarrior 60 45
+spawn ArabinWarrior 60 46
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+placeFlag
+[
+    300
+    2750
+    1000
+    flag4
+    true
+]
+}
+
+event
+[
+flag4 true
+all_killed true
+]
+{
+sout go Home
+placeFlag
+[
+    300
+    2750
+    1000
+    flag5
+    true
+]
+}
+
+event
+[
+flag5 true
+]
+{
+sout Wave4!
+spawn ArabinWarrior 60 35
+spawn ArabinWarrior 60 36
+spawn ArabinWarrior 60 37
+spawn ArabinWarrior 60 38
+spawn ArabinWarrior 60 39
+spawn ArabinWarrior 60 40
+spawn ArabinWarrior 60 41
+spawn ArabinWarrior 60 42
+spawn ArabinWarrior 60 43
+spawn ArabinWarrior 60 44
+spawn ArabinWarrior 60 45
+spawn ArabinWarrior 60 46
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+spawn Suicide 62 47
+spawn Suicide 62 48
+spawn Suicide 62 49
+spawn Suicide 62 50
+spawn Suicide 62 51
+placeFlag
+[
+    300
+    2750
+    1000
+    flag6
+    true
+]
+}
+
+event
+[
+flag6 true
+all_killed true
+]
+{
+sout go Home
+placeFlag
+[
+    300
+    2750
+    1000
+    flag7
+    true
+]
+}
+
+event
+[
+flag7 true
+]
+{
+sout Wave5!
+spawn ArabinWarrior 60 35
+spawn ArabinWarrior 60 36
+spawn ArabinWarrior 60 37
+spawn ArabinWarrior 60 38
+spawn ArabinWarrior 60 39
+spawn ArabinWarrior 60 40
+spawn ArabinWarrior 60 41
+spawn ArabinWarrior 60 42
+spawn ArabinWarrior 60 43
+spawn ArabinWarrior 60 44
+spawn ArabinWarrior 60 45
+spawn ArabinWarrior 60 46
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+spawn Suicide 62 47
+spawn Suicide 62 48
+spawn Suicide 62 49
+spawn Suicide 62 50
+spawn Suicide 62 51
+spawn Suicide 62 52
+spawn Suicide 62 53
+spawn Suicide 62 54
+spawn Suicide 62 55
+spawn Suicide 62 56
+placeFlag
+[
+    300
+    2750
+    1000
+    flag8
+    true
+]
+}
+
+event
+[
+flag8 true
+all_killed true
+]
+{
+sout go Home
+placeFlag
+[
+    300
+    2750
+    1000
+    flag9
+    true
+]
+}
+
+event
+[
+flag9 true
+]
+{
+sout Wave6!
+spawn ArabinWarrior 60 35
+spawn ArabinWarrior 60 36
+spawn ArabinWarrior 60 37
+spawn ArabinWarrior 60 38
+spawn ArabinWarrior 60 39
+spawn ArabinWarrior 60 40
+spawn ArabinWarrior 60 41
+spawn ArabinWarrior 60 42
+spawn ArabinWarrior 60 43
+spawn ArabinWarrior 60 44
+spawn ArabinWarrior 60 45
+spawn ArabinWarrior 60 46
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+spawn Suicide 62 47
+spawn Suicide 62 48
+spawn Suicide 62 49
+spawn Suicide 62 50
+spawn Suicide 62 51
+spawn Suicide 62 52
+spawn Suicide 62 53
+spawn Suicide 62 54
+spawn Suicide 62 55
+spawn Suicide 62 56
+spawn Genie 59 35
+spawn Genie 59 36
+spawn Genie 59 37
+spawn Genie 59 38
+place LiftableGodBow 16 53
+place BowAmmo 16 55
+placeFlag
+[
+    300
+    2750
+    1000
+    flag10
+    true
+]
+}
+
+event
+[
+flag10 true
+all_killed true
+]
+{
+sout go Home
+placeFlag
+[
+    300
+    2750
+    1000
+    flag11
+    true
+]
+}
+
+event
+[
+flag11 true
+]
+{
+sout Wave7!
+spawn ArabinWarrior 60 35
+spawn ArabinWarrior 60 36
+spawn ArabinWarrior 60 37
+spawn ArabinWarrior 60 38
+spawn ArabinWarrior 60 39
+spawn ArabinWarrior 60 40
+spawn ArabinWarrior 60 41
+spawn ArabinWarrior 60 42
+spawn ArabinWarrior 60 43
+spawn ArabinWarrior 60 44
+spawn ArabinWarrior 60 45
+spawn ArabinWarrior 60 46
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+spawn Suicide 62 47
+spawn Suicide 62 48
+spawn Suicide 62 49
+spawn Suicide 62 50
+spawn Suicide 62 51
+spawn Suicide 62 52
+spawn Suicide 62 53
+spawn Suicide 62 54
+spawn Suicide 62 55
+spawn Suicide 62 56
+spawn Genie 59 35
+spawn Genie 59 36
+spawn Genie 59 37
+spawn Genie 59 38
+spawn Genie 59 39
+spawn Genie 59 40
+spawn Genie 59 41
+spawn Genie 59 42
+placeFlag
+[
+    300
+    2750
+    1000
+    flag12
+    true
+]
+}
+
+event
+[
+flag12 true
+all_killed true
+]
+{
+sout go Home
+placeFlag
+[
+    300
+    2750
+    1000
+    flag13
+    true
+]
+}
+
+event
+[
+flag13 true
+]
+{
+sout Wave8!
+spawn ArabinWarrior 60 35
+spawn ArabinWarrior 60 36
+spawn ArabinWarrior 60 37
+spawn ArabinWarrior 60 38
+spawn ArabinWarrior 60 39
+spawn ArabinWarrior 60 40
+spawn ArabinWarrior 60 41
+spawn ArabinWarrior 60 42
+spawn ArabinWarrior 60 43
+spawn ArabinWarrior 60 44
+spawn ArabinWarrior 60 45
+spawn ArabinWarrior 60 46
+spawn ArabinWarrior 60 47
+spawn ArabinWarrior 60 48
+spawn ArabinWarrior 60 49
+spawn ArabinWarrior 60 50
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+spawn Suicide 62 47
+spawn Suicide 62 48
+spawn Suicide 62 49
+spawn Suicide 62 50
+spawn Suicide 62 51
+spawn Suicide 62 52
+spawn Suicide 62 53
+spawn Suicide 62 54
+spawn Suicide 62 55
+spawn Suicide 62 56
+spawn Suicide 62 46
+spawn Suicide 62 45
+spawn Suicide 62 44
+spawn Suicide 62 43
+spawn Genie 59 35
+spawn Genie 59 36
+spawn Genie 59 37
+spawn Genie 59 38
+spawn Genie 59 39
+spawn Genie 59 40
+spawn Genie 59 41
+spawn Genie 59 42
+spawn Genie 59 43
+spawn Genie 59 44
+placeFlag
+[
+    300
+    2750
+    1000
+    flag14
+    true
+]
+}
+
+event
+[
+flag14 true
+all_killed true
+]
+{
+sout go Home
+placeFlag
+[
+    300
+    2750
+    1000
+    flag15
+    true
+]
+}
+
+event
+[
+flag15 true
+]
+{
+sout What the F##K???!
+
+
+spawn BiggerBoss 60 38
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+spawn Suicide 62 47
+spawn Suicide 62 48
+spawn Suicide 62 49
+spawn Suicide 62 50
+spawn Suicide 62 51
+spawn Suicide 62 52
+spawn Suicide 62 53
+spawn Suicide 62 54
+spawn Suicide 62 55
+spawn Suicide 62 56
+spawn Suicide 62 46
+spawn Suicide 62 45
+spawn Suicide 62 44
+spawn Suicide 62 43
+spawn Genie 59 35
+spawn Genie 59 36
+spawn Genie 59 37
+spawn Genie 59 38
+spawn Genie 59 39
+spawn Genie 59 40
+spawn Genie 59 41
+spawn Genie 59 42
+spawn Genie 59 43
+spawn Genie 59 44
+placeFlag
+[
+    300
+    2750
+    1000
+    flag16
+    true
+]
+}
+
+
+event
+[
+flag16 true
+all_killed true
+]
+{
+sout go to Hell-#@!5%ome!
+placeFlag
+[
+    300
+    2750
+    1000
+    flag17
+    true
+]
+}
+
+event
+[
+flag17 true
+]
+{
+sout iQQwXZaC?n|\t}{t@#o56ddfihke!
+spawn BigBoss 58 38
+spawn BiggerBoss 60 38
+spawn Uprajka 57 20
+spawn KnifeJuggler 61 42
+spawn KnifeJuggler 61 43
+spawn KnifeJuggler 61 44
+spawn KnifeJuggler 61 45
+spawn KnifeJuggler 61 46
+spawn KnifeJuggler 61 47
+spawn KnifeJuggler 61 48
+spawn KnifeJuggler 61 49
+spawn KnifeJuggler 61 50
+spawn KnifeJuggler 61 51
+spawn Suicide 62 47
+spawn Suicide 62 48
+spawn Suicide 62 49
+spawn Suicide 62 50
+spawn Suicide 62 51
+spawn Suicide 62 52
+spawn Suicide 62 53
+spawn Suicide 62 54
+spawn Suicide 62 55
+spawn Suicide 62 56
+spawn Suicide 62 46
+spawn Suicide 62 45
+spawn Suicide 62 44
+spawn Suicide 62 43
+spawn Genie 59 35
+spawn Genie 59 36
+spawn Genie 59 37
+spawn Genie 59 38
+spawn Genie 59 39
+spawn Genie 59 40
+spawn Genie 59 41
+spawn Genie 59 42
+spawn Genie 59 43
+spawn Genie 59 44
+placeFlag
+[
+    300
+    2750
+    1000
+    flag18
+    true
+]
+}
+
+event
+[
+flag18 true
+all_killed true
+]
+{
+sout Uhhhh better run outside
+placeFlag
+[
+    3550
+    1900
+    1000
+    flag19
+    true
+]
+}
+
+event
+[ 
+flag19 true
+]
+{
+sout YOU WIN!!!
+}

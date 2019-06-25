@@ -266,7 +266,6 @@ public class EntityController {
                 y1 = 50 * scanner.nextInt();
                 placePalms(x, y, x1, y1);
             }
-
             if(command.equals("placeVases")) {
                 x = 50 * scanner.nextInt();
                 y = 50 * scanner.nextInt();
@@ -337,6 +336,17 @@ public class EntityController {
             spawnSuicide(x,y);
         if(command.equals("spawnGenie"))
             spawnGenie(x,y);
+
+        if(command.equals("spawnDisign"))
+            spawnDisign(x, y);
+        if(command.equals("spawnUprajka"))
+            spawnUprajka(x, y);
+        if(command.equals("spawnGarbage"))
+            spawnGarbage(x, y);
+        if (command.equals("spawnBigBoss"))
+            spawnBigBoss(x, y);
+        if (command.equals("spawnBiggerBoss"))
+            spawnBiggerBoss(x,y);
     }
 
     public void place(String command, int x, int y){
@@ -592,6 +602,59 @@ public class EntityController {
         screenObjectArray.add(new BreakableScreenObject(entity,
                 Game.getInstance().getTextureController().getTextures("enemy", "enemy4"), 75));
     }
+    public void spawnDisign(int x, int y) {
+        CreatureEntity entity = new Disign(x, y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new Bow(0, entity));
+        entity.selectWeapon(1);
+        entity.getCurrentWeapon().setCurClipSize(0);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy7"), 104));
+    }
+    public void spawnUprajka(int x, int y) {
+        CreatureEntity entity = new Uprajka(x, y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new Bow(0, entity));
+        entity.addAmmo(WeaponType.BOW, 8000);
+        entity.setRadius(500);
+        entity.selectWeapon(1);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy8"), 175));
+    }
+    public void spawnGarbage(int x, int y) {
+        for (int i = 0; i < 4; i++) {
+            CreatureEntity entity = new Garbage(x + 100 * i, y + 100 * i, player.getRectangle());
+            map.addEntity(entity);
+            entity.addWeapon(new Bow(0, entity));
+            entity.selectWeapon(1);
+            entity.getCurrentWeapon().setCurClipSize(0);
+            screenObjectArray.add(new BreakableScreenObject(entity,
+                    Game.getInstance().getTextureController().getTextures("enemy", "enemy" + (9 + i)), 72));
+        }
+    }
+    public void spawnBigBoss(int x, int y) {
+        CreatureEntity entity = new BigBoss(x , y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new Bow(0, entity));
+        entity.selectWeapon(1);
+        entity.getCurrentWeapon().setNeedAmmo(false);
+        entity.getCurrentWeapon().setShotTime(1);
+        entity.addAmmo(WeaponType.BOW, 500000);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy14"), 80));
+
+    }
+    public void spawnBiggerBoss(int x, int y) {
+        CreatureEntity entity = new BiggerBoss(x , y, player.getRectangle());
+        map.addEntity(entity);
+        entity.addWeapon(new UltimateOneShotSuperMegaAnnihilationBow(10, entity));
+        entity.selectWeapon(1);
+        entity.getCurrentWeapon().setNeedAmmo(false);
+        entity.addAmmo(WeaponType.BOW, 500000);
+        screenObjectArray.add(new BreakableScreenObject(entity,
+                Game.getInstance().getTextureController().getTextures("enemy", "enemy13"), 200));
+
+    }
     public void spawnPlane(int x, int y) {
         CreatureEntity entity = new CreatureEntity(x, y, 75,75, 10,100, 5, Depth.ENEMY, false, player.getRectangle());
         map.addEntity(entity);
@@ -610,8 +673,8 @@ public class EntityController {
     }
 
     public void placePalms(int x, int y, int x1, int y1){
-        for(int i = x; i < x1; i+= 50){
-            for(int j = y; j < y1; j+= 50){
+        for(int i = x; i < x1; i+= 100){
+            for(int j = y; j < y1; j+= 100){
                 placePassablePalm(i,j);
             }
         }

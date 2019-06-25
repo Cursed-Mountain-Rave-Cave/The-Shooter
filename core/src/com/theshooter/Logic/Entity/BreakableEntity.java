@@ -68,4 +68,8 @@ public class BreakableEntity extends Entity implements IBreakable {
         if(hp == 0)
             broken = true;
     }
+
+    public void setBroken(boolean broken) {
+        this.broken = broken;
+    }
 }
