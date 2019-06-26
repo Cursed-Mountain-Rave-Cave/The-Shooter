@@ -5,12 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
-import com.theshooter.Screen.MainMenu;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
-
-import java.io.IOException;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -18,10 +15,9 @@ public class Game extends com.badlogic.gdx.Game {
 
 	private Config config;
 
-	public MainScreen mainScreen;
 	public GameScreen gameScreen;
 	public MapScreen mapScreen;
-	public MainMenu mainMenu;
+	public MainScreen mainMenu;
 
 	public String level;
 
@@ -57,9 +53,8 @@ public class Game extends com.badlogic.gdx.Game {
 		entityController = new EntityController();
 		eventController = new EventController();
 
-		mainMenu = new MainMenu();
+		mainMenu = new MainScreen();
 		mapScreen = new MapScreen();
-		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
 
 		setScreen(mainMenu);
@@ -97,6 +92,8 @@ public class Game extends com.badlogic.gdx.Game {
 	public EventController getEventController() {
 		return eventController;
 	}
+
+	public InputController getInputController() {return inputController;}
 
 	public long getGameTime() {
 		return TimeUtils.millis() - pausedTime;

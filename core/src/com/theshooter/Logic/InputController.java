@@ -3,11 +3,8 @@ package com.theshooter.Logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
-import com.theshooter.Screen.MapScreen;
 
 public class InputController implements InputProcessor {
 
@@ -202,6 +199,9 @@ public class InputController implements InputProcessor {
             leftMouseBottomPressed = true;
             lastScreenX = screenX;
             lastScreenY = screenY;
+        }
+        if (Game.getInstance().isPaused() || !Game.getInstance().isStarted()) {
+            Game.getInstance().mainMenu.isTouched();
         }
         return false;
     }
