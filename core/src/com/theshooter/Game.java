@@ -32,6 +32,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private EventController eventController;
 
 	private boolean started;
+	private boolean paused;
 	private long pausedTime;
 	private long pauseBegin;
 
@@ -47,7 +48,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void create () {
-		level = "lvl1";
+		level = "level1";
 		config = new Config();
 
 		inputController = new InputController();
@@ -67,13 +68,14 @@ public class Game extends com.badlogic.gdx.Game {
 
 		gameScreen.screenObjects = entityController.getScreenObjectArray();
 
-		setScreen(gameScreen);
+		//setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
 
 		pausedTime = 0;
-		pauseBegin = 0;
-		started = true;
+		pauseBegin = TimeUtils.millis();
+		started = false;
+		paused = false;
 	}
 
 	public Config getConfig() {
@@ -103,7 +105,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void render () {
 		super.render();
-		if (started) {
+		if (started && !paused) {
 			mapScreen.view();
 			inputController.update();
 			entityController.update();
@@ -121,19 +123,29 @@ public class Game extends com.badlogic.gdx.Game {
 				config.playerVelocityMultiplier = 1;
 
 			}
-			pauseBegin = TimeUtils.millis();
-		} else {
-			pausedTime += TimeUtils.millis() - pauseBegin;
-			pauseBegin = TimeUtils.millis();
+			if (!paused)
+				pauseBegin = TimeUtils.millis();
+			else {
+				pausedTime += TimeUtils.millis() - pauseBegin;
+				pauseBegin = TimeUtils.millis();
+			}
 		}
 	}
 
-	public void setStarted(boolean paused) {
-		this.started = paused;
+	public void setStarted(boolean started) {
+		this.started = started;
 	}
 
 	public boolean isStarted() {
 		return started;
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
+	public boolean isPaused() {
+		return paused;
 	}
 
 	@Override

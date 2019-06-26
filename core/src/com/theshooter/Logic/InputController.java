@@ -70,12 +70,21 @@ public class InputController implements InputProcessor {
 
         switch (keycode){
             case Input.Keys.ESCAPE:{
-                Gdx.app.exit();
+                if (!Game.getInstance().isPaused() && Game.getInstance().isStarted()) {
+                    Game.getInstance().setPaused(true);
+                    Game.getInstance().mainMenu.setPlaying(false);
+                    Game.getInstance().setScreen(Game.getInstance().mainMenu);
+                } else if (Game.getInstance().isStarted() && Game.getInstance().isPaused()){
+                    Game.getInstance().setPaused(false);
+                    Game.getInstance().setScreen(Game.getInstance().gameScreen);
+                    Game.getInstance().getAudioController().stopMusic();
+
+                }
                 break;
             }
             case Input.Keys.F11:{
                 if(Gdx.graphics.isFullscreen())
-                    Gdx.graphics.setWindowedMode(1600, 900);
+                    Gdx.graphics.setWindowedMode(1920, 1080);
                 else
                     Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 break;
@@ -152,10 +161,6 @@ public class InputController implements InputProcessor {
                 Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().reload();
                 break;
             }
-            /*case Input.Keys.P: {
-                Game.getInstance().setPaused(!Game.getInstance().isPaused());
-                break;
-            }*/
         }
 
         return false;
@@ -243,5 +248,9 @@ public class InputController implements InputProcessor {
         else
             Game.getInstance().gameScreen.getCameraController().zoom(amount);
         return false;
+    }
+
+    public boolean isLeftMouseBottomPressed() {
+        return leftMouseBottomPressed;
     }
 }

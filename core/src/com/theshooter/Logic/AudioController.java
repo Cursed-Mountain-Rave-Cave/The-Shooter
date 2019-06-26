@@ -33,6 +33,7 @@ public class AudioController {
         addMusic("american");
         addMusic("casino");
         addMusic("vdamki");
+        addMusic("awaken");
 
     }
 
