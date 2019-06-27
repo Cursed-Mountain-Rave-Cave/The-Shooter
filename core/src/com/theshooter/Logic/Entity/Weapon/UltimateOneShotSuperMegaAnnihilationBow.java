@@ -65,11 +65,9 @@ public class UltimateOneShotSuperMegaAnnihilationBow extends Weapon {
     @Override
     public void levelUp() {
         super.levelUp();
-        if (getLevel() < 3) {
-            shots += 2;
-            setDamage(getDamage() + 1);
-            setClipSize(getClipSize() + 2);
-        }
+        shots += 2;
+        setDamage(getDamage() + 1);
+        setClipSize(getClipSize() + 2);
     }
 
     @Override

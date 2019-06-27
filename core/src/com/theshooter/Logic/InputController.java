@@ -44,8 +44,8 @@ public class InputController implements InputProcessor {
             dx++;
             dy--;
         }
-
-        Game.getInstance().getEntityController().getPlayer().moveAt(dx, dy);
+        if (Game.getInstance().isStarted())
+            Game.getInstance().getEntityController().getPlayer().moveAt(dx, dy);
         float sdx = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
         float sdy = -Gdx.input.getY() + Gdx.graphics.getHeight() / 2 - 100;
 
@@ -53,12 +53,12 @@ public class InputController implements InputProcessor {
         float deltaY = -sdx / 2 + sdy;
         Vector2 vect = new Vector2(deltaX, deltaY);
 
-        if (leftMouseBottomPressed)
+        if (leftMouseBottomPressed && (Game.getInstance().isStarted()))
             Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().attack(vect);
 
-        if (mapIsOpen)
+        if (mapIsOpen && Game.getInstance().isStarted())
             Game.getInstance().setScreen(Game.getInstance().mapScreen);
-        else
+        else if (Game.getInstance().isStarted())
             Game.getInstance().setScreen(Game.getInstance().gameScreen);
     }
 
@@ -103,58 +103,72 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.M: {
-                if(mapIsOpen) mapIsOpen = false;
-                else {
-                    mapIsOpen = true;
-                    Game.getInstance().mapScreen.center();
+                if (Game.getInstance().isStarted()) {
+                    if (mapIsOpen) mapIsOpen = false;
+                    else {
+                        mapIsOpen = true;
+                        Game.getInstance().mapScreen.center();
+                    }
                 }
                 break;
             }
             case Input.Keys.NUM_1: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(1);
                 break;
             }
             case Input.Keys.NUM_2: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(2);
                 break;
             }
             case Input.Keys.NUM_3: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(3);
                 break;
             }
             case Input.Keys.NUM_4: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(4);
                 break;
             }
             case Input.Keys.NUM_5: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(5);
                 break;
             }
             case Input.Keys.NUM_6: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(6);
                 break;
             }
             case Input.Keys.NUM_7: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(7);
                 break;
             }
             case Input.Keys.NUM_8: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(8);
                 break;
             }
             case Input.Keys.NUM_9: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(9);
                 break;
             }
             case Input.Keys.NUM_0: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(10);
                 break;
             }
             case Input.Keys.F3: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getConfig().showAdditionalInfo = !Game.getInstance().getConfig().showAdditionalInfo;
                 break;
             }
             case Input.Keys.R: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().reload();
                 break;
             }
@@ -225,8 +239,8 @@ public class InputController implements InputProcessor {
         else {
             int curX = screenX - Gdx.graphics.getWidth() / 2;
             int curY = screenY - Gdx.graphics.getHeight() / 2;
-
-            Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+            if (Game.getInstance().isStarted())
+                Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
         }
         return false;
     }
@@ -236,7 +250,8 @@ public class InputController implements InputProcessor {
         int curX = screenX - Gdx.graphics.getWidth() / 2;
         int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+        if (Game.getInstance().isStarted())
+            Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
 
         return false;
     }

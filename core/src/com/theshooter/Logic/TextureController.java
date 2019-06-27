@@ -1,6 +1,7 @@
 package com.theshooter.Logic;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.theshooter.Logic.Entity.Weapon.WeaponType;
 import com.theshooter.Screen.Animation;
@@ -11,6 +12,9 @@ import java.util.TreeMap;
 public class TextureController {
     private Map<String, Map<String, Array<Texture>>> textures;
     private Map<String, Map<String, Array<Animation>>> animations;
+
+    public String style;
+    public String[] styles = {"classic", "leather", "meat", "smth1", "smth2"};
 
     private final int WEAPONS = 4;
 
@@ -27,21 +31,22 @@ public class TextureController {
         addTextureType("wall");
 
         addAnimationType("player");
+        for (String style : styles) {
+            addTextureArray("floor", style + "/" + "floor", style + "/" + "floor/", 18, 1);
 
-        addTextureArray("floor", "floor", "floor/", 18, 1);
+            //addTextureArray("walls", "wall", "walls/", 3, 5);
+            addTextureArray("wall", style + "/" + "wall", style + "/" + "wall/", 1, 1);
 
-        //addTextureArray("walls", "wall", "walls/", 3, 5);
-        addTextureArray("wall", "wall", "wall/", 1, 1);
+            addTextureArray("things", style + "/" + "unbreakableThing", style + "/" + "environment/unbreakable/", 18, 1);
+            addTextureArray("things", style + "/" + "breakableThing", style + "/" + "environment/breakable/", 6, 2);
 
-        addTextureArray("things", "unbreakableThing", "environment/unbreakable/", 18, 1);
-        addTextureArray("things", "breakableThing", "environment/breakable/", 6, 2);
+            addBodyAnimationArray("player", style + "/" + "body", style + "/" + "player/bodies/", 5, 9, 3);
+            addAnimationArray("player", style + "/" + "legs", style + "/" + "player/legs/", 12, 9, 4);
 
-        addBodyAnimationArray("player", "body", "player/bodies/", 5, 9, 3);
-        addAnimationArray("player", "legs", "player/legs/", 12, 9, 4);
+            addTextureArray("enemy", style + "/" + "enemy", style + "/" + "enemies/", 14, 2);
 
-        addTextureArray("enemy", "enemy", "enemies/", 14, 2);
-
-        addTextureArray("projectiles", "projectile", "projectiles/", 5, 1);
+            addTextureArray("projectiles", style + "/" + "projectile", style + "/" + "projectiles/", 5, 1);
+        }
     }
 
     private void addTextureType(String type) {
@@ -104,9 +109,10 @@ public class TextureController {
 
     public Map<WeaponType, Array<Animation>> getBody(String type, String name) {
         Map<WeaponType, Array<Animation>> animations = new TreeMap<>();
+        String curStyle = style.equals("clown") ? styles[MathUtils.random(0, styles.length - 1)] : style;
         for (int i = 0; i < WEAPONS; i++) {
             Array<Animation> array = new Array<>();
-            for (Animation animation : getAnimations(type, name + "/" + WeaponType.fromInt(i).toString()))
+            for (Animation animation : getAnimations(type, curStyle + "/" + name + "/" + WeaponType.fromInt(i).toString(), true))
                 array.add(animation);
             animations.put(WeaponType.fromInt(i), array);
 
@@ -114,18 +120,29 @@ public class TextureController {
         return animations;
     }
 
-    public Array<Texture> getTextures(String type, String name) { return textures.get(type).get(name); }
+    public Array<Texture> getTextures(String type, String name) {
+        return textures.get(type).get((style.equals("clown") ? styles[MathUtils.random(0, styles.length - 1)] : style) + "/" + name); }
 
     public Array<Animation> getAnimations(String type, String name) {
+        Array<Animation> animations = new Array<>();
+        String curStyle = style.equals("clown") ? styles[MathUtils.random(0, styles.length - 1)] : style;
+        for (Animation animation : this.animations.get(type).get(curStyle + "/"  + name))
+            animations.add(new Animation(animation));
+        return animations;
+    }
+
+    private Array<Animation> getAnimations(String type, String name, boolean hasStyle) {
         Array<Animation> animations = new Array<>();
         for (Animation animation : this.animations.get(type).get(name))
             animations.add(new Animation(animation));
         return animations;
     }
 
-    public Texture getTexture(String type, String name, int n) { return textures.get(type).get(name).get(n); }
+    public Texture getTexture(String type, String name, int n) {
+        return textures.get(type).get((style.equals("clown") ? styles[MathUtils.random(0, styles.length - 1)] : style) + "/" + name).get(n); }
 
-    public Texture getTexture(String type, String name) { return this.getTexture(type, name, 0); }
+    public Texture getTexture(String type, String name) {
+        return textures.get(type).get((style.equals("clown") ? styles[MathUtils.random(0, styles.length - 1)] : style) + "/" + name).get(0); }
 
     public void dispose() {
         for (String s : textures.keySet())

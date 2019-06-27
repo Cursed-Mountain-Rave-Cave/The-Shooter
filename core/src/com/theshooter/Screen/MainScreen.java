@@ -148,40 +148,40 @@ public class MainScreen implements Screen {
             }
         } else if (selectShowed && !Game.getInstance().isStarted()) {
                 if (contain(classic, touchX, touchY, classicX + 340, classicY)) {
-                    //classic params
+                    Game.getInstance().getTextureController().style = "classic";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
-                    Game.getInstance().setStarted(true);
+                    Game.getInstance().setStarted();
                 }
                 if (contain(meat, touchX, touchY, classicX, classicY)) {
-                    //meat params
+                    Game.getInstance().getTextureController().style = "meat";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
-                    Game.getInstance().setStarted(true);
+                    Game.getInstance().setStarted();
                 }
                 if (contain(leather, touchX, touchY, classicX + 680, classicY)) {
-                    //leather params
+                    Game.getInstance().getTextureController().style = "leather";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
-                    Game.getInstance().setStarted(true);
+                    Game.getInstance().setStarted();
                 }
                 if (contain(clown, touchX, touchY, classicX + 340, classicY - classic.getHeight() - 20)) {
-                    //clown params
+                   /****/ Game.getInstance().getTextureController().style = "clown";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
-                    Game.getInstance().setStarted(true);
+                    Game.getInstance().setStarted();
                 }
                 if (contain(smth1, touchX, touchY, classicX, classicY - classic.getHeight() - 20)) {
-                    //unknown1 params
+                    Game.getInstance().getTextureController().style = "smth1";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
-                    Game.getInstance().setStarted(true);
+                    Game.getInstance().setStarted();
                 }
                 if (contain(smth2, touchX, touchY, classicX + 680, classicY - classic.getHeight() - 20)) {
-                    //unknown2 params
+                    Game.getInstance().getTextureController().style = "smth2";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
-                    Game.getInstance().setStarted(true);
+                    Game.getInstance().setStarted();
                 }
             }
         firstClick = true;

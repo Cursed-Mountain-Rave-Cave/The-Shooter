@@ -45,25 +45,16 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void create () {
 		level = "lvl1";
-		config = new Config();
-
-		inputController = new InputController();
-		textureController = new TextureController();
-		audioController = new AudioController();
-		entityController = new EntityController();
-		eventController = new EventController();
 
 		mainMenu = new MainScreen();
 		mapScreen = new MapScreen();
 		gameScreen = new GameScreen();
 
+		audioController = new AudioController();
+		textureController = new TextureController();
+		inputController = new InputController();
+
 		setScreen(mainMenu);
-
-		entityController.load(level);
-
-		gameScreen.screenObjects = entityController.getScreenObjectArray();
-
-		//setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
 
@@ -129,8 +120,17 @@ public class Game extends com.badlogic.gdx.Game {
 		}
 	}
 
-	public void setStarted(boolean started) {
-		this.started = started;
+	public void setStarted() {
+		if (!started) {
+			this.started = true;
+			config = new Config();
+			entityController = new EntityController();
+			eventController = new EventController();
+
+			entityController.load(level);
+
+			gameScreen.screenObjects = entityController.getScreenObjectArray();
+		}
 	}
 
 	public boolean isStarted() {
