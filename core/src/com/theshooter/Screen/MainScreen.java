@@ -19,20 +19,19 @@ public class MainScreen implements Screen {
     private SpriteBatch batch;
     private OrthographicCamera camera;
 
-    private Texture backGround;
-    private Texture startButton;
-    private Texture exitButton;
-    private Texture menuBack;
-    private Texture resumeButton;
-
-    private Texture classic;
-    private Texture clown;
-    private Texture meat;
-    private Texture leather;
-    private Texture smth1;
-    private Texture smth2;
-
     private Sprite backGroundSprite;
+    private Sprite menuBackSprite;
+    private Sprite startButtonSprite;
+    private Sprite resumeButtonSprite;
+    private Sprite exitButtonSprite;
+
+    private Sprite classicSprite;
+    private Sprite clownSprite;
+    private Sprite meatSprite;
+    private Sprite leatherSprite;
+    private Sprite smth1Sprtie;
+    private Sprite smth2Sprite;
+
 
     private boolean firstClick;
     private boolean isPlaying;
@@ -45,24 +44,61 @@ public class MainScreen implements Screen {
         camera = new OrthographicCamera(1920, 1080);
         camera.setToOrtho(false);
 
-        backGround = new Texture("background.png");
-        startButton = new Texture("start.png");
-        resumeButton = new Texture("resume.png");
-        exitButton = new Texture("exit.png");
-        menuBack = new Texture("menuback.png");
+        backGroundSprite = new Sprite(new Texture("background.png"));
+        menuBackSprite = new Sprite(new Texture("menuback.png"));
+        startButtonSprite = new Sprite(new Texture("start.png"));
+        resumeButtonSprite = new Sprite(new Texture("resume.png"));
+        exitButtonSprite = new Sprite(new Texture("exit.png"));
 
-        classic = new Texture("classic.png");
-        clown = new Texture("clown.png");
-        meat = new Texture("meat.png");
-        leather = new Texture("leather.png");
-        smth1 = new Texture("cheto1.png");
-        smth2 = new Texture("cheto2.png");
 
-        backGroundSprite = new Sprite(backGround);
+        classicSprite = new Sprite(new Texture("classic.png"));
+        clownSprite = new Sprite(new Texture("clown.png"));
+        meatSprite = new Sprite(new Texture("meat.png"));
+        leatherSprite = new Sprite(new Texture("leather.png"));
+        smth1Sprtie = new Sprite(new Texture("cheto1.png"));
+        smth2Sprite = new Sprite(new Texture("cheto2.png"));
+
+        menuBackSprite.setSize(Gdx.graphics.getWidth() / 1.791f, Gdx.graphics.getHeight() / 3.167f );
+        menuBackSprite.setPosition(Gdx.graphics.getWidth() / 2f - menuBackSprite.getWidth() / 2f, 0);
 
         backGroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         backGroundSprite.setPosition(0, 0);
+
+        startButtonSprite.setSize(Gdx.graphics.getWidth() / 5.828f, Gdx.graphics.getHeight() / 8.308f);
+        startButtonSprite.setPosition(Gdx.graphics.getWidth() / 2f - startButtonSprite.getWidth() / 2f,
+                Gdx.graphics.getHeight() / 2f - 2.7f * startButtonSprite.getHeight());
+
+        resumeButtonSprite.setSize(startButtonSprite.getWidth(), startButtonSprite.getHeight());
+        resumeButtonSprite.setPosition(startButtonSprite.getX(), startButtonSprite.getY());
+
+        exitButtonSprite.setSize(startButtonSprite.getWidth(), startButtonSprite.getHeight());
+        exitButtonSprite.setPosition(startButtonSprite.getX(),
+                Gdx.graphics.getHeight() / 2f - 4 *exitButtonSprite.getHeight());
+
+        classicSprite.setSize(Gdx.graphics.getWidth() / 6.4f, Gdx.graphics.getHeight() / 7.2f);
+        classicSprite.setPosition(Gdx.graphics.getWidth() / 2f - classicSprite.getWidth() / 2f,
+                Gdx.graphics.getHeight() / 2f - 2.4f * classicSprite.getHeight());
+
+        clownSprite.setSize(classicSprite.getWidth(), classicSprite.getHeight());
+        clownSprite.setPosition(classicSprite.getX(),
+                Gdx.graphics.getHeight() / 2f - 3.5f * clownSprite.getHeight());
+
+        smth1Sprtie.setSize(classicSprite.getWidth(), classicSprite.getHeight());
+        smth1Sprtie.setPosition(Gdx.graphics.getWidth() / 2f - (3.2f * smth1Sprtie.getWidth()) / 2f,
+                clownSprite.getY());
+
+        smth2Sprite.setSize(classicSprite.getWidth(), classicSprite.getHeight());
+        smth2Sprite.setPosition(Gdx.graphics.getWidth() / 2f + (1.2f * smth2Sprite.getWidth()) / 2f,
+                clownSprite.getY());
+
+        meatSprite.setSize(classicSprite.getWidth(), classicSprite.getHeight());
+        meatSprite.setPosition(smth1Sprtie.getX(),
+                classicSprite.getY());
+
+        leatherSprite.setSize(classicSprite.getWidth(), classicSprite.getHeight());
+        leatherSprite.setPosition(smth2Sprite.getX(),
+                classicSprite.getY());
+
 
         firstClick = false;
         isPlaying = false;
@@ -73,14 +109,6 @@ public class MainScreen implements Screen {
     public void show() {
 
     }
-
-    private float startX;
-    private float startY;
-    private float exitX;
-    private float exitY;
-    private float classicX;
-    private float classicY;
-
 
     @Override
     public void render(float delta) {
@@ -97,30 +125,21 @@ public class MainScreen implements Screen {
 
         backGroundSprite.draw(batch);
 
-        startX = camera.viewportWidth / 2 - startButton.getWidth() / 2f;
-        startY = camera.viewportHeight / 2 - startButton.getHeight() / 2f - 260;
-
-        exitX = camera.viewportWidth / 2 - exitButton.getWidth() / 2f;
-        exitY = camera.viewportHeight / 2 - exitButton.getHeight() / 2f - 450;
-
-        classicX = camera.viewportWidth / 2 - classic.getWidth() / 2f - 340;
-        classicY = camera.viewportHeight / 2 - classic.getHeight() / 2f - 280;
-
         if (firstClick) {
-            batch.draw(menuBack, camera.viewportWidth / 2 - menuBack.getWidth() / 2f, 0);
+            menuBackSprite.draw(batch);
             if (!selectShowed || Game.getInstance().isPaused()) {
                 if (!Game.getInstance().isStarted())
-                    batch.draw(startButton, startX, startY);
+                    startButtonSprite.draw(batch);
                 else
-                    batch.draw(resumeButton, startX, startY);
-                batch.draw(exitButton, exitX, exitY);
+                    resumeButtonSprite.draw(batch);
+                exitButtonSprite.draw(batch);
             } else  if (selectShowed && !Game.getInstance().isStarted()){
-                batch.draw(classic, classicX + 340, classicY);
-                batch.draw(meat, classicX, classicY);
-                batch.draw(leather, classicX + 680, classicY);
-                batch.draw(smth1, classicX, classicY - classic.getHeight() - 20);
-                batch.draw(clown, classicX + 340, classicY - classic.getHeight() - 20);
-                batch.draw(smth2, classicX + 680, classicY - classic.getHeight() - 20);
+                meatSprite.draw(batch);
+                classicSprite.draw(batch);
+                leatherSprite.draw(batch);
+                smth1Sprtie.draw(batch);
+                clownSprite.draw(batch);
+                smth2Sprite.draw(batch);
             }
 
         }
@@ -134,9 +153,9 @@ public class MainScreen implements Screen {
         float touchX = touched.x;
         float touchY = touched.y;
         if (firstClick && (!selectShowed || Game.getInstance().isStarted())) {
-            if (contain(exitButton, touchX, touchY, exitX, exitY))
+            if (contain(exitButtonSprite, touchX, touchY))
                 Gdx.app.exit();
-            if (contain(startButton, touchX, touchY, startX, startY)) {
+            if (contain(startButtonSprite, touchX, touchY)) {
                 if (!Game.getInstance().isStarted())
                     selectShowed = true;
                 if (Game.getInstance().isPaused()) {
@@ -147,37 +166,37 @@ public class MainScreen implements Screen {
 
             }
         } else if (selectShowed && !Game.getInstance().isStarted()) {
-                if (contain(classic, touchX, touchY, classicX + 340, classicY)) {
+                if (contain(classicSprite, touchX, touchY)) {
                     Game.getInstance().getTextureController().style = "classic";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
                     Game.getInstance().setStarted();
                 }
-                if (contain(meat, touchX, touchY, classicX, classicY)) {
+                if (contain(meatSprite, touchX, touchY)) {
                     Game.getInstance().getTextureController().style = "meat";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
                     Game.getInstance().setStarted();
                 }
-                if (contain(leather, touchX, touchY, classicX + 680, classicY)) {
+                if (contain(leatherSprite, touchX, touchY)) {
                     Game.getInstance().getTextureController().style = "leather";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
                     Game.getInstance().setStarted();
                 }
-                if (contain(clown, touchX, touchY, classicX + 340, classicY - classic.getHeight() - 20)) {
-                   /****/ Game.getInstance().getTextureController().style = "clown";
+                if (contain(clownSprite, touchX, touchY)) {
+                    Game.getInstance().getTextureController().style = "clown";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
                     Game.getInstance().setStarted();
                 }
-                if (contain(smth1, touchX, touchY, classicX, classicY - classic.getHeight() - 20)) {
+                if (contain(smth1Sprtie, touchX, touchY)) {
                     Game.getInstance().getTextureController().style = "smth1";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
                     Game.getInstance().setStarted();
                 }
-                if (contain(smth2, touchX, touchY, classicX + 680, classicY - classic.getHeight() - 20)) {
+                if (contain(smth2Sprite, touchX, touchY)) {
                     Game.getInstance().getTextureController().style = "smth2";
                     Game.getInstance().getAudioController().stopMusic();
                     Game.getInstance().setScreen(Game.getInstance().gameScreen);
@@ -191,8 +210,8 @@ public class MainScreen implements Screen {
         isPlaying = playing;
     }
 
-    private boolean contain(Texture texture, float x1, float y1, float x2, float y2) {
-        return  x1 >= x2 && x1 <= x2 + texture.getWidth() && y1 >= y2 && y1 <= y2 + texture.getHeight();
+    private boolean contain(Sprite sprite, float x1, float y1) {
+        return  x1 >= sprite.getX() && x1 <= sprite.getX() + sprite.getWidth() && y1 >= sprite.getY() && y1 <= sprite.getY() + sprite.getHeight();
     }
 
     @Override
@@ -217,11 +236,5 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        classic.dispose();
-        clown.dispose();
-        meat.dispose();
-        leather.dispose();
-        smth1.dispose();
-        smth2.dispose();
     }
 }
