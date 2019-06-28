@@ -123,6 +123,9 @@ public class TextureController {
     public Array<Texture> getTextures(String type, String name) {
         return textures.get(type).get((style.equals("clown") ? styles[MathUtils.random(0, styles.length - 1)] : style) + "/" + name); }
 
+    public Array<Texture> getTextures(String type, String style, String name) {
+        return textures.get(type).get(style + "/" + name); }
+
     public Array<Animation> getAnimations(String type, String name) {
         Array<Animation> animations = new Array<>();
         String curStyle = style.equals("clown") ? styles[MathUtils.random(0, styles.length - 1)] : style;
