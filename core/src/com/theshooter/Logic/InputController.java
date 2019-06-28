@@ -3,11 +3,8 @@ package com.theshooter.Logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.theshooter.Game;
-import com.theshooter.Screen.MapScreen;
 
 public class InputController implements InputProcessor {
 
@@ -47,8 +44,8 @@ public class InputController implements InputProcessor {
             dx++;
             dy--;
         }
-
-        Game.getInstance().getEntityController().getPlayer().moveAt(dx, dy);
+        if (Game.getInstance().isStarted())
+            Game.getInstance().getEntityController().getPlayer().moveAt(dx, dy);
         float sdx = Gdx.input.getX() - Gdx.graphics.getWidth() / 2;
         float sdy = -Gdx.input.getY() + Gdx.graphics.getHeight() / 2 - 100;
 
@@ -56,12 +53,12 @@ public class InputController implements InputProcessor {
         float deltaY = -sdx / 2 + sdy;
         Vector2 vect = new Vector2(deltaX, deltaY);
 
-        if (leftMouseBottomPressed)
+        if (leftMouseBottomPressed && (Game.getInstance().isStarted()))
             Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().attack(vect);
 
-        if (mapIsOpen)
+        if (mapIsOpen && Game.getInstance().isStarted())
             Game.getInstance().setScreen(Game.getInstance().mapScreen);
-        else
+        else if (Game.getInstance().isStarted())
             Game.getInstance().setScreen(Game.getInstance().gameScreen);
     }
 
@@ -70,12 +67,21 @@ public class InputController implements InputProcessor {
 
         switch (keycode){
             case Input.Keys.ESCAPE:{
-                Gdx.app.exit();
+                if (!Game.getInstance().isPaused() && Game.getInstance().isStarted()) {
+                    Game.getInstance().setPaused(true);
+                    Game.getInstance().mainMenu.setPlaying(false);
+                    Game.getInstance().setScreen(Game.getInstance().mainMenu);
+                } else if (Game.getInstance().isStarted() && Game.getInstance().isPaused()){
+                    Game.getInstance().setPaused(false);
+                    Game.getInstance().setScreen(Game.getInstance().gameScreen);
+                    Game.getInstance().getAudioController().stopMusic();
+
+                }
                 break;
             }
             case Input.Keys.F11:{
                 if(Gdx.graphics.isFullscreen())
-                    Gdx.graphics.setWindowedMode(1600, 900);
+                    Gdx.graphics.setWindowedMode(1920, 1080);
                 else
                     Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 break;
@@ -97,65 +103,75 @@ public class InputController implements InputProcessor {
                 break;
             }
             case Input.Keys.M: {
-                if(mapIsOpen) mapIsOpen = false;
-                else {
-                    mapIsOpen = true;
-                    Game.getInstance().mapScreen.center();
+                if (Game.getInstance().isStarted()) {
+                    if (mapIsOpen) mapIsOpen = false;
+                    else {
+                        mapIsOpen = true;
+                        Game.getInstance().mapScreen.center();
+                    }
                 }
                 break;
             }
             case Input.Keys.NUM_1: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(1);
                 break;
             }
             case Input.Keys.NUM_2: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(2);
                 break;
             }
             case Input.Keys.NUM_3: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(3);
                 break;
             }
             case Input.Keys.NUM_4: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(4);
                 break;
             }
             case Input.Keys.NUM_5: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(5);
                 break;
             }
             case Input.Keys.NUM_6: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(6);
                 break;
             }
             case Input.Keys.NUM_7: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(7);
                 break;
             }
             case Input.Keys.NUM_8: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(8);
                 break;
             }
             case Input.Keys.NUM_9: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(9);
                 break;
             }
             case Input.Keys.NUM_0: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().selectWeapon(10);
                 break;
             }
             case Input.Keys.F3: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getConfig().showAdditionalInfo = !Game.getInstance().getConfig().showAdditionalInfo;
                 break;
             }
             case Input.Keys.R: {
+                if (Game.getInstance().isStarted())
                 Game.getInstance().getEntityController().getPlayer().getCurrentWeapon().reload();
                 break;
             }
-            /*case Input.Keys.P: {
-                Game.getInstance().setPaused(!Game.getInstance().isPaused());
-                break;
-            }*/
         }
 
         return false;
@@ -198,6 +214,9 @@ public class InputController implements InputProcessor {
             lastScreenX = screenX;
             lastScreenY = screenY;
         }
+        if (Game.getInstance().isPaused() || !Game.getInstance().isStarted()) {
+            Game.getInstance().mainMenu.isTouched();
+        }
         return false;
     }
 
@@ -220,8 +239,8 @@ public class InputController implements InputProcessor {
         else {
             int curX = screenX - Gdx.graphics.getWidth() / 2;
             int curY = screenY - Gdx.graphics.getHeight() / 2;
-
-            Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+            if (Game.getInstance().isStarted())
+                Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
         }
         return false;
     }
@@ -231,7 +250,8 @@ public class InputController implements InputProcessor {
         int curX = screenX - Gdx.graphics.getWidth() / 2;
         int curY = screenY - Gdx.graphics.getHeight() / 2;
 
-        Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
+        if (Game.getInstance().isStarted())
+            Game.getInstance().getEntityController().getPlayer().lookAt(curX, curY);
 
         return false;
     }
@@ -243,5 +263,9 @@ public class InputController implements InputProcessor {
         else
             Game.getInstance().gameScreen.getCameraController().zoom(amount);
         return false;
+    }
+
+    public boolean isLeftMouseBottomPressed() {
+        return leftMouseBottomPressed;
     }
 }

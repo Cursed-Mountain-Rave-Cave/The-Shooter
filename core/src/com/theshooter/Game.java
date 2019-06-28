@@ -5,12 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.theshooter.Logic.*;
 import com.theshooter.Screen.GameScreen;
-import com.theshooter.Screen.MainMenu;
 import com.theshooter.Screen.MainScreen;
 import com.theshooter.Screen.MapScreen;
 import com.theshooter.Utils.Config;
-
-import java.io.IOException;
 
 public class Game extends com.badlogic.gdx.Game {
 
@@ -18,10 +15,9 @@ public class Game extends com.badlogic.gdx.Game {
 
 	private Config config;
 
-	public MainScreen mainScreen;
 	public GameScreen gameScreen;
 	public MapScreen mapScreen;
-	public MainMenu mainMenu;
+	public MainScreen mainMenu;
 
 	public String level;
 
@@ -32,6 +28,7 @@ public class Game extends com.badlogic.gdx.Game {
 	private EventController eventController;
 
 	private boolean started;
+	private boolean paused;
 	private long pausedTime;
 	private long pauseBegin;
 
@@ -48,32 +45,23 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void create () {
 		level = "lvl1";
-		config = new Config();
 
-		inputController = new InputController();
-		textureController = new TextureController();
-		audioController = new AudioController();
-		entityController = new EntityController();
-		eventController = new EventController();
-
-		mainMenu = new MainMenu();
+		mainMenu = new MainScreen();
 		mapScreen = new MapScreen();
-		mainScreen = new MainScreen();
 		gameScreen = new GameScreen();
 
+		audioController = new AudioController();
+		textureController = new TextureController();
+		inputController = new InputController();
+
 		setScreen(mainMenu);
-
-		entityController.load(level);
-
-		gameScreen.screenObjects = entityController.getScreenObjectArray();
-
-		setScreen(gameScreen);
 
 		Gdx.input.setInputProcessor(inputController);
 
 		pausedTime = 0;
-		pauseBegin = 0;
-		started = true;
+		pauseBegin = TimeUtils.millis();
+		started = false;
+		paused = false;
 	}
 
 	public Config getConfig() {
@@ -96,6 +84,8 @@ public class Game extends com.badlogic.gdx.Game {
 		return eventController;
 	}
 
+	public InputController getInputController() {return inputController;}
+
 	public long getGameTime() {
 		return TimeUtils.millis() - pausedTime;
 	}
@@ -103,7 +93,7 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void render () {
 		super.render();
-		if (started) {
+		if (started && !paused) {
 			mapScreen.view();
 			inputController.update();
 			entityController.update();
@@ -121,19 +111,38 @@ public class Game extends com.badlogic.gdx.Game {
 				config.playerVelocityMultiplier = 1;
 
 			}
-			pauseBegin = TimeUtils.millis();
-		} else {
-			pausedTime += TimeUtils.millis() - pauseBegin;
-			pauseBegin = TimeUtils.millis();
+			if (!paused)
+				pauseBegin = TimeUtils.millis();
+			else {
+				pausedTime += TimeUtils.millis() - pauseBegin;
+				pauseBegin = TimeUtils.millis();
+			}
 		}
 	}
 
-	public void setStarted(boolean paused) {
-		this.started = paused;
+	public void setStarted() {
+		if (!started) {
+			this.started = true;
+			config = new Config();
+			entityController = new EntityController();
+			eventController = new EventController();
+
+			entityController.load(level);
+
+			gameScreen.screenObjects = entityController.getScreenObjectArray();
+		}
 	}
 
 	public boolean isStarted() {
 		return started;
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
+	public boolean isPaused() {
+		return paused;
 	}
 
 	@Override

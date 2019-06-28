@@ -106,25 +106,26 @@ public class HumanScreenObject extends ScreenObject {
 
         int last = currentBody;
         if (this.human.getClass() == Player.class) {
-            if (angle > 112.5 && angle < 157.5)
-                this.currentBody = 1;
-            else if (angle > 67.5 && angle < 112.5)
-                this.currentBody = 0;
-            else if (angle > 22.5 && angle < 67.5)
-                this.currentBody = 7;
-            else if (angle > -22.5 && angle < 22.5)
-                this.currentBody = 6;
-            else if (angle < -22.5 && angle > -67.5)
-                this.currentBody = 5;
-            else if (angle < -67.5 && angle > -112.5)
-                this.currentBody = 4;
-            else if (angle < -112.5 && angle > -157.5)
-                this.currentBody = 3;
-            else
-                this.currentBody = 2;
+             if (angle > 112.5 && angle < 157.5)
+                 this.currentBody = 1;
+             else if (angle > 67.5 && angle < 112.5)
+                 this.currentBody = 0;
+             else if (angle > 22.5 && angle < 67.5)
+                 this.currentBody = 7;
+             else if (angle > -22.5 && angle < 22.5)
+                 this.currentBody = 6;
+             else if (angle < -22.5 && angle > -67.5)
+                 this.currentBody = 5;
+             else if (angle < -67.5 && angle > -112.5)
+                 this.currentBody = 4;
+             else if (angle < -112.5 && angle > -157.5)
+                 this.currentBody = 3;
+             else
+                 this.currentBody = 2;
         }
-        else {
+        else
             currentBody = currentLegs;
+
         if (!lastWeapon.equals(human.getCurrentWeapon().getWeaponType())) {
             body.get(lastWeapon).get(last).reset();
         } else {
@@ -144,7 +145,6 @@ public class HumanScreenObject extends ScreenObject {
             }
         }
         lastWeapon = human.getCurrentWeapon().getWeaponType();
-        }
     }
 
     public void setLegsAnimationFrameTime(int frameTime) {

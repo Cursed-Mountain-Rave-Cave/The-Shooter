@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		config.x = 0;
 		config.y = 0;
 
-		config.width = 1600;
-		config.height = 900;
+		config.width = 1920;
+		config.height = 1080;
 		config.vSyncEnabled = true;
 
 		config.foregroundFPS = 120;
